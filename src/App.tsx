@@ -1,5 +1,5 @@
 import React from 'react'
-import AppWrapper from './styled/App-wrapper'
+import AppWrapper from './styled/App-wrapper.styled'
 
 const App = () => {
   return (
