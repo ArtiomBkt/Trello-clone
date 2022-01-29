@@ -3,7 +3,7 @@ import * as taskInterfaces from '../../interfaces/task.interface'
 import LabelPreview from '../labels/LabelPreview'
 import TaskPreviewContainer from './TaskPreview.styled'
 
-interface taskProps {
+type taskProps = {
   task: taskInterfaces.task
 }
 

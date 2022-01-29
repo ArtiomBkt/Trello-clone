@@ -3,7 +3,7 @@ import * as boardInterfaces from '../../interfaces/board.interface'
 import TaskPreview from '../task/TaskPreview'
 import { ListContentPreview } from './ListPreview.styled'
 
-interface listProps {
+type listProps = {
   list: boardInterfaces.list
 }
 

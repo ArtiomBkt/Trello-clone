@@ -1,13 +1,16 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import { BrowserRouter } from 'react-router-dom'
 import App from './App'
 import { Resets, FontStyles } from './styled/Global.styled'
 
 ReactDOM.render(
   <React.StrictMode>
-    <Resets />
-    <FontStyles />
-    <App />
+    <BrowserRouter>
+      <Resets />
+      <FontStyles />
+      <App />
+    </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')
 )

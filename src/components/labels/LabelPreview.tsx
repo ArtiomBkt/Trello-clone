@@ -1,7 +1,7 @@
 import React from "react";
 import * as boardInterfaces from "../../interfaces/board.interface"
 
-interface labelProps {
+type labelProps = {
   label: boardInterfaces.label
 }
 

@@ -1,4 +1,6 @@
 import { createGlobalStyle } from 'styled-components'
+import icomoon from '../assets/fonts/icomoon.ttf'
+import sourceSans from '../assets/fonts/SourceSansPro-SemiBold.ttf'
 
 const Resets = createGlobalStyle`
   *,
@@ -13,13 +15,15 @@ const Resets = createGlobalStyle`
 
   body {
     margin: 0;
+  }
 
+  html, body, button, input, select, textarea {
+    color: #172b4d;
     font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, 
       Noto Sans, Ubuntu, Droid Sans, Helvetica Neue, sans-serif;
     font-size: 14px;
     font-weight: 400;
-    color: #172b4d;
-    background-color: red;
+    line-height: 20px;
   }
 
   a {
@@ -29,24 +33,25 @@ const Resets = createGlobalStyle`
       cursor: pointer;
     }
   }
-
+  /*
   p {
     all: unset;
   }
 
   button {
     all: unset;
-  }
+  } */
 `
 
 const FontStyles = createGlobalStyle`
   @font-face {
-    font-family: trellicons;
-    src: url('../assets/fonts/icomoon.ttf') format('truetype')
+    font-family: 'trellicons';
+    src: url(${icomoon}) format('truetype');
   }
   @font-face {
-    font-family: source-sans;
-    src: url('../assets/fonts/source-sans.ttf') format('truetype')
+    font-family: 'sourceSans';
+    src: url(${sourceSans}) format('truetype');
+    font-style: normal;
   }
 `
 

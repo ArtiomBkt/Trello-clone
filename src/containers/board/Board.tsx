@@ -11,7 +11,7 @@ import BoardNav from './BoardNav'
 import ListPreview from '../../components/list/ListPreview'
 import { ListPreviewContainer } from '../../components/list/ListPreview.styled'
 
-interface boardProps {
+type boardProps = {
   board: boardInterfaces.board
   lists: boardInterfaces.list[]
   tasks: taskInterfaces.task[]

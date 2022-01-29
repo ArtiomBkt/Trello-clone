@@ -1,33 +1,45 @@
 import styled from 'styled-components'
+import { LinkHover } from '../../styled/Mixins.styled'
 
 export const Header = styled.header`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  padding: 6px;
   height: 44px;
+  overflow: hidden;
+`
 
-  background-color: #0000003d;
-  color: #fff;
+export const HeaderMainNav = styled.nav`
+  display: flex;
+
+  padding: 6px 4px;
+  height: 100%;
+
+  background-color: #026aa7;
+  backdrop-filter: blur(6px);
+`
+
+export const HeaderLinksWrapper = styled.div`
+  display: flex;
+  flex-basis: 100%;
+`
+
+export const HeaderLinksContainer = styled.div`
+  display: flex;
+  align-items: stretch;
+  flex-grow: 1;
+  flex-shrink: 0;
+  flex-basis: 0;
+  height: 100%;
+  position: relative;
 `
 
 export const HeaderLinks = styled.div`
   display: flex;
-  align-items: center;
-  flex-grow: 1;
+  flex-shrink: 0;
+  margin: 0 5px;
+  color: #fff;
 `
 
-export const HeaderLogo = styled.a`
+export const HeaderRightChunk = styled.div`
   display: flex;
-  align-items: center;
-  position: relative;
-  padding-left: 20px;
-
-  p {
-    font-family: source-sans;
-    font-size: 2em;
-    line-height: 16px;
-    margin-left: 10px;
-  }
+  justify-content: flex-end;
+  flex-grow: 1;
 `
