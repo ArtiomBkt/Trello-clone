@@ -10,10 +10,9 @@ export const NavLinkContainer = styled.a`
   border: none;
 
   line-height: 32px;
-  /* height: 32px;  ????? */
-  margin-left: 4px;
-  padding: 6px 12px;
-  padding-right: 10px;
+  margin: ${p => p.type !== 'Create' ? '0 0 0 4px' : '0 4px 0 0'};
+  padding: ${p => p.type !== 'Create' ? '6px 12px' : null};
+  padding-right: ${p => p.type !== 'Create' ? '10px' : null};
   
   background-color: ${p => p.type === 'Create' ? 'rgba(0,0,0,.24)' : 'transparent'};
   white-space: nowrap;

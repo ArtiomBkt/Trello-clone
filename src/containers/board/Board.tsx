@@ -6,7 +6,7 @@ import * as taskInterfaces from '../../interfaces/task.interface'
 
 import { BoardContainer, BoardContentWrapper } from './Board.styled'
 
-import BoardNav from './BoardNav'
+import BoardNav from '../../components/board-navbar/BoardNav'
 
 import ListPreview from '../../components/list/ListPreview'
 import { ListPreviewContainer } from '../../components/list/ListPreview.styled'

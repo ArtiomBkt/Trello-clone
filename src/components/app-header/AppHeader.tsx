@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Header, HeaderMainNav, HeaderLinksWrapper, HeaderLinksContainer, HeaderLinks, HeaderRightChunk } from './AppHeader.styled'
 import AppLogo from './logo/AppLogo'
+import { ReactComponent as CreateIcon } from '../../assets/images/plus.svg'
 import NavLink from './links/NavLink'
 import RightChunk from './right-chunk/RightChunk'
 
@@ -86,7 +87,9 @@ const AppHeader = () => {
               <NavLinks />
             </HeaderLinks>
             <HeaderLinks>
-              <NavLink type="Create">{windowWidth < 1100 ? '+' : 'Create'}</NavLink>
+              <NavLink type="Create">
+                {windowWidth < 1100 ? <CreateIcon style={{width: '20px', height: '20px'}} /> : 'Create'}
+              </NavLink>
             </HeaderLinks>
           </HeaderLinksContainer>
         </HeaderLinksWrapper>
