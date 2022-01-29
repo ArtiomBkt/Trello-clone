@@ -1,10 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import { boardService } from '../../services/board.service'
+
 import * as boardInterfaces from '../../interfaces/board.interface'
 import * as taskInterfaces from '../../interfaces/task.interface'
-import ListPreview from '../../components/list/ListPreview'
-import BoardContainer from './BoardContainer.styled'
+
+import { BoardContainer, BoardContentWrapper } from './Board.styled'
+
 import BoardNav from './BoardNav'
+
+import ListPreview from '../../components/list/ListPreview'
+import { ListPreviewContainer } from '../../components/list/ListPreview.styled'
 
 interface boardProps {
   board: boardInterfaces.board
@@ -21,17 +26,18 @@ const Board = () => {
   }, [])
 
   if (!board) return <div>loading...</div>
-
   return (
     <BoardContainer>
       <BoardNav />
-      {/* dnd */}
-      <div style={{ position: 'relative', height: '40px' }}>
-        {board.lists?.map(list => (
-          <ListPreview key={list.id} list={list} />
-        ))}
-      </div>
-      {/* dnd */}
+      <BoardContentWrapper>
+        {/* dnd */}
+        <ListPreviewContainer>
+          {board.lists?.map(list => (
+            <ListPreview key={list.id} list={list} />
+          ))}
+        </ListPreviewContainer>
+        {/* dnd */}
+      </BoardContentWrapper>
     </BoardContainer>
   )
 }

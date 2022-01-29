@@ -7,6 +7,10 @@ const Resets = createGlobalStyle`
     box-sizing: border-box;
   }
 
+  html, body, #root {
+    height: 100%;
+  }
+
   body {
     margin: 0;
 

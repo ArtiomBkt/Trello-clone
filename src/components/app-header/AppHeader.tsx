@@ -1,8 +1,16 @@
 import React from 'react'
-import Header from './AppHeader.styled'
+import { Header, HeaderLinks, HeaderLogo } from './AppHeader.styled'
 
 const AppHeader = () => {
-  return <Header>header</Header>
+  return (
+    <Header>
+      <HeaderLinks>
+        <HeaderLogo>
+          <p>Trackero</p>
+        </HeaderLogo>
+      </HeaderLinks>
+    </Header>
+  )
 }
 
 export default AppHeader
