@@ -1,7 +1,8 @@
 import React from 'react'
 import * as boardInterfaces from '../../interfaces/board.interface'
 import TaskPreview from '../task/TaskPreview'
-import { ListContentPreview } from './ListPreview.styled'
+import ListHeader from './header/ListHeader'
+import { ListContentPreview, List, ListTasksWrapper, TaskComposerWrapper } from './ListPreview.styled'
 
 type listProps = {
   list: boardInterfaces.list
@@ -10,12 +11,15 @@ type listProps = {
 const ListPreview = ({ list }: listProps) => {
   return (
     <ListContentPreview>
-      <div>
-        {list.title} | {list.id}
-      </div>
-      {list.tasks?.map(task => (
-        <TaskPreview key={task.id} task={task} />
-      ))}
+      <List>
+        <ListHeader list={list} />
+        <ListTasksWrapper>
+          {list.tasks?.map(task => (
+            <TaskPreview key={task.id} task={task} />
+          ))}
+        </ListTasksWrapper>
+        <TaskComposerWrapper></TaskComposerWrapper>
+      </List>
     </ListContentPreview>
   )
 }

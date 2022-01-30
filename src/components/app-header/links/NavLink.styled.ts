@@ -17,6 +17,10 @@ export const NavLinkContainer = styled.a`
   background-color: ${p => p.type === 'Create' ? 'rgba(0,0,0,.24)' : 'transparent'};
   white-space: nowrap;
 
+  @media screen and (min-width: 1100px) {
+    padding: 6px 12px;
+  }
+
   &:hover,
   &.modal-open {
     ${LinkHover}

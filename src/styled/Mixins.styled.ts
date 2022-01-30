@@ -34,3 +34,39 @@ export const HeaderLogoPseudos = () => css`
     opacity: 1;
   }
 `
+
+export const Icon = (size: string | undefined) => css`
+  ${size === 'sm'
+    ? css`
+        font-size: 16px;
+        height: 20px;
+        line-height: 20px;
+        width: 20px;
+      `
+    : size === 'md'
+    ? css`
+        font-size: 20px;
+        height: 24px;
+        line-height: 24px;
+        width: 24px;
+      `
+    : css`
+        font-size: 24px;
+        height: 32px;
+        line-height: 32px;
+        width: 32px;
+      `}
+
+  display: inline-block;
+  font-family: trellicons;
+  font-style: normal;
+  font-weight: 400;
+  text-align: center;
+  text-decoration: none;
+  vertical-align: bottom;
+  color: #42526e;
+
+  &:hover {
+    color: #172b4d;
+  }
+`

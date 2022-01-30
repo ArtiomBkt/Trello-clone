@@ -28,15 +28,23 @@ const Board = () => {
   if (!board) return <div>loading...</div>
   return (
     <BoardContainer>
-      <BoardNav />
       <BoardContentWrapper>
-        {/* dnd */}
-        <ListPreviewContainer>
-          {board.lists?.map(list => (
-            <ListPreview key={list.id} list={list} />
-          ))}
-        </ListPreviewContainer>
-        {/* dnd */}
+        <div style={{ display: 'flex', flexDirection: 'column', flex: '1 1 0', overflowY: 'auto', position: 'relative' }}>
+          <div style={{ position: 'absolute', inset: '0' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', height: '100%', marginRight: 0, position: 'relative' }}>
+              <BoardNav />
+              {/* dnd */}
+              <div style={{flexGrow: 1, position: 'relative'}}>
+                <ListPreviewContainer>
+                  {board.lists?.map(list => (
+                    <ListPreview key={list.id} list={list} />
+                  ))}
+                </ListPreviewContainer>
+              </div>
+              {/* dnd */}
+            </div>
+          </div>
+        </div>
       </BoardContentWrapper>
     </BoardContainer>
   )

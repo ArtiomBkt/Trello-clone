@@ -26,6 +26,23 @@ const Resets = createGlobalStyle`
     line-height: 20px;
   }
 
+  input:not([type=file]), textarea {
+    background-color: #fafbfc;
+    border: none;
+    border-radius: 3px;
+    box-shadow: inset 0 0 0 2px #dfe1e6;
+    display: block;
+    line-height: 20px;
+    margin-bottom: 12px;
+    outline: none;
+    padding: 8px 12px;
+    transition: background-color,border-color,box-shadow .85s ease;
+  }
+
+  textarea {
+    width: 100%;
+  }
+
   a {
     all: unset;
 
