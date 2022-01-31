@@ -4,21 +4,16 @@ import * as taskInterfaces from '../../interfaces/task.interface'
 import LabelPreview from '../labels/LabelPreview'
 import { TaskPreviewContainer, TaskCover, TaskEditIcon } from './TaskPreview.styled'
 
-type taskProps = {
+type TaskProps = {
   task: taskInterfaces.task
 }
 
-const TaskPreview = ({ task }: taskProps) => {
+const TaskPreview = ({ task }: TaskProps) => {
   return (
-    <TaskPreviewContainer taskStyle={task.style} to={`/${task.id}`}>
-      {!task.style?.fullCover && task.style?.background && <TaskCover taskStyle={task.style} />}
+    <TaskPreviewContainer taskStyle={task?.style} to={`/${task?.id}`}>
+      {!task?.style?.fullCover && task?.style?.background && <TaskCover taskStyle={task.style} />}
       <TaskEditIcon content="'\e928'" size="sm" />
       <TaskDetails task={task} />
-        {/* {task.title}
-        <div style={{ background: task.style?.background }}></div>
-        {task.labels?.map(label => (
-          <LabelPreview key={label.color} label={label} />
-        ))} */}
     </TaskPreviewContainer>
   )
 }

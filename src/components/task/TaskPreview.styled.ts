@@ -1,11 +1,8 @@
 import styled, { css } from 'styled-components'
 import { Link } from 'react-router-dom'
 import { Icon } from '../../styled/Mixins.styled'
-import * as taskInterfaces from '../../interfaces/task.interface'
-
-type TaskProps = {
-  taskStyle: taskInterfaces.task['style']
-}
+import TaskProps from './TaskProps'
+import IconProps from '../../interfaces/IconProps'
 
 export const TaskPreviewContainer = styled(Link)<TaskProps>`
   display: ${({ taskStyle }) => (taskStyle?.fullCover ? 'flex' : 'block')};
@@ -45,11 +42,6 @@ export const TaskCover = styled.div<TaskProps>`
   user-select: none;
 `
 
-type IconBtnProps = {
-  size: string
-  content: string
-}
-
 export const TaskEditIcon = styled.span`
   box-sizing: content-box;
   position: absolute;
@@ -69,10 +61,10 @@ export const TaskEditIcon = styled.span`
 
   z-index: 30;
 
-  ${({ size }: IconBtnProps) => Icon(size)}
+  ${({ size }: IconProps) => Icon(size)}
 
   &:before {
-    ${({ content }: IconBtnProps) =>
+    ${({ content }: IconProps) =>
       css`
         content: ${content};
       `}

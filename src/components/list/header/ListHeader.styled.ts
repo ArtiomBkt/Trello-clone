@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components'
 import { Icon } from '../../../styled/Mixins.styled'
+import IconProps from '../../../interfaces/IconProps'
 
 export const ListTitle = styled.div`
   flex: 0 0 auto;
@@ -44,11 +45,6 @@ export const ListHeaderOpts = styled.div`
   z-index: 1;
 `
 
-type IconBtnProps = {
-  size: string
-  content: string
-}
-
 export const HeaderOptsBtn = styled.a`
   border-radius: 3px;
   color: #6b778c;
@@ -58,10 +54,10 @@ export const HeaderOptsBtn = styled.a`
     background-color: #091e4214;
   }
 
-  ${({ size }: IconBtnProps) => Icon(size)}
+  ${({ size }: IconProps) => Icon(size)}
 
   &:before {
-    ${({ content }: IconBtnProps) =>
+    ${({ content }: IconProps) =>
       css`
         content: ${content};
       `}

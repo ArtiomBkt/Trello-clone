@@ -8,7 +8,7 @@ type TaskProps = {
 
 const TaskTitle = ({ task }: TaskProps) => {
   return (
-    <TaskTitleContainer>
+    <TaskTitleContainer isFullCover={task.style?.fullCover}>
       {task.title}
     </TaskTitleContainer>
   )

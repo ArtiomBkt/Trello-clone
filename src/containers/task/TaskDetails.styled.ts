@@ -1,8 +1,14 @@
 import styled from 'styled-components'
 
-export const TaskDetailsContainer = styled.div`
+type TaskDetailsProps = {
+  isFullCover?: boolean
+}
+
+export const TaskDetailsContainer = styled.div<TaskDetailsProps>`
   overflow: hidden;
   padding: 6px 8px 2px;
   position: relative;
   z-index: 10;
+
+  ${({ isFullCover }) => isFullCover ? 'align-self: flex-end; width: 100%;' : ''};
 `

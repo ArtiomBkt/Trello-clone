@@ -5,13 +5,17 @@ import * as boardInterfaces from './board.interface'
 //   tasks: task[]
 // }
 
+// interface taskBadges {
+  
+// }
+
 export interface task {
   id: string
   title: string
-  description?: string
   style?: { background: string; fullCover: boolean }
-  members?: boardInterfaces.member[]
   labels?: boardInterfaces.label[]
+  members?: boardInterfaces.member[]
+  description?: string
   startDate?: { timestamp: number }
   dueDate?: { timestamp: number, status: string }
   comments?: boardInterfaces.comment[]
