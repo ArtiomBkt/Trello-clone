@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react'
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
+
 import { boardService } from '../../services/board.service'
 
 import * as boardInterfaces from '../../interfaces/board.interface'
@@ -25,6 +27,10 @@ const Board = () => {
     setBoard(boardToLoad)
   }, [])
 
+  const onDragEnd = (result: any) => {
+    console.log(result)
+  }
+
   if (!board) return <div>loading...</div>
   return (
     <BoardContainer>
@@ -33,15 +39,19 @@ const Board = () => {
           <div style={{ position: 'absolute', inset: '0' }}>
             <div style={{ display: 'flex', flexDirection: 'column', height: '100%', marginRight: 0, position: 'relative' }}>
               <BoardNav />
-              {/* dnd */}
-              <div style={{flexGrow: 1, position: 'relative'}}>
-                <ListPreviewContainer>
-                  {board.lists?.map(list => (
-                    <ListPreview key={list.id} list={list} />
-                  ))}
-                </ListPreviewContainer>
+              <div style={{ flexGrow: 1, position: 'relative' }}>
+                <DragDropContext onDragEnd={onDragEnd}>
+                  <Droppable direction="horizontal" droppableId="lists" type="list">
+                    {(provided, snapshot) => (
+                      <ListPreviewContainer ref={provided.innerRef} {...provided.droppableProps}>
+                        {board.lists?.map((list, idx) => (
+                          <ListPreview key={list.id} list={list} idx={idx} />
+                        ))}
+                      </ListPreviewContainer>
+                    )}
+                  </Droppable>
+                </DragDropContext>
               </div>
-              {/* dnd */}
             </div>
           </div>
         </div>

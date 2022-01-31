@@ -191,7 +191,7 @@ function getDummyBoard(): boardInterfaces.board {
         title: 'group 1',
         tasks: [
           {
-            id: 't100',
+            id: 't103',
             title: 'task one',
             description: '',
             style: { background: '', fullCover: false },
@@ -204,7 +204,7 @@ function getDummyBoard(): boardInterfaces.board {
             isArchived: false
           },
           {
-            id: 't101',
+            id: 't104',
             title: 'task two',
             description: 'task two description',
             style: { background: '#ff3030', fullCover: true },
@@ -266,7 +266,7 @@ function getDummyBoard(): boardInterfaces.board {
         title: 'group 1',
         tasks: [
           {
-            id: 't100',
+            id: 't105',
             title: 'task one',
             description: '',
             style: { background: '', fullCover: false },
@@ -279,7 +279,7 @@ function getDummyBoard(): boardInterfaces.board {
             isArchived: false
           },
           {
-            id: 't101',
+            id: 't106',
             title: 'task two',
             description: 'task two description',
             style: { background: '#ff3030', fullCover: true },
@@ -341,7 +341,7 @@ function getDummyBoard(): boardInterfaces.board {
         title: 'group 1',
         tasks: [
           {
-            id: 't100',
+            id: 't107',
             title: 'task one',
             description: '',
             style: { background: '', fullCover: false },
@@ -354,7 +354,7 @@ function getDummyBoard(): boardInterfaces.board {
             isArchived: false
           },
           {
-            id: 't101',
+            id: 't108',
             title: 'task two',
             description: 'task two description',
             style: { background: '#ff3030', fullCover: true },
@@ -416,7 +416,7 @@ function getDummyBoard(): boardInterfaces.board {
         title: 'group 2',
         tasks: [
           {
-            id: 't103',
+            id: 't109',
             title: 'task one group two',
             description: '',
             style: { background: '', fullCover: false },
@@ -429,7 +429,7 @@ function getDummyBoard(): boardInterfaces.board {
             isArchived: false
           },
           {
-            id: 't104',
+            id: 't110',
             title: 'task two group two',
             description: 'task two description',
             style: { background: '#ff3030', fullCover: true },
