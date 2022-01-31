@@ -2,17 +2,24 @@ import styled, { css } from 'styled-components'
 import IconProps from '../../../interfaces/IconProps'
 import { Icon } from '../../../styled/Mixins.styled'
 
-export const BadgesWrapper = styled.div`
+type WrapperProps = {
+  isFullCover?: boolean
+}
+
+export const BadgesWrapper = styled.div<WrapperProps>`
+  ${({ isFullCover }) => isFullCover ? 'display: none;' : ''}
+
   float: left;
   margin-left: -2px;
   max-width: 100%;
 `
 
-type containerProps = {
+type ContainerProps = {
   isDone?: boolean
+  isDateBadge?: boolean
 }
 
-export const BadgeContainer = styled.div<containerProps>`
+export const BadgeContainer = styled.div<ContainerProps>`
   display: inline-block;
   position: relative;
 
@@ -20,7 +27,7 @@ export const BadgeContainer = styled.div<containerProps>`
   margin: 0 4px 4px 0;
   max-width: 100%;
   min-height: 20px;
-  
+
   overflow: hidden;
   text-decoration: none;
   text-overflow: ellipsis;
@@ -28,17 +35,27 @@ export const BadgeContainer = styled.div<containerProps>`
 
   color: #5e6c84;
 
-  ${({ isDone }) => isDone ? 'background-color: green;' : ''}
+  ${({ isDone }) => (isDone ? 'background-color: green;' : '')}
+
+  ${({ isDateBadge }) =>
+    isDateBadge
+      ? css`
+          &:hover {
+            background-color: #ebecf0;
+            border-radius: 3px;
+          }
+        `
+      : ''}
 `
 
-export const BadgeIcon = styled.span`
-  color: #6b778c;
+export const BadgeIcon = styled.span<IconProps>`
+  color: ${({ content }) => (content === '\\e91b' ? '#fff' : '#6b778c')};
   vertical-align: top;
 
-  ${({ size }: IconProps) => Icon(size)}
+  ${({ size }) => Icon(size)}
 
   &:before {
-    ${({ content }: IconProps) =>
+    ${({ content }) =>
       css`
         content: ${content};
       `}

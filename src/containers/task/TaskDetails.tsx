@@ -19,7 +19,7 @@ const TaskBadges = ({ task }: TaskProps) => {
   const props = { id: task?.id, title: task?.title }
 
   return (
-    <BadgesWrapper>
+    <BadgesWrapper isFullCover={task.style?.fullCover}>
       <TaskDates task={task} />
       <TaskDescriptionBadge description={task?.description} {...props} />
       <TaskCommentBadge comments={task?.comments} {...props} />
