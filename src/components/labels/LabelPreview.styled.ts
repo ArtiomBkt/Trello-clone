@@ -1,13 +1,27 @@
 import styled from 'styled-components'
 
+type LabelProps = {
+  bgColor: string
+}
+
+interface LabelsInterface {
+  [key: string]: string
+}
+
+const labelColors: LabelsInterface = {
+  green: '#61bd4f',
+  yellow: '#f2d600',
+  orange: '#ff9f1a',
+  red: '#eb5a46',
+  purple: '#c377e0',
+  blue: '#0079bf',
+  navy: '#344563'
+}
+
 export const LabelsContainer = styled.div`
   overflow: auto;
   position: relative;
 `
-
-type LabelProps = {
-  bgColor: string
-}
 
 export const Label = styled.span`
   display: block;
@@ -18,7 +32,7 @@ export const Label = styled.span`
 
   border-radius: 4px;
   color: #fff;
-  background-color: ${({ bgColor }: LabelProps) => bgColor || '#b3bac5'};
+  background-color: ${({ bgColor }: LabelProps) => labelColors[bgColor] || '#b3bac5'};
   
   float: left;
   

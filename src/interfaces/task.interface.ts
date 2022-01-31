@@ -16,8 +16,9 @@ export interface task {
   labels?: boardInterfaces.label[]
   members?: boardInterfaces.member[]
   description?: string
-  startDate?: { timestamp: number }
-  dueDate?: { timestamp: number, status: string }
+  startDate?: { timestamp: number, isDone: boolean }
+  dueDate?: { timestamp: number, isDone: boolean }
   comments?: boardInterfaces.comment[]
   checklists?: boardInterfaces.checklist[]
+  isArchived?: boolean
 }

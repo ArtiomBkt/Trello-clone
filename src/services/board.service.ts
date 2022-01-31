@@ -5,7 +5,7 @@ type valueArgs = boardInterfaces.list | taskInterfaces.task | boardInterfaces.bo
 type typeArgs = 'task' | 'list' | 'board'
 
 interface saveArgs {
-  value: valueArgs,
+  value: valueArgs
   type: typeArgs
 }
 
@@ -17,7 +17,7 @@ const gBoard: boardInterfaces.board = getDummyBoard()
 
 function getBoardById(boardId?: string): boardInterfaces.board {
   // const board = getDummyBoard()
-  
+
   // return board
   return gBoard
 }
@@ -33,10 +33,7 @@ function _add(value: valueArgs, type: typeArgs) {
   // return gBoard
 }
 
-function _update(value: valueArgs, type: typeArgs) {
-  
-}
-
+function _update(value: valueArgs, type: typeArgs) {}
 
 function _makeId(length = 10) {
   const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
@@ -71,10 +68,41 @@ function getDummyBoard(): boardInterfaces.board {
       }
     ],
     labels: [
-      { id: 'l100', title: 'done', color: '#50ff80' },
-      { id: 'l101', title: 'bug', color: '#ff5050' },
-      { id: 'l102', title: 'urgent', color: '#80ffff' },
-      { id: 'l103', title: '', color: '#309fff' }
+      {
+        id: 'l101',
+        title: '',
+        color: 'green'
+      },
+      {
+        id: 'l102',
+        title: '',
+        color: 'yellow'
+      },
+      {
+        id: 'l103',
+        title: '',
+        color: 'orange'
+      },
+      {
+        id: 'l104',
+        title: '',
+        color: 'red'
+      },
+      {
+        id: 'l105',
+        title: '',
+        color: 'purple'
+      },
+      {
+        id: 'l106',
+        title: '',
+        color: 'blue'
+      },
+      {
+        id: 'l107',
+        title: '',
+        color: 'navy'
+      }
     ],
     description: '',
     archive: [],
@@ -89,11 +117,16 @@ function getDummyBoard(): boardInterfaces.board {
             description: '',
             style: { background: '', fullCover: false },
             members: [],
-            labels: [{ id: 'l100', title: 'done', color: '#50ff80' }],
-            startDate: { timestamp: 1242101225068 },
-            dueDate: { timestamp: 1242101225068, status: 'due soon' },
+            labels: [
+              { id: 'l101', title: 'done', color: 'green' },
+              { id: 'l102', title: '', color: 'yellow' },
+              { id: 'l107', title: '', color: 'navy' }
+            ],
+            startDate: { timestamp: 1242101225068, isDone: false },
+            dueDate: { timestamp: 1242101225068, isDone: false },
             comments: [],
-            checklists: []
+            checklists: [],
+            isArchived: false
           },
           {
             id: 't101',
@@ -111,11 +144,11 @@ function getDummyBoard(): boardInterfaces.board {
               }
             ],
             labels: [
-              { id: 'l100', title: 'done', color: '#50ff80' },
-              { id: 'l101', title: 'bug', color: '#ff5050' }
+              { id: 'l101', title: '', color: 'green' },
+              { id: 'l103', title: '', color: 'orange' }
             ],
-            startDate: { timestamp: 1642101255068 },
-            dueDate: { timestamp: 1642101255069, status: 'done' },
+            startDate: { timestamp: 1642101255068, isDone: true},
+            dueDate: { timestamp: 1642101255069, isDone: true },
             comments: [
               {
                 id: 'c100',
@@ -148,7 +181,8 @@ function getDummyBoard(): boardInterfaces.board {
                   }
                 ]
               }
-            ]
+            ],
+            isArchived: false
           }
         ]
       },
@@ -162,11 +196,12 @@ function getDummyBoard(): boardInterfaces.board {
             description: '',
             style: { background: '', fullCover: false },
             members: [],
-            labels: [{ id: 'l100', title: 'done', color: '#50ff80' }],
-            startDate: { timestamp: 1242101225068 },
-            dueDate: { timestamp: 1242101225068, status: 'due soon' },
+            labels: [{ id: 'l101', title: 'done', color: 'green' }],
+            startDate: { timestamp: 1242101225068, isDone: false },
+            dueDate: { timestamp: 1242101225068, isDone: false },
             comments: [],
-            checklists: []
+            checklists: [],
+            isArchived: false
           },
           {
             id: 't101',
@@ -184,11 +219,11 @@ function getDummyBoard(): boardInterfaces.board {
               }
             ],
             labels: [
-              { id: 'l100', title: 'done', color: '#50ff80' },
-              { id: 'l101', title: 'bug', color: '#ff5050' }
+              { id: 'l101', title: 'done', color: 'green' },
+              { id: 'l105', title: 'bug', color: 'purple' }
             ],
-            startDate: { timestamp: 1642101255068 },
-            dueDate: { timestamp: 1642101255069, status: 'done' },
+            startDate: { timestamp: 1642101255068, isDone: true },
+            dueDate: { timestamp: 1642101255069, isDone: true },
             comments: [
               {
                 id: 'c100',
@@ -221,7 +256,8 @@ function getDummyBoard(): boardInterfaces.board {
                   }
                 ]
               }
-            ]
+            ],
+            isArchived: false
           }
         ]
       },
@@ -235,11 +271,12 @@ function getDummyBoard(): boardInterfaces.board {
             description: '',
             style: { background: '', fullCover: false },
             members: [],
-            labels: [{ id: 'l100', title: 'done', color: '#50ff80' }],
-            startDate: { timestamp: 1242101225068 },
-            dueDate: { timestamp: 1242101225068, status: 'due soon' },
+            labels: [{ id: 'l101', title: 'done', color: 'green' }],
+            startDate: { timestamp: 1242101225068, isDone: false},
+            dueDate: { timestamp: 1242101225068, isDone: false},
             comments: [],
-            checklists: []
+            checklists: [],
+            isArchived: false
           },
           {
             id: 't101',
@@ -257,11 +294,11 @@ function getDummyBoard(): boardInterfaces.board {
               }
             ],
             labels: [
-              { id: 'l100', title: 'done', color: '#50ff80' },
-              { id: 'l101', title: 'bug', color: '#ff5050' }
+              { id: 'l101', title: 'done', color: 'green' },
+              { id: 'l103', title: 'bug', color: 'orange' }
             ],
-            startDate: { timestamp: 1642101255068 },
-            dueDate: { timestamp: 1642101255069, status: 'done' },
+            startDate: { timestamp: 1642101255068, isDone: false },
+            dueDate: { timestamp: 1642101255069, isDone: false },
             comments: [
               {
                 id: 'c100',
@@ -294,7 +331,8 @@ function getDummyBoard(): boardInterfaces.board {
                   }
                 ]
               }
-            ]
+            ],
+            isArchived: false
           }
         ]
       },
@@ -308,11 +346,12 @@ function getDummyBoard(): boardInterfaces.board {
             description: '',
             style: { background: '', fullCover: false },
             members: [],
-            labels: [{ id: 'l100', title: 'done', color: '#50ff80' }],
-            startDate: { timestamp: 1242101225068 },
-            dueDate: { timestamp: 1242101225068, status: 'due soon' },
+            labels: [{ id: 'l101', title: 'done', color: 'green' }],
+            startDate: { timestamp: 1242101225068, isDone: false},
+            dueDate: { timestamp: 1242101225068, isDone: false},
             comments: [],
-            checklists: []
+            checklists: [],
+            isArchived: false
           },
           {
             id: 't101',
@@ -330,11 +369,11 @@ function getDummyBoard(): boardInterfaces.board {
               }
             ],
             labels: [
-              { id: 'l100', title: 'done', color: '#50ff80' },
-              { id: 'l101', title: 'bug', color: '#ff5050' }
+              { id: 'l101', title: 'done', color: 'green' },
+              { id: 'l102', title: 'bug', color: 'yellow' }
             ],
-            startDate: { timestamp: 1642101255068 },
-            dueDate: { timestamp: 1642101255069, status: 'done' },
+            startDate: { timestamp: 1642101255068, isDone: false },
+            dueDate: { timestamp: 1642101255069, isDone: false },
             comments: [
               {
                 id: 'c100',
@@ -367,7 +406,8 @@ function getDummyBoard(): boardInterfaces.board {
                   }
                 ]
               }
-            ]
+            ],
+            isArchived: false
           }
         ]
       },
@@ -381,11 +421,12 @@ function getDummyBoard(): boardInterfaces.board {
             description: '',
             style: { background: '', fullCover: false },
             members: [],
-            labels: [{ id: 'l100', title: 'done', color: '#50ff80' }],
-            startDate: { timestamp: Date.now() },
-            dueDate: { timestamp: Date.now(), status: '' },
+            labels: [{ id: 'l101', title: 'done', color: 'green' }],
+            startDate: { timestamp: Date.now(), isDone: false },
+            dueDate: { timestamp: Date.now(), isDone: false },
             comments: [],
-            checklists: []
+            checklists: [],
+            isArchived: false
           },
           {
             id: 't104',
@@ -403,11 +444,11 @@ function getDummyBoard(): boardInterfaces.board {
               }
             ],
             labels: [
-              { id: 'l100', title: 'done', color: '#50ff80' },
-              { id: 'l101', title: 'bug', color: '#ff5050' }
+              { id: 'l101', title: 'done', color: 'green' },
+              { id: 'l102', title: 'bug', color: 'yellow' }
             ],
-            startDate: { timestamp: 1642101255068 },
-            dueDate: { timestamp: 1642101255069, status: 'done' },
+            startDate: { timestamp: 1642101255068, isDone: false },
+            dueDate: { timestamp: 1642101255069, isDone: false },
             comments: [
               {
                 id: 'c100',
@@ -440,7 +481,8 @@ function getDummyBoard(): boardInterfaces.board {
                   }
                 ]
               }
-            ]
+            ],
+            isArchived: false
           }
         ]
       }
