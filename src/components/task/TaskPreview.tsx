@@ -2,7 +2,6 @@ import React from 'react'
 import { Draggable } from 'react-beautiful-dnd'
 import TaskDetails from '../../containers/task/TaskDetails'
 import * as taskInterfaces from '../../interfaces/task.interface'
-import LabelPreview from '../labels/LabelPreview'
 import { TaskPreviewContainer, TaskCover, TaskEditIcon } from './TaskPreview.styled'
 
 type TaskProps = {
@@ -13,6 +12,7 @@ type TaskProps = {
 
 const TaskPreview = ({ task, idx, isDraggingOver }: TaskProps) => {
   return (
+    // TODO: add dnd ui
     <Draggable draggableId={task.id} index={idx}>
       {provided => (
         <>

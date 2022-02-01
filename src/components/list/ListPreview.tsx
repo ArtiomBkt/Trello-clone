@@ -8,14 +8,16 @@ import { ListContentPreview, List, ListTasksWrapper, TaskComposerWrapper } from 
 type listProps = {
   list: boardInterfaces.list
   idx: number
+  isDraggingOver: boolean
 }
 
-const ListPreview = ({ list, idx }: listProps) => {
+const ListPreview = ({ list, idx, isDraggingOver }: listProps) => {
   return (
+    // TODO: add dnd ui
     <Draggable draggableId={list.id} index={idx}>
-      {provided => (
+      {(provided, snapshot) => (
         <ListContentPreview {...provided.draggableProps} ref={provided.innerRef}>
-          <List>
+          <List isDraggingOver={isDraggingOver} isDragging={snapshot.isDragging}>
             <ListHeader dragHandleProps={provided.dragHandleProps} list={list} />
             <Droppable droppableId={list.id} type="TASK">
               {(provided, { isDraggingOver }) => (
@@ -29,8 +31,8 @@ const ListPreview = ({ list, idx }: listProps) => {
                 </>
               )}
             </Droppable>
+            <TaskComposerWrapper>{/* // TODO: add task compose functionality */}</TaskComposerWrapper>
           </List>
-          <TaskComposerWrapper></TaskComposerWrapper>
         </ListContentPreview>
       )}
     </Draggable>

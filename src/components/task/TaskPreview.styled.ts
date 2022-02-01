@@ -24,6 +24,9 @@ export const TaskPreviewContainer = styled(Link)<TaskProps>`
   z-index: 0;
 
   &:hover {
+    background-color: #f4f5f7;
+    border-bottom-color: #091e4240;
+
     span {
       visibility: visible;
     }

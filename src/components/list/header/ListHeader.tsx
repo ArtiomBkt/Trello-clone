@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import * as boardInterfaces from '../../../interfaces/board.interface'
 import { ListTitle, ListHeaderTarget, ListHeaderNameAssist, ListHeaderNameInput, ListHeaderOpts, HeaderOptsBtn } from './ListHeader.styled'
 
@@ -8,16 +8,17 @@ type Props = {
 }
 
 const handleInputChange = ({ target }: React.ChangeEvent<HTMLTextAreaElement>): void => {
-  console.log(target.value)
+  // TODO: handle list title input
 }
 
 const ListHeader = ({ list, dragHandleProps }: Props) => {
   const [isOpen, setIsOpen] = useState(false)
+  
+  // TODO: useref for auto focus on textarea
+  const inputRef = useRef()
 
   const openTitleEditor = () => {
-    console.log(isOpen)
-
-    setIsOpen(open => !open)
+    setIsOpen(true)
   }
 
   return (

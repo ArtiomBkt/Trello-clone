@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 export const ListPreviewContainer = styled.div`
   position: absolute;
@@ -23,7 +23,12 @@ export const ListContentPreview = styled.div`
   }
 `
 
-export const List = styled.div`
+type dndProps = {
+  isDragging: boolean
+  isDraggingOver: boolean
+}
+
+export const List = styled.div<dndProps>`
   display: flex;
   flex-direction: column;
   position: relative;
@@ -34,7 +39,10 @@ export const List = styled.div`
 
   background-color: #ebecf0;
   border-radius: 3px;
-`
+  
+  ${({ isDragging }) => isDragging ? css`transform:rotateY(0) rotate(5deg); transition: transform .1s;` : null};
+  `
+  /* background-color: ${({ isDraggingOver }) => isDraggingOver ? '#2c2c2c' : '#ebecf0'}; */
 
 export const ListTasksWrapper = styled.div`
   flex: 1 1 auto;

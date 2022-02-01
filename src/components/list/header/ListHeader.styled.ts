@@ -42,7 +42,6 @@ export const ListHeaderOpts = styled.div`
   position: absolute;
   right: 4px;
   top: 4px;
-  z-index: 1;
 `
 
 export const HeaderOptsBtn = styled.a`
