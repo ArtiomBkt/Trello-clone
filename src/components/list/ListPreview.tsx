@@ -1,5 +1,5 @@
 import React from 'react'
-import { Draggable } from 'react-beautiful-dnd'
+import { Draggable, Droppable } from 'react-beautiful-dnd'
 import * as boardInterfaces from '../../interfaces/board.interface'
 import TaskPreview from '../task/TaskPreview'
 import ListHeader from './header/ListHeader'
@@ -12,18 +12,25 @@ type listProps = {
 
 const ListPreview = ({ list, idx }: listProps) => {
   return (
-    <Draggable key={list.id} draggableId={list.id} index={idx}>
-      {(provided, snapshot) => (
-        <ListContentPreview {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef}>
+    <Draggable draggableId={list.id} index={idx}>
+      {provided => (
+        <ListContentPreview {...provided.draggableProps} ref={provided.innerRef}>
           <List>
-            <ListHeader list={list} />
-            <ListTasksWrapper>
-              {list.tasks?.map(task => (
-                <TaskPreview key={task.id} task={task} />
-              ))}
-            </ListTasksWrapper>
-            <TaskComposerWrapper></TaskComposerWrapper>
+            <ListHeader dragHandleProps={provided.dragHandleProps} list={list} />
+            <Droppable droppableId={list.id} type="TASK">
+              {(provided, { isDraggingOver }) => (
+                <>
+                  <ListTasksWrapper {...provided.droppableProps} ref={provided.innerRef}>
+                    {list.tasks?.map((task, idx) => (
+                      <TaskPreview isDraggingOver={isDraggingOver} key={task.id} task={task} idx={idx} />
+                    ))}
+                    {provided.placeholder}
+                  </ListTasksWrapper>
+                </>
+              )}
+            </Droppable>
           </List>
+          <TaskComposerWrapper></TaskComposerWrapper>
         </ListContentPreview>
       )}
     </Draggable>

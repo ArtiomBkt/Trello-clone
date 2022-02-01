@@ -3,14 +3,27 @@ import * as taskInterfaces from '../interfaces/task.interface'
 
 type valueArgs = boardInterfaces.list | taskInterfaces.task | boardInterfaces.board
 type typeArgs = 'task' | 'list' | 'board'
+type dndTypes = {
+  droppableId: string
+  index: number
+}
 
 interface saveArgs {
   value: valueArgs
   type: typeArgs
 }
 
+interface dragAndDropArgs {
+  board: boardInterfaces.board
+  draggableId: string
+  destination: dndTypes
+  source: dndTypes
+}
+
 export const boardService = {
-  getBoardById
+  getBoardById,
+  handleListMove,
+  handleTaskMove
 }
 
 const gBoard: boardInterfaces.board = getDummyBoard()
@@ -20,6 +33,69 @@ function getBoardById(boardId?: string): boardInterfaces.board {
 
   // return board
   return gBoard
+}
+
+function handleListMove({ board, draggableId, source, destination }: dragAndDropArgs): boardInterfaces.list[] | undefined {
+  if (!board || !board.lists) return
+
+  const draggedList = board.lists.find(list => list.id === draggableId)
+  if (!draggedList) return
+
+  const newLists = [...board.lists]
+  newLists.splice(source.index, 1)
+  newLists.splice(destination.index, 0, draggedList)
+
+  return newLists
+}
+
+function handleTaskMove({ board, draggableId, source, destination }: dragAndDropArgs): boardInterfaces.list[] | undefined {
+  if (!board || !board.lists) return
+
+  const startList = board.lists.find(list => list.id === source.droppableId)
+  const endList = board.lists.find(list => list.id === destination.droppableId)
+  if (!startList || !endList) return
+
+  const draggedTask = startList.tasks.find(task => task.id === draggableId)
+  if (!draggedTask) return
+
+  if (startList.id === endList.id) {
+    const newTasks = [...startList.tasks]
+    newTasks.splice(source.index, 1)
+    newTasks.splice(destination.index, 0, draggedTask)
+
+    const newList = {
+      ...startList,
+      tasks: newTasks
+    }
+
+    const newLists = [...board.lists]
+    const idx = newLists.findIndex(list => list.id === source.droppableId)
+    newLists.splice(idx, 1, newList)
+
+    return newLists
+  } else {
+    const newStartTasks = [...startList.tasks]
+    newStartTasks.splice(source.index, 1)
+    const newStartList = {
+      ...startList,
+      tasks: newStartTasks
+    }
+
+    const newEndTasks = [...endList.tasks]
+    newEndTasks.splice(destination.index, 0, draggedTask)
+    const newEndList = {
+      ...endList,
+      tasks: newEndTasks
+    }
+
+    const newLists = [...board.lists]
+    const startListIdx = newLists.findIndex(list => list.id === startList.id)
+    newLists.splice(startListIdx, 1, newStartList)
+    const endListIdx = newLists.findIndex(list => list.id === endList.id)
+    newLists.splice(endListIdx, 1, newEndList)
+
+    return newLists
+  }
 }
 
 function save({ value, type }: saveArgs) {
@@ -147,7 +223,7 @@ function getDummyBoard(): boardInterfaces.board {
               { id: 'l101', title: '', color: 'green' },
               { id: 'l103', title: '', color: 'orange' }
             ],
-            startDate: { timestamp: 1642101255068, isDone: true},
+            startDate: { timestamp: 1642101255068, isDone: true },
             dueDate: { timestamp: 1642101255069, isDone: true },
             comments: [
               {
@@ -272,8 +348,8 @@ function getDummyBoard(): boardInterfaces.board {
             style: { background: '', fullCover: false },
             members: [],
             labels: [{ id: 'l101', title: 'done', color: 'green' }],
-            startDate: { timestamp: 1242101225068, isDone: false},
-            dueDate: { timestamp: 1242101225068, isDone: false},
+            startDate: { timestamp: 1242101225068, isDone: false },
+            dueDate: { timestamp: 1242101225068, isDone: false },
             comments: [],
             checklists: [],
             isArchived: false
@@ -347,8 +423,8 @@ function getDummyBoard(): boardInterfaces.board {
             style: { background: '', fullCover: false },
             members: [],
             labels: [{ id: 'l101', title: 'done', color: 'green' }],
-            startDate: { timestamp: 1242101225068, isDone: false},
-            dueDate: { timestamp: 1242101225068, isDone: false},
+            startDate: { timestamp: 1242101225068, isDone: false },
+            dueDate: { timestamp: 1242101225068, isDone: false },
             comments: [],
             checklists: [],
             isArchived: false

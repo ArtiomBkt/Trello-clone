@@ -17,7 +17,7 @@ export const ListHeaderTarget = styled.div`
 `
 
 export const ListHeaderNameAssist = styled.h2`
-  display: none;
+  /* display: none; */
   margin: 0 0 8px;
   font-weight: 600;
   font-size: 20px;

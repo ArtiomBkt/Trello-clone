@@ -20,15 +20,23 @@ type boardProps = {
 }
 
 const Board = () => {
-  const [board, setBoard] = useState<boardProps['board'] | null>(null)
+  const [board, setBoard] = useState<boardProps['board']>(() => boardService.getBoardById())
 
-  useEffect(() => {
-    const boardToLoad = boardService.getBoardById()
-    setBoard(boardToLoad)
-  }, [])
+  const onDragEnd = (result: any): void => {
+    const { destination, source, type, draggableId } = result
 
-  const onDragEnd = (result: any) => {
-    console.log(result)
+    if (!board || !board.lists) return
+    if (!destination) return
+    if (destination.droppableId === source.droppableId && destination.index === source.index) return
+
+    const args = { board, destination, draggableId, source }
+    const newLists = type === 'LIST' ? boardService.handleListMove(args) : boardService.handleTaskMove(args)
+    
+    const newBoard = {
+      ...board,
+      lists: newLists
+    }
+    setBoard(newBoard)
   }
 
   if (!board) return <div>loading...</div>
@@ -41,12 +49,13 @@ const Board = () => {
               <BoardNav />
               <div style={{ flexGrow: 1, position: 'relative' }}>
                 <DragDropContext onDragEnd={onDragEnd}>
-                  <Droppable direction="horizontal" droppableId="lists" type="list">
-                    {(provided, snapshot) => (
-                      <ListPreviewContainer ref={provided.innerRef} {...provided.droppableProps}>
+                  <Droppable direction="horizontal" droppableId={board.id} type="LIST">
+                    {provided => (
+                      <ListPreviewContainer {...provided.droppableProps} ref={provided.innerRef}>
                         {board.lists?.map((list, idx) => (
                           <ListPreview key={list.id} list={list} idx={idx} />
                         ))}
+                        {provided.placeholder}
                       </ListPreviewContainer>
                     )}
                   </Droppable>
