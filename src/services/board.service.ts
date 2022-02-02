@@ -199,7 +199,7 @@ function getDummyBoard(): boardInterfaces.board {
               { id: 'l107', title: '', color: 'navy' }
             ],
             startDate: { timestamp: 1242101225068, isDone: false },
-            dueDate: { timestamp: 1242101225068, isDone: false },
+            dueDate: { timestamp: undefined, isDone: false },
             comments: [],
             checklists: [],
             isArchived: false
@@ -349,7 +349,7 @@ function getDummyBoard(): boardInterfaces.board {
             members: [],
             labels: [{ id: 'l101', title: 'done', color: 'green' }],
             startDate: { timestamp: 1242101225068, isDone: false },
-            dueDate: { timestamp: 1242101225068, isDone: false },
+            dueDate: { timestamp: undefined, isDone: false },
             comments: [],
             checklists: [],
             isArchived: false
@@ -524,7 +524,7 @@ function getDummyBoard(): boardInterfaces.board {
               { id: 'l102', title: 'bug', color: 'yellow' }
             ],
             startDate: { timestamp: 1642101255068, isDone: false },
-            dueDate: { timestamp: 1642101255069, isDone: false },
+            dueDate: { timestamp: undefined, isDone: false },
             comments: [
               {
                 id: 'c100',

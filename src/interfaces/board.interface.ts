@@ -16,7 +16,7 @@ export interface todo {
 export interface checklist {
   id: string
   title: string
-  todos: todo[]
+  todos?: todo[]
 }
 
 export interface comment {
@@ -47,7 +47,7 @@ export interface board {
   title: string
   createdBy: member
   style: { background: string }
-  members: member[]
+  members?: member[]
   labels: label[]
   description?: string
   archive?: taskInterfaces.task[]

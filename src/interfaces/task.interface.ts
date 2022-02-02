@@ -1,14 +1,6 @@
 import * as boardInterfaces from './board.interface'
 
 
-// export interface tasks {
-//   tasks: task[]
-// }
-
-// interface taskBadges {
-  
-// }
-
 export interface task {
   id: string
   title: string
@@ -16,8 +8,8 @@ export interface task {
   labels?: boardInterfaces.label[]
   members?: boardInterfaces.member[]
   description?: string
-  startDate?: { timestamp: number, isDone: boolean }
-  dueDate?: { timestamp: number, isDone: boolean }
+  startDate?: { timestamp?: number, isDone?: boolean }
+  dueDate?: { timestamp?: number, isDone?: boolean }
   comments?: boardInterfaces.comment[]
   checklists?: boardInterfaces.checklist[]
   isArchived?: boolean
