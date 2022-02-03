@@ -5,17 +5,17 @@ type LabelProps = {
 }
 
 interface LabelsInterface {
-  [key: string]: string
+  [key: string]: { static: string; hover: string }
 }
 
 const labelColors: LabelsInterface = {
-  green: '#61bd4f',
-  yellow: '#f2d600',
-  orange: '#ff9f1a',
-  red: '#eb5a46',
-  purple: '#c377e0',
-  blue: '#0079bf',
-  navy: '#344563'
+  green: { static: '#61bd4f', hover: '#519839' },
+  yellow: { static: '#f2d600', hover: '#d9b51c' },
+  orange: { static: '#ff9f1a', hover: '#cd8313' },
+  red: { static: '#eb5a46', hover: '#b04632' },
+  purple: { static: '#c377e0', hover: '#89609e' },
+  blue: { static: '#0079bf', hover: '#055a8c' },
+  navy: { static: '#344563', hover: '#091e42' }
 }
 
 export const LabelsContainer = styled.div`
@@ -32,10 +32,14 @@ export const Label = styled.span`
 
   border-radius: 4px;
   color: #fff;
-  background-color: ${({ bgColor }: LabelProps) => labelColors[bgColor] || '#b3bac5'};
-  
+  background-color: ${({ bgColor }: LabelProps) => labelColors[bgColor].static || '#b3bac5'};
+
+  &:hover {
+    background-color: ${({ bgColor }: LabelProps) => labelColors[bgColor].hover};
+  }
+
   float: left;
-  
+
   height: 8px;
   min-width: 40px;
   width: auto;

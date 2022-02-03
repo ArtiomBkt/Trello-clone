@@ -208,7 +208,7 @@ function getDummyBoard(): boardInterfaces.board {
             id: 't101',
             title: 'task two',
             description: 'task two description',
-            style: { background: '#ff3030', fullCover: true },
+            style: { background: '#ef7564', fullCover: true },
             members: [
               {
                 id: 'u100',
@@ -283,7 +283,7 @@ function getDummyBoard(): boardInterfaces.board {
             id: 't104',
             title: 'task two',
             description: 'task two description',
-            style: { background: '#ff3030', fullCover: true },
+            style: { background: '#ef7564', fullCover: true },
             members: [
               {
                 id: 'u100',
@@ -358,7 +358,7 @@ function getDummyBoard(): boardInterfaces.board {
             id: 't106',
             title: 'task two',
             description: 'task two description',
-            style: { background: '#ff3030', fullCover: true },
+            style: { background: '#ef7564', fullCover: true },
             members: [
               {
                 id: 'u100',
@@ -433,7 +433,7 @@ function getDummyBoard(): boardInterfaces.board {
             id: 't108',
             title: 'task two',
             description: 'task two description',
-            style: { background: '#ff3030', fullCover: true },
+            style: { background: '#ef7564', fullCover: true },
             members: [
               {
                 id: 'u100',
@@ -508,7 +508,7 @@ function getDummyBoard(): boardInterfaces.board {
             id: 't110',
             title: 'task two group two',
             description: 'task two description',
-            style: { background: '#ff3030', fullCover: true },
+            style: { background: '#ef7564', fullCover: true },
             members: [
               {
                 id: 'u100',

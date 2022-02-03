@@ -53,9 +53,3 @@ export const ListTasksWrapper = styled.div`
   min-height: 0;
   z-index: 1;
 `
-
-export const TaskComposerWrapper = styled.div`
-  display: flex;
-  justify-content: space-between;
-  height: 38px;
-`

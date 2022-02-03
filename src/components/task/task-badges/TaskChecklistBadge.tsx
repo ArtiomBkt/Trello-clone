@@ -16,8 +16,8 @@ const TaskChecklistBadge = ({ checklists }: TaskProps['task']) => {
       <BadgeIcon content="'\e91a'" size="sm" />
       <BadgeText>
         {checklists.map(checklist => {
-          checklist.todos.map(todo => (todo.isDone ? count++ : null))
-          return `${count}/${checklist.todos.length}`
+          checklist.todos?.map(todo => (todo.isDone ? count++ : null))
+          return `${count}/${checklist.todos?.length}`
         })}
       </BadgeText>
     </BadgeContainer>

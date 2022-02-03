@@ -138,7 +138,7 @@ const Board = () => {
                     {(provided, snapshot) => (
                       <ListPreviewContainer {...provided.droppableProps} ref={provided.innerRef}>
                         {board.lists?.map((list, idx) => (
-                          <ListPreview key={list.id} isDraggingOver={snapshot.isDraggingOver} list={list} idx={idx} />
+                          <ListPreview key={list.id} placeholder={provided.placeholder} isDraggingOver={snapshot.isDraggingOver} list={list} idx={idx} />
                         ))}
                         {provided.placeholder}
                       </ListPreviewContainer>
@@ -155,8 +155,6 @@ const Board = () => {
 }
 
 export default Board
-
-
 
 // {placeholderProps && snapshot.isDraggingOver && <Placeholder top={placeholderProps.clientY} left={placeholderProps.clientX} height={placeholderProps.clientHeight} width={placeholderProps.clientWidth} />}
 
