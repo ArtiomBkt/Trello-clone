@@ -7,7 +7,7 @@ type props = {
 }
 
 const TaskComposer = ({ handleComposerToggle, handleTaskAdd }: props) => {
-  const [cardTitle, setCardTitle] = useState<string | null>(null)
+  const [cardTitle, setCardTitle] = useState<string>('')
 
   useLayoutEffect(() => {}, [cardTitle])
 
@@ -15,13 +15,15 @@ const TaskComposer = ({ handleComposerToggle, handleTaskAdd }: props) => {
     setCardTitle(target.value)
   }
 
-  const handleTaskSubmit = () => {
+  const handleTaskSubmit = (e: any) => {
+    if (e.key !== 'Enter') return
+    e.preventDefault()
     handleTaskAdd(cardTitle)
-    handleDiscardTask()
+    setCardTitle('')
   }
 
   const handleDiscardTask = () => {
-    setCardTitle(null)
+    setCardTitle('')
     handleComposerToggle()
   }
 
@@ -29,7 +31,7 @@ const TaskComposer = ({ handleComposerToggle, handleTaskAdd }: props) => {
     <TaskComposerContainer>
       <ComposingTask>
         <ComposingTaskDetails>
-          <ComposingTaskTextarea onChange={handleInputChange} placeholder="Enter a title for this card..." />
+          <ComposingTaskTextarea value={cardTitle} onBlur={handleComposerToggle} onKeyDown={handleTaskSubmit} onChange={handleInputChange} placeholder="Enter a title for this card..." />
         </ComposingTaskDetails>
       </ComposingTask>
       <div>
