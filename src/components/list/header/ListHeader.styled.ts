@@ -17,11 +17,18 @@ export const ListHeaderTarget = styled.div`
 `
 
 export const ListHeaderNameAssist = styled.h2`
-  /* display: none; */
   margin: 0 0 8px;
   font-weight: 600;
-  font-size: 20px;
-  line-height: 24px;
+  font-size: 14px;
+  line-height: 20px;
+  overflow: hidden;
+  overflow-wrap: break-word;
+  height: 28px;
+  background: #0000;
+  margin: -4px 0;
+  max-height: 256px;
+  min-height: 20px;
+  padding: 4px 8px;
 `
 
 export const ListHeaderNameInput = styled.textarea`
@@ -36,6 +43,11 @@ export const ListHeaderNameInput = styled.textarea`
   max-height: 256px;
   min-height: 20px;
   padding: 4px 8px;
+
+  &:focus {
+    background: #fff;
+    box-shadow: inset 0 0 0 2px #0079bf;
+  }
 `
 
 export const ListHeaderOpts = styled.div`

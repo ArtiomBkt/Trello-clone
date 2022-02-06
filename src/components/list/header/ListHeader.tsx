@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useLayoutEffect, useEffect } from 'react'
 import * as boardInterfaces from '../../../interfaces/board.interface'
 import { ListTitle, ListHeaderTarget, ListHeaderNameAssist, ListHeaderNameInput, ListHeaderOpts, HeaderOptsBtn } from './ListHeader.styled'
 
@@ -7,28 +7,36 @@ type Props = {
   dragHandleProps?: any
 }
 
-const handleInputChange = ({ target }: React.ChangeEvent<HTMLTextAreaElement>): void => {
-  // TODO: handle list title input
-}
-
 const ListHeader = ({ list, dragHandleProps }: Props) => {
-  const [isOpen, setIsOpen] = useState(false)
-  
-  // TODO: useref for auto focus on textarea
-  const inputRef = useRef()
 
-  const openTitleEditor = () => {
-    setIsOpen(true)
+  const [listTitle, setListTitle] = useState(list.title)
+  const [isOpen, setIsOpen] = useState(false)
+  const inputRef = useRef<HTMLTextAreaElement>(null)
+
+  useLayoutEffect(() => {
+    if (isOpen && inputRef.current) {
+      inputRef.current.focus()
+      inputRef.current.select()
+    }
+  }, [isOpen, inputRef])
+
+  const handleInputChange = ({ target }: React.ChangeEvent<HTMLTextAreaElement>): void => {
+    console.log(target);
+    
+    setListTitle(target.value)
+  }
+
+  const toggleTitleEditor = () => {
+    setIsOpen(prev => !prev)
   }
 
   return (
     <ListTitle {...dragHandleProps}>
       {isOpen ? (
-        <ListHeaderNameInput onChange={handleInputChange} value={list.title} />
+        <ListHeaderNameInput ref={inputRef} onBlur={toggleTitleEditor} onChange={handleInputChange} value={listTitle} 
+          onKeyPress={ev => (ev.nativeEvent.key === 'Enter' ? handleInputChange : null)} />
       ) : (
-        <ListHeaderNameAssist onClick={openTitleEditor}>
-          {list.title}
-        </ListHeaderNameAssist>
+        <ListHeaderNameAssist onClick={toggleTitleEditor}>{list.title}</ListHeaderNameAssist>
       )}
       <ListHeaderOpts>
         <HeaderOptsBtn content="'\e952'" size="sm" />

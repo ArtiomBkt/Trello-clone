@@ -10,10 +10,9 @@ type listProps = {
   list: boardInterfaces.list
   idx: number
   isDraggingOver: boolean
-  placeholder: any
 }
 
-const ListPreview = ({ list, idx, isDraggingOver, placeholder }: listProps) => {
+const ListPreview = ({ list, idx, isDraggingOver }: listProps) => {
   return (
     // TODO: add dnd ui
     <Draggable draggableId={list.id} index={idx}>

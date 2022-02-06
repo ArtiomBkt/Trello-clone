@@ -36,7 +36,7 @@ const Resets = createGlobalStyle`
     margin-bottom: 12px;
     outline: none;
     padding: 8px 12px;
-    transition: background-color,border-color,box-shadow .85s ease;
+    transition: background-color,border-color,box-shadow .2s ease;
   }
 
   textarea {
