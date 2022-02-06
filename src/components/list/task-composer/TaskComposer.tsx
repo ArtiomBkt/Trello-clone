@@ -1,14 +1,42 @@
-import React from 'react'
-import { TaskComposerWrapper, TaskComposerToggler, TaskComposerIcon } from './TaskComposer.styled'
+import React, { useLayoutEffect, useState } from 'react'
+import { TaskComposerContainer, ComposingTask, ComposingTaskDetails, ComposingTaskTextarea, AddTaskBtn, DiscardTaskIcon } from './TaskComposer.styled'
 
-const TaskComposer = () => {
+type props = {
+  handleComposerToggle: () => void
+  handleTaskAdd: (cardTitle: string | null) => void
+}
+
+const TaskComposer = ({ handleComposerToggle, handleTaskAdd }: props) => {
+  const [cardTitle, setCardTitle] = useState<string | null>(null)
+
+  useLayoutEffect(() => {}, [cardTitle])
+
+  const handleInputChange = ({ target }: React.ChangeEvent<HTMLTextAreaElement>): void => {
+    setCardTitle(target.value)
+  }
+
+  const handleTaskSubmit = () => {
+    handleTaskAdd(cardTitle)
+    handleDiscardTask()
+  }
+
+  const handleDiscardTask = () => {
+    setCardTitle(null)
+    handleComposerToggle()
+  }
+
   return (
-    <TaskComposerWrapper>
-      <TaskComposerToggler>
-        <TaskComposerIcon content="'\e901'" size="sm" />
-        <span>Add a card</span>
-      </TaskComposerToggler>
-    </TaskComposerWrapper>
+    <TaskComposerContainer>
+      <ComposingTask>
+        <ComposingTaskDetails>
+          <ComposingTaskTextarea onChange={handleInputChange} placeholder="Enter a title for this card..." />
+        </ComposingTaskDetails>
+      </ComposingTask>
+      <div>
+        <AddTaskBtn onClick={handleTaskSubmit}>Add card</AddTaskBtn>
+        <DiscardTaskIcon onClick={handleDiscardTask} content="'\e91c'" size="lg" />
+      </div>
+    </TaskComposerContainer>
   )
 }
 

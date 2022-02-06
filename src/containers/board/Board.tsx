@@ -25,11 +25,24 @@ const Board = () => {
   const onDragEnd = (result: any): void => {
     const { destination, source, type, draggableId } = result
 
-    if (!board || !board.lists || destination) return
+    if (!board || !board.lists || !destination) return
     if (destination.droppableId === source.droppableId && destination.index === source.index) return
 
     const args = { board, destination, draggableId, source }
     const newLists = type === 'LIST' ? boardService.handleListMove(args) : boardService.handleTaskMove(args)
+
+    const newBoard = {
+      ...board,
+      lists: newLists
+    }
+    setBoard(newBoard)
+  }
+
+  const onListUpdate = (newList: boardInterfaces.list): void => {
+    const idx = board.lists!.findIndex(list => list.id === newList.id)
+
+    const newLists = [...board.lists!]
+    newLists.splice(idx, 1, newList)
 
     const newBoard = {
       ...board,
@@ -52,7 +65,7 @@ const Board = () => {
                     {(provided, snapshot) => (
                       <ListPreviewContainer {...provided.droppableProps} ref={provided.innerRef}>
                         {board.lists?.map((list, idx) => (
-                          <ListPreview key={list.id} isDraggingOver={snapshot.isDraggingOver} list={list} idx={idx} />
+                          <ListPreview onListUpdate={onListUpdate} key={list.id} isDraggingOver={snapshot.isDraggingOver} list={list} idx={idx} />
                         ))}
                         {provided.placeholder}
                       </ListPreviewContainer>

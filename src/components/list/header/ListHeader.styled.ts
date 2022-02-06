@@ -10,12 +10,6 @@ export const ListTitle = styled.div`
   padding-right: 36px;
 `
 
-export const ListHeaderTarget = styled.div`
-  position: absolute;
-  inset: 0;
-  cursor: pointer;
-`
-
 export const ListHeaderNameAssist = styled.h2`
   margin: 0 0 8px;
   font-weight: 600;

@@ -70,3 +70,41 @@ export const Icon = (size: string | undefined) => css`
     color: #172b4d;
   }
 `
+
+export const PrimeBtn = (type: string | undefined) => css`
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+
+  padding: 6px 12px;
+  border-radius: 3px;
+
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+
+  background-color: #091e420a;
+  color: #172b4d;
+  border: none;
+  box-shadow: none;
+  white-space: normal;
+
+  transition-duration: 85ms;
+  transition-property: background-color, color, border-color, box-shadow;
+  transition-timing-function: ease;
+
+  ${type === 'primary'
+    ? css`
+        margin-bottom: 0;
+        margin-top: 0;
+        vertical-align: top;
+        background-color: #0079bf;
+        color: #fff;
+
+        &:hover {
+          background-color: #026aa7;
+        }
+      `
+    : ''}
+`

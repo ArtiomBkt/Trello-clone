@@ -23,7 +23,8 @@ interface dragAndDropArgs {
 export const boardService = {
   getBoardById,
   handleListMove,
-  handleTaskMove
+  handleTaskMove,
+  getEmptyTask
 }
 
 const gBoard: boardInterfaces.board = getDummyBoard()
@@ -95,6 +96,22 @@ function handleTaskMove({ board, draggableId, source, destination }: dragAndDrop
     newLists.splice(endListIdx, 1, newEndList)
 
     return newLists
+  }
+}
+
+function getEmptyTask() {
+  return {
+    id: _makeId(),
+    title: '',
+    description: '',
+    style: { background: '', fullCover: false },
+    members: [],
+    labels: [],
+    startDate: { timestamp: undefined, isDone: false },
+    dueDate: { timestamp: undefined, isDone: false },
+    comments: [],
+    checklists: [],
+    isArchived: false
   }
 }
 
