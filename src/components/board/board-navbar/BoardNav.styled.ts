@@ -1,12 +1,12 @@
 import styled from 'styled-components'
-import { Icon } from '../../styled/Mixins.styled'
+import { Icon } from '../../../styled/Mixins.styled'
 
 export const BoardNavContainer = styled.div`
   position: relative;
   padding: 8px 4px 4px 12px;
   height: auto;
 
-  background-color: #0000003d;
+  /* background-color: #0000003d; */
 `
 
 export const BoardViewsContainer = styled.div``

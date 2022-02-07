@@ -5,7 +5,9 @@ export const boardService = {
   getBoardById,
   handleListMove,
   handleTaskMove,
-  getEmptyTask
+  getEmptyTask,
+  getBoardStyle,
+  getEmptyList
 }
 
 const gBoard: BoardTypes.board = getDummyBoard()
@@ -94,6 +96,19 @@ function getEmptyTask(): ReturnType<serviceTypes.getEmptyTask> {
     checklists: [],
     isArchived: false
   }
+}
+
+function getEmptyList(): ReturnType<serviceTypes.getEmptyList> {
+  return {
+    id: _makeId(),
+    title: '',
+    tasks: []
+  }
+}
+
+function getBoardStyle() {
+  const board = getBoardById()
+  return board.style.background
 }
 
 function save({ value, type }: serviceTypes.saveArgs) {

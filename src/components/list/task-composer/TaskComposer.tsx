@@ -1,18 +1,16 @@
-import React, { useLayoutEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { TaskComposerContainer, ComposingTask, ComposingTaskDetails, ComposingTaskTextarea, AddTaskBtn, DiscardTaskIcon } from './TaskComposer.styled'
 import { PropTypes } from '../../../types/prop-types'
 
 const TaskComposer = ({ handleComposerToggle, handleTaskAdd }: PropTypes.TaskComposerProps) => {
-  const [cardTitle, setCardTitle] = useState<string>('')
-
-  useLayoutEffect(() => {}, [cardTitle])
+  const [cardTitle, setCardTitle] = useState('')
 
   const handleInputChange = ({ target }: React.ChangeEvent<HTMLTextAreaElement>): void => {
     setCardTitle(target.value)
   }
 
   const handleTaskSubmit = (ev: React.MouseEvent | React.KeyboardEvent) => {
-    if ((ev as React.KeyboardEvent).key !== 'Enter') return
+    if ((ev as React.KeyboardEvent).key !== 'Enter' && ev.type !== 'click') return
     ev.preventDefault()
     handleTaskAdd(cardTitle)
     setCardTitle('')

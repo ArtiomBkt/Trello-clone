@@ -23,4 +23,5 @@ export declare module serviceTypes {
 
   export type getBoardById = (boardId?: BoardTypes.board['id']) => BoardTypes.board
   export type getEmptyTask = () => BoardTypes.task
+  export type getEmptyList = () => BoardTypes.list
 }

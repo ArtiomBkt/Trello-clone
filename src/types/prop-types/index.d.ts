@@ -10,6 +10,7 @@ export declare module PropTypes {
     isDone?: boolean
     isDateBadge?: boolean
     isFullCover?: boolean
+    isListAdd?: boolean
   }
 
   export type DndTypes = {
@@ -37,9 +38,14 @@ export declare module PropTypes {
   }
 
   export type task = BoardTypes.task
+  export type list = BoardTypes.list
 
   export type TaskComposerProps = {
     handleComposerToggle: () => void
     handleTaskAdd: (taskTitle: task['title'] | null) => void
+  }
+
+  export type ListComposerProps = {
+    onAddList: (listTitle: list['title']) => void
   }
 }

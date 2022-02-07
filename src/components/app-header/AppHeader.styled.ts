@@ -12,7 +12,8 @@ export const HeaderMainNav = styled.nav`
   padding: 6px 4px;
   height: 100%;
 
-  background-color: #026aa7;
+  /* background-color: #026aa7; */
+  background-color: rgba(0, 0, 0, 0.45);
   backdrop-filter: blur(6px);
 `
 
