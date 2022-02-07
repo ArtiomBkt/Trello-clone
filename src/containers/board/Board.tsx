@@ -1,6 +1,6 @@
 import React, { useLayoutEffect } from 'react'
 import { useLocalStorageState } from '../../hooks/useLocalStorageState'
-import { DragDropContext, Droppable } from 'react-beautiful-dnd'
+import { DragDropContext, Droppable, DropResult } from 'react-beautiful-dnd'
 import { BoardTypes } from '../../types/board-types/index'
 import { boardService } from '../../services/board.service'
 import { BoardContainer, BoardContentWrapper } from './Board.styled'
@@ -17,9 +17,9 @@ const Board = () => {
     if (elRoot) elRoot.style.background = board.style.background
   }, [board.style.background])
 
-  const onDragEnd = (result: any): void => {
+  const onDragEnd = (result: DropResult): void => {
     const { destination, source, type, draggableId } = result
-
+    
     if (!board || !board.lists || !destination) return
     if (destination.droppableId === source.droppableId && destination.index === source.index) return
 

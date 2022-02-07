@@ -34,7 +34,6 @@ export declare module PropTypes {
   export type TaskPreviewProps = {
     task: task
     idx: number
-    isDraggingOver: boolean
   }
 
   export type task = BoardTypes.task

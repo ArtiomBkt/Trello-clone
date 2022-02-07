@@ -9,6 +9,26 @@ export const ListPreviewContainer = styled.div`
   margin-bottom: 8px;
   padding: 0 0 8px 8px;
   white-space: nowrap;
+/* 
+  &::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    display: block;
+    border-radius: 3px;
+    background: #ffffff80;
+  }
+  &::-webkit-scrollbar-button {
+    width: 24px;
+  }
+
+  &::-webkit-scrollbar-track {
+    border-radius: 3px;
+    background: #00000026;
+    margin: 0 20px;
+  } */
 `
 
 export const ListContentPreview = styled.div`
@@ -35,10 +55,16 @@ export const List = styled.div<PropTypes.DndTypes>`
 
   background-color: #ebecf0;
   border-radius: 3px;
-  
-  ${({ isDragging }) => isDragging ? css`transform:rotateY(0) rotate(5deg); transition: transform .1s;` : null};
-  `
-  /* background-color: ${({ isDraggingOver }) => isDraggingOver ? '#2c2c2c' : '#ebecf0'}; */
+
+  ${({ isDragging }) =>
+    isDragging
+      ? css`
+          transform: rotateY(0) rotate(5deg);
+          transition: transform 0.1s;
+        `
+      : null};
+`
+/* background-color: ${({ isDraggingOver }) => isDraggingOver ? '#2c2c2c' : '#ebecf0'}; */
 
 export const ListTasksWrapper = styled.div`
   flex: 1 1 auto;
@@ -48,4 +74,17 @@ export const ListTasksWrapper = styled.div`
   padding: 0 4px;
   min-height: 0;
   z-index: 1;
+
+  /* &::-webkit-scrollbar {
+    width: 8px;
+  }
+  &::-webkit-scrollbar-thumb {
+    border-radius: 3px;
+    background: #00000026;
+    display: block;
+  }
+  &::-webkit-scrollbar-track-piece {
+    border-radius: 3px;
+    background: #091e4214;
+  } */
 `

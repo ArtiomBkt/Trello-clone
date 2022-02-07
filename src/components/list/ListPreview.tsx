@@ -37,18 +37,14 @@ const ListPreview = ({ list, idx, isDraggingOver, onListUpdate }: PropTypes.List
           <List isDraggingOver={isDraggingOver} isDragging={snapshot.isDragging}>
             <ListHeader onListUpdate={onListUpdate} dragHandleProps={provided.dragHandleProps} list={list} />
             <Droppable droppableId={list.id} type="TASK">
-              {(provided, { isDraggingOver }) => (
-                <>
-                  <ListTasksWrapper {...provided.droppableProps} ref={provided.innerRef}>
-                    {list.tasks?.map((task, idx) => (
-                      <TaskPreview isDraggingOver={isDraggingOver} key={task.id} task={task} idx={idx} />
-                    ))}
-                    {provided.placeholder}
-                    {isComposerOpen && (
-                      <TaskComposer handleTaskAdd={handleTaskAdd} handleComposerToggle={handleComposerToggle} />
-                    )}
-                  </ListTasksWrapper>
-                </>
+              {provided => (
+                <ListTasksWrapper {...provided.droppableProps} ref={provided.innerRef}>
+                  {list.tasks?.map((task, idx) => (
+                    <TaskPreview key={task.id} task={task} idx={idx} />
+                  ))}
+                  {provided.placeholder}
+                  {isComposerOpen && <TaskComposer handleTaskAdd={handleTaskAdd} handleComposerToggle={handleComposerToggle} />}
+                </ListTasksWrapper>
               )}
             </Droppable>
             {!isComposerOpen && (
