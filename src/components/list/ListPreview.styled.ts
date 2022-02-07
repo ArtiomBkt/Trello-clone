@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components'
+import { PropTypes } from '../../types/prop-types'
 
 export const ListPreviewContainer = styled.div`
   position: absolute;
@@ -23,12 +24,7 @@ export const ListContentPreview = styled.div`
   }
 `
 
-type dndProps = {
-  isDragging: boolean
-  isDraggingOver: boolean
-}
-
-export const List = styled.div<dndProps>`
+export const List = styled.div<PropTypes.DndTypes>`
   display: flex;
   flex-direction: column;
   position: relative;

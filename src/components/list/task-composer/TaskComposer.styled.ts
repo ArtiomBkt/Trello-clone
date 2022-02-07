@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components'
-import IconProps from '../../../interfaces/IconProps'
+import { PropTypes } from '../../../types/prop-types'
 import { Icon, PrimeBtn } from '../../../styled/Mixins.styled'
 
 export const TaskComposerWrapper = styled.div`
@@ -28,7 +28,7 @@ export const TaskComposerToggler = styled.a`
   }
 `
 
-export const TaskComposerIcon = styled.span<IconProps>`
+export const TaskComposerIcon = styled.span<PropTypes.StyledProps>`
   ${({ size }) => Icon(size)}
 
   &:before {
@@ -88,7 +88,7 @@ export const AddTaskBtn = styled.button`
   ${PrimeBtn('primary')}
 `
 
-export const DiscardTaskIcon = styled.a<IconProps>`
+export const DiscardTaskIcon = styled.a<PropTypes.StyledProps>`
   ${({ size }) => Icon(size)}
   color: #6b778c;
 

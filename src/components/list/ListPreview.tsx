@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Draggable, Droppable } from 'react-beautiful-dnd'
-import * as boardInterfaces from '../../interfaces/board.interface'
+import { PropTypes } from '../../types/prop-types'
 import { boardService } from '../../services/board.service'
 import TaskPreview from '../task/TaskPreview'
 import ListHeader from './header/ListHeader'
@@ -8,14 +8,7 @@ import TaskComposer from './task-composer/TaskComposer'
 import { ListContentPreview, List, ListTasksWrapper } from './ListPreview.styled'
 import { TaskComposerWrapper, TaskComposerToggler, TaskComposerIcon } from './task-composer/TaskComposer.styled'
 
-type listProps = {
-  list: boardInterfaces.list
-  idx: number
-  isDraggingOver: boolean
-  onListUpdate: (list: listProps['list']) => void
-}
-
-const ListPreview = ({ list, idx, isDraggingOver, onListUpdate }: listProps) => {
+const ListPreview = ({ list, idx, isDraggingOver, onListUpdate }: PropTypes.ListPreviewProps) => {
   const [isComposerOpen, setIsComposerOpen] = useState(false)
 
   const handleComposerToggle = () => {
@@ -33,7 +26,7 @@ const ListPreview = ({ list, idx, isDraggingOver, onListUpdate }: listProps) => 
       ...list,
       tasks: newTasks
     }
-    
+
     onListUpdate(newList)
   }
 
@@ -52,17 +45,21 @@ const ListPreview = ({ list, idx, isDraggingOver, onListUpdate }: listProps) => 
                       <TaskPreview isDraggingOver={isDraggingOver} key={task.id} task={task} idx={idx} />
                     ))}
                     {provided.placeholder}
-                    {isComposerOpen && <TaskComposer handleTaskAdd={handleTaskAdd} handleComposerToggle={handleComposerToggle} />}
+                    {isComposerOpen && (
+                      <TaskComposer handleTaskAdd={handleTaskAdd} handleComposerToggle={handleComposerToggle} />
+                    )}
                   </ListTasksWrapper>
                 </>
               )}
             </Droppable>
-            {!isComposerOpen && <TaskComposerWrapper>
-              <TaskComposerToggler onClick={()=>setIsComposerOpen(true)}>
-                <TaskComposerIcon content="'\e901'" size="sm" />
-                <span>Add a card</span>
-              </TaskComposerToggler>
-            </TaskComposerWrapper>}
+            {!isComposerOpen && (
+              <TaskComposerWrapper>
+                <TaskComposerToggler onClick={() => setIsComposerOpen(true)}>
+                  <TaskComposerIcon content="'\e901'" size="sm" />
+                  <span>Add a card</span>
+                </TaskComposerToggler>
+              </TaskComposerWrapper>
+            )}
           </List>
         </ListContentPreview>
       )}

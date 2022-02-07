@@ -1,9 +1,9 @@
 import React from 'react'
-import * as taskInterfaces from '../../../interfaces/task.interface'
+import { PropTypes } from '../../../types/prop-types'
 import { BadgeContainer, BadgeIcon, BadgeText } from './TaskBadges.styled'
 
 type TaskProps = {
-  task: taskInterfaces.task
+  task: PropTypes.task
 }
 
 const TaskCommentBadge = ({ comments }: TaskProps['task']) => {

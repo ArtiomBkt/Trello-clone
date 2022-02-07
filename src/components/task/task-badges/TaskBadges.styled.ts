@@ -1,25 +1,16 @@
 import styled, { css } from 'styled-components'
-import IconProps from '../../../interfaces/IconProps'
+import { PropTypes } from '../../../types/prop-types'
 import { Icon } from '../../../styled/Mixins.styled'
 
-type WrapperProps = {
-  isFullCover?: boolean
-}
-
-export const BadgesWrapper = styled.div<WrapperProps>`
-  ${({ isFullCover }) => isFullCover ? 'display: none;' : ''}
+export const BadgesWrapper = styled.div<PropTypes.StyledProps>`
+  ${({ isFullCover }) => (isFullCover ? 'display: none;' : '')}
 
   float: left;
   margin-left: -2px;
   max-width: 100%;
 `
 
-type ContainerProps = {
-  isDone?: boolean
-  isDateBadge?: boolean
-}
-
-export const BadgeContainer = styled.div<ContainerProps>`
+export const BadgeContainer = styled.div<PropTypes.StyledProps>`
   display: inline-block;
   position: relative;
 
@@ -48,7 +39,7 @@ export const BadgeContainer = styled.div<ContainerProps>`
       : ''}
 `
 
-export const BadgeIcon = styled.span<IconProps>`
+export const BadgeIcon = styled.span<PropTypes.StyledProps>`
   color: ${({ content }) => (content === '\\e91b' ? '#fff' : '#6b778c')};
   vertical-align: top;
 

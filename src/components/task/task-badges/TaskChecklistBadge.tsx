@@ -1,15 +1,14 @@
 import React from 'react'
-import * as taskInterfaces from '../../../interfaces/task.interface'
-import { checklist } from '../../../interfaces/board.interface'
+import { PropTypes } from '../../../types/prop-types'
 import { BadgeContainer, BadgeIcon, BadgeText } from './TaskBadges.styled'
 
 type TaskProps = {
-  task: taskInterfaces.task
+  task: PropTypes.task
 }
 
 const TaskChecklistBadge = ({ checklists }: TaskProps['task']) => {
   let count = 0
-  
+
   if (!checklists || !checklists.length) return null
   return (
     <BadgeContainer>

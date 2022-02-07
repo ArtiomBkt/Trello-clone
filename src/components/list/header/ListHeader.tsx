@@ -1,14 +1,8 @@
 import React, { useState, useRef, useLayoutEffect } from 'react'
-import * as boardInterfaces from '../../../interfaces/board.interface'
+import { PropTypes } from '../../../types/prop-types'
 import { ListTitle, ListHeaderNameAssist, ListHeaderNameInput, ListHeaderOpts, HeaderOptsBtn } from './ListHeader.styled'
 
-type Props = {
-  list: boardInterfaces.list
-  dragHandleProps?: any
-  onListUpdate: (list: Props['list']) => void
-}
-
-const ListHeader = ({ list, dragHandleProps, onListUpdate }: Props) => {
+const ListHeader = ({ list, dragHandleProps, onListUpdate }: PropTypes.ListHeaderProps) => {
   const [listTitle, setListTitle] = useState<string>(list.title)
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const inputRef = useRef<HTMLTextAreaElement>(null)

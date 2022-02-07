@@ -1,19 +1,20 @@
 import React from 'react'
+import { BoardTypes } from '../../types/board-types'
+
 import LabelsPreview from '../../components/labels/LabelPreview'
 import TaskChecklistBadge from '../../components/task/task-badges/TaskChecklistBadge'
 import TaskTitle from '../../components/task/TaskTitle'
-import * as taskInterfaces from '../../interfaces/task.interface'
-import { TaskDetailsContainer } from './TaskDetails.styled'
-import { BadgesWrapper } from '../../components/task/task-badges/TaskBadges.styled'
 import TaskCommentBadge from '../../components/task/task-badges/TaskCommentBadge'
 import TaskDescriptionBadge from '../../components/task/task-badges/TaskDescriptionBadge'
 import TaskDates from '../../components/task/task-badges/TaskDateBadge'
+import { TaskDetailsContainer } from './TaskDetails.styled'
+import { BadgesWrapper } from '../../components/task/task-badges/TaskBadges.styled'
 
-type TaskProps = {
-  task: taskInterfaces.task
+type taskCmps = {
+  task: BoardTypes.task
 }
 
-const TaskBadges = ({ task }: TaskProps) => {
+const TaskBadges = ({ task }: taskCmps) => {
   if (!task.checklists && !task.comments && !task.description && !task.startDate) return null
 
   const props = { id: task?.id, title: task?.title }
@@ -28,7 +29,7 @@ const TaskBadges = ({ task }: TaskProps) => {
   )
 }
 
-const TaskDetails = ({ task }: TaskProps) => {
+const TaskDetails = ({ task }: taskCmps) => {
   return (
     <TaskDetailsContainer isFullCover={task.style?.fullCover}>
       {task.labels && !task.style?.fullCover && <LabelsPreview labels={task.labels} />}

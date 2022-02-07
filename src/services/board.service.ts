@@ -1,24 +1,5 @@
-import * as boardInterfaces from '../interfaces/board.interface'
-import * as taskInterfaces from '../interfaces/task.interface'
-
-type valueArgs = boardInterfaces.list | taskInterfaces.task | boardInterfaces.board
-type typeArgs = 'task' | 'list' | 'board'
-type dndTypes = {
-  droppableId: string
-  index: number
-}
-
-interface saveArgs {
-  value: valueArgs
-  type: typeArgs
-}
-
-interface dragAndDropArgs {
-  board: boardInterfaces.board
-  draggableId: string
-  destination: dndTypes
-  source: dndTypes
-}
+import { serviceTypes } from '../types/service-types'
+import { BoardTypes } from '../types/board-types'
 
 export const boardService = {
   getBoardById,
@@ -27,16 +8,16 @@ export const boardService = {
   getEmptyTask
 }
 
-const gBoard: boardInterfaces.board = getDummyBoard()
+const gBoard: BoardTypes.board = getDummyBoard()
 
-function getBoardById(boardId?: string): boardInterfaces.board {
+function getBoardById(boardId?: Parameters<serviceTypes.getBoardById>): ReturnType<serviceTypes.getBoardById> {
   // const board = getDummyBoard()
 
   // return board
   return gBoard
 }
 
-function handleListMove({ board, draggableId, source, destination }: dragAndDropArgs): boardInterfaces.list[] | undefined {
+function handleListMove({ board, draggableId, source, destination }: serviceTypes.dragAndDropArgs): BoardTypes.list[] | undefined {
   if (!board || !board.lists) return
 
   const draggedList = board.lists.find(list => list.id === draggableId)
@@ -49,7 +30,7 @@ function handleListMove({ board, draggableId, source, destination }: dragAndDrop
   return newLists
 }
 
-function handleTaskMove({ board, draggableId, source, destination }: dragAndDropArgs): boardInterfaces.list[] | undefined {
+function handleTaskMove({ board, draggableId, source, destination }: serviceTypes.dragAndDropArgs): BoardTypes.list[] | undefined {
   if (!board || !board.lists) return
 
   const startList = board.lists.find(list => list.id === source.droppableId)
@@ -99,7 +80,7 @@ function handleTaskMove({ board, draggableId, source, destination }: dragAndDrop
   }
 }
 
-function getEmptyTask() {
+function getEmptyTask(): ReturnType<serviceTypes.getEmptyTask> {
   return {
     id: _makeId(),
     title: '',
@@ -115,18 +96,18 @@ function getEmptyTask() {
   }
 }
 
-function save({ value, type }: saveArgs) {
+function save({ value, type }: serviceTypes.saveArgs) {
   return value.id ? _update(value, type) : _add(value, type)
 }
 
-function _add(value: valueArgs, type: typeArgs) {
+function _add(value: serviceTypes.valueArgs, type: serviceTypes.typeArgs) {
   value.id = _makeId()
   if (type === 'task') return gBoard.lists
   // gBoard.lists?.push(value)
   // return gBoard
 }
 
-function _update(value: valueArgs, type: typeArgs) {}
+function _update(value: serviceTypes.valueArgs, type: serviceTypes.typeArgs) {}
 
 function _makeId(length = 10) {
   const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
@@ -137,7 +118,7 @@ function _makeId(length = 10) {
   return txt
 }
 
-function getDummyBoard(): boardInterfaces.board {
+function getDummyBoard(): BoardTypes.board {
   return {
     id: 'b100',
     title: 'board one',

@@ -1,10 +1,9 @@
 import styled, { css } from 'styled-components'
 import { Link } from 'react-router-dom'
 import { Icon } from '../../styled/Mixins.styled'
-import TaskProps from './TaskProps'
-import IconProps from '../../interfaces/IconProps'
+import { PropTypes } from '../../types/prop-types'
 
-export const TaskPreviewContainer = styled(Link)<TaskProps>`
+export const TaskPreviewContainer = styled(Link)<PropTypes.StyledProps>`
   display: ${({ taskStyle }) => (taskStyle?.fullCover ? 'flex' : 'block')};
   flex-direction: ${({ taskStyle }) => (taskStyle?.fullCover ? 'row' : '')};
 
@@ -17,14 +16,14 @@ export const TaskPreviewContainer = styled(Link)<TaskProps>`
   border-radius: 3px;
   box-shadow: 0 1px 0 #091e4240;
 
-  background-color: ${({ taskStyle }) => (taskStyle?.background || '#fff')};
+  background-color: ${({ taskStyle }) => taskStyle?.background || '#fff'};
   position: relative;
 
   text-decoration: none;
   z-index: 0;
 
   &:hover {
-    background-color: ${({ taskStyle }) => taskStyle?.background === '#ef7564' ? '#eb5a46' : '#f4f5f7'};
+    background-color: ${({ taskStyle }) => (taskStyle?.background === '#ef7564' ? '#eb5a46' : '#f4f5f7')};
     border-bottom-color: #091e4240;
 
     span {
@@ -33,7 +32,7 @@ export const TaskPreviewContainer = styled(Link)<TaskProps>`
   }
 `
 
-export const TaskCover = styled.div<TaskProps>`
+export const TaskCover = styled.div<PropTypes.StyledProps>`
   height: 32px;
   border-radius: 3px 3px 0 0;
 
@@ -45,7 +44,7 @@ export const TaskCover = styled.div<TaskProps>`
   user-select: none;
 `
 
-export const TaskEditIcon = styled.span`
+export const TaskEditIcon = styled.span<PropTypes.StyledProps>`
   box-sizing: content-box;
   position: absolute;
   top: 2px;
@@ -64,10 +63,10 @@ export const TaskEditIcon = styled.span`
 
   z-index: 30;
 
-  ${({ size }: IconProps) => Icon(size)}
+  ${({ size }) => Icon(size)}
 
   &:before {
-    ${({ content }: IconProps) =>
+    ${({ content }) =>
       css`
         content: ${content};
       `}

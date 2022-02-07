@@ -1,9 +1,9 @@
 import React from 'react'
-import { task } from '../../interfaces/task.interface'
+import { PropTypes } from '../../types/prop-types'
 import { TaskTitleContainer } from './TaskTitle.styled'
 
 type TaskProps = {
-  task: task
+  task: PropTypes.task
 }
 
 const TaskTitle = ({ task }: TaskProps) => {

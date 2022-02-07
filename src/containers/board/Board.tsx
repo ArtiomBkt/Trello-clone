@@ -1,26 +1,14 @@
 import React, { useState } from 'react'
 import { DragDropContext, Droppable } from 'react-beautiful-dnd'
-
+import { BoardTypes } from '../../types/board-types/index'
 import { boardService } from '../../services/board.service'
-
-import * as boardInterfaces from '../../interfaces/board.interface'
-import * as taskInterfaces from '../../interfaces/task.interface'
-
 import { BoardContainer, BoardContentWrapper } from './Board.styled'
-
 import BoardNav from '../../components/board-navbar/BoardNav'
-
 import ListPreview from '../../components/list/ListPreview'
 import { ListPreviewContainer } from '../../components/list/ListPreview.styled'
 
-type boardProps = {
-  board: boardInterfaces.board
-  lists: boardInterfaces.list[]
-  tasks: taskInterfaces.task[]
-}
-
 const Board = () => {
-  const [board, setBoard] = useState<boardProps['board']>(() => boardService.getBoardById())
+  const [board, setBoard] = useState<BoardTypes.board>(() => boardService.getBoardById())
 
   const onDragEnd = (result: any): void => {
     const { destination, source, type, draggableId } = result
@@ -38,7 +26,7 @@ const Board = () => {
     setBoard(newBoard)
   }
 
-  const onListUpdate = (newList: boardInterfaces.list): void => {
+  const onListUpdate = (newList: BoardTypes.list): void => {
     const idx = board.lists!.findIndex(list => list.id === newList.id)
 
     const newLists = [...board.lists!]

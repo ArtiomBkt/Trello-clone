@@ -1,12 +1,8 @@
 import React, { useLayoutEffect, useState } from 'react'
 import { TaskComposerContainer, ComposingTask, ComposingTaskDetails, ComposingTaskTextarea, AddTaskBtn, DiscardTaskIcon } from './TaskComposer.styled'
+import { PropTypes } from '../../../types/prop-types'
 
-type props = {
-  handleComposerToggle: () => void
-  handleTaskAdd: (cardTitle: string | null) => void
-}
-
-const TaskComposer = ({ handleComposerToggle, handleTaskAdd }: props) => {
+const TaskComposer = ({ handleComposerToggle, handleTaskAdd }: PropTypes.TaskComposerProps) => {
   const [cardTitle, setCardTitle] = useState<string>('')
 
   useLayoutEffect(() => {}, [cardTitle])
@@ -15,9 +11,9 @@ const TaskComposer = ({ handleComposerToggle, handleTaskAdd }: props) => {
     setCardTitle(target.value)
   }
 
-  const handleTaskSubmit = (e: any) => {
-    if (e.key !== 'Enter') return
-    e.preventDefault()
+  const handleTaskSubmit = (ev: React.MouseEvent | React.KeyboardEvent) => {
+    if ((ev as React.KeyboardEvent).key !== 'Enter') return
+    ev.preventDefault()
     handleTaskAdd(cardTitle)
     setCardTitle('')
   }
@@ -31,7 +27,13 @@ const TaskComposer = ({ handleComposerToggle, handleTaskAdd }: props) => {
     <TaskComposerContainer>
       <ComposingTask>
         <ComposingTaskDetails>
-          <ComposingTaskTextarea value={cardTitle} onBlur={handleComposerToggle} onKeyDown={handleTaskSubmit} onChange={handleInputChange} placeholder="Enter a title for this card..." />
+          <ComposingTaskTextarea
+            value={cardTitle}
+            onBlur={handleComposerToggle}
+            onKeyDown={handleTaskSubmit}
+            onChange={handleInputChange}
+            placeholder="Enter a title for this card..."
+          />
         </ComposingTaskDetails>
       </ComposingTask>
       <div>
