@@ -6,12 +6,11 @@ import { TaskPreviewContainer, TaskCover, TaskEditIcon } from './TaskPreview.sty
 
 const TaskPreview = ({ task, idx, isDraggingOver }: PropTypes.TaskPreviewProps) => {
   return (
-    // TODO: add dnd ui
     <Draggable draggableId={task.id} index={idx}>
       {provided => (
         <>
-          <TaskPreviewContainer ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps} taskStyle={task?.style} to={`/${task?.id}`}>
-            {!task?.style?.fullCover && task?.style?.background && <TaskCover taskStyle={task.style} />}
+          <TaskPreviewContainer ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps} style={task?.style} to={`/${task?.id}`}>
+            {!task?.style?.fullCover && task?.style?.background && <TaskCover style={task.style} />}
             <TaskEditIcon content="'\e928'" size="sm" />
             <TaskDetails task={task} />
           </TaskPreviewContainer>

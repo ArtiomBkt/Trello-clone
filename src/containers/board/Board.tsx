@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React from 'react'
+import { useLocalStorageState } from '../../hooks/useLocalStorageState'
 import { DragDropContext, Droppable } from 'react-beautiful-dnd'
 import { BoardTypes } from '../../types/board-types/index'
 import { boardService } from '../../services/board.service'
@@ -8,7 +9,7 @@ import ListPreview from '../../components/list/ListPreview'
 import { ListPreviewContainer } from '../../components/list/ListPreview.styled'
 
 const Board = () => {
-  const [board, setBoard] = useState<BoardTypes.board>(() => boardService.getBoardById())
+  const [board, setBoard] = useLocalStorageState('board', boardService.getBoardById())
 
   const onDragEnd = (result: any): void => {
     const { destination, source, type, draggableId } = result
@@ -27,7 +28,7 @@ const Board = () => {
   }
 
   const onListUpdate = (newList: BoardTypes.list): void => {
-    const idx = board.lists!.findIndex(list => list.id === newList.id)
+    const idx = board.lists!.findIndex((list: BoardTypes.list) => list.id === newList.id)
 
     const newLists = [...board.lists!]
     newLists.splice(idx, 1, newList)
@@ -52,13 +53,14 @@ const Board = () => {
                   <Droppable direction="horizontal" droppableId={board.id} type="LIST">
                     {(provided, snapshot) => (
                       <ListPreviewContainer {...provided.droppableProps} ref={provided.innerRef}>
-                        {board.lists?.map((list, idx) => (
+                        {board.lists?.map((list: BoardTypes.list, idx: number) => (
                           <ListPreview onListUpdate={onListUpdate} key={list.id} isDraggingOver={snapshot.isDraggingOver} list={list} idx={idx} />
                         ))}
                         {provided.placeholder}
                       </ListPreviewContainer>
                     )}
                   </Droppable>
+                  asd
                 </DragDropContext>
               </div>
             </div>

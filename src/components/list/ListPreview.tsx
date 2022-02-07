@@ -31,7 +31,6 @@ const ListPreview = ({ list, idx, isDraggingOver, onListUpdate }: PropTypes.List
   }
 
   return (
-    // TODO: add dnd ui
     <Draggable draggableId={list.id} index={idx}>
       {(provided, snapshot) => (
         <ListContentPreview {...provided.draggableProps} ref={provided.innerRef}>
@@ -68,5 +67,3 @@ const ListPreview = ({ list, idx, isDraggingOver, onListUpdate }: PropTypes.List
 }
 
 export default ListPreview
-
-// {/* <TaskComposerWrapper>// TODO: add task compose functionality</TaskComposerWrapper> */}

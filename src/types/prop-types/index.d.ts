@@ -4,7 +4,7 @@ import { DraggableProvided } from 'react-beautiful-dnd'
 export declare module PropTypes {
   export type StyledProps = {
     task?: task
-    taskStyle?: task['style']
+    style?: task['style']
     size?: string
     content?: string
     isDone?: boolean
