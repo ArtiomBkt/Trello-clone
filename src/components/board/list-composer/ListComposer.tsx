@@ -10,15 +10,21 @@ import {
   ListComposerAnchor
 } from './ListComposer.styled'
 import { PropTypes } from '../../../types/prop-types'
+import useOutsideAlerter from '../../../hooks/useOutsideAlerter'
 
 const ListComposer = ({ onAddList }: PropTypes.ListComposerProps) => {
   const [isListAdd, setIsListAdd] = useState(false)
   const [listTitle, setListTitle] = useState('')
   const inputRef = useRef<HTMLInputElement>(null)
+  const wrapperRef = useRef<HTMLDivElement>(null)
+  const outsideClick = useOutsideAlerter(wrapperRef)
 
   useLayoutEffect(() => {
-    if (isListAdd && inputRef.current) inputRef.current.focus()
-  }, [isListAdd])
+    if (inputRef.current) inputRef.current.focus()
+    if (outsideClick) {
+      setIsListAdd(false)
+    }
+  }, [outsideClick])
 
   const handleInputChange = ({ target }: React.ChangeEvent<HTMLInputElement>): void => {
     setListTitle(target.value)
@@ -44,19 +50,23 @@ const ListComposer = ({ onAddList }: PropTypes.ListComposerProps) => {
           Add another list
         </ListComposerPlaceholder>
       </ListComposerAnchor>
-      <ListComposerInput
-        ref={inputRef}
-        value={listTitle}
-        onKeyDown={handleListSubmit}
-        onChange={handleInputChange}
-        type="text"
-        placeholder="Enter list title..."
-        isListAdd={isListAdd}
-      />
-      <ListComposerControls isListAdd={isListAdd}>
-        <AddComposedListBtn onMouseDown={handleListSubmit}>Add list</AddComposedListBtn>
-        <DiscardListBtn onClick={handleDiscardList} content="'\e91c'" size="lg" />
-      </ListComposerControls>
+      {isListAdd && (
+        <div ref={wrapperRef}>
+          <ListComposerInput
+            ref={inputRef}
+            value={listTitle}
+            onKeyDown={handleListSubmit}
+            onChange={handleInputChange}
+            type="text"
+            placeholder="Enter list title..."
+            isListAdd={isListAdd}
+          />
+          <ListComposerControls isListAdd={isListAdd}>
+            <AddComposedListBtn onMouseDown={handleListSubmit}>Add list</AddComposedListBtn>
+            <DiscardListBtn onClick={handleDiscardList} content="'\e91c'" size="lg" />
+          </ListComposerControls>
+        </div>
+      )}
     </ListComposerContainer>
   )
 }

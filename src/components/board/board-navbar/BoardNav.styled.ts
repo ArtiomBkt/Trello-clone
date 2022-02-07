@@ -3,7 +3,7 @@ import { Icon } from '../../../styled/Mixins.styled'
 
 export const BoardNavContainer = styled.div`
   position: relative;
-  padding: 8px 4px 4px 12px;
+  padding: 8px 4px 4px 16px;
   height: auto;
 
   /* background-color: #0000003d; */

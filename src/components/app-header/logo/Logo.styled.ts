@@ -9,7 +9,7 @@ export const LogoLink = styled(Link)`
   flex-shrink: 0;
 
   margin-left: 10px;
-  padding: 0 6px;
+  padding: 0 8px;
   border-radius: 3px;
   height: 32px;
 

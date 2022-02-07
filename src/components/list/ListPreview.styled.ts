@@ -20,7 +20,7 @@ export const ListContentPreview = styled.div`
   width: 272px;
 
   &:first-child {
-    margin-left: 12px;
+    margin-left: 10px;
   }
 `
 
