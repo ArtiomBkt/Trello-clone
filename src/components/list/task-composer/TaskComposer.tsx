@@ -1,23 +1,28 @@
-import React, { useState } from 'react'
+import React, { useState, useRef, useLayoutEffect } from 'react'
 import { TaskComposerContainer, ComposingTask, ComposingTaskDetails, ComposingTaskTextarea, AddTaskBtn, DiscardTaskIcon } from './TaskComposer.styled'
 import { PropTypes } from '../../../types/prop-types'
 
 const TaskComposer = ({ handleComposerToggle, handleTaskAdd }: PropTypes.TaskComposerProps) => {
-  const [cardTitle, setCardTitle] = useState('')
+  const [taskTitle, setTaskTitle] = useState('')
+  const textAreaRef = useRef<HTMLTextAreaElement>(null)
+
+  useLayoutEffect(() => {
+    if (textAreaRef.current) textAreaRef.current.focus()
+  }, [])
 
   const handleInputChange = ({ target }: React.ChangeEvent<HTMLTextAreaElement>): void => {
-    setCardTitle(target.value)
+    setTaskTitle(target.value)
   }
 
-  const handleTaskSubmit = (ev: React.MouseEvent | React.KeyboardEvent) => {
-    if ((ev as React.KeyboardEvent).key !== 'Enter' && ev.type !== 'click') return
+  const handleTaskSubmit = (ev: React.MouseEvent | React.KeyboardEvent): void => {
+    if (((ev as React.KeyboardEvent).key !== 'Enter' && ev.type !== 'mousedown') || !taskTitle) return
     ev.preventDefault()
-    handleTaskAdd(cardTitle)
-    setCardTitle('')
+    handleTaskAdd(taskTitle)
+    setTaskTitle('')
   }
 
-  const handleDiscardTask = () => {
-    setCardTitle('')
+  const handleDiscardTask = (): void => {
+    setTaskTitle('')
     handleComposerToggle()
   }
 
@@ -26,8 +31,9 @@ const TaskComposer = ({ handleComposerToggle, handleTaskAdd }: PropTypes.TaskCom
       <ComposingTask>
         <ComposingTaskDetails>
           <ComposingTaskTextarea
-            value={cardTitle}
-            onBlur={handleComposerToggle}
+            ref={textAreaRef}
+            value={taskTitle}
+            // onBlur={handleDiscardTask}
             onKeyDown={handleTaskSubmit}
             onChange={handleInputChange}
             placeholder="Enter a title for this card..."
@@ -35,7 +41,7 @@ const TaskComposer = ({ handleComposerToggle, handleTaskAdd }: PropTypes.TaskCom
         </ComposingTaskDetails>
       </ComposingTask>
       <div>
-        <AddTaskBtn onClick={handleTaskSubmit}>Add card</AddTaskBtn>
+        <AddTaskBtn onMouseDown={handleTaskSubmit}>Add card</AddTaskBtn>
         <DiscardTaskIcon onClick={handleDiscardTask} content="'\e91c'" size="lg" />
       </div>
     </TaskComposerContainer>

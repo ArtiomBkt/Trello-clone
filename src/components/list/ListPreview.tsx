@@ -12,12 +12,12 @@ const ListPreview = ({ list, idx, isDraggingOver, onListUpdate }: PropTypes.List
   const [isComposerOpen, setIsComposerOpen] = useState(false)
 
   const handleComposerToggle = () => {
-    setIsComposerOpen(false)
+    setIsComposerOpen(p => !p)
   }
 
-  const handleTaskAdd = (taskTitle: string | null) => {
+  const handleTaskAdd = (taskTitle: string) => {
     const newTask = boardService.getEmptyTask()
-    newTask.title = taskTitle!
+    newTask.title = taskTitle
 
     const newTasks = [...list.tasks]
     newTasks.push(newTask)

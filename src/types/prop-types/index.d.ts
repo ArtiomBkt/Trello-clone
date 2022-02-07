@@ -42,7 +42,7 @@ export declare module PropTypes {
 
   export type TaskComposerProps = {
     handleComposerToggle: () => void
-    handleTaskAdd: (taskTitle: task['title'] | null) => void
+    handleTaskAdd: (taskTitle: task['title']) => void
   }
 
   export type ListComposerProps = {
