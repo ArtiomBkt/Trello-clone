@@ -201,6 +201,10 @@ export const BoardOrgBtnIcon = styled.span<PropTypes.StyledProps>`
   box-sizing: content-box;
   color: #fff;
 
+  &:hover {
+    color: #fff;
+  }
+
   &:before {
     ${({ content }) =>
       css`
