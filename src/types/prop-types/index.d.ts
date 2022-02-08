@@ -42,6 +42,10 @@ export declare module PropTypes {
     onBoardUpdate: (board: BoardTypes.board) => void
   }
 
+  export type MemberListProps = {
+    members: BoardTypes.member[] | undefined
+  }
+
   export type board = BoardTypes.board
   export type list = BoardTypes.list
   export type task = BoardTypes.task

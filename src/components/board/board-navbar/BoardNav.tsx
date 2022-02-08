@@ -1,27 +1,33 @@
 import React, { useLayoutEffect, useRef, useState } from 'react'
 import {
   BoardNavContainer,
-  BoardViewsContainer,
-  BoardViewBtn,
-  BoardViewsIconContainer,
-  BoardViewsText,
   BoardNameContainer,
   BoardNamePlaceholder,
   BoardNameInput,
-  BoardStarredContainer
+  BoardStarredContainer,
+  BoardStarredIcon,
+  BoardNavDivider,
+  BoardNavRightChunkContainer
 } from './BoardNav.styled'
-import { ReactComponent as BoardViewIcon } from '../../../assets/images/board-view.svg'
-import { ReactComponent as ArrowSvg } from '../../../assets/images/arrow-down.svg'
-import { ArrowIcon } from '../../app-header/links/NavLink.styled'
 import { PropTypes } from '../../../types/prop-types'
+import BoardViews from './BoardViews'
+import BoardOrg from './BoardOrg'
+import BoardMembers from './BoardMembers'
+import BoardControls from './BoardControls'
 
 const BoardNav = ({ board, onBoardUpdate }: PropTypes.BoardNavCmp) => {
   const [boardTitle, setBoardTitle] = useState(board.title)
   const [isEditBoardTitle, setIsEditBoardTitle] = useState(false)
+  const [titleContainerWidth, setTitleContainerWidth] = useState('')
   const inputRef = useRef<HTMLInputElement>(null)
+  const titleContainerRef = useRef<HTMLDivElement>(null)
 
   useLayoutEffect(() => {
+    if (titleContainerRef.current) {
+      setTitleContainerWidth(window.getComputedStyle(titleContainerRef.current).width)
+    }
     if (isEditBoardTitle && inputRef.current) {
+      // inputRef.current.style.width = titleContainerWidth
       inputRef.current.focus()
       inputRef.current.select()
     }
@@ -45,22 +51,10 @@ const BoardNav = ({ board, onBoardUpdate }: PropTypes.BoardNavCmp) => {
 
   return (
     <BoardNavContainer>
-      <BoardViewsContainer>
-        <BoardViewBtn>
-          <BoardViewsIconContainer>
-            <ArrowIcon>
-              <BoardViewIcon />
-            </ArrowIcon>
-          </BoardViewsIconContainer>
-          <BoardViewsText>Board</BoardViewsText>
-          <BoardViewsIconContainer>
-            <ArrowIcon>
-              <ArrowSvg />
-            </ArrowIcon>
-          </BoardViewsIconContainer>
-        </BoardViewBtn>
-      </BoardViewsContainer>
-      <BoardNameContainer>
+      <div>
+        <BoardViews />
+      </div>
+      <BoardNameContainer ref={titleContainerRef}>
         {!isEditBoardTitle ? (
           <BoardNamePlaceholder onClick={() => setIsEditBoardTitle(true)}>{board.title}</BoardNamePlaceholder>
         ) : (
@@ -71,14 +65,21 @@ const BoardNav = ({ board, onBoardUpdate }: PropTypes.BoardNavCmp) => {
             onKeyDown={handleTitleChange}
             onChange={handleInputChange}
             value={boardTitle}
+            style={{ width: titleContainerWidth }}
           />
         )}
       </BoardNameContainer>
-      <BoardStarredContainer>star</BoardStarredContainer>
+      <BoardStarredContainer>
+        <BoardStarredIcon content="'\e967'" size="sm" />
+      </BoardStarredContainer>
+      <BoardOrg />
+      <BoardNavDivider />
+      <BoardNavRightChunkContainer>
+        <BoardMembers members={board.members} />
+        <BoardControls />
+      </BoardNavRightChunkContainer>
     </BoardNavContainer>
   )
 }
 
 export default BoardNav
-
-// get computed style of board name placeholder h1 and set it to the input's width
