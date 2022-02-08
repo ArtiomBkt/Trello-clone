@@ -1,11 +1,12 @@
 import { useState, useEffect, useRef } from 'react'
 import { BoardTypes } from '../types/board-types/index'
 
-export function useLocalStorageState(
+const useLocalStorageState = (
   key: string,
   defaultValue: BoardTypes.board,
   { serialize = JSON.stringify, deserialize = JSON.parse } = {}
-) {
+): [state: BoardTypes.board, setState: React.Dispatch<any>] => {
+  
   const [state, setState] = useState(() => {
     const valInStorage = window.localStorage.getItem(key)
     if (valInStorage) {
@@ -27,3 +28,5 @@ export function useLocalStorageState(
 
   return [state, setState]
 }
+
+export default useLocalStorageState

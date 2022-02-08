@@ -1,5 +1,5 @@
 import React, { useLayoutEffect } from 'react'
-import { useLocalStorageState } from '../../hooks/useLocalStorageState'
+import useLocalStorageState from '../../hooks/useLocalStorageState'
 import { DragDropContext, Droppable, DropResult } from 'react-beautiful-dnd'
 import { BoardTypes } from '../../types/board-types/index'
 import { boardService } from '../../services/board.service'
@@ -30,7 +30,7 @@ const Board = () => {
       ...board,
       lists: newLists
     }
-    setBoard(newBoard)
+    onBoardUpdate(newBoard)
   }
 
   const onAddList = (listTitle: string): void => {
@@ -43,7 +43,7 @@ const Board = () => {
   const onListUpdate = (newList: BoardTypes.list): void => {
     const idx = board.lists!.findIndex((list: BoardTypes.list) => list.id === newList.id)
 
-    const newLists = [...board.lists]
+    const newLists = [...board.lists!]
 
     if (idx !== -1) {
       newLists.splice(idx, 1, newList)
@@ -55,6 +55,10 @@ const Board = () => {
       ...board,
       lists: newLists
     }
+    onBoardUpdate(newBoard)
+  }
+
+  const onBoardUpdate = (newBoard: BoardTypes.board): void => {
     setBoard(newBoard)
   }
 
@@ -65,7 +69,7 @@ const Board = () => {
         <div style={{ display: 'flex', flexDirection: 'column', flex: '1 1 0', overflowY: 'auto', position: 'relative' }}>
           <div style={{ position: 'absolute', inset: '0' }}>
             <div style={{ display: 'flex', flexDirection: 'column', height: '100%', marginRight: 0, position: 'relative' }}>
-              <BoardNav />
+              <BoardNav onBoardUpdate={onBoardUpdate} board={board} />
               <div style={{ flexGrow: 1, position: 'relative' }}>
                 <DragDropContext onDragEnd={onDragEnd}>
                   <Droppable direction="horizontal" droppableId={board.id} type="LIST">

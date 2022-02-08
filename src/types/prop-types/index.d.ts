@@ -11,6 +11,7 @@ export declare module PropTypes {
     isDateBadge?: boolean
     isFullCover?: boolean
     isListAdd?: boolean
+    isEditBoardTitle?: boolean
   }
 
   export type DndTypes = {
@@ -36,8 +37,14 @@ export declare module PropTypes {
     idx: number
   }
 
-  export type task = BoardTypes.task
+  export type BoardNavCmp = {
+    board: BoardTypes.board
+    onBoardUpdate: (board: BoardTypes.board) => void
+  }
+
+  export type board = BoardTypes.board
   export type list = BoardTypes.list
+  export type task = BoardTypes.task
 
   export type TaskComposerProps = {
     handleComposerToggle: () => void

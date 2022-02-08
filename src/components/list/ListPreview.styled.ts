@@ -9,7 +9,7 @@ export const ListPreviewContainer = styled.div`
   margin-bottom: 8px;
   padding: 0 0 8px 8px;
   white-space: nowrap;
-/* 
+
   &::-webkit-scrollbar {
     width: 12px;
     height: 12px;
@@ -28,7 +28,7 @@ export const ListPreviewContainer = styled.div`
     border-radius: 3px;
     background: #00000026;
     margin: 0 20px;
-  } */
+  }
 `
 
 export const ListContentPreview = styled.div`
@@ -75,7 +75,7 @@ export const ListTasksWrapper = styled.div`
   min-height: 0;
   z-index: 1;
 
-  /* &::-webkit-scrollbar {
+  &::-webkit-scrollbar {
     width: 8px;
   }
   &::-webkit-scrollbar-thumb {
@@ -86,5 +86,5 @@ export const ListTasksWrapper = styled.div`
   &::-webkit-scrollbar-track-piece {
     border-radius: 3px;
     background: #091e4214;
-  } */
+  }
 `
