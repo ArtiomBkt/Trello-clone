@@ -13,6 +13,8 @@ const Board = () => {
   const [board, setBoard] = useLocalStorageState('board', boardService.getBoardById())
 
   useLayoutEffect(() => {
+    console.log('board layout effect ran, board style background');
+    
     const elRoot = document.getElementById('root')
     if (elRoot) elRoot.style.background = board.style.background
   }, [board.style.background])
