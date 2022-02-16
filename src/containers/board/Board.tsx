@@ -13,15 +13,13 @@ const Board = () => {
   const [board, setBoard] = useLocalStorageState('board', boardService.getBoardById())
 
   useLayoutEffect(() => {
-    console.log('board layout effect ran, board style background');
-    
     const elRoot = document.getElementById('root')
     if (elRoot) elRoot.style.background = board.style.background
   }, [board.style.background])
 
   const onDragEnd = (result: DropResult): void => {
     const { destination, source, type, draggableId } = result
-    
+
     if (!board || !board.lists || !destination) return
     if (destination.droppableId === source.droppableId && destination.index === source.index) return
 
@@ -38,7 +36,7 @@ const Board = () => {
   const onAddList = (listTitle: string): void => {
     const newList = boardService.getEmptyList()
     newList.title = listTitle
-    
+
     onListUpdate(newList)
   }
 

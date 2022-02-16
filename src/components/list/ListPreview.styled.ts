@@ -77,6 +77,7 @@ export const ListTasksWrapper = styled.div`
 
   &::-webkit-scrollbar {
     width: 8px;
+    height: 8px;
   }
   &::-webkit-scrollbar-thumb {
     border-radius: 3px;

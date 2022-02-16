@@ -122,16 +122,18 @@ export const BoardNamePlaceholder = styled.h1`
 `
 
 export const BoardNameInput = styled.input`
-  background-color: #fff !important;
-
   font-size: 18px;
   font-weight: 700;
-  line-height: 32px !important;
 
   margin: 0;
-  padding: 0 12px !important;
 
   box-shadow: inset 0 0 0 2px #dfe1e6;
+
+  &&& {
+    background-color: #fff;
+    padding: 0 12px;
+    line-height: 32px;
+  }
 `
 
 export const BoardStarredContainer = styled.a`
@@ -166,8 +168,8 @@ export const BoardOrgContainer = styled.div`
   position: relative;
 
   /** change display when features are ready
-  display: none;
   **/
+  display: none;
 `
 
 export const BoardNavDivider = styled.span`

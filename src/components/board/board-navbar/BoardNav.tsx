@@ -18,22 +18,24 @@ import BoardControls from './BoardControls'
 const BoardNav = ({ board, onBoardUpdate }: PropTypes.BoardNavCmp) => {
   const [boardTitle, setBoardTitle] = useState(board.title)
   const [isEditBoardTitle, setIsEditBoardTitle] = useState(false)
-  const [titleContainerWidth, setTitleContainerWidth] = useState('')
+  // const [titleContainerWidth, setTitlePlaceholderWidth] = useState('')
   const inputRef = useRef<HTMLInputElement>(null)
-  const titleContainerRef = useRef<HTMLDivElement>(null)
+  const titlePlaceholderRef = useRef<HTMLDivElement>(null)
 
   useLayoutEffect(() => {
-    if (titleContainerRef.current) {
-      setTitleContainerWidth(window.getComputedStyle(titleContainerRef.current).width)
-    }
+    // if (titlePlaceholderRef.current) {
+    //   setTitlePlaceholderWidth(window.getComputedStyle(titlePlaceholderRef.current).width)
+    // }
     if (isEditBoardTitle && inputRef.current) {
-      // inputRef.current.style.width = titleContainerWidth
       inputRef.current.focus()
       inputRef.current.select()
     }
   }, [isEditBoardTitle, inputRef])
 
   const handleInputChange = ({ target }: React.ChangeEvent<HTMLInputElement>): void => {
+    if (inputRef.current) {
+      inputRef.current.size = target.value.length
+    }
     setBoardTitle(target.value)
   }
 
@@ -54,9 +56,11 @@ const BoardNav = ({ board, onBoardUpdate }: PropTypes.BoardNavCmp) => {
       <div>
         <BoardViews />
       </div>
-      <BoardNameContainer ref={titleContainerRef}>
+      <BoardNameContainer>
         {!isEditBoardTitle ? (
-          <BoardNamePlaceholder onClick={() => setIsEditBoardTitle(true)}>{board.title}</BoardNamePlaceholder>
+          <BoardNamePlaceholder ref={titlePlaceholderRef} onClick={() => setIsEditBoardTitle(true)}>
+            {board.title}
+          </BoardNamePlaceholder>
         ) : (
           <BoardNameInput
             ref={inputRef}
@@ -65,7 +69,7 @@ const BoardNav = ({ board, onBoardUpdate }: PropTypes.BoardNavCmp) => {
             onKeyDown={handleTitleChange}
             onChange={handleInputChange}
             value={boardTitle}
-            style={{ width: titleContainerWidth }}
+            // style={{ width: titleContainerWidth }}
           />
         )}
       </BoardNameContainer>
