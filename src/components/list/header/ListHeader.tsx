@@ -18,10 +18,10 @@ const ListHeader = ({ list, dragHandleProps, onListUpdate }: PropTypes.ListHeade
     setListTitle(target.value)
   }
 
-  const handleTitleChange = (e?: any) => {
-    if (e.key !== 'Enter' && e.type !== 'blur') return
+  const handleTitleChange = (ev: React.FocusEvent | React.KeyboardEvent): void => {
+    if ((ev as React.KeyboardEvent).key !== 'Enter' && ev.type !== 'blur') return
 
-    e.preventDefault()
+    ev.preventDefault()
     setIsOpen(false)
 
     const newList = JSON.parse(JSON.stringify(list))

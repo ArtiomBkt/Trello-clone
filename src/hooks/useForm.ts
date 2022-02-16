@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
 
 type stateProps = {
-  initialState:any
-  cb?:any
+  initialState: any
+  cb?: any
 }
 // type stateProps = {
 //   initialState: inputProps["value"];
@@ -10,14 +10,14 @@ type stateProps = {
 // }
 
 type registerInputType = {
-  field: string | number,
+  field: string | number
   type: string
 }
 
 interface inputProps {
-  name: registerInputType["field"]
-  id: registerInputType["field"]
-  type: registerInputType["type"]
+  name: registerInputType['field']
+  id: registerInputType['field']
+  type: registerInputType['type']
   value: boolean | string | number
   onChange?: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void
 }
@@ -29,7 +29,7 @@ export const useForm = (initialState: any, cb = (value?: any) => {}) => {
     cb(fields)
   }, [fields, cb])
 
-  const handleChange: inputProps['onChange'] = (event) => {
+  const handleChange: inputProps['onChange'] = event => {
     const value = event.target.type === 'number' ? +event.target.value : event.target.value
     setFields(value)
   }
@@ -45,5 +45,4 @@ export const useForm = (initialState: any, cb = (value?: any) => {}) => {
   }
 
   return [fields, handleChange, setFields, register]
-
 }

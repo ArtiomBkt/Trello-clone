@@ -3,6 +3,7 @@ import { Header, HeaderMainNav, HeaderLinksWrapper, HeaderLinksContainer, Header
 import AppLogo from './logo/AppLogo'
 import { ReactComponent as CreateIcon } from '../../assets/images/plus.svg'
 import NavLink from './links/NavLink'
+import HeaderModal from '../../containers/modals/header/HeaderModal'
 
 const AppHeader = () => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth)
@@ -18,19 +19,34 @@ const AppHeader = () => {
     return () => window.removeEventListener('resize', handleResize)
   })
 
-  const handleMenuToggle = () => {
+  const positionCalc = React.useCallback(
+    (ev: any) => {
+      if (!isMenuOpen && ev.target instanceof Element) {
+        console.log(ev.target.clientLeft, ev.target.offsetWidth)
+      }
+    },
+    [isMenuOpen]
+  )
+
+  const handleMenuToggle = (ev: any) => {
+    ev.preventDefault()
+    positionCalc(ev)
     setIsMenuOpen(prevIsMenuOpen => !prevIsMenuOpen)
   }
 
   //// Can be simpler - refactor
-  const NavLinks = (): any => {
+  const NavLinks = (): JSX.Element => {
     const visibleLinks = [{ text: 'Workspaces' }, { text: 'Recent' }, { text: 'Starred' }, { text: 'Templates' }]
     if (windowWidth > 1000) {
-      return visibleLinks.map(link => (
-        <NavLink type={link.text} key={link.text}>
-          {link.text}
-        </NavLink>
-      ))
+      return (
+        <>
+          {visibleLinks.map(link => (
+            <NavLink type={link.text} key={link.text}>
+              {link.text}
+            </NavLink>
+          ))}
+        </>
+      )
     } else if (windowWidth < 1000 && windowWidth > 660) {
       const moreLinks = visibleLinks.splice(2, 2)
       return (
@@ -44,13 +60,16 @@ const AppHeader = () => {
             More
           </NavLink>
           {isMenuOpen && (
-            <div>
-              {moreLinks.map(link => (
-                <NavLink type={link.text} key={link.text}>
-                  {link.text}
-                </NavLink>
-              ))}
-            </div>
+            <HeaderModal position={{ top: 48, left: 114 }} onClose={handleMenuToggle}>
+              {/* needs a container for nice layout */}
+              <>
+                {moreLinks.map(link => (
+                  <NavLink type={link.text} key={link.text}>
+                    {link.text}
+                  </NavLink>
+                ))}
+              </>
+            </HeaderModal>
           )}
         </>
       )
@@ -62,13 +81,16 @@ const AppHeader = () => {
             More
           </NavLink>
           {isMenuOpen && (
-            <div>
-              {moreLinks.map(link => (
-                <NavLink type={link.text} key={link.text}>
-                  {link.text}
-                </NavLink>
-              ))}
-            </div>
+            <HeaderModal position={{ top: 48, left: 114 }} onClose={handleMenuToggle}>
+              {/* needs a container for nice layout */}
+              <>
+                {moreLinks.map(link => (
+                  <NavLink type={link.text} key={link.text}>
+                    {link.text}
+                  </NavLink>
+                ))}
+              </>
+            </HeaderModal>
           )}
         </>
       )
@@ -86,9 +108,7 @@ const AppHeader = () => {
               <NavLinks />
             </HeaderLinks>
             <HeaderLinks>
-              <NavLink type="Create">
-                {windowWidth < 1100 ? <CreateIcon style={{width: '20px', height: '20px'}} /> : 'Create'}
-              </NavLink>
+              <NavLink type="Create">{windowWidth < 1100 ? <CreateIcon style={{ width: '20px', height: '20px' }} /> : 'Create'}</NavLink>
             </HeaderLinks>
           </HeaderLinksContainer>
         </HeaderLinksWrapper>

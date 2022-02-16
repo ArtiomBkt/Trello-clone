@@ -1,12 +1,11 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, RefObject } from 'react'
 
-const useOutsideAlerter = (ref: any) => {
+const useOutsideAlerter = (ref: RefObject<HTMLDivElement>) => {
   const [outsideClick, setOutsideClick] = useState(false)
 
   useEffect(() => {
-
     const handleClickOutside = (event: MouseEvent) => {
-      if (ref.current && !ref.current.contains(event.target)) {
+      if (ref.current && !ref.current.contains(event.target as Node)) {
         setOutsideClick(true)
       } else setOutsideClick(false)
     }
@@ -16,7 +15,6 @@ const useOutsideAlerter = (ref: any) => {
     return () => {
       document.removeEventListener('mousedown', handleClickOutside)
     }
-
   }, [ref])
 
   return outsideClick
