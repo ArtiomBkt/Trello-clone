@@ -50,6 +50,15 @@ const Resets = createGlobalStyle`
 
   button {
     all: unset;
+    display: inline-block;
+    position: relative;    
+    border-radius: 3px;
+    
+    line-height: 20px;
+    margin-bottom: 8px;
+    padding: 6px 12px;
+
+    text-decoration: none;
   }
 `
 

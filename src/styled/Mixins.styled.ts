@@ -3,7 +3,7 @@ import logoStatic from '../assets/images/logo-static.gif'
 import logoHover from '../assets/images/logo-hover.gif'
 
 export const LinkHover = () => css`
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: rgba(255, 255, 255, 0.3);
   box-shadow: none;
   color: #fff;
   cursor: pointer;

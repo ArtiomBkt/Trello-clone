@@ -12,7 +12,7 @@ export const NavLinkContainer = styled.button<PropTypes.StyledProps>`
 
   line-height: 32px;
 
-  background-color: transparent;
+  background-color: ${({ btnType }) => (btnType === 'Create' ? 'rgba(255, 255, 255, 0.2)' : 'transparent')};
 
   ${({ btnType }) =>
     btnType !== 'Create'
@@ -22,6 +22,7 @@ export const NavLinkContainer = styled.button<PropTypes.StyledProps>`
         `
       : css`
           margin: 0 4px 0 0;
+          padding: 0;
         `}
 
   white-space: nowrap;
@@ -43,8 +44,8 @@ export const NavLinkContainer = styled.button<PropTypes.StyledProps>`
 
           white-space: nowrap;
 
-          background-color: rgba(255, 255, 255, 0.2);
-          color: #fff;
+          /* background-color: rgba(255, 255, 255, 0.2); */
+          /* color: #fff; */
         `
       : null}
 
@@ -52,6 +53,14 @@ export const NavLinkContainer = styled.button<PropTypes.StyledProps>`
   &.modal-open {
     ${LinkHover}
   }
+`
+
+export const HeaderCreateBtn = styled.span`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 32px;
+  margin: 0;
 `
 
 export const ArrowIconContainer = styled.span`
