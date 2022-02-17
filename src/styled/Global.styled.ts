@@ -30,10 +30,7 @@ const Resets = createGlobalStyle`
     background-color: #fafbfc;
     border: none;
     border-radius: 3px;
-    /* box-shadow: inset 0 0 0 2px #dfe1e6; */
-    /* display: block; */
     line-height: 20px;
-    /* margin-bottom: 12px; */
     outline: none;
     padding: 8px 12px;
     transition: background-color,border-color,box-shadow .2s ease;
@@ -50,14 +47,10 @@ const Resets = createGlobalStyle`
       cursor: pointer;
     }
   }
-  /*
-  p {
-    all: unset;
-  }
 
   button {
     all: unset;
-  } */
+  }
 `
 
 const FontStyles = createGlobalStyle`

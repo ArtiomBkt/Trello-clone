@@ -1,7 +1,8 @@
 import styled, { css } from 'styled-components'
 import { LinkHover } from '../../../styled/Mixins.styled'
+import { PropTypes } from '../../../types/prop-types'
 
-export const NavLinkContainer = styled.a`
+export const NavLinkContainer = styled.button<PropTypes.StyledProps>`
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -10,22 +11,29 @@ export const NavLinkContainer = styled.a`
   border: none;
 
   line-height: 32px;
-  margin: ${p => (p.type !== 'Create' ? '0 0 0 4px' : '0 4px 0 0')};
-  padding: ${p => (p.type !== 'Create' ? '6px 12px' : null)};
-  padding-right: ${p => (p.type !== 'Create' ? '10px' : null)};
 
-  background-color: ${p => (p.type === 'Create' ? 'rgba(0,0,0,.24)' : 'transparent')};
+  background-color: transparent;
+
+  ${({ btnType }) =>
+    btnType !== 'Create'
+      ? css`
+          margin: 0 0 0 4px;
+          padding: 6px 10px 6px 12px;
+        `
+      : css`
+          margin: 0 4px 0 0;
+        `}
+
   white-space: nowrap;
 
   @media screen and (min-width: 1100px) {
     padding: 6px 12px;
   }
 
-  ${p =>
-    p.type === 'board-views'
+  ${({ btnType }) =>
+    btnType === 'board-views'
       ? css`
           box-sizing: border-box;
-          /* float: left; */
           padding-right: 5px;
           padding-left: 5px;
 
@@ -38,7 +46,7 @@ export const NavLinkContainer = styled.a`
           background-color: rgba(255, 255, 255, 0.2);
           color: #fff;
         `
-      : ''}
+      : null}
 
   &:hover,
   &.modal-open {

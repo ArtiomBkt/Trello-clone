@@ -1,13 +1,20 @@
 import React, { useEffect, useState } from 'react'
 import { Header, HeaderMainNav, HeaderLinksWrapper, HeaderLinksContainer, HeaderLinks, HeaderRightChunk } from './AppHeader.styled'
 import AppLogo from './logo/AppLogo'
+import useModalPos from '../../hooks/useModalPos'
 import { ReactComponent as CreateIcon } from '../../assets/images/plus.svg'
 import NavLink from './links/NavLink'
 import HeaderModal from '../../containers/modals/header/HeaderModal'
 
+type modalPos = {
+  elemPosX: number
+  elemPosY: number
+}
+
 const AppHeader = () => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth)
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [modalPos, setModalPos] = useState<modalPos>({ elemPosX: 0, elemPosY: 0 })
 
   useEffect(() => {
     const handleResize = () => {
@@ -20,22 +27,23 @@ const AppHeader = () => {
   })
 
   const positionCalc = React.useCallback(
-    (ev: any) => {
+    (ev: React.MouseEvent) => {
       if (!isMenuOpen && ev.target instanceof Element) {
-        console.log(ev.target.clientLeft, ev.target.offsetWidth)
+        const { x: elemPosX, y: elemPosY, height: elemHeight } = ev.currentTarget.getBoundingClientRect()
+        setModalPos({ elemPosX, elemPosY: elemPosY + elemHeight + 10 })
       }
     },
     [isMenuOpen]
   )
 
-  const handleMenuToggle = (ev: any) => {
-    ev.preventDefault()
+  const handleMenuToggle = (ev: React.MouseEvent) => {
+    ev.stopPropagation()
     positionCalc(ev)
     setIsMenuOpen(prevIsMenuOpen => !prevIsMenuOpen)
   }
 
   //// Can be simpler - refactor
-  const NavLinks = (): JSX.Element => {
+  const NavLinks = (): any => {
     const visibleLinks = [{ text: 'Workspaces' }, { text: 'Recent' }, { text: 'Starred' }, { text: 'Templates' }]
     if (windowWidth > 1000) {
       return (
@@ -60,7 +68,7 @@ const AppHeader = () => {
             More
           </NavLink>
           {isMenuOpen && (
-            <HeaderModal position={{ top: 48, left: 114 }} onClose={handleMenuToggle}>
+            <HeaderModal position={modalPos} onClose={handleMenuToggle}>
               {/* needs a container for nice layout */}
               <>
                 {moreLinks.map(link => (
@@ -81,7 +89,7 @@ const AppHeader = () => {
             More
           </NavLink>
           {isMenuOpen && (
-            <HeaderModal position={{ top: 48, left: 114 }} onClose={handleMenuToggle}>
+            <HeaderModal position={modalPos} onClose={handleMenuToggle}>
               {/* needs a container for nice layout */}
               <>
                 {moreLinks.map(link => (

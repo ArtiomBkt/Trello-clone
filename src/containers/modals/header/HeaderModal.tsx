@@ -3,14 +3,14 @@ import { createPortal } from 'react-dom'
 import { HeaderModalContainer, HeaderModalHead } from './HeaderModal.styled'
 
 type HeaderModalProps = {
-  onClose: (ev: any) => void
-  children?: React.ReactNode
-  position: { top: number; left: number }
+  onClose: (ev: React.MouseEvent) => void
+  children: React.ReactNode
+  position: { elemPosX: number; elemPosY: number }
 }
 
 const HeaderModal = ({ position, children, onClose }: HeaderModalProps) => {
   return createPortal(
-    <HeaderModalContainer top={position.top} left={position.left}>
+    <HeaderModalContainer top={position.elemPosY} left={position.elemPosX}>
       <HeaderModalHead>
         <button onClick={onClose}>x</button>
       </HeaderModalHead>

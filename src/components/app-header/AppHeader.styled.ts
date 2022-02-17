@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-import { LinkHover } from '../../styled/Mixins.styled'
 
 export const Header = styled.header`
   height: 44px;
@@ -13,7 +12,7 @@ export const HeaderMainNav = styled.nav`
   height: 100%;
 
   /* background-color: #026aa7; */
-  background-color: rgba(0, 0, 0, 0.45);
+  background-color: rgba(0, 0, 0, 0.16); // should be dynamic
   backdrop-filter: blur(6px);
 `
 

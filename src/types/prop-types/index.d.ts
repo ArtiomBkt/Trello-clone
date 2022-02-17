@@ -3,6 +3,7 @@ import { DraggableProvided } from 'react-beautiful-dnd'
 
 export declare module PropTypes {
   export type StyledProps = {
+    btnType?: string
     task?: task
     style?: task['style']
     size?: string
