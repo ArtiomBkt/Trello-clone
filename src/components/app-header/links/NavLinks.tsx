@@ -6,7 +6,7 @@ type NavLinksProps = {
   windowWidth: number
   isMenuOpen: boolean
   modalPos: { elemPosX: number; elemPosY: number }
-  handleMenuToggle: (ev: React.MouseEvent) => void
+  handleMenuToggle: (ev?: React.MouseEvent) => void
 }
 type Link = { text: string }
 type NavLinksState = Link[]

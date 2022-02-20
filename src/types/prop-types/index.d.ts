@@ -41,6 +41,7 @@ export declare module PropTypes {
   export type BoardNavCmp = {
     board: BoardTypes.board
     onBoardUpdate: (board: BoardTypes.board) => void
+    onSidenavOpen: () => void
   }
 
   export type MemberListProps = {

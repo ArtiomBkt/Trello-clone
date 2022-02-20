@@ -41,6 +41,10 @@ export const BoardNavContainer = styled.div`
   height: auto;
 
   /* background-color: #0000003d; */
+
+  @media screen and (max-width: 660px) {
+    flex-wrap: wrap;
+  }
 `
 
 export const BoardViewBtn = styled.button`
@@ -219,6 +223,10 @@ export const BoardNavRightChunkContainer = styled.div`
   display: flex;
   justify-content: space-between;
   flex-grow: 1;
+
+  @media screen and (max-width: 660px) {
+    justify-content: flex-end;
+  }
 `
 
 export const MemberListContainer = styled.div`

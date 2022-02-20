@@ -7,7 +7,9 @@ import {
   BoardStarredContainer,
   BoardStarredIcon,
   BoardNavDivider,
-  BoardNavRightChunkContainer
+  BoardNavRightChunkContainer,
+  BoardSidebarBtn,
+  BoardSidebarIcon
 } from './BoardNav.styled'
 import { PropTypes } from '../../../types/prop-types'
 import BoardViews from './BoardViews'
@@ -15,7 +17,7 @@ import BoardOrg from './BoardOrg'
 import BoardMembers from './BoardMembers'
 import BoardControls from './BoardControls'
 
-const BoardNav = ({ board, onBoardUpdate }: PropTypes.BoardNavCmp) => {
+const BoardNav = ({ board, onBoardUpdate, onSidenavOpen }: PropTypes.BoardNavCmp) => {
   const [boardTitle, setBoardTitle] = useState(board.title)
   const [isEditBoardTitle, setIsEditBoardTitle] = useState(false)
   // const [titleContainerWidth, setTitlePlaceholderWidth] = useState('')
@@ -80,7 +82,12 @@ const BoardNav = ({ board, onBoardUpdate }: PropTypes.BoardNavCmp) => {
       <BoardNavDivider />
       <BoardNavRightChunkContainer>
         <BoardMembers members={board.members} />
-        <BoardControls />
+        <BoardControls>
+          <BoardSidebarBtn onClick={onSidenavOpen}>
+            <BoardSidebarIcon content="'\e952'" size="sm" />
+            <span>Show menu</span>
+          </BoardSidebarBtn>
+        </BoardControls>
       </BoardNavRightChunkContainer>
     </BoardNavContainer>
   )

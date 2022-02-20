@@ -1,7 +1,11 @@
 import React from 'react'
-import { BoardWatcherBtn, BoardWatcherIcon, BoardNavDivider, BoardSidebarBtn, BoardSidebarIcon } from './BoardNav.styled'
+import { BoardWatcherBtn, BoardWatcherIcon, BoardNavDivider } from './BoardNav.styled'
 
-const BoardControls = () => {
+type BoardControlsProps = {
+  children: React.ReactNode
+}
+
+const BoardControls = ({ children }: BoardControlsProps) => {
   return (
     <div style={{ display: 'inline-flex' }}>
       <BoardWatcherBtn>
@@ -9,10 +13,7 @@ const BoardControls = () => {
         <span>Watching</span>
       </BoardWatcherBtn>
       <BoardNavDivider />
-      <BoardSidebarBtn>
-        <BoardSidebarIcon content="'\e952'" size="sm" />
-        <span>Show menu</span>
-      </BoardSidebarBtn>
+      {children}
     </div>
   )
 }

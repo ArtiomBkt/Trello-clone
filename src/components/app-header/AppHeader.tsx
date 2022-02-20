@@ -49,9 +49,11 @@ const AppHeader = () => {
     [isMenuOpen]
   )
 
-  const handleMenuToggle = (ev: React.MouseEvent) => {
-    ev.stopPropagation()
-    positionCalc(ev)
+  const handleMenuToggle = (ev?: React.MouseEvent) => {
+    if (ev) {
+      ev.stopPropagation()
+      positionCalc(ev)
+    }
     setIsMenuOpen(prevIsMenuOpen => !prevIsMenuOpen)
   }
 
