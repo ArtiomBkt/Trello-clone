@@ -74,7 +74,7 @@ const Board = () => {
       <BoardContentWrapper>
         <AppWrapper>
           <div style={{ position: 'absolute', inset: '0' }}>
-            <BoardWrapper>
+            <BoardWrapper isSidenavOpen={isSidenavOpen}>
               <BoardNav onSidenavOpen={toggleSidenav} onBoardUpdate={onBoardUpdate} board={board} />
               <div style={{ flexGrow: 1, position: 'relative' }}>
                 <DragDropContext onDragEnd={onDragEnd}>
@@ -98,7 +98,7 @@ const Board = () => {
                 </DragDropContext>
               </div>
             </BoardWrapper>
-            {isSidenavOpen && <BoardSidebar onSidenavClose={toggleSidenav} />}
+            <BoardSidebar isSidenavOpen={isSidenavOpen} onSidenavClose={toggleSidenav} />
           </div>
         </AppWrapper>
       </BoardContentWrapper>

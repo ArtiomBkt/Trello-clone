@@ -13,6 +13,7 @@ export declare module PropTypes {
     isFullCover?: boolean
     isListAdd?: boolean
     isEditBoardTitle?: boolean
+    isSidenavOpen?: boolean
   }
 
   export type DndTypes = {

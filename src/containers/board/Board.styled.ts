@@ -1,4 +1,5 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
+import { PropTypes } from '../../types/prop-types'
 
 export const BoardContainer = styled.div`
   display: flex;
@@ -25,11 +26,17 @@ export const AppWrapper = styled.div`
   position: relative;
 `
 
-export const BoardWrapper = styled.div`
+export const BoardWrapper = styled.div<PropTypes.StyledProps>`
   display: flex;
   flex-direction: column;
   height: 100%;
   position: relative;
+
+  ${({ isSidenavOpen }) =>
+    isSidenavOpen &&
+    css`
+      margin-right: 339px;
+    `}
 
   transition: margin 0.1s ease-in;
 `
