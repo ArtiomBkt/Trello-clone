@@ -16,6 +16,7 @@ export declare module PropTypes {
     isSidenavOpen?: boolean
     modalPos?: { top: number; left: number }
     isQuickEdit?: boolean
+    labelColor?: string
   }
 
   export type DndTypes = {

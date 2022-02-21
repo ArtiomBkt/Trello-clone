@@ -8,7 +8,7 @@ interface LabelsInterface {
   [key: string]: { static: string; hover: string }
 }
 
-const labelColors: LabelsInterface = {
+export const labelColors: LabelsInterface = {
   green: { static: '#61bd4f', hover: '#519839' },
   yellow: { static: '#f2d600', hover: '#d9b51c' },
   orange: { static: '#ff9f1a', hover: '#cd8313' },

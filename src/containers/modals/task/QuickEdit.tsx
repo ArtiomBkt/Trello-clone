@@ -12,7 +12,8 @@ import {
   EditorControlText,
   EditorTaskDetails
 } from './QuickEdit.styled'
-import BadgeModal from './badges/BadgesModal'
+import BadgesModal from './badges/BadgesModal'
+import LabelsModal from './badges/labels/LabelsModal'
 
 type QuickEditorProps = {
   children?: React.ReactNode
@@ -31,17 +32,37 @@ const QuickEditControls = ({ isEditorOpen, taskId }: QuickEditorProps) => {
     { title: 'Edit dates', type: 'dates', icon: `'\\e91b'` }
   ])
   const [badgeModalOpen, setBadgeModalOpen] = useState<string>('')
+  const [modalPos, setModalPos] = useState({ top: 0, left: 0 })
 
-  const toggleBadgeModal = (modalName?: string) => {
-    if (typeof modalName !== 'string') return setBadgeModalOpen('')
+  const toggleBadgeModal = (modalName?: string, ev?: React.MouseEvent) => {
+    if (typeof modalName !== 'string' || modalName === badgeModalOpen) return setBadgeModalOpen('')
+    if (ev) {
+      const { y: top, x: left, height } = ev.currentTarget.getBoundingClientRect()
+      setModalPos({ top: top + height + 5, left })
+    }
     setBadgeModalOpen(modalName)
   }
+
+  const getModalChild = () => {
+    switch (badgeModalOpen) {
+      case 'labels':
+        return <LabelsModal />
+      case 'members':
+        return <>members</>
+      case 'dates':
+        return <>dates</>
+      default:
+        return
+    }
+  }
+
+  // handle task badges updates. update all or individual badges
 
   return (
     <TaskQuickEditorControls isQuickEdit={isEditorOpen}>
       {quickControls.map(control => (
         <TaskQuickEditorControlBtn
-          onClick={() => toggleBadgeModal(control.type)}
+          onClick={ev => toggleBadgeModal(control.type, ev)}
           href={control.href}
           key={control.icon}
         >
@@ -49,7 +70,11 @@ const QuickEditControls = ({ isEditorOpen, taskId }: QuickEditorProps) => {
           <EditorControlText>{control.title}</EditorControlText>
         </TaskQuickEditorControlBtn>
       ))}
-      {badgeModalOpen && <BadgeModal title={badgeModalOpen} onClose={toggleBadgeModal}></BadgeModal>}
+      {badgeModalOpen && (
+        <BadgesModal modalPos={modalPos} title={badgeModalOpen} onClose={toggleBadgeModal}>
+          {getModalChild()}
+        </BadgesModal>
+      )}
     </TaskQuickEditorControls>
   )
 }

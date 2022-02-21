@@ -19,7 +19,12 @@ function getBoardById(boardId?: Parameters<serviceTypes.getBoardById>): ReturnTy
   return gBoard
 }
 
-function handleListMove({ board, draggableId, source, destination }: serviceTypes.dragAndDropArgs): BoardTypes.list[] | undefined {
+function handleListMove({
+  board,
+  draggableId,
+  source,
+  destination
+}: serviceTypes.dragAndDropArgs): BoardTypes.list[] | undefined {
   if (!board || !board.lists) return
 
   const draggedList = board.lists.find(list => list.id === draggableId)
@@ -32,7 +37,12 @@ function handleListMove({ board, draggableId, source, destination }: serviceType
   return newLists
 }
 
-function handleTaskMove({ board, draggableId, source, destination }: serviceTypes.dragAndDropArgs): BoardTypes.list[] | undefined {
+function handleTaskMove({
+  board,
+  draggableId,
+  source,
+  destination
+}: serviceTypes.dragAndDropArgs): BoardTypes.list[] | undefined {
   if (!board || !board.lists) return
 
   const startList = board.lists.find(list => list.id === source.droppableId)
@@ -159,7 +169,7 @@ function getDummyBoard(): BoardTypes.board {
     labels: [
       {
         id: 'l101',
-        title: '',
+        title: 'done',
         color: 'green'
       },
       {
@@ -169,7 +179,7 @@ function getDummyBoard(): BoardTypes.board {
       },
       {
         id: 'l103',
-        title: '',
+        title: 'bug',
         color: 'orange'
       },
       {
@@ -309,7 +319,7 @@ function getDummyBoard(): BoardTypes.board {
             ],
             labels: [
               { id: 'l101', title: 'done', color: 'green' },
-              { id: 'l105', title: 'bug', color: 'purple' }
+              { id: 'l105', title: '', color: 'purple' }
             ],
             startDate: { timestamp: 1642101255068, isDone: true },
             dueDate: { timestamp: 1642101255069, isDone: true },
@@ -459,7 +469,7 @@ function getDummyBoard(): BoardTypes.board {
             ],
             labels: [
               { id: 'l101', title: 'done', color: 'green' },
-              { id: 'l102', title: 'bug', color: 'yellow' }
+              { id: 'l102', title: '', color: 'yellow' }
             ],
             startDate: { timestamp: 1642101255068, isDone: false },
             dueDate: { timestamp: 1642101255069, isDone: false },
@@ -534,7 +544,7 @@ function getDummyBoard(): BoardTypes.board {
             ],
             labels: [
               { id: 'l101', title: 'done', color: 'green' },
-              { id: 'l102', title: 'bug', color: 'yellow' }
+              { id: 'l102', title: '', color: 'yellow' }
             ],
             startDate: { timestamp: 1642101255068, isDone: false },
             dueDate: { timestamp: undefined, isDone: false },
