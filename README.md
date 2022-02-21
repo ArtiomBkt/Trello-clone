@@ -25,7 +25,7 @@ This project is under constant progress.
   - [X] New task composing.
   - [ ] Task's details modal.
   - [ ] Task inline editing
-    - [ ] Title.
+    - [X] Title.
     - [ ] Labels.
     - [ ] Members.
     - [ ] Dates.
