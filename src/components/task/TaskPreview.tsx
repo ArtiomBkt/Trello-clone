@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useRef, useState } from 'react'
+import React, { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { Draggable } from 'react-beautiful-dnd'
 import { PropTypes } from '../../types/prop-types'
 import TaskDetails from '../../containers/task/TaskDetails'
@@ -6,10 +6,12 @@ import { TaskPreviewContainer, TaskCover, TaskEditIcon } from './TaskPreview.sty
 import { EditorTaskTextarea } from '../../containers/modals/task/QuickEdit.styled'
 import TaskQuickEdit from '../../containers/modals/task/QuickEdit'
 
-const TaskPreview = ({ task, idx }: PropTypes.TaskPreviewProps) => {
+const TaskPreview = ({ task, idx, handleTaskEdit }: PropTypes.TaskPreviewProps) => {
   const [isQuickEditOpen, setIsQuickEditOpen] = useState(false)
   const [taskEditorPos, setTaskEditorPos] = useState({ top: 0, left: 0 })
+  const [taskTitle, setTaskTitle] = useState<string>(task.title)
   const taskRef = useRef<HTMLDivElement>(null)
+  const taskTitleRef = useRef<HTMLTextAreaElement>(null)
 
   useLayoutEffect(() => {
     if (taskRef.current && isQuickEditOpen) {
@@ -18,25 +20,63 @@ const TaskPreview = ({ task, idx }: PropTypes.TaskPreviewProps) => {
     }
   }, [isQuickEditOpen, taskRef])
 
-  const handleQuickEditToggle = (ev: React.MouseEvent) => setIsQuickEditOpen(prevState => !prevState)
+  useEffect(() => {
+    if (isQuickEditOpen && taskTitleRef.current) {
+      taskTitleRef.current.focus()
+      taskTitleRef.current.select()
+    }
+  }, [isQuickEditOpen])
 
-  const handleQuickEditChange = () => {}
+  const handleQuickEditToggle = (ev?: React.MouseEvent): void => {
+    if (ev) {
+      ev.stopPropagation()
+      ev.preventDefault()
+    }
+    setIsQuickEditOpen(prevState => !prevState)
+  }
+
+  const handleQuickEditChange = ({ target }: React.ChangeEvent<HTMLTextAreaElement>): void => {
+    setTaskTitle(target.value)
+  }
+
+  const handleTaskTitleSubmit = (ev: React.MouseEvent | React.KeyboardEvent): void => {
+    if (((ev as React.KeyboardEvent).key !== 'Enter' && ev.type !== 'click') || !taskTitle) return
+    ev.preventDefault()
+
+    const newTask = JSON.parse(JSON.stringify(task))
+    newTask.title = taskTitle
+
+    handleTaskEdit(newTask)
+    handleQuickEditToggle()
+  }
 
   return (
     <Draggable draggableId={task.id} index={idx}>
       {provided => (
         <TaskPreviewContainer
+          href={`/${task.id}`}
+          // to={`/${task?.id}`}
           ref={provided.innerRef}
           {...provided.draggableProps}
           {...provided.dragHandleProps}
           style={task?.style}
-          to={`/${task?.id}`}
         >
           {!task?.style?.fullCover && task?.style?.background && <TaskCover style={task.style} />}
-          <TaskEditIcon onClickCapture={handleQuickEditToggle} content="'\e928'" size="sm" />
+          <TaskEditIcon onClick={handleQuickEditToggle} content="'\e928'" size="sm" />
           {isQuickEditOpen && (
-            <TaskQuickEdit modalPos={taskEditorPos} isEditorOpen={isQuickEditOpen} onClose={handleQuickEditToggle}>
-              <EditorTaskTextarea onChange={handleQuickEditChange} value={task.title} />
+            <TaskQuickEdit
+              taskId={task.id}
+              modalPos={taskEditorPos}
+              isEditorOpen={isQuickEditOpen}
+              onChangeSubmit={handleTaskTitleSubmit}
+              onClose={handleQuickEditToggle}
+            >
+              <EditorTaskTextarea
+                onKeyDown={handleTaskTitleSubmit}
+                ref={taskTitleRef}
+                onChange={handleQuickEditChange}
+                value={taskTitle}
+              />
             </TaskQuickEdit>
           )}
           <TaskDetails taskRef={taskRef} task={task} />

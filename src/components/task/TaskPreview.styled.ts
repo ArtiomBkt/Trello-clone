@@ -1,9 +1,10 @@
 import styled, { css } from 'styled-components'
-import { Link } from 'react-router-dom'
+// import { Link } from 'react-router-dom'
 import { Icon } from '../../styled/Mixins.styled'
 import { PropTypes } from '../../types/prop-types'
 
-export const TaskPreviewContainer = styled(Link)<PropTypes.StyledProps>`
+// export const TaskPreviewContainer = styled(Link)<PropTypes.StyledProps>`
+export const TaskPreviewContainer = styled.a<PropTypes.StyledProps>`
   display: ${({ style }) => (style?.fullCover ? 'flex' : 'block')};
   flex-direction: ${({ style }) => (style?.fullCover ? 'row' : '')};
 

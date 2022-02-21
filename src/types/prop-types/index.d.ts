@@ -39,6 +39,7 @@ export declare module PropTypes {
   export type TaskPreviewProps = {
     task: task
     idx: number
+    handleTaskEdit: (task: BoardTypes.task) => void
   }
 
   export type BoardNavCmp = {

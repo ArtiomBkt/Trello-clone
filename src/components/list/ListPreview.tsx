@@ -7,15 +7,16 @@ import ListHeader from './header/ListHeader'
 import TaskComposer from './task-composer/TaskComposer'
 import { ListContentPreview, List, ListTasksWrapper } from './ListPreview.styled'
 import { TaskComposerWrapper, TaskComposerToggler, TaskComposerIcon } from './task-composer/TaskComposer.styled'
+import { BoardTypes } from '../../types/board-types'
 
 const ListPreview = ({ list, idx, isDraggingOver, onListUpdate }: PropTypes.ListPreviewProps) => {
   const [isComposerOpen, setIsComposerOpen] = useState(false)
 
-  const handleComposerToggle = () => {
+  const handleComposerToggle = (): void => {
     setIsComposerOpen(p => !p)
   }
 
-  const handleTaskAdd = (taskTitle: string) => {
+  const handleTaskAdd = (taskTitle: string): void => {
     const newTask = boardService.getEmptyTask()
     newTask.title = taskTitle
 
@@ -30,7 +31,22 @@ const ListPreview = ({ list, idx, isDraggingOver, onListUpdate }: PropTypes.List
     onListUpdate(newList)
   }
 
-  const handleTaskEdit = () => {}
+  const handleTaskEdit = (updatedTask: BoardTypes.task): void => {
+    const idx = list.tasks.findIndex(task => task.id === updatedTask.id)
+    if (idx === -1) {
+      throw new Error(`Task ${updatedTask.id} was not found`)
+    }
+
+    const newTasks = [...list.tasks]
+    newTasks.splice(idx, 1, updatedTask)
+
+    const newList = {
+      ...list,
+      tasks: newTasks
+    }
+
+    onListUpdate(newList)
+  }
 
   return (
     <Draggable draggableId={list.id} index={idx}>
@@ -42,7 +58,7 @@ const ListPreview = ({ list, idx, isDraggingOver, onListUpdate }: PropTypes.List
               {provided => (
                 <ListTasksWrapper {...provided.droppableProps} ref={provided.innerRef}>
                   {list.tasks?.map((task, idx) => (
-                    <TaskPreview key={task.id} task={task} idx={idx} />
+                    <TaskPreview handleTaskEdit={handleTaskEdit} key={task.id} task={task} idx={idx} />
                   ))}
                   {provided.placeholder}
                   {isComposerOpen && (
