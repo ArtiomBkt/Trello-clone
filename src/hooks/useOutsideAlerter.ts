@@ -5,9 +5,12 @@ const useOutsideAlerter = (ref: RefObject<HTMLDivElement>) => {
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
+      setOutsideClick(false)
       if (ref.current && !ref.current.contains(event.target as Node)) {
         setOutsideClick(true)
-      } else setOutsideClick(false)
+      } else {
+        setOutsideClick(false)
+      }
     }
 
     document.addEventListener('mousedown', handleClickOutside)

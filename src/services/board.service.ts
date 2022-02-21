@@ -7,7 +7,8 @@ export const boardService = {
   handleTaskMove,
   getEmptyTask,
   getBoardStyle,
-  getEmptyList
+  getEmptyList,
+  save
 }
 
 const gBoard: BoardTypes.board = getDummyBoard()

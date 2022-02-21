@@ -83,20 +83,20 @@ export const TaskQuickEditorControls = styled.div<PropTypes.StyledProps>`
   left: 100%;
   top: 0;
 
-  transform: translateX(-20px);
-  opacity: 0;
+  /* transform: translateX(-20px); */
+  /* opacity: 0; */
   transition: opacity, transform 0.85s ease-in;
 
   width: 240px;
 
   z-index: 0;
 
-  ${({ isQuickEdit }) =>
+  /* ${({ isQuickEdit }) =>
     isQuickEdit &&
     css`
       opacity: 1;
       transform: translateX(0);
-    `}
+    `} */
 `
 
 export const TaskQuickEditorControlBtn = styled.a`

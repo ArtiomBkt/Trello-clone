@@ -1,4 +1,4 @@
-import React, { useEffect, useLayoutEffect, useRef, useState } from 'react'
+import React, { useLayoutEffect, useRef, useState } from 'react'
 import { Draggable } from 'react-beautiful-dnd'
 import { PropTypes } from '../../types/prop-types'
 import TaskDetails from '../../containers/task/TaskDetails'
@@ -14,23 +14,18 @@ const TaskPreview = ({ task, idx, handleTaskEdit }: PropTypes.TaskPreviewProps) 
   const taskTitleRef = useRef<HTMLTextAreaElement>(null)
 
   useLayoutEffect(() => {
-    if (taskRef.current && isQuickEditOpen) {
-      const { x, y } = taskRef.current.getBoundingClientRect()
-      setTaskEditorPos({ top: y, left: x })
-    }
-  }, [isQuickEditOpen, taskRef])
-
-  useEffect(() => {
-    if (isQuickEditOpen && taskTitleRef.current) {
-      taskTitleRef.current.focus()
+    if (taskTitleRef.current && isQuickEditOpen) {
       taskTitleRef.current.select()
     }
   }, [isQuickEditOpen])
 
   const handleQuickEditToggle = (ev?: React.MouseEvent): void => {
-    if (ev) {
+    if (ev && taskRef.current) {
       ev.stopPropagation()
       ev.preventDefault()
+
+      const { x, y } = taskRef.current.getBoundingClientRect()
+      setTaskEditorPos({ top: y, left: x })
     }
     setIsQuickEditOpen(prevState => !prevState)
   }
@@ -67,7 +62,6 @@ const TaskPreview = ({ task, idx, handleTaskEdit }: PropTypes.TaskPreviewProps) 
             <TaskQuickEdit
               taskId={task.id}
               modalPos={taskEditorPos}
-              isEditorOpen={isQuickEditOpen}
               onChangeSubmit={handleTaskTitleSubmit}
               onClose={handleQuickEditToggle}
             >

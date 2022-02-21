@@ -18,42 +18,43 @@ import useOutsideAlerter from '../../../hooks/useOutsideAlerter'
 
 type QuickEditorProps = {
   children?: React.ReactNode
-  isEditorOpen?: boolean
   modalPos?: { top: number; left: number }
   taskId?: string
   onChangeSubmit?: (ev: React.MouseEvent) => void
   onClose?: (ev: React.MouseEvent) => void
 }
 
-const QuickEditControls = ({ isEditorOpen, taskId }: QuickEditorProps) => {
+const QuickEditControls = ({ taskId }: QuickEditorProps) => {
   const [quickControls] = useState([
     { title: 'Open card', type: 'openCard', icon: `'\\e912'`, href: `/${taskId}` },
     { title: 'Edit labels', type: 'labels', icon: `'\\e93f'` },
     { title: 'Change members', type: 'members', icon: `'\\e946'` },
     { title: 'Edit dates', type: 'dates', icon: `'\\e91b'` }
   ])
-  const [badgeModal, setBadgeModal] = useState('')
+  const [badgeModal, setBadgeModal] = useState<string | null>(null)
   const [modalPos, setModalPos] = useState({ top: 0, left: 0 })
   const modalWrapperRef = useRef<HTMLDivElement>(null)
   const outsideAlerter = useOutsideAlerter(modalWrapperRef)
 
   const toggleBadgeModal = useCallback(
     (modalName?: string, ev?: React.MouseEvent) => {
-      if (typeof modalName !== 'string' || modalName === badgeModal) return setBadgeModal('')
-      if (ev) {
+      if (typeof modalName !== 'string' || modalName === badgeModal) {
+        return setBadgeModal(null)
+      }
+      if (ev && modalName) {
         const { y: top, x: left, height } = ev.currentTarget.getBoundingClientRect()
         setModalPos({ top: top + height + 5, left })
+        setBadgeModal(modalName)
       }
-      setBadgeModal(modalName)
     },
     [badgeModal]
   )
 
   useLayoutEffect(() => {
     if (outsideAlerter) {
-      toggleBadgeModal(modalWrapperRef.current?.title)
+      setBadgeModal(null)
     }
-  }, [outsideAlerter, toggleBadgeModal])
+  }, [outsideAlerter])
 
   const getModalChild = () => {
     switch (badgeModal) {
@@ -71,7 +72,7 @@ const QuickEditControls = ({ isEditorOpen, taskId }: QuickEditorProps) => {
   // handle task badges updates. update all or individual badges
 
   return (
-    <TaskQuickEditorControls isQuickEdit={isEditorOpen}>
+    <TaskQuickEditorControls>
       {quickControls.map(control => (
         <TaskQuickEditorControlBtn
           onClick={ev => toggleBadgeModal(control.type, ev)}
@@ -96,7 +97,7 @@ const QuickEditControls = ({ isEditorOpen, taskId }: QuickEditorProps) => {
   )
 }
 
-const TaskQuickEdit = ({ children, isEditorOpen, modalPos, taskId, onChangeSubmit, onClose }: QuickEditorProps) => {
+const TaskQuickEdit = ({ children, modalPos, taskId, onChangeSubmit, onClose }: QuickEditorProps) => {
   return createPortal(
     <QuickEditContainer>
       <QuickEditCloseBtn onClick={onClose} content="'\e91c'" size="lg" />
@@ -105,7 +106,7 @@ const TaskQuickEdit = ({ children, isEditorOpen, modalPos, taskId, onChangeSubmi
           <EditorTaskDetails>{children}</EditorTaskDetails>
         </TaskQuickEditor>
         <TaskQuickEditorSave onClick={onChangeSubmit}>Save</TaskQuickEditorSave>
-        <QuickEditControls taskId={taskId} isEditorOpen={isEditorOpen} />
+        <QuickEditControls taskId={taskId} />
       </TaskQuickEditorWrapper>
     </QuickEditContainer>,
     document.body
