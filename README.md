@@ -8,29 +8,29 @@ This project is under constant progress.
 
 #### Functionalities
 
-- [ ] Drag and drop-
+- [ ] Drag and drop
   - [X] Lists drag and drop.
   - [ ] Tasks drag and drop - inside the same list and between lists.
 
-- [ ] Boards-
+- [ ] Boards
   - [X] Change board's title.
   - [ ] Change board's background.
   - [ ] Create new boards.
 
-- [X] Lists-
+- [X] Lists
   - [X] New list composing.
   - [X] List title editing.
 
-- [ ] Tasks-
+- [ ] Tasks
   - [X] New task composing.
   - [ ] Task's details modal.
-  - [ ] Task inline editing-
+  - [ ] Task inline editing
     - [ ] Title.
     - [ ] Labels.
     - [ ] Members.
     - [ ] Dates.
 
-- [ ] Users-
+- [ ] Users
   - [ ] Multiple users support.
   - [ ] Star, watch board.
   - [ ] Notifications.
