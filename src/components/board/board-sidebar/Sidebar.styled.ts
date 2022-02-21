@@ -3,17 +3,6 @@ import { PropTypes } from '../../../types/prop-types'
 import { Icon } from '../../../styled/Mixins.styled'
 
 export const BoardSidenavWrapper = styled.div<PropTypes.StyledProps>`
-  ${({ isSidenavOpen }) =>
-    isSidenavOpen
-      ? css`
-          transform: translateX(0);
-          box-shadow: 0 12px 24px -6px #091e4240, 0 0 0 1px #091e4214;
-        `
-      : css`
-          display: none;
-          transform: translateX(339px);
-        `}
-
   position: absolute;
   bottom: 0;
   top: 0;
@@ -23,9 +12,21 @@ export const BoardSidenavWrapper = styled.div<PropTypes.StyledProps>`
   transition-duration: 0.2s;
   transition-timing-function: ease-in;
 
-  width: 339px;
   background-color: #f4f5f7;
   z-index: 5;
+
+  ${({ isSidenavOpen }) =>
+    isSidenavOpen
+      ? css`
+          display: block;
+          transform: translateX(0);
+          box-shadow: 0 12px 24px -6px #091e4240, 0 0 0 1px #091e4214;
+          width: 339px;
+        `
+      : css`
+          width: 0;
+          transform: translateX(339px);
+        `}
 `
 
 export const BoardSidenavContainer = styled.div`

@@ -1,6 +1,5 @@
 import React from 'react'
 import { BoardTypes } from '../../types/board-types'
-
 import LabelsPreview from '../../components/labels/LabelPreview'
 import TaskChecklistBadge from '../../components/task/task-badges/TaskChecklistBadge'
 import TaskTitle from '../../components/task/TaskTitle'
@@ -12,6 +11,7 @@ import { BadgesWrapper } from '../../components/task/task-badges/TaskBadges.styl
 
 type taskCmps = {
   task: BoardTypes.task
+  taskRef?: React.RefObject<HTMLDivElement>
 }
 
 const TaskBadges = ({ task }: taskCmps) => {
@@ -29,9 +29,9 @@ const TaskBadges = ({ task }: taskCmps) => {
   )
 }
 
-const TaskDetails = ({ task }: taskCmps) => {
+const TaskDetails = ({ taskRef, task }: taskCmps) => {
   return (
-    <TaskDetailsContainer isFullCover={task.style?.fullCover}>
+    <TaskDetailsContainer ref={taskRef} isFullCover={task.style?.fullCover}>
       {task.labels && !task.style?.fullCover && <LabelsPreview labels={task.labels} />}
       <TaskTitle task={task} />
       <TaskBadges task={task} />

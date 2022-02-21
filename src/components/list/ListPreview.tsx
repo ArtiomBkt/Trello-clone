@@ -30,6 +30,8 @@ const ListPreview = ({ list, idx, isDraggingOver, onListUpdate }: PropTypes.List
     onListUpdate(newList)
   }
 
+  const handleTaskEdit = () => {}
+
   return (
     <Draggable draggableId={list.id} index={idx}>
       {(provided, snapshot) => (
@@ -43,7 +45,9 @@ const ListPreview = ({ list, idx, isDraggingOver, onListUpdate }: PropTypes.List
                     <TaskPreview key={task.id} task={task} idx={idx} />
                   ))}
                   {provided.placeholder}
-                  {isComposerOpen && <TaskComposer handleTaskAdd={handleTaskAdd} handleComposerToggle={handleComposerToggle} />}
+                  {isComposerOpen && (
+                    <TaskComposer handleTaskAdd={handleTaskAdd} handleComposerToggle={handleComposerToggle} />
+                  )}
                 </ListTasksWrapper>
               )}
             </Droppable>
