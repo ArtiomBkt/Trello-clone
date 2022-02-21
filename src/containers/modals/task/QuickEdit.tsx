@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useCallback, useLayoutEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 import {
   QuickEditContainer,
@@ -14,6 +14,7 @@ import {
 } from './QuickEdit.styled'
 import BadgesModal from './badges/BadgesModal'
 import LabelsModal from './badges/labels/LabelsModal'
+import useOutsideAlerter from '../../../hooks/useOutsideAlerter'
 
 type QuickEditorProps = {
   children?: React.ReactNode
@@ -31,20 +32,31 @@ const QuickEditControls = ({ isEditorOpen, taskId }: QuickEditorProps) => {
     { title: 'Change members', type: 'members', icon: `'\\e946'` },
     { title: 'Edit dates', type: 'dates', icon: `'\\e91b'` }
   ])
-  const [badgeModalOpen, setBadgeModalOpen] = useState<string>('')
+  const [badgeModal, setBadgeModal] = useState('')
   const [modalPos, setModalPos] = useState({ top: 0, left: 0 })
+  const modalWrapperRef = useRef<HTMLDivElement>(null)
+  const outsideAlerter = useOutsideAlerter(modalWrapperRef)
 
-  const toggleBadgeModal = (modalName?: string, ev?: React.MouseEvent) => {
-    if (typeof modalName !== 'string' || modalName === badgeModalOpen) return setBadgeModalOpen('')
-    if (ev) {
-      const { y: top, x: left, height } = ev.currentTarget.getBoundingClientRect()
-      setModalPos({ top: top + height + 5, left })
+  const toggleBadgeModal = useCallback(
+    (modalName?: string, ev?: React.MouseEvent) => {
+      if (typeof modalName !== 'string' || modalName === badgeModal) return setBadgeModal('')
+      if (ev) {
+        const { y: top, x: left, height } = ev.currentTarget.getBoundingClientRect()
+        setModalPos({ top: top + height + 5, left })
+      }
+      setBadgeModal(modalName)
+    },
+    [badgeModal]
+  )
+
+  useLayoutEffect(() => {
+    if (outsideAlerter) {
+      toggleBadgeModal(modalWrapperRef.current?.title)
     }
-    setBadgeModalOpen(modalName)
-  }
+  }, [outsideAlerter, toggleBadgeModal])
 
   const getModalChild = () => {
-    switch (badgeModalOpen) {
+    switch (badgeModal) {
       case 'labels':
         return <LabelsModal />
       case 'members':
@@ -70,8 +82,13 @@ const QuickEditControls = ({ isEditorOpen, taskId }: QuickEditorProps) => {
           <EditorControlText>{control.title}</EditorControlText>
         </TaskQuickEditorControlBtn>
       ))}
-      {badgeModalOpen && (
-        <BadgesModal modalPos={modalPos} title={badgeModalOpen} onClose={toggleBadgeModal}>
+      {badgeModal && (
+        <BadgesModal
+          modalWrapperRef={modalWrapperRef}
+          modalPos={modalPos}
+          title={badgeModal}
+          onClose={toggleBadgeModal}
+        >
           {getModalChild()}
         </BadgesModal>
       )}

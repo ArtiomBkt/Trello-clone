@@ -1,6 +1,5 @@
-import React, { useLayoutEffect, useRef } from 'react'
+import React from 'react'
 import { createPortal } from 'react-dom'
-import useOutsideAlerter from '../../../../hooks/useOutsideAlerter'
 import {
   BadgesModalContainer,
   BadgesModalHeader,
@@ -13,21 +12,13 @@ type BadgesModalProps = {
   title: string
   children?: React.ReactNode
   modalPos?: { top: number; left: number }
+  modalWrapperRef?: React.RefObject<HTMLDivElement>
   onClose?: () => void
 }
 
-const BadgesModal = ({ title, children, modalPos, onClose }: BadgesModalProps) => {
-  const badgedModalRef = useRef<HTMLDivElement>(null)
-  const outsideAlerter = useOutsideAlerter(badgedModalRef)
-
-  useLayoutEffect(() => {
-    if (outsideAlerter && onClose) {
-      onClose()
-    }
-  }, [onClose, outsideAlerter])
-
+const BadgesModal = ({ title, children, modalPos, modalWrapperRef, onClose }: BadgesModalProps) => {
   return createPortal(
-    <BadgesModalContainer ref={badgedModalRef} modalPos={modalPos}>
+    <BadgesModalContainer title={title} ref={modalWrapperRef} modalPos={modalPos}>
       <BadgesModalHeader>
         <BadgesModalHeaderTitle>{title}</BadgesModalHeaderTitle>
         <BadgesModalHeaderCloseBtn onClick={onClose} content="'\e91c'" size="sm" />
