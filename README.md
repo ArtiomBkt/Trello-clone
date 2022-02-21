@@ -6,23 +6,23 @@ This project is under constant progress.
 
 ### Goals for the project
 
-- [] Drag and drop-
+- [ ] Drag and drop-
   - [X] Lists drag and drop.
-  - [] Tasks drag and drop - inside the same list and between lists.
-- [] Boards-
+  - [ ] Tasks drag and drop - inside the same list and between lists.
+- [ ] Boards-
   - [X] Change board's title.
-  - [] Change board's background.
-  - [] Create new boards.
+  - [ ] Change board's background.
+  - [ ] Create new boards.
 - [X] Lists-
   - [X] New list composing.
   - [X] List title editing.
-- [] Tasks-
+- [ ] Tasks-
   - [X] New task composing.
-  - [] Task's details modal.
-  - [] Task inline editing-
-    - [] Title.
-    - [] Labels.
-    - [] Members.
-    - [] Dates.
+  - [ ] Task's details modal.
+  - [ ] Task inline editing-
+    - [ ] Title.
+    - [ ] Labels.
+    - [ ] Members.
+    - [ ] Dates.
     - More to be added.
 
