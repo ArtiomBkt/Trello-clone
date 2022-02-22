@@ -139,14 +139,6 @@ export const EditorControlText = styled.span`
   margin-left: 4px;
 `
 
-export const EditorTaskDetails = styled.div`
-  position: relative;
-  padding: 6px 8px 2px;
-  z-index: 10;
-
-  overflow: hidden;
-`
-
 export const EditorTaskTextarea = styled.textarea`
   height: 90px;
   resize: none;

@@ -9,7 +9,14 @@ const BoardMembers = ({ members }: PropTypes.MemberListProps) => {
       <MemberListContainer>
         {members &&
           members.map(member => (
-            <Avatar key={member.id} size="30" round={true} name={member.username} src={member.image} />
+            <Avatar
+              key={member.id}
+              size="28"
+              textSizeRatio={2}
+              round={true}
+              name={member.username}
+              src={member.image}
+            />
           ))}
       </MemberListContainer>
       <BoardMemberInviteBtn>

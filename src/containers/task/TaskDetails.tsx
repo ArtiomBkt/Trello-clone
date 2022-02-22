@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useLayoutEffect, useRef } from 'react'
 import { BoardTypes } from '../../types/board-types'
 import LabelsPreview from '../../components/labels/LabelPreview'
 import TaskChecklistBadge from '../../components/task/task-badges/TaskChecklistBadge'
@@ -8,10 +8,15 @@ import TaskDescriptionBadge from '../../components/task/task-badges/TaskDescript
 import TaskDates from '../../components/task/task-badges/TaskDateBadge'
 import { TaskDetailsContainer } from './TaskDetails.styled'
 import { BadgesWrapper } from '../../components/task/task-badges/TaskBadges.styled'
+import { EditorTaskTextarea } from '../modals/task/QuickEdit.styled'
 
 type taskCmps = {
   task: BoardTypes.task
   taskRef?: React.RefObject<HTMLDivElement>
+  isQuickEditOpen?: boolean
+  handleTaskEditSubmit?: (ev: React.MouseEvent | React.KeyboardEvent) => void
+  handleTaskTitleChange?: ({ target }: React.ChangeEvent<HTMLTextAreaElement>) => void
+  taskTitle?: string
 }
 
 const TaskBadges = ({ task }: taskCmps) => {
@@ -29,11 +34,35 @@ const TaskBadges = ({ task }: taskCmps) => {
   )
 }
 
-const TaskDetails = ({ taskRef, task }: taskCmps) => {
+const TaskDetails = ({
+  taskTitle,
+  handleTaskTitleChange,
+  handleTaskEditSubmit,
+  taskRef,
+  task,
+  isQuickEditOpen
+}: taskCmps) => {
+  const taskTitleRef = useRef<HTMLTextAreaElement>(null)
+
+  useLayoutEffect(() => {
+    if (taskTitleRef.current && isQuickEditOpen) {
+      taskTitleRef.current.select()
+    }
+  }, [isQuickEditOpen])
+
   return (
     <TaskDetailsContainer ref={taskRef} isFullCover={task.style?.fullCover}>
       {task.labels && !task.style?.fullCover && <LabelsPreview labels={task.labels} />}
-      <TaskTitle task={task} />
+      {!isQuickEditOpen ? (
+        <TaskTitle task={task} />
+      ) : (
+        <EditorTaskTextarea
+          onKeyDown={handleTaskEditSubmit}
+          ref={taskTitleRef}
+          onChange={handleTaskTitleChange}
+          value={taskTitle}
+        />
+      )}
       <TaskBadges task={task} />
     </TaskDetailsContainer>
   )

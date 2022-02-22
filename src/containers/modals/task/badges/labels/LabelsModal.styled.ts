@@ -76,3 +76,24 @@ export const LabelPreview = styled.span<PropTypes.StyledProps>`
     box-shadow: -8px 0 ${({ labelColor }) => labelColor && labelColors[labelColor].hover};
   }
 `
+
+export const LabelSelectedIcon = styled.span<PropTypes.StyledProps>`
+  position: absolute;
+  right: 6px;
+  top: 6px;
+
+  ${({ size }) => Icon(size)}
+
+  &:before {
+    ${({ content }) =>
+      css`
+        content: ${content};
+      `}
+  }
+
+  color: #fff;
+
+  &:hover {
+    color: #fff;
+  }
+`

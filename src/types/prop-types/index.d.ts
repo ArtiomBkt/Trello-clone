@@ -56,6 +56,7 @@ export declare module PropTypes {
   export type board = BoardTypes.board
   export type list = BoardTypes.list
   export type task = BoardTypes.task
+  export type label = BoardTypes.label
 
   export type TaskComposerProps = {
     handleComposerToggle: () => void

@@ -1,37 +1,43 @@
 import React, { useState } from 'react'
-import { BoardTypes } from '../../../../../types/board-types'
+import { PropTypes } from '../../../../../types/prop-types'
 import {
   LabelsModalsContainer,
   LabelsList,
   LabelPreviewContainer,
   LabelPreviewEditBtn,
-  LabelPreview
+  LabelPreview,
+  LabelSelectedIcon
 } from './LabelsModal.styled'
 
 type LabelProps = {
-  label: BoardTypes.label
+  label?: PropTypes.label
+  task: PropTypes.task
+  handleTaskLabelChange: (label: PropTypes.label) => void
 }
 
-const Label = ({ label }: LabelProps) => {
-  const [labelTitle, setLabelTitle] = useState(label.title)
+const Label = ({ task, handleTaskLabelChange, label }: LabelProps) => {
+  // const [labelTitle, setLabelTitle] = useState(label.title)
+  if (!label) return null
 
   return (
     <LabelPreviewContainer>
       <LabelPreviewEditBtn content="'\e928'" size="sm" />
-      <LabelPreview labelColor={label.color}>{label.title && label.title}</LabelPreview>
+      <LabelPreview onClick={() => handleTaskLabelChange(label)} labelColor={label.color}>
+        {label.title}
+        {task.labels!.find(taskLabel => taskLabel.id === label.id) && <LabelSelectedIcon content="'\e916'" size="sm" />}
+      </LabelPreview>
     </LabelPreviewContainer>
   )
 }
 
-const LabelsModal = () => {
+const LabelsModal = ({ task, handleTaskLabelChange }: LabelProps) => {
   const [boardLabels] = useState(() => {
-    const board: BoardTypes.board = JSON.parse(localStorage.getItem('board') || '')
+    const board: PropTypes.board = JSON.parse(localStorage.getItem('board') || '')
     if (board) {
       return board.labels
     }
   })
 
-  // TODO: label preview onclick, add label to task
   // TODO: label edit onclick, edit label title
 
   return (
@@ -39,7 +45,7 @@ const LabelsModal = () => {
       <h4>Labels</h4>
       <LabelsList>
         {boardLabels?.map(label => (
-          <Label key={label.id} label={label} />
+          <Label task={task} handleTaskLabelChange={handleTaskLabelChange} key={label.id} label={label} />
         ))}
       </LabelsList>
     </LabelsModalsContainer>

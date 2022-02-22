@@ -19,7 +19,7 @@ type SidenavProps = {
 }
 
 const BoardSidebar = ({ onSidenavClose, isSidenavOpen }: SidenavProps) => {
-  const [currentMenu, setCurrentMenu] = useState()
+  // const [currentMenu, setCurrentMenu] = useState('')
 
   return (
     <BoardSidenavWrapper isSidenavOpen={isSidenavOpen}>

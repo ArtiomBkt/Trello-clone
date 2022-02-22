@@ -1,9 +1,8 @@
-import React, { useLayoutEffect, useRef, useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { Draggable } from 'react-beautiful-dnd'
 import { PropTypes } from '../../types/prop-types'
 import TaskDetails from '../../containers/task/TaskDetails'
 import { TaskPreviewContainer, TaskCover, TaskEditIcon } from './TaskPreview.styled'
-import { EditorTaskTextarea } from '../../containers/modals/task/QuickEdit.styled'
 import TaskQuickEdit from '../../containers/modals/task/QuickEdit'
 
 const TaskPreview = ({ task, idx, handleTaskEdit }: PropTypes.TaskPreviewProps) => {
@@ -11,13 +10,6 @@ const TaskPreview = ({ task, idx, handleTaskEdit }: PropTypes.TaskPreviewProps) 
   const [taskEditorPos, setTaskEditorPos] = useState({ top: 0, left: 0 })
   const [taskTitle, setTaskTitle] = useState<string>(task.title)
   const taskRef = useRef<HTMLDivElement>(null)
-  const taskTitleRef = useRef<HTMLTextAreaElement>(null)
-
-  useLayoutEffect(() => {
-    if (taskTitleRef.current && isQuickEditOpen) {
-      taskTitleRef.current.select()
-    }
-  }, [isQuickEditOpen])
 
   const handleQuickEditToggle = (ev?: React.MouseEvent): void => {
     if (ev && taskRef.current) {
@@ -30,15 +22,28 @@ const TaskPreview = ({ task, idx, handleTaskEdit }: PropTypes.TaskPreviewProps) 
     setIsQuickEditOpen(prevState => !prevState)
   }
 
-  const handleQuickEditChange = ({ target }: React.ChangeEvent<HTMLTextAreaElement>): void => {
+  const handleTaskTitleChange = ({ target }: React.ChangeEvent<HTMLTextAreaElement>): void => {
     setTaskTitle(target.value)
   }
 
-  const handleTaskTitleSubmit = (ev: React.MouseEvent | React.KeyboardEvent): void => {
+  const handleTaskLabelChange = (chosenLabel: PropTypes.label): void => {
+    const newTask: PropTypes.task = JSON.parse(JSON.stringify(task))
+    const idx = task.labels!.findIndex(label => label.id === chosenLabel.id)
+
+    if (idx === -1) {
+      newTask.labels!.push(chosenLabel)
+    } else {
+      newTask.labels!.splice(idx, 1)
+    }
+
+    handleTaskEdit(newTask)
+  }
+
+  const handleTaskEditSubmit = (ev: React.MouseEvent | React.KeyboardEvent): void => {
     if (((ev as React.KeyboardEvent).key !== 'Enter' && ev.type !== 'click') || !taskTitle) return
     ev.preventDefault()
 
-    const newTask = JSON.parse(JSON.stringify(task))
+    const newTask: PropTypes.task = JSON.parse(JSON.stringify(task))
     newTask.title = taskTitle
 
     handleTaskEdit(newTask)
@@ -60,16 +65,19 @@ const TaskPreview = ({ task, idx, handleTaskEdit }: PropTypes.TaskPreviewProps) 
           <TaskEditIcon onClick={handleQuickEditToggle} content="'\e928'" size="sm" />
           {isQuickEditOpen && (
             <TaskQuickEdit
-              taskId={task.id}
+              task={task}
               modalPos={taskEditorPos}
-              onChangeSubmit={handleTaskTitleSubmit}
+              handleTaskLabelChange={handleTaskLabelChange}
+              onChangeSubmit={handleTaskEditSubmit}
               onClose={handleQuickEditToggle}
             >
-              <EditorTaskTextarea
-                onKeyDown={handleTaskTitleSubmit}
-                ref={taskTitleRef}
-                onChange={handleQuickEditChange}
-                value={taskTitle}
+              <TaskDetails
+                taskTitle={taskTitle}
+                handleTaskTitleChange={handleTaskTitleChange}
+                handleTaskEditSubmit={handleTaskEditSubmit}
+                isQuickEditOpen={isQuickEditOpen}
+                taskRef={taskRef}
+                task={task}
               />
             </TaskQuickEdit>
           )}
