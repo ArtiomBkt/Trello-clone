@@ -75,22 +75,13 @@ const QuickEditControls = ({ handleTaskLabelChange, task }: QuickEditorProps) =>
   return (
     <TaskQuickEditorControls>
       {quickControls.map(control => (
-        <TaskQuickEditorControlBtn
-          onClick={ev => toggleBadgeModal(control.type, ev)}
-          href={control.href}
-          key={control.icon}
-        >
+        <TaskQuickEditorControlBtn onClick={ev => toggleBadgeModal(control.type, ev)} href={control.href} key={control.icon}>
           <EditorControlBtnIcon content={control.icon} size="sm" />
           <EditorControlText>{control.title}</EditorControlText>
         </TaskQuickEditorControlBtn>
       ))}
       {badgeModal && (
-        <BadgesModal
-          modalWrapperRef={modalWrapperRef}
-          modalPos={modalPos}
-          title={badgeModal}
-          onClose={toggleBadgeModal}
-        >
+        <BadgesModal modalWrapperRef={modalWrapperRef} modalPos={modalPos} title={badgeModal} onClose={toggleBadgeModal}>
           {getModalChild()}
         </BadgesModal>
       )}
@@ -98,14 +89,7 @@ const QuickEditControls = ({ handleTaskLabelChange, task }: QuickEditorProps) =>
   )
 }
 
-const TaskQuickEdit = ({
-  children,
-  modalPos,
-  task,
-  handleTaskLabelChange,
-  onChangeSubmit,
-  onClose
-}: QuickEditorProps) => {
+const TaskQuickEdit = ({ children, modalPos, task, handleTaskLabelChange, onChangeSubmit, onClose }: QuickEditorProps) => {
   return createPortal(
     <QuickEditContainer>
       <QuickEditCloseBtn onClick={onClose} content="'\e91c'" size="lg" />

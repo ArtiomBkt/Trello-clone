@@ -12,10 +12,11 @@ const TaskPreview = ({ task, idx, handleTaskEdit }: PropTypes.TaskPreviewProps) 
   const taskRef = useRef<HTMLDivElement>(null)
 
   const handleQuickEditToggle = (ev?: React.MouseEvent): void => {
-    if (ev && taskRef.current) {
+    if (ev) {
       ev.stopPropagation()
       ev.preventDefault()
-
+    }
+    if (ev && taskRef.current) {
       const { x, y } = taskRef.current.getBoundingClientRect()
       setTaskEditorPos({ top: y, left: x })
     }
@@ -62,23 +63,10 @@ const TaskPreview = ({ task, idx, handleTaskEdit }: PropTypes.TaskPreviewProps) 
           style={task?.style}
         >
           {!task?.style?.fullCover && task?.style?.background && <TaskCover style={task.style} />}
-          <TaskEditIcon onClick={handleQuickEditToggle} content="'\e928'" size="sm" />
+          <TaskEditIcon onClickCapture={handleQuickEditToggle} content="'\e928'" size="sm" />
           {isQuickEditOpen && (
-            <TaskQuickEdit
-              task={task}
-              modalPos={taskEditorPos}
-              handleTaskLabelChange={handleTaskLabelChange}
-              onChangeSubmit={handleTaskEditSubmit}
-              onClose={handleQuickEditToggle}
-            >
-              <TaskDetails
-                taskTitle={taskTitle}
-                handleTaskTitleChange={handleTaskTitleChange}
-                handleTaskEditSubmit={handleTaskEditSubmit}
-                isQuickEditOpen={isQuickEditOpen}
-                taskRef={taskRef}
-                task={task}
-              />
+            <TaskQuickEdit task={task} modalPos={taskEditorPos} handleTaskLabelChange={handleTaskLabelChange} onChangeSubmit={handleTaskEditSubmit} onClose={handleQuickEditToggle}>
+              <TaskDetails taskTitle={taskTitle} handleTaskTitleChange={handleTaskTitleChange} isQuickEditOpen={isQuickEditOpen} taskRef={taskRef} task={task} />
             </TaskQuickEdit>
           )}
           <TaskDetails taskRef={taskRef} task={task} />

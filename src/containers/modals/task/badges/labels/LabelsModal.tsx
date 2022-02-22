@@ -1,13 +1,6 @@
 import React, { useState } from 'react'
 import { PropTypes } from '../../../../../types/prop-types'
-import {
-  LabelsModalsContainer,
-  LabelsList,
-  LabelPreviewContainer,
-  LabelPreviewEditBtn,
-  LabelPreview,
-  LabelSelectedIcon
-} from './LabelsModal.styled'
+import { LabelsModalsContainer, LabelsList, LabelPreviewContainer, LabelPreviewEditBtn, LabelPreview, LabelSelectedIcon } from './LabelsModal.styled'
 
 type LabelProps = {
   label?: PropTypes.label

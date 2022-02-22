@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useState } from 'react'
+import React, { useLayoutEffect, useReducer, useState } from 'react'
 import useLocalStorageState from '../../hooks/useLocalStorageState'
 import { DragDropContext, Droppable, DropResult } from 'react-beautiful-dnd'
 import { BoardTypes } from '../../types/board-types/index'
@@ -10,7 +10,29 @@ import BoardSidebar from '../../components/board/board-sidebar/Sidebar'
 import ListPreview from '../../components/list/ListPreview'
 import ListComposer from '../../components/board/list-composer/ListComposer'
 
+// type BoardActions =
+//   | { type: 'BOARD_UPDATE'; payload: BoardTypes.board }
+//   | { type: 'LIST_UPDATE' }
+//   | { type: 'TASK_UPDATE' }
+
+// const initialState = { board: boardService.getBoardById() }
+
+// const boardReducer = (state: typeof initialState, action: BoardActions) => {
+//   switch (action.type) {
+//     case 'BOARD_UPDATE':
+//       return {
+//         board: action.payload
+//       }
+//     case 'LIST_UPDATE':
+//       console.log(state)
+//       return state
+//     default:
+//       throw new Error(`Invalid action type ${action.type}`)
+//   }
+// }
+
 const Board = () => {
+  // const [{ board }, dispatch] = useReducer(boardReducer, initialState)
   const [board, setBoard] = useLocalStorageState('board', boardService.getBoardById())
   const [isSidenavOpen, setIsSidenavOpen] = useState(false)
 
@@ -61,6 +83,7 @@ const Board = () => {
   }
 
   const onBoardUpdate = (newBoard: BoardTypes.board): void => {
+    // dispatch({ type: 'BOARD_UPDATE', payload: newBoard })
     setBoard(newBoard)
   }
 

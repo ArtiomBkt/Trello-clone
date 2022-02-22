@@ -14,7 +14,6 @@ type taskCmps = {
   task: BoardTypes.task
   taskRef?: React.RefObject<HTMLDivElement>
   isQuickEditOpen?: boolean
-  handleTaskEditSubmit?: (ev: React.MouseEvent | React.KeyboardEvent) => void
   handleTaskTitleChange?: ({ target }: React.ChangeEvent<HTMLTextAreaElement>) => void
   taskTitle?: string
 }
@@ -34,14 +33,7 @@ const TaskBadges = ({ task }: taskCmps) => {
   )
 }
 
-const TaskDetails = ({
-  taskTitle,
-  handleTaskTitleChange,
-  handleTaskEditSubmit,
-  taskRef,
-  task,
-  isQuickEditOpen
-}: taskCmps) => {
+const TaskDetails = ({ taskTitle, handleTaskTitleChange, taskRef, task, isQuickEditOpen }: taskCmps) => {
   const taskTitleRef = useRef<HTMLTextAreaElement>(null)
 
   useLayoutEffect(() => {
@@ -53,16 +45,7 @@ const TaskDetails = ({
   return (
     <TaskDetailsContainer ref={taskRef} isFullCover={task.style?.fullCover}>
       {task.labels && !task.style?.fullCover && <LabelsPreview labels={task.labels} />}
-      {!isQuickEditOpen ? (
-        <TaskTitle task={task} />
-      ) : (
-        <EditorTaskTextarea
-          onKeyDown={handleTaskEditSubmit}
-          ref={taskTitleRef}
-          onChange={handleTaskTitleChange}
-          value={taskTitle}
-        />
-      )}
+      {!isQuickEditOpen ? <TaskTitle task={task} /> : <EditorTaskTextarea ref={taskTitleRef} onChange={handleTaskTitleChange} value={taskTitle} />}
       <TaskBadges task={task} />
     </TaskDetailsContainer>
   )
