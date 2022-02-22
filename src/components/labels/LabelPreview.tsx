@@ -1,13 +1,10 @@
 import React, { useState } from 'react'
-import { BoardTypes } from '../../types/board-types'
+import { PropTypes } from '../../types/prop-types'
 import { LabelsContainer, Label } from './LabelPreview.styled'
 
-type labelProps = {
-  labels: BoardTypes.label[]
-}
-
-const LabelsPreview = ({ labels }: labelProps) => {
+const LabelsPreview = ({ labels }: PropTypes.ContainersProps) => {
   const [isLabelExpanded, setIsLabelExpanded] = useState(false)
+  // context could be a better solution here
 
   const toggleLabels = (ev: React.MouseEvent) => {
     ev.preventDefault()
@@ -17,8 +14,8 @@ const LabelsPreview = ({ labels }: labelProps) => {
 
   return (
     <LabelsContainer onClick={toggleLabels}>
-      {labels.map(label => (
-        <Label isLabelExpanded={isLabelExpanded} key={label.id} bgColor={label.color}>
+      {labels!.map(label => (
+        <Label isLabelExpanded={isLabelExpanded} key={label.id} labelColor={label.color}>
           {label.title}
         </Label>
       ))}

@@ -1,15 +1,7 @@
 import styled, { css, keyframes } from 'styled-components'
+import { PropTypes } from '../../types/prop-types'
 
-type LabelProps = {
-  bgColor: string
-  isLabelExpanded: boolean
-}
-
-interface LabelsInterface {
-  [key: string]: { static: string; hover: string }
-}
-
-export const labelColors: LabelsInterface = {
+export const labelColors: PropTypes.LabelsInterface = {
   green: { static: '#61bd4f', hover: '#519839' },
   yellow: { static: '#f2d600', hover: '#d9b51c' },
   orange: { static: '#ff9f1a', hover: '#cd8313' },
@@ -88,7 +80,7 @@ export const LabelsContainer = styled.div`
   position: relative;
 `
 
-export const Label = styled.span<LabelProps>`
+export const Label = styled.span<PropTypes.StyledProps>`
   display: block;
   overflow: hidden;
   position: relative;
@@ -97,10 +89,10 @@ export const Label = styled.span<LabelProps>`
 
   border-radius: 4px;
   color: #fff;
-  background-color: ${({ bgColor }) => labelColors[bgColor].static || '#b3bac5'};
+  background-color: ${({ labelColor }) => labelColors[labelColor!].static || '#b3bac5'};
 
   &:hover {
-    background-color: ${({ bgColor }) => labelColors[bgColor].hover};
+    background-color: ${({ labelColor }) => labelColors[labelColor!].hover};
   }
 
   float: left;
@@ -115,6 +107,7 @@ export const Label = styled.span<LabelProps>`
   margin: 0 4px 4px 0;
   /* padding: 0; */
 
+  // finish configuring
   &&& {
     ${({ isLabelExpanded }) =>
       isLabelExpanded

@@ -3,15 +3,7 @@ import useLabelReducer from '../../../../../hooks/useLabelReducer'
 import { PropTypes } from '../../../../../types/prop-types'
 import { LabelsModalsContainer, LabelsList, LabelPreviewContainer, LabelPreviewEditBtn, LabelPreview, LabelSelectedIcon } from './LabelsModal.styled'
 
-type LabelProps = {
-  label?: PropTypes.label
-  task: PropTypes.task
-  handleTaskLabelChange: (label: PropTypes.label) => void
-  onLabelsUpdate?: (labels: PropTypes.label[]) => void
-  handleLabelChange?: (label: PropTypes.label) => void
-}
-
-const Label = ({ task, handleTaskLabelChange, handleLabelChange, label }: LabelProps) => {
+const Label = ({ task, handleTaskLabelChange, handleLabelChange, label }: PropTypes.LabelProps) => {
   const [state, dispatch] = useLabelReducer()
 
   const handleLabelTitleChange = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
@@ -50,7 +42,7 @@ const Label = ({ task, handleTaskLabelChange, handleLabelChange, label }: LabelP
   )
 }
 
-const LabelsModal = ({ task, handleTaskLabelChange, onLabelsUpdate }: LabelProps) => {
+const LabelsModal = ({ task, handleTaskLabelChange, onLabelsUpdate }: PropTypes.LabelProps) => {
   const [boardLabels, setBoardLabels] = useState<PropTypes.label[]>()
 
   useEffect(() => {

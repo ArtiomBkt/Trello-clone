@@ -1,22 +1,9 @@
 import React from 'react'
 import { createPortal } from 'react-dom'
-import {
-  BadgesModalContainer,
-  BadgesModalHeader,
-  BadgesModalHeaderCloseBtn,
-  BadgesModalHeaderTitle,
-  BadgesModalBody
-} from './BadgesModal.styled'
+import { PropTypes } from '../../../../types/prop-types'
+import { BadgesModalContainer, BadgesModalHeader, BadgesModalHeaderCloseBtn, BadgesModalHeaderTitle, BadgesModalBody } from './BadgesModal.styled'
 
-type BadgesModalProps = {
-  title: string
-  children?: React.ReactNode
-  modalPos?: { top: number; left: number }
-  modalWrapperRef?: React.RefObject<HTMLDivElement>
-  onClose?: () => void
-}
-
-const BadgesModal = ({ title, children, modalPos, modalWrapperRef, onClose }: BadgesModalProps) => {
+const BadgesModal = ({ title, children, modalPos, modalWrapperRef, onClose }: PropTypes.BadgesModalProps) => {
   return createPortal(
     <BadgesModalContainer title={title} ref={modalWrapperRef} modalPos={modalPos}>
       <BadgesModalHeader>

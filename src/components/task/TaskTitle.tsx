@@ -2,16 +2,12 @@ import React from 'react'
 import { PropTypes } from '../../types/prop-types'
 import { TaskTitleContainer } from './TaskTitle.styled'
 
-type TaskProps = {
-  task: PropTypes.task
-}
+const TaskTitle = ({ task }: PropTypes.ContainersProps) => {
+  if (!task) {
+    return null
+  }
 
-const TaskTitle = ({ task }: TaskProps) => {
-  return (
-    <TaskTitleContainer isFullCover={task.style?.fullCover}>
-      {task.title}
-    </TaskTitleContainer>
-  )
+  return <TaskTitleContainer isFullCover={task.style?.fullCover}>{task.title}</TaskTitleContainer>
 }
 
 export default TaskTitle

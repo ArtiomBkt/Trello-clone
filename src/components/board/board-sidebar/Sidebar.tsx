@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import {
   BoardSidenavWrapper,
   BoardSidenavContainer,
@@ -12,13 +12,9 @@ import {
   SidenavBodyContainer
 } from './Sidebar.styled'
 import MainMenu from './sidebar-menus/MainMenu'
+import { PropTypes } from '../../../types/prop-types'
 
-type SidenavProps = {
-  isSidenavOpen: boolean
-  onSidenavClose: () => void
-}
-
-const BoardSidebar = ({ onSidenavClose, isSidenavOpen }: SidenavProps) => {
+const BoardSidebar = ({ onSidenavClose, isSidenavOpen }: PropTypes.SidenavProps) => {
   // const [currentMenu, setCurrentMenu] = useState('')
 
   return (

@@ -1,12 +1,6 @@
 import React, { useState, useRef, useLayoutEffect } from 'react'
 import { PropTypes } from '../../../types/prop-types'
-import {
-  ListTitle,
-  ListHeaderNameAssist,
-  ListHeaderNameInput,
-  ListHeaderOpts,
-  HeaderOptsBtn
-} from './ListHeader.styled'
+import { ListTitle, ListHeaderNameAssist, ListHeaderNameInput, ListHeaderOpts, HeaderOptsBtn } from './ListHeader.styled'
 
 const ListHeader = ({ list, dragHandleProps, onListUpdate }: PropTypes.ListHeaderProps) => {
   const [listTitle, setListTitle] = useState<string>(list.title)
@@ -42,13 +36,7 @@ const ListHeader = ({ list, dragHandleProps, onListUpdate }: PropTypes.ListHeade
   return (
     <ListTitle {...dragHandleProps}>
       {isOpen ? (
-        <ListHeaderNameInput
-          ref={inputRef}
-          onBlur={handleTitleChange}
-          onChange={handleInputChange}
-          value={listTitle}
-          onKeyDown={handleTitleChange}
-        />
+        <ListHeaderNameInput ref={inputRef} onBlur={handleTitleChange} onChange={handleInputChange} value={listTitle} onKeyDown={handleTitleChange} />
       ) : (
         <ListHeaderNameAssist onClick={toggleTitleEditor}>{list.title}</ListHeaderNameAssist>
       )}

@@ -36,13 +36,7 @@ const TaskComposer = ({ handleComposerToggle, handleTaskAdd }: PropTypes.TaskCom
     <TaskComposerContainer ref={wrapperRef}>
       <ComposingTask>
         <ComposingTaskDetails>
-          <ComposingTaskTextarea
-            ref={textAreaRef}
-            value={taskTitle}
-            onKeyDown={handleTaskSubmit}
-            onChange={handleInputChange}
-            placeholder="Enter a title for this card..."
-          />
+          <ComposingTaskTextarea ref={textAreaRef} value={taskTitle} onKeyDown={handleTaskSubmit} onChange={handleInputChange} placeholder="Enter a title for this card..." />
         </ComposingTaskDetails>
       </ComposingTask>
       <div>

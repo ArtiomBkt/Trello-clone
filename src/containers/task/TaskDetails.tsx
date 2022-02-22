@@ -1,5 +1,5 @@
 import React, { useLayoutEffect, useRef } from 'react'
-import { BoardTypes } from '../../types/board-types'
+import { PropTypes } from '../../types/prop-types'
 import LabelsPreview from '../../components/labels/LabelPreview'
 import TaskChecklistBadge from '../../components/task/task-badges/TaskChecklistBadge'
 import TaskTitle from '../../components/task/TaskTitle'
@@ -10,15 +10,7 @@ import { TaskDetailsContainer } from './TaskDetails.styled'
 import { BadgesWrapper } from '../../components/task/task-badges/TaskBadges.styled'
 import { EditorTaskTextarea } from '../modals/task/QuickEdit.styled'
 
-type taskCmps = {
-  task: BoardTypes.task
-  taskRef?: React.RefObject<HTMLDivElement>
-  isQuickEditOpen?: boolean
-  handleTaskTitleChange?: ({ target }: React.ChangeEvent<HTMLTextAreaElement>) => void
-  taskTitle?: string
-}
-
-const TaskBadges = ({ task }: taskCmps) => {
+const TaskBadges = ({ task }: PropTypes.TaskCmps) => {
   if (!task.checklists && !task.comments && !task.description && !task.startDate) return null
 
   const props = { id: task?.id, title: task?.title }
@@ -33,7 +25,7 @@ const TaskBadges = ({ task }: taskCmps) => {
   )
 }
 
-const TaskDetails = ({ taskTitle, handleTaskTitleChange, taskRef, task, isQuickEditOpen }: taskCmps) => {
+const TaskDetails = ({ taskTitle, handleTaskTitleChange, taskRef, task, isQuickEditOpen }: PropTypes.TaskCmps) => {
   const taskTitleRef = useRef<HTMLTextAreaElement>(null)
 
   useLayoutEffect(() => {

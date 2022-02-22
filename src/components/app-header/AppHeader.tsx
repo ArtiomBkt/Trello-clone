@@ -1,27 +1,14 @@
 import React, { useEffect, useState } from 'react'
-import {
-  Header,
-  HeaderMainNav,
-  HeaderLinksWrapper,
-  HeaderLinksContainer,
-  HeaderLinks,
-  HeaderRightChunk
-} from './AppHeader.styled'
+import { Header, HeaderMainNav, HeaderLinksWrapper, HeaderLinksContainer, HeaderLinks, HeaderRightChunk } from './AppHeader.styled'
 import AppLogo from './logo/AppLogo'
-// import useModalPos from '../../hooks/useModalPos'
 import { ReactComponent as CreateIcon } from '../../assets/images/plus.svg'
 import NavLinks from './links/NavLinks'
 import NavLink from './links/NavLink'
 
-type modalPos = {
-  elemPosX: number
-  elemPosY: number
-}
-
 const AppHeader = () => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth)
   const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const [modalPos, setModalPos] = useState<modalPos>({ elemPosX: 0, elemPosY: 0 })
+  const [modalPos, setModalPos] = useState({ left: 0, top: 0 })
 
   useEffect(() => {
     const handleResize = () => {
@@ -42,8 +29,8 @@ const AppHeader = () => {
   const positionCalc = React.useCallback(
     (ev: React.MouseEvent) => {
       if (!isMenuOpen && ev.target instanceof Element) {
-        const { x: elemPosX, y: elemPosY, height: elemHeight } = ev.currentTarget.getBoundingClientRect()
-        setModalPos({ elemPosX, elemPosY: elemPosY + elemHeight + 10 })
+        const { x: left, y: top, height: elemHeight } = ev.currentTarget.getBoundingClientRect()
+        setModalPos({ left, top: top + elemHeight + 10 })
       }
     },
     [isMenuOpen]
@@ -64,17 +51,10 @@ const AppHeader = () => {
         <HeaderLinksWrapper>
           <HeaderLinksContainer>
             <HeaderLinks>
-              <NavLinks
-                handleMenuToggle={handleMenuToggle}
-                windowWidth={windowWidth}
-                isMenuOpen={isMenuOpen}
-                modalPos={modalPos}
-              />
+              <NavLinks handleMenuToggle={handleMenuToggle} windowWidth={windowWidth} isMenuOpen={isMenuOpen} modalPos={modalPos} />
             </HeaderLinks>
             <HeaderLinks>
-              <NavLink type="Create">
-                {windowWidth < 1100 ? <CreateIcon style={{ width: '20px', height: '20px' }} /> : 'Create'}
-              </NavLink>
+              <NavLink type="Create">{windowWidth < 1100 ? <CreateIcon style={{ width: '20px', height: '20px' }} /> : 'Create'}</NavLink>
             </HeaderLinks>
           </HeaderLinksContainer>
         </HeaderLinksWrapper>

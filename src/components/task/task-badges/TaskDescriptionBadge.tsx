@@ -2,11 +2,7 @@ import React from 'react'
 import { PropTypes } from '../../../types/prop-types'
 import { BadgeContainer, BadgeIcon } from './TaskBadges.styled'
 
-type TaskProps = {
-  task: PropTypes.task
-}
-
-const TaskDescriptionBadge = ({ description }: TaskProps['task']) => {
+const TaskDescriptionBadge = ({ description }: PropTypes.task) => {
   if (!description || !description.length) return null
   return (
     <BadgeContainer>

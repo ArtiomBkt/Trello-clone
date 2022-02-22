@@ -2,11 +2,7 @@ import React from 'react'
 import { PropTypes } from '../../../types/prop-types'
 import { BadgeContainer, BadgeIcon, BadgeText } from './TaskBadges.styled'
 
-type TaskProps = {
-  task: PropTypes.task
-}
-
-const TaskChecklistBadge = ({ checklists }: TaskProps['task']) => {
+const TaskChecklistBadge = ({ checklists }: PropTypes.task) => {
   let count = 0
 
   if (!checklists || !checklists.length) return null

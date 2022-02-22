@@ -1,11 +1,8 @@
 import React from 'react'
 import { BoardWatcherBtn, BoardWatcherIcon, BoardNavDivider } from './BoardNav.styled'
+import { PropTypes } from '../../../types/prop-types'
 
-type BoardControlsProps = {
-  children: React.ReactNode
-}
-
-const BoardControls = ({ children }: BoardControlsProps) => {
+const BoardControls = ({ children }: PropTypes.ChildrenProp) => {
   return (
     <div style={{ display: 'inline-flex' }}>
       <BoardWatcherBtn>

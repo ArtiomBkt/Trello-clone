@@ -11,15 +11,9 @@ import {
   HeaderModalBody
 } from './HeaderModal.styled'
 import useOutsideAlerter from '../../../hooks/useOutsideAlerter'
+import { PropTypes } from '../../../types/prop-types'
 
-type HeaderModalProps = {
-  onClose: (ev?: React.MouseEvent) => void
-  children: React.ReactNode
-  title: string
-  position: { elemPosX: number; elemPosY: number }
-}
-
-const HeaderModal = ({ onClose, children, title, position }: HeaderModalProps) => {
+const HeaderModal = ({ onClose, children, title, modalPos }: PropTypes.HeaderModalProps) => {
   const modalContainerRef = useRef<HTMLDivElement>(null)
   const outsideClick = useOutsideAlerter(modalContainerRef)
 
@@ -30,7 +24,7 @@ const HeaderModal = ({ onClose, children, title, position }: HeaderModalProps) =
   }, [outsideClick, onClose])
 
   return createPortal(
-    <HeaderModalContainer ref={modalContainerRef} top={position.elemPosY} left={position.elemPosX}>
+    <HeaderModalContainer ref={modalContainerRef} modalPos={modalPos}>
       <HeaderModalHead>
         <HeaderModalTitle>{title}</HeaderModalTitle>
         <HeaderModalCloseBtn onClick={onClose}>

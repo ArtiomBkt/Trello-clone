@@ -1,18 +1,16 @@
 import styled, { css } from 'styled-components'
+import { PropTypes } from '../../../types/prop-types'
 
-type HeaderModalProps = {
-  top?: number
-  left?: number
-}
-
-export const HeaderModalContainer = styled.div<HeaderModalProps>`
+export const HeaderModalContainer = styled.div<PropTypes.StyledProps>`
   position: fixed;
 
   width: 304px;
-  ${({ top, left }) => css`
-    top: ${top}px;
-    left: ${left}px;
-  `}
+  ${({ modalPos }) =>
+    modalPos &&
+    css`
+      top: ${modalPos.top}px;
+      left: ${modalPos.left}px;
+    `}
 
   background-color: #fff;
   box-shadow: 0 8px 12px -4px rgba(9, 30, 66, 25%), 0 0 0 1px rgba(9, 30, 66, 8%);
