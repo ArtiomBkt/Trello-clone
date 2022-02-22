@@ -5,7 +5,7 @@ import TaskDetails from '../../containers/task/TaskDetails'
 import { TaskPreviewContainer, TaskCover, TaskEditIcon } from './TaskPreview.styled'
 import TaskQuickEdit from '../../containers/modals/task/QuickEdit'
 
-const TaskPreview = ({ task, idx, handleTaskEdit }: PropTypes.TaskPreviewProps) => {
+const TaskPreview = ({ task, idx, handleTaskEdit, onLabelsUpdate }: PropTypes.TaskPreviewProps) => {
   const [isQuickEditOpen, setIsQuickEditOpen] = useState(false)
   const [taskEditorPos, setTaskEditorPos] = useState({ top: 0, left: 0 })
   const [taskTitle, setTaskTitle] = useState<string>(task.title)
@@ -65,7 +65,14 @@ const TaskPreview = ({ task, idx, handleTaskEdit }: PropTypes.TaskPreviewProps) 
           {!task?.style?.fullCover && task?.style?.background && <TaskCover style={task.style} />}
           <TaskEditIcon onClickCapture={handleQuickEditToggle} content="'\e928'" size="sm" />
           {isQuickEditOpen && (
-            <TaskQuickEdit task={task} modalPos={taskEditorPos} handleTaskLabelChange={handleTaskLabelChange} onChangeSubmit={handleTaskEditSubmit} onClose={handleQuickEditToggle}>
+            <TaskQuickEdit
+              task={task}
+              modalPos={taskEditorPos}
+              onLabelsUpdate={onLabelsUpdate}
+              handleTaskLabelChange={handleTaskLabelChange}
+              onChangeSubmit={handleTaskEditSubmit}
+              onClose={handleQuickEditToggle}
+            >
               <TaskDetails taskTitle={taskTitle} handleTaskTitleChange={handleTaskTitleChange} isQuickEditOpen={isQuickEditOpen} taskRef={taskRef} task={task} />
             </TaskQuickEdit>
           )}

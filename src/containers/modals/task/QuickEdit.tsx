@@ -23,9 +23,10 @@ type QuickEditorProps = {
   handleTaskLabelChange: (label: PropTypes.label) => void
   onChangeSubmit?: (ev: React.MouseEvent) => void
   onClose?: (ev?: React.MouseEvent) => void
+  onLabelsUpdate: (labels: PropTypes.label[]) => void
 }
 
-const QuickEditControls = ({ handleTaskLabelChange, task }: QuickEditorProps) => {
+const QuickEditControls = ({ handleTaskLabelChange, task, onLabelsUpdate }: QuickEditorProps) => {
   const [quickControls] = useState([
     { title: 'Open card', type: 'openCard', icon: `'\\e912'`, href: `/${task.id}` },
     { title: 'Edit labels', type: 'labels', icon: `'\\e93f'` },
@@ -60,7 +61,7 @@ const QuickEditControls = ({ handleTaskLabelChange, task }: QuickEditorProps) =>
   const getModalChild = () => {
     switch (badgeModal) {
       case 'labels':
-        return <LabelsModal task={task} handleTaskLabelChange={handleTaskLabelChange} />
+        return <LabelsModal onLabelsUpdate={onLabelsUpdate} task={task} handleTaskLabelChange={handleTaskLabelChange} />
       case 'members':
         return <>members</>
       case 'dates':
@@ -89,7 +90,7 @@ const QuickEditControls = ({ handleTaskLabelChange, task }: QuickEditorProps) =>
   )
 }
 
-const TaskQuickEdit = ({ children, modalPos, task, handleTaskLabelChange, onChangeSubmit, onClose }: QuickEditorProps) => {
+const TaskQuickEdit = ({ children, modalPos, task, handleTaskLabelChange, onChangeSubmit, onLabelsUpdate, onClose }: QuickEditorProps) => {
   return createPortal(
     <QuickEditContainer>
       <QuickEditCloseBtn onClick={onClose} content="'\e91c'" size="lg" />
@@ -98,7 +99,7 @@ const TaskQuickEdit = ({ children, modalPos, task, handleTaskLabelChange, onChan
           <>{children}</>
         </TaskQuickEditor>
         <TaskQuickEditorSave onClick={onChangeSubmit}>Save</TaskQuickEditorSave>
-        <QuickEditControls handleTaskLabelChange={handleTaskLabelChange} task={task} />
+        <QuickEditControls onLabelsUpdate={onLabelsUpdate} handleTaskLabelChange={handleTaskLabelChange} task={task} />
       </TaskQuickEditorWrapper>
     </QuickEditContainer>,
     document.body

@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import useLabelReducer from '../../../../../hooks/useLabelReducer'
 import { PropTypes } from '../../../../../types/prop-types'
 import { LabelsModalsContainer, LabelsList, LabelPreviewContainer, LabelPreviewEditBtn, LabelPreview, LabelSelectedIcon } from './LabelsModal.styled'
 
@@ -6,39 +7,81 @@ type LabelProps = {
   label?: PropTypes.label
   task: PropTypes.task
   handleTaskLabelChange: (label: PropTypes.label) => void
+  onLabelsUpdate?: (labels: PropTypes.label[]) => void
+  handleLabelChange?: (label: PropTypes.label) => void
 }
 
-const Label = ({ task, handleTaskLabelChange, label }: LabelProps) => {
-  // const [labelTitle, setLabelTitle] = useState(label.title)
-  if (!label) return null
+const Label = ({ task, handleTaskLabelChange, handleLabelChange, label }: LabelProps) => {
+  const [state, dispatch] = useLabelReducer()
 
+  const handleLabelTitleChange = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch({ type: 'CHANGE_TITLE', payload: target.value })
+  }
+
+  const handleLabelChangeSubmit = (ev: React.FocusEvent | React.KeyboardEvent) => {
+    if (((ev as React.KeyboardEvent).key !== 'Enter' && ev.type !== 'blur') || !label) {
+      return
+    }
+
+    const newLabel = {
+      ...label,
+      title: state.labelTitle
+    }
+
+    handleLabelChange!(newLabel)
+    dispatch({ type: 'SUBMIT_CHANGE' })
+  }
+
+  if (!label) return null
   return (
     <LabelPreviewContainer>
-      <LabelPreviewEditBtn content="'\e928'" size="sm" />
-      <LabelPreview onClick={() => handleTaskLabelChange(label)} labelColor={label.color}>
-        {label.title}
-        {task.labels!.find(taskLabel => taskLabel.id === label.id) && <LabelSelectedIcon content="'\e916'" size="sm" />}
-      </LabelPreview>
+      <LabelPreviewEditBtn onClick={() => dispatch({ type: 'TOGGLE_EDIT', payload: label.title })} content="'\e928'" size="sm" />
+      {state.isEditMode ? (
+        <LabelPreview labelColor={label.color}>
+          <input type="text" value={state.labelTitle} onBlur={handleLabelChangeSubmit} onKeyDown={handleLabelChangeSubmit} onChange={handleLabelTitleChange} />
+        </LabelPreview>
+      ) : (
+        <LabelPreview onClick={() => handleTaskLabelChange(label)} labelColor={label.color}>
+          {label.title}
+          {task.labels!.find(taskLabel => taskLabel.id === label.id) && <LabelSelectedIcon content="'\e916'" size="sm" />}
+        </LabelPreview>
+      )}
     </LabelPreviewContainer>
   )
 }
 
-const LabelsModal = ({ task, handleTaskLabelChange }: LabelProps) => {
-  const [boardLabels] = useState(() => {
+const LabelsModal = ({ task, handleTaskLabelChange, onLabelsUpdate }: LabelProps) => {
+  const [boardLabels, setBoardLabels] = useState<PropTypes.label[]>()
+
+  useEffect(() => {
+    const labels = getBoardLabels()
+    setBoardLabels(labels)
+  }, [])
+
+  function getBoardLabels() {
     const board: PropTypes.board = JSON.parse(localStorage.getItem('board') || '')
     if (board) {
       return board.labels
     }
-  })
+  }
 
-  // TODO: label edit onclick, edit label title
+  const handleLabelChange = (updatedLabel: PropTypes.label) => {
+    const idx = boardLabels!.findIndex(label => label.id === updatedLabel.id)
+    const newLabels = [...boardLabels!]
+
+    if (idx !== -1) {
+      newLabels.splice(idx, 1, updatedLabel)
+    }
+
+    onLabelsUpdate!(newLabels)
+  }
 
   return (
     <LabelsModalsContainer>
       <h4>Labels</h4>
       <LabelsList>
         {boardLabels?.map(label => (
-          <Label task={task} handleTaskLabelChange={handleTaskLabelChange} key={label.id} label={label} />
+          <Label handleLabelChange={handleLabelChange} task={task} handleTaskLabelChange={handleTaskLabelChange} key={label.id} label={label} />
         ))}
       </LabelsList>
     </LabelsModalsContainer>

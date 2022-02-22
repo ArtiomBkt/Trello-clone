@@ -29,6 +29,7 @@ export declare module PropTypes {
     idx: number
     isDraggingOver: boolean
     onListUpdate: (list: BoardTypes.list) => void
+    onLabelsUpdate: (labels: BoardTypes.label[]) => void
   }
 
   export type ListHeaderProps = {
@@ -41,6 +42,7 @@ export declare module PropTypes {
     task: task
     idx: number
     handleTaskEdit: (task: BoardTypes.task) => void
+    onLabelsUpdate: (labels: BoardTypes.label[]) => void
   }
 
   export type BoardNavCmp = {

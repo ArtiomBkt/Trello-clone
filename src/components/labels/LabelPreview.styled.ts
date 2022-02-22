@@ -1,7 +1,8 @@
-import styled from 'styled-components'
+import styled, { css, keyframes } from 'styled-components'
 
 type LabelProps = {
   bgColor: string
+  isLabelExpanded: boolean
 }
 
 interface LabelsInterface {
@@ -18,12 +19,76 @@ export const labelColors: LabelsInterface = {
   navy: { static: '#344563', hover: '#091e42' }
 }
 
+const labels_expand = keyframes`
+  0% {
+    color: #0000;
+    height: 8px;
+    width: 40px;
+  }
+
+  25% {
+    height: 8px;
+    padding-right: 10px;
+    width: fit-content;
+  }
+
+  45% {
+    height: 8px;
+    padding-right: 9px;
+  }
+
+  53% {
+    height: 8px;
+    padding-right: 8px;
+  }
+
+  75% {
+    color: #0000;
+    height: 16px;
+  }
+  to {
+    color: #0000;
+    height: 16px;
+    padding: 0 8px;
+  }
+`
+
+const labels_shrink = keyframes`
+  0% {
+    height: 16px;
+    line-height: 16px;
+    padding: 0 8px;
+    width: fit-content;
+  }
+
+  33% {
+    color: #0000;
+    height: 16px;
+    line-height: 16px;
+    width: fit-content;
+  }
+
+  66% {
+    color: #0000;
+    height: 8px;
+    line-height: 100px;
+    padding: 0 8px;
+    width: fit-content;
+  }
+
+  to {
+    color: #0000;
+    padding: 0;
+    width: 40px;
+  }
+`
+
 export const LabelsContainer = styled.div`
   overflow: auto;
   position: relative;
 `
 
-export const Label = styled.span`
+export const Label = styled.span<LabelProps>`
   display: block;
   overflow: hidden;
   position: relative;
@@ -32,23 +97,41 @@ export const Label = styled.span`
 
   border-radius: 4px;
   color: #fff;
-  background-color: ${({ bgColor }: LabelProps) => labelColors[bgColor].static || '#b3bac5'};
+  background-color: ${({ bgColor }) => labelColors[bgColor].static || '#b3bac5'};
 
   &:hover {
-    background-color: ${({ bgColor }: LabelProps) => labelColors[bgColor].hover};
+    background-color: ${({ bgColor }) => labelColors[bgColor].hover};
   }
 
   float: left;
 
-  height: 8px;
   min-width: 40px;
   width: auto;
 
-  line-height: 100px;
   font-size: 12px;
   font-weight: 700;
   text-shadow: none;
 
   margin: 0 4px 4px 0;
-  padding: 0;
+  /* padding: 0; */
+
+  &&& {
+    ${({ isLabelExpanded }) =>
+      isLabelExpanded
+        ? css`
+            animation: ${labels_expand} 0.45s ease-out;
+            height: 16px;
+            line-height: 100px;
+            max-width: 40px;
+            min-width: 40px;
+            width: auto;
+            padding: 0;
+            margin: 0 4px 4px 0;
+          `
+        : css`
+            animation: ${labels_shrink} 0.45s ease-in forwards;
+            height: 8px;
+            max-width: 198px;
+          `}
+  }
 `

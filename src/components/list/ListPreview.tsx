@@ -9,7 +9,7 @@ import { ListContentPreview, List, ListTasksWrapper } from './ListPreview.styled
 import { TaskComposerWrapper, TaskComposerToggler, TaskComposerIcon } from './task-composer/TaskComposer.styled'
 import { BoardTypes } from '../../types/board-types'
 
-const ListPreview = ({ list, idx, isDraggingOver, onListUpdate }: PropTypes.ListPreviewProps) => {
+const ListPreview = ({ list, idx, isDraggingOver, onLabelsUpdate, onListUpdate }: PropTypes.ListPreviewProps) => {
   const [isComposerOpen, setIsComposerOpen] = useState(false)
 
   const handleComposerToggle = (): void => {
@@ -58,12 +58,10 @@ const ListPreview = ({ list, idx, isDraggingOver, onListUpdate }: PropTypes.List
               {provided => (
                 <ListTasksWrapper {...provided.droppableProps} ref={provided.innerRef}>
                   {list.tasks?.map((task, idx) => (
-                    <TaskPreview handleTaskEdit={handleTaskEdit} key={task.id} task={task} idx={idx} />
+                    <TaskPreview onLabelsUpdate={onLabelsUpdate} handleTaskEdit={handleTaskEdit} key={task.id} task={task} idx={idx} />
                   ))}
                   {provided.placeholder}
-                  {isComposerOpen && (
-                    <TaskComposer handleTaskAdd={handleTaskAdd} handleComposerToggle={handleComposerToggle} />
-                  )}
+                  {isComposerOpen && <TaskComposer handleTaskAdd={handleTaskAdd} handleComposerToggle={handleComposerToggle} />}
                 </ListTasksWrapper>
               )}
             </Droppable>
