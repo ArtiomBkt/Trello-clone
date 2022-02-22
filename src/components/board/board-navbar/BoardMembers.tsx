@@ -1,15 +1,15 @@
 import React from 'react'
-import Avatar from '@atlaskit/avatar'
+import Avatar from 'react-avatar'
 import { PropTypes } from '../../../types/prop-types'
 import { MemberListContainer, BoardMemberInviteBtn, MemberInviteBtnIcon } from './BoardNav.styled'
 
 const BoardMembers = ({ members }: PropTypes.MemberListProps) => {
   return (
-    <div style={{display: 'inline-flex'}}>
+    <div style={{ display: 'inline-flex' }}>
       <MemberListContainer>
         {members &&
           members.map(member => (
-            <Avatar key={member.id} borderColor="none" size="small" appearance="circle" name={member.username} src={member.image} />
+            <Avatar key={member.id} size="30" round={true} name={member.username} src={member.image} />
           ))}
       </MemberListContainer>
       <BoardMemberInviteBtn>
