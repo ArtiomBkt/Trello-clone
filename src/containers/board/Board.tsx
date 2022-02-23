@@ -86,12 +86,12 @@ const Board = () => {
           <div style={{ position: 'absolute', inset: '0' }}>
             <BoardWrapper isSidenavOpen={isSidenavOpen}>
               <BoardNav onSidenavOpen={toggleSidenav} onBoardUpdate={onBoardUpdate} board={board} />
-              <div style={{ flexGrow: 1, position: 'relative' }}>
+              <div style={{ flexGrow: 1, position: 'relative', overflow: 'auto' }}>
                 <DragDropContext onDragEnd={onDragEnd}>
                   <Droppable direction="horizontal" droppableId={board.id} type="LIST">
                     {(provided, snapshot) => (
                       <ListPreviewContainer {...provided.droppableProps} ref={provided.innerRef}>
-                        {board.lists?.map((list: BoardTypes.list, idx: number) => (
+                        {board.lists?.map((list, idx: number) => (
                           <ListPreview onLabelsUpdate={onLabelsUpdate} onListUpdate={onListUpdate} key={list.id} isDraggingOver={snapshot.isDraggingOver} list={list} idx={idx} />
                         ))}
                         {provided.placeholder}

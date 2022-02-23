@@ -52,12 +52,12 @@ const ListPreview = ({ list, idx, isDraggingOver, onLabelsUpdate, onListUpdate }
     <Draggable draggableId={list.id} index={idx}>
       {(provided, snapshot) => (
         <ListContentPreview {...provided.draggableProps} ref={provided.innerRef}>
-          <List isDraggingOver={isDraggingOver} isDragging={snapshot.isDragging}>
+          <List isDragging={snapshot.isDragging}>
             <ListHeader onListUpdate={onListUpdate} dragHandleProps={provided.dragHandleProps} list={list} />
             <Droppable droppableId={list.id} type="TASK">
-              {provided => (
-                <ListTasksWrapper {...provided.droppableProps} ref={provided.innerRef}>
-                  {list.tasks?.map((task, idx) => (
+              {(provided, snapshot) => (
+                <ListTasksWrapper isDraggingOver={snapshot.isDraggingOver} {...provided.droppableProps} ref={provided.innerRef}>
+                  {list.tasks.map((task, idx) => (
                     <TaskPreview onLabelsUpdate={onLabelsUpdate} handleTaskEdit={handleTaskEdit} key={task.id} task={task} idx={idx} />
                   ))}
                   {provided.placeholder}
