@@ -21,8 +21,8 @@ export declare module PropTypes {
   }
 
   type DndTypes = {
-    isDragging: boolean
-    isDraggingOver: boolean
+    isDragging?: boolean
+    isDraggingOver?: boolean
   }
 
   interface modalPos {

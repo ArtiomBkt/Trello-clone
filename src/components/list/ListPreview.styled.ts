@@ -66,7 +66,7 @@ export const List = styled.div<PropTypes.DndTypes>`
 `
 /* background-color: ${({ isDraggingOver }) => isDraggingOver ? '#2c2c2c' : '#ebecf0'}; */
 
-export const ListTasksWrapper = styled.div`
+export const ListTasksWrapper = styled.div<PropTypes.DndTypes>`
   flex: 1 1 auto;
   overflow-x: hidden;
   overflow-y: auto;

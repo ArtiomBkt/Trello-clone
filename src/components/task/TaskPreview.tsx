@@ -60,9 +60,9 @@ const TaskPreview = ({ task, idx, handleTaskEdit, onLabelsUpdate }: PropTypes.Ta
           ref={provided.innerRef}
           {...provided.draggableProps}
           {...provided.dragHandleProps}
-          style={task?.style}
+          style={task.style}
         >
-          {!task?.style?.fullCover && task?.style?.background && <TaskCover style={task.style} />}
+          {!task.style?.fullCover && task.style?.background && <TaskCover style={task.style} />}
           <TaskEditIcon onClickCapture={handleQuickEditToggle} content="'\e928'" size="sm" />
           {isQuickEditOpen && (
             <TaskQuickEdit

@@ -20,12 +20,7 @@ function getBoardById(boardId?: Parameters<serviceTypes.getBoardById>): ReturnTy
   return gBoard
 }
 
-function handleListMove({
-  board,
-  draggableId,
-  source,
-  destination
-}: serviceTypes.dragAndDropArgs): BoardTypes.list[] | undefined {
+function handleListMove({ board, draggableId, source, destination }: serviceTypes.dragAndDropArgs): BoardTypes.list[] | undefined {
   if (!board || !board.lists) return
 
   const draggedList = board.lists.find(list => list.id === draggableId)
@@ -38,12 +33,7 @@ function handleListMove({
   return newLists
 }
 
-function handleTaskMove({
-  board,
-  draggableId,
-  source,
-  destination
-}: serviceTypes.dragAndDropArgs): BoardTypes.list[] | undefined {
+function handleTaskMove({ board, draggableId, source, destination }: serviceTypes.dragAndDropArgs): BoardTypes.list[] | undefined {
   if (!board || !board.lists) return
 
   const startList = board.lists.find(list => list.id === source.droppableId)
