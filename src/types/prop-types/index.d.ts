@@ -36,8 +36,7 @@ export declare module PropTypes {
 
   type ListPreviewProps = {
     list: BoardTypes.list
-    idx: number
-    isDraggingOver: boolean
+    index: number
     onListUpdate: (list: BoardTypes.list) => void
     onLabelsUpdate: (labels: BoardTypes.label[]) => void
   }
@@ -50,7 +49,7 @@ export declare module PropTypes {
 
   type TaskPreviewProps = {
     task: task
-    idx: number
+    index: number
     handleTaskEdit: (task: BoardTypes.task) => void
     onLabelsUpdate: (labels: BoardTypes.label[]) => void
   }
@@ -76,6 +75,10 @@ export declare module PropTypes {
   type list = BoardTypes.list
   type task = BoardTypes.task
   type label = BoardTypes.label
+
+  type LabelsPreviewProps = {
+    labels: label[]
+  }
 
   type TaskComposerProps = {
     handleComposerToggle: () => void
@@ -133,12 +136,12 @@ export declare module PropTypes {
     handleMenuToggle: (ev?: React.MouseEvent) => void
   }
 
-  type TaskCmps = {
+  interface TaskCmps {
     task: BoardTypes.task
     taskRef?: React.RefObject<HTMLDivElement>
     isQuickEditOpen?: boolean
-    handleTaskTitleChange?: ({ target }: React.ChangeEvent<HTMLTextAreaElement>) => void
     taskTitle?: string
+    handleTaskTitleChange?: ({ target }: React.ChangeEvent<HTMLTextAreaElement>) => void
   }
 
   interface LabelsInterface {
@@ -148,5 +151,10 @@ export declare module PropTypes {
   type SidenavProps = {
     isSidenavOpen: boolean
     onSidenavClose: () => void
+  }
+
+  type LabelsContext = {
+    isLabelsExpanded: boolean
+    setIsLabelsExpanded: (isExpanded: boolean) => void
   }
 }

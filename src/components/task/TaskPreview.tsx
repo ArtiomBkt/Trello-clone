@@ -5,7 +5,7 @@ import TaskDetails from '../../containers/task/TaskDetails'
 import { TaskPreviewContainer, TaskCover, TaskEditIcon } from './TaskPreview.styled'
 import TaskQuickEdit from '../../containers/modals/task/QuickEdit'
 
-const TaskPreview = ({ task, idx, handleTaskEdit, onLabelsUpdate }: PropTypes.TaskPreviewProps) => {
+const TaskPreview = ({ task, index, handleTaskEdit, onLabelsUpdate }: PropTypes.TaskPreviewProps) => {
   const [isQuickEditOpen, setIsQuickEditOpen] = useState(false)
   const [taskEditorPos, setTaskEditorPos] = useState({ top: 0, left: 0 })
   const [taskTitle, setTaskTitle] = useState<string>(task.title)
@@ -52,14 +52,14 @@ const TaskPreview = ({ task, idx, handleTaskEdit, onLabelsUpdate }: PropTypes.Ta
   }
 
   return (
-    <Draggable draggableId={task.id} index={idx}>
+    <Draggable draggableId={task.id} index={index}>
       {provided => (
         <TaskPreviewContainer
-          href={`/${task.id}`}
-          // to={`/${task?.id}`}
           ref={provided.innerRef}
           {...provided.draggableProps}
           {...provided.dragHandleProps}
+          href={`/${task.id}`}
+          onContextMenuCapture={handleQuickEditToggle}
           style={task.style}
         >
           {!task.style?.fullCover && task.style?.background && <TaskCover style={task.style} />}

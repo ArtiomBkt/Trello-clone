@@ -9,7 +9,7 @@ import { ListContentPreview, List, ListTasksWrapper } from './ListPreview.styled
 import { TaskComposerWrapper, TaskComposerToggler, TaskComposerIcon } from './task-composer/TaskComposer.styled'
 import { BoardTypes } from '../../types/board-types'
 
-const ListPreview = ({ list, idx, isDraggingOver, onLabelsUpdate, onListUpdate }: PropTypes.ListPreviewProps) => {
+const ListPreview = ({ list, index, onLabelsUpdate, onListUpdate }: PropTypes.ListPreviewProps) => {
   const [isComposerOpen, setIsComposerOpen] = useState(false)
 
   const handleComposerToggle = (): void => {
@@ -49,17 +49,24 @@ const ListPreview = ({ list, idx, isDraggingOver, onLabelsUpdate, onListUpdate }
   }
 
   return (
-    <Draggable draggableId={list.id} index={idx}>
-      {(provided, snapshot) => (
+    <Draggable draggableId={list.id} index={index}>
+      {provided => (
         <ListContentPreview {...provided.draggableProps} ref={provided.innerRef}>
-          <List isDragging={snapshot.isDragging}>
+          <List>
             <ListHeader onListUpdate={onListUpdate} dragHandleProps={provided.dragHandleProps} list={list} />
             <Droppable droppableId={list.id} type="TASK">
-              {(provided, snapshot) => (
-                <ListTasksWrapper isDraggingOver={snapshot.isDraggingOver} {...provided.droppableProps} ref={provided.innerRef}>
-                  {list.tasks.map((task, idx) => (
-                    <TaskPreview onLabelsUpdate={onLabelsUpdate} handleTaskEdit={handleTaskEdit} key={task.id} task={task} idx={idx} />
-                  ))}
+              {provided => (
+                <ListTasksWrapper {...provided.droppableProps} ref={provided.innerRef}>
+                  {list.tasks.map((task, index) => {
+                    const taskPreviewProps = {
+                      key: task.id,
+                      task,
+                      index,
+                      onLabelsUpdate,
+                      handleTaskEdit
+                    }
+                    return <TaskPreview {...taskPreviewProps} />
+                  })}
                   {provided.placeholder}
                   {isComposerOpen && <TaskComposer handleTaskAdd={handleTaskAdd} handleComposerToggle={handleComposerToggle} />}
                 </ListTasksWrapper>

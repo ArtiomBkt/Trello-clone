@@ -5,6 +5,7 @@ import { BoardTypes } from '../../types/board-types/index'
 import { boardService } from '../../services/board.service'
 import { BoardContainer, BoardContentWrapper, BoardWrapper, AppWrapper } from './Board.styled'
 import { ListPreviewContainer } from '../../components/list/ListPreview.styled'
+import labelsContext from '../../contexts/labelsContext'
 import BoardNav from '../../components/board/board-navbar/BoardNav'
 import BoardSidebar from '../../components/board/board-sidebar/Sidebar'
 import ListPreview from '../../components/list/ListPreview'
@@ -13,6 +14,7 @@ import ListComposer from '../../components/board/list-composer/ListComposer'
 const Board = () => {
   const [board, setBoard] = useLocalStorageState('board', boardService.getBoardById())
   const [isSidenavOpen, setIsSidenavOpen] = useState(false)
+  const [isLabelsExpanded, setIsLabelsExpanded] = useState(false)
 
   useLayoutEffect(() => {
     const elRoot = document.getElementById('root')
@@ -86,16 +88,25 @@ const Board = () => {
           <div style={{ position: 'absolute', inset: '0' }}>
             <BoardWrapper isSidenavOpen={isSidenavOpen}>
               <BoardNav onSidenavOpen={toggleSidenav} onBoardUpdate={onBoardUpdate} board={board} />
-              <div style={{ flexGrow: 1, position: 'relative', overflow: 'auto' }}>
+              <div style={{ flexGrow: 1, position: 'relative' }}>
                 <DragDropContext onDragEnd={onDragEnd}>
-                  <Droppable direction="horizontal" droppableId={board.id} type="LIST">
-                    {(provided, snapshot) => (
+                  <Droppable direction="horizontal" droppableId="board" type="LIST">
+                    {provided => (
                       <ListPreviewContainer {...provided.droppableProps} ref={provided.innerRef}>
-                        {board.lists?.map((list, idx: number) => (
-                          <ListPreview onLabelsUpdate={onLabelsUpdate} onListUpdate={onListUpdate} key={list.id} isDraggingOver={snapshot.isDraggingOver} list={list} idx={idx} />
-                        ))}
-                        {provided.placeholder}
-                        <ListComposer onAddList={onAddList} />
+                        <labelsContext.Provider value={{ isLabelsExpanded, setIsLabelsExpanded }}>
+                          {board.lists?.map((list, index) => {
+                            const listPreviewProps = {
+                              key: list.id,
+                              list,
+                              index,
+                              onLabelsUpdate,
+                              onListUpdate
+                            }
+                            return <ListPreview {...listPreviewProps} />
+                          })}
+                          {provided.placeholder}
+                          <ListComposer onAddList={onAddList} />
+                        </labelsContext.Provider>
                       </ListPreviewContainer>
                     )}
                   </Droppable>

@@ -25,7 +25,7 @@ const TaskBadges = ({ task }: PropTypes.TaskCmps) => {
   )
 }
 
-const TaskDetails = ({ taskTitle, handleTaskTitleChange, taskRef, task, isQuickEditOpen }: PropTypes.TaskCmps) => {
+const TaskDetails = ({ taskTitle, taskRef, task, isQuickEditOpen, handleTaskTitleChange }: PropTypes.TaskCmps) => {
   const taskTitleRef = useRef<HTMLTextAreaElement>(null)
 
   useLayoutEffect(() => {

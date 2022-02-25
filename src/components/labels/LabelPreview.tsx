@@ -1,21 +1,21 @@
-import React, { useState } from 'react'
+import React, { useContext } from 'react'
 import { PropTypes } from '../../types/prop-types'
+import labelsContext from '../../contexts/labelsContext'
 import { LabelsContainer, Label } from './LabelPreview.styled'
 
-const LabelsPreview = ({ labels }: PropTypes.ContainersProps) => {
-  const [isLabelExpanded, setIsLabelExpanded] = useState(false)
-  // context could be a better solution here
+const LabelsPreview = ({ labels }: PropTypes.LabelsPreviewProps) => {
+  const { isLabelsExpanded, setIsLabelsExpanded } = useContext(labelsContext)
 
   const toggleLabels = (ev: React.MouseEvent) => {
     ev.preventDefault()
     ev.stopPropagation()
-    setIsLabelExpanded(p => !p)
+    setIsLabelsExpanded(!isLabelsExpanded)
   }
 
   return (
     <LabelsContainer onClick={toggleLabels}>
       {labels!.map(label => (
-        <Label isLabelExpanded={isLabelExpanded} key={label.id} labelColor={label.color}>
+        <Label isLabelExpanded={isLabelsExpanded} key={label.id} labelColor={label.color}>
           {label.title}
         </Label>
       ))}
