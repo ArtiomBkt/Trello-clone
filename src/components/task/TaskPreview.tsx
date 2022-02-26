@@ -62,21 +62,22 @@ const TaskPreview = ({ task, index, handleTaskEdit, onLabelsUpdate }: PropTypes.
           onContextMenuCapture={handleQuickEditToggle}
           styling={task.style}
         >
-          {!task.style?.fullCover && task.style?.background && <TaskCover style={task.style} />}
-          <TaskEditIcon onClickCapture={handleQuickEditToggle} content="'\e928'" size="sm" />
-          {isQuickEditOpen && (
-            <TaskQuickEdit
-              task={task}
-              modalPos={taskEditorPos}
-              onLabelsUpdate={onLabelsUpdate}
-              handleTaskLabelChange={handleTaskLabelChange}
-              onChangeSubmit={handleTaskEditSubmit}
-              onClose={handleQuickEditToggle}
-            >
-              <TaskDetails taskTitle={taskTitle} handleTaskTitleChange={handleTaskTitleChange} isQuickEditOpen={isQuickEditOpen} taskRef={taskRef} task={task} />
-            </TaskQuickEdit>
-          )}
-          <TaskDetails taskRef={taskRef} task={task} />
+          hello
+          {/* //   {!task.style?.fullCover && task.style?.background && <TaskCover style={task.style} />}
+        //   <TaskEditIcon onClickCapture={handleQuickEditToggle} content="'\e928'" size="sm" />
+        //   {isQuickEditOpen && (
+        //     <TaskQuickEdit
+        //       task={task}
+        //       modalPos={taskEditorPos}
+        //       onLabelsUpdate={onLabelsUpdate}
+        //       handleTaskLabelChange={handleTaskLabelChange}
+        //       onChangeSubmit={handleTaskEditSubmit}
+        //       onClose={handleQuickEditToggle}
+        //     >
+        //       <TaskDetails taskTitle={taskTitle} handleTaskTitleChange={handleTaskTitleChange} isQuickEditOpen={isQuickEditOpen} taskRef={taskRef} task={task} />
+        //     </TaskQuickEdit>
+        //   )}
+        //   <TaskDetails taskRef={taskRef} task={task} /> */}
         </TaskPreviewContainer>
       )}
     </Draggable>
