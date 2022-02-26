@@ -16,7 +16,7 @@ const TaskBadges = ({ task }: PropTypes.TaskCmps) => {
   const props = { id: task?.id, title: task?.title }
 
   return (
-    <BadgesWrapper isFullCover={task.styling?.fullCover}>
+    <BadgesWrapper isFullCover={task.style?.fullCover}>
       <TaskDates task={task} />
       <TaskDescriptionBadge description={task?.description} {...props} />
       <TaskCommentBadge comments={task?.comments} {...props} />
@@ -35,8 +35,8 @@ const TaskDetails = ({ taskTitle, taskRef, task, isQuickEditOpen, handleTaskTitl
   }, [isQuickEditOpen])
 
   return (
-    <TaskDetailsContainer ref={taskRef} isFullCover={task.styling?.fullCover}>
-      {task.labels && !task.styling?.fullCover && <LabelsPreview labels={task.labels} />}
+    <TaskDetailsContainer ref={taskRef} isFullCover={task.style?.fullCover}>
+      {task.labels && !task.style?.fullCover && <LabelsPreview labels={task.labels} />}
       {!isQuickEditOpen ? <TaskTitle task={task} /> : <EditorTaskTextarea ref={taskTitleRef} onChange={handleTaskTitleChange} value={taskTitle} />}
       <TaskBadges task={task} />
     </TaskDetailsContainer>

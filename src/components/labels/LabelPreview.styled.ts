@@ -76,11 +76,14 @@ const labels_shrink = keyframes`
 `
 
 export const LabelsContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
   overflow: auto;
   position: relative;
 `
 
 export const Label = styled.span<PropTypes.StyledProps>`
+  box-sizing: content-box;
   display: block;
   overflow: hidden;
   position: relative;
@@ -95,36 +98,29 @@ export const Label = styled.span<PropTypes.StyledProps>`
     background-color: ${({ labelColor }) => labelColors[labelColor!].hover};
   }
 
-  float: left;
-
   min-width: 40px;
-  width: auto;
 
   font-size: 12px;
   font-weight: 700;
   text-shadow: none;
 
   margin: 0 4px 4px 0;
-  /* padding: 0; */
 
-  // finish configuring
   &&& {
     ${({ isLabelExpanded }) =>
       isLabelExpanded
         ? css`
-            animation: ${labels_expand} 0.45s ease-out;
+            animation: ${labels_expand} 0.45s ease-out backwards;
             height: 16px;
-            line-height: 100px;
-            max-width: 40px;
-            min-width: 40px;
-            width: auto;
-            padding: 0;
+            line-height: 16px;
+            max-width: 198px;
             margin: 0 4px 4px 0;
+            padding: 0 8px;
           `
         : css`
-            animation: ${labels_shrink} 0.45s ease-in forwards;
+            animation: ${labels_shrink} 0.45s ease-in backwards;
             height: 8px;
-            max-width: 198px;
+            line-height: 100px;
           `}
   }
 `

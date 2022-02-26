@@ -7,7 +7,7 @@ const TaskTitle = ({ task }: PropTypes.ContainersProps) => {
     return null
   }
 
-  return <TaskTitleContainer isFullCover={task.styling?.fullCover}>{task.title}</TaskTitleContainer>
+  return <TaskTitleContainer isFullCover={task.style?.fullCover}>{task.title}</TaskTitleContainer>
 }
 
 export default TaskTitle
