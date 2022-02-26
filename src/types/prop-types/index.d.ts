@@ -5,7 +5,7 @@ export declare module PropTypes {
   type StyledProps = {
     btnType?: string
     task?: task
-    style?: task['style']
+    styling?: task['style']
     size?: string
     content?: string
     isDone?: boolean

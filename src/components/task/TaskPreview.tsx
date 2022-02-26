@@ -58,9 +58,9 @@ const TaskPreview = ({ task, index, handleTaskEdit, onLabelsUpdate }: PropTypes.
           ref={provided.innerRef}
           {...provided.draggableProps}
           {...provided.dragHandleProps}
-          href={`/${task.id}`}
+          to={`/${task.id}`}
           onContextMenuCapture={handleQuickEditToggle}
-          style={task.style}
+          styling={task.style}
         >
           {!task.style?.fullCover && task.style?.background && <TaskCover style={task.style} />}
           <TaskEditIcon onClickCapture={handleQuickEditToggle} content="'\e928'" size="sm" />

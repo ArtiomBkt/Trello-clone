@@ -20,14 +20,14 @@ import BoardControls from './BoardControls'
 const BoardNav = ({ board, onBoardUpdate, onSidenavOpen }: PropTypes.BoardNavCmp) => {
   const [boardTitle, setBoardTitle] = useState(board.title)
   const [isEditBoardTitle, setIsEditBoardTitle] = useState(false)
-  // const [titleContainerWidth, setTitlePlaceholderWidth] = useState('')
+  const [titleContainerWidth, setTitlePlaceholderWidth] = useState('')
   const inputRef = useRef<HTMLInputElement>(null)
   const titlePlaceholderRef = useRef<HTMLDivElement>(null)
 
   useLayoutEffect(() => {
-    // if (titlePlaceholderRef.current) {
-    //   setTitlePlaceholderWidth(window.getComputedStyle(titlePlaceholderRef.current).width)
-    // }
+    if (titlePlaceholderRef.current) {
+      setTitlePlaceholderWidth(window.getComputedStyle(titlePlaceholderRef.current).width)
+    }
     if (isEditBoardTitle && inputRef.current) {
       inputRef.current.focus()
       inputRef.current.select()
@@ -36,7 +36,9 @@ const BoardNav = ({ board, onBoardUpdate, onSidenavOpen }: PropTypes.BoardNavCmp
 
   const handleInputChange = ({ target }: React.ChangeEvent<HTMLInputElement>): void => {
     if (inputRef.current) {
-      inputRef.current.size = target.value.length
+      // console.log(target.value.length)
+      // inputRef.current.size = target.value.length
+      // console.log(inputRef.current.size)
     }
     setBoardTitle(target.value)
   }
@@ -71,7 +73,7 @@ const BoardNav = ({ board, onBoardUpdate, onSidenavOpen }: PropTypes.BoardNavCmp
             onKeyDown={handleTitleChange}
             onChange={handleInputChange}
             value={boardTitle}
-            // style={{ width: titleContainerWidth }}
+            style={{ width: titleContainerWidth }}
           />
         )}
       </BoardNameContainer>
