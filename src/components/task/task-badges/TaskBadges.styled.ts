@@ -5,7 +5,7 @@ import { Icon } from '../../../styled/Mixins.styled'
 export const BadgesWrapper = styled.div<PropTypes.StyledProps>`
   ${({ isFullCover }) => isFullCover && 'display: none;'}
 
-  float: left;
+  /* float: left; */
   margin-left: -2px;
   max-width: 100%;
 `

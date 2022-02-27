@@ -124,7 +124,8 @@ export declare module PropTypes {
 
   type MemberProps = {
     task: PropTypes.task
-    handleTaskMemberToggle: (memberId: BoardTypes.member) => void
+    members?: MemberListProps['members']
+    handleTaskMemberToggle?: (memberId: BoardTypes.member) => void
   }
 
   type HeaderModalProps = {
@@ -160,6 +161,8 @@ export declare module PropTypes {
   interface LabelsInterface {
     [key: string]: { static: string; hover: string }
   }
+
+  interface TaskColorsInterface extends LabelsInterface {}
 
   type SidenavProps = {
     isSidenavOpen: boolean

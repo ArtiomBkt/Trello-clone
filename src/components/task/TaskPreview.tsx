@@ -90,7 +90,7 @@ const TaskPreview = ({ task, index, handleTaskEdit, onLabelsUpdate }: PropTypes.
           onContextMenuCapture={handleQuickEditToggle}
           styling={task.style}
         >
-          {!task.style?.fullCover && task.style?.background && <TaskCover style={task.style} />}
+          {!task.style?.fullCover && task.style?.background && <TaskCover styling={task.style} />}
           <TaskEditIcon onClickCapture={handleQuickEditToggle} content="'\e928'" size="sm" />
           {isQuickEditOpen && (
             <TaskQuickEdit

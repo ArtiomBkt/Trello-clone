@@ -222,7 +222,7 @@ function getDummyBoard(): BoardTypes.board {
             id: 't101',
             title: 'task two',
             description: 'task two description',
-            style: { background: '#ef7564', fullCover: false },
+            style: { background: 'red', fullCover: false },
             members: [
               {
                 id: 'u100',
@@ -297,7 +297,7 @@ function getDummyBoard(): BoardTypes.board {
             id: 't104',
             title: 'task two',
             description: 'task two description',
-            style: { background: '#ef7564', fullCover: true },
+            style: { background: 'cyan', fullCover: true },
             members: [
               {
                 id: 'u100',
@@ -359,7 +359,7 @@ function getDummyBoard(): BoardTypes.board {
             id: 't105',
             title: 'task one',
             description: '',
-            style: { background: '', fullCover: false },
+            style: { background: 'navy', fullCover: true },
             members: [],
             labels: [{ id: 'l101', title: 'done', color: 'green' }],
             startDate: { timestamp: 1242101225068, isDone: false },
@@ -372,7 +372,7 @@ function getDummyBoard(): BoardTypes.board {
             id: 't106',
             title: 'task two',
             description: 'task two description',
-            style: { background: '#ef7564', fullCover: true },
+            style: { background: 'green', fullCover: false },
             members: [
               {
                 id: 'u100',
@@ -447,7 +447,7 @@ function getDummyBoard(): BoardTypes.board {
             id: 't108',
             title: 'task two',
             description: 'task two description',
-            style: { background: '#ef7564', fullCover: true },
+            style: { background: 'red', fullCover: true },
             members: [
               {
                 id: 'u100',
@@ -522,7 +522,7 @@ function getDummyBoard(): BoardTypes.board {
             id: 't110',
             title: 'task two group two',
             description: 'task two description',
-            style: { background: '#ef7564', fullCover: true },
+            style: { background: 'orange', fullCover: true },
             members: [
               {
                 id: 'u100',

@@ -24,7 +24,7 @@ const MemberModal = ({ task, handleTaskMemberToggle }: PropTypes.MemberProps) =>
         {boardMembers &&
           boardMembers.map(member => (
             <li key={member.id}>
-              <MemberWrapper onClick={() => handleTaskMemberToggle(member)}>
+              <MemberWrapper onClick={() => handleTaskMemberToggle!(member)}>
                 <MemberImgContainer>{MemberProfile(member)}</MemberImgContainer>
                 <MemberNameContainer>
                   {member.fullname} ({member.username})
