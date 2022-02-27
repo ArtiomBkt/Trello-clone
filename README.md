@@ -8,9 +8,9 @@ This project is under constant progress.
 
 #### Functionalities
 
-- [ ] Drag and drop
+- [X] Drag and drop
   - [X] Lists drag and drop.
-  - [ ] Tasks drag and drop - inside the same list and between lists.
+  - [X] Tasks drag and drop - inside the same list and between lists.
 
 - [ ] Boards
   - [X] Change board's title.
