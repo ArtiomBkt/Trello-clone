@@ -1,13 +1,13 @@
 import { useReducer } from 'react'
 import { PropTypes } from '../types/prop-types'
 
-const useLabelReducer = () => {
-  type LabelActions = { type: 'TOGGLE_EDIT'; payload: PropTypes.label['title'] } | { type: 'CHANGE_TITLE'; payload: string } | { type: 'SUBMIT_CHANGE' }
-  type StateTypes = {
-    isEditMode: boolean
-    labelTitle: PropTypes.label['title']
-  }
+type LabelActions = { type: 'TOGGLE_EDIT'; payload: PropTypes.label['title'] } | { type: 'CHANGE_TITLE'; payload: string } | { type: 'SUBMIT_CHANGE' }
+type StateTypes = {
+  isEditMode: boolean
+  labelTitle: PropTypes.label['title']
+}
 
+const useLabelReducer = () => {
   const labelState: StateTypes = {
     isEditMode: false,
     labelTitle: ''

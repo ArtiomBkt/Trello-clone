@@ -4,14 +4,21 @@ import { Icon } from '../../styled/Mixins.styled'
 import { PropTypes } from '../../types/prop-types'
 
 export const TaskPreviewContainer = styled(Link)<PropTypes.StyledProps>`
-  display: ${({ styling }) => (styling?.fullCover ? 'flex' : 'block')};
-  flex-direction: ${({ styling }) => (styling?.fullCover ? 'row' : '')};
+  ${({ styling }) =>
+    styling?.fullCover
+      ? css`
+          display: flex;
+          flex-direction: row;
+          min-height: 56px;
+        `
+      : css`
+          display: block;
+          min-height: 20px;
+        `};
 
   cursor: pointer;
-
   margin-bottom: 8px;
   max-width: 300px;
-  min-height: ${({ styling }) => (styling?.fullCover ? '56px' : '20px')};
 
   border-radius: 3px;
   box-shadow: 0 1px 0 #091e4240;

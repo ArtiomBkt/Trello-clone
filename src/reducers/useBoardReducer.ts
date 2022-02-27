@@ -2,9 +2,9 @@ import { useReducer } from 'react'
 import { boardService } from '../services/board.service'
 import { BoardTypes } from '../types/board-types'
 
-const useBoardReducer = () => {
-  type BoardActions = { type: 'BOARD_UPDATE'; payload: BoardTypes.board } | { type: 'LIST_UPDATE' } | { type: 'TASK_UPDATE' }
+type BoardActions = { type: 'BOARD_UPDATE'; payload: BoardTypes.board } | { type: 'LIST_UPDATE' } | { type: 'TASK_UPDATE' }
 
+const useBoardReducer = () => {
   const initialState = { board: boardService.getBoardById() }
 
   const boardReducer = (state: typeof initialState, action: BoardActions) => {

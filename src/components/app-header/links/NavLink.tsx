@@ -5,8 +5,9 @@ import { ReactComponent as RightArrowSvg } from '../../../assets/images/arrow-ri
 import { PropTypes } from '../../../types/prop-types'
 
 const NavLink = ({ isInModal, type, handleMenuToggle, children }: PropTypes.LinkProps) => {
+  const disabledBtn = type === 'More' ? false : true
   return (
-    <NavLinkContainer onClickCapture={handleMenuToggle} btnType={type}>
+    <NavLinkContainer disabled={disabledBtn} onClickCapture={handleMenuToggle} btnType={type}>
       {type === 'Create' ? (
         <HeaderCreateBtn title="Create new board">{children}</HeaderCreateBtn>
       ) : (

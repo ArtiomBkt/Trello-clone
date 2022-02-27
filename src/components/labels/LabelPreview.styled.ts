@@ -118,9 +118,10 @@ export const Label = styled.span<PropTypes.StyledProps>`
             padding: 0 8px;
           `
         : css`
+            line-height: 100px;
             animation: ${labels_shrink} 0.45s ease-in backwards;
             height: 8px;
-            line-height: 100px;
+            max-width: 40px;
           `}
   }
 `

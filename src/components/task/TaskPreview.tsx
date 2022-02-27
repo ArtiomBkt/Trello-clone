@@ -53,7 +53,7 @@ const TaskPreview = ({ task, index, handleTaskEdit, onLabelsUpdate }: PropTypes.
 
   return (
     <Draggable draggableId={task.id} index={index}>
-      {provided => (
+      {(provided, snapshot) => (
         <TaskPreviewContainer
           ref={provided.innerRef}
           {...provided.draggableProps}

@@ -50,9 +50,9 @@ const ListPreview = ({ list, index, onLabelsUpdate, onListUpdate }: PropTypes.Li
 
   return (
     <Draggable draggableId={list.id} index={index}>
-      {provided => (
+      {(provided, snapshot) => (
         <ListContentPreview {...provided.draggableProps} ref={provided.innerRef}>
-          <List>
+          <List isDragging={snapshot.isDragging}>
             <ListHeader onListUpdate={onListUpdate} dragHandleProps={provided.dragHandleProps} list={list} />
             <Droppable droppableId={list.id} type="TASK">
               {provided => (

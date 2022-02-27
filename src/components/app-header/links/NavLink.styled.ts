@@ -51,7 +51,12 @@ export const NavLinkContainer = styled.button<PropTypes.StyledProps>`
 
   &:hover,
   &.modal-open {
-    ${LinkHover}
+    ${({ btnType }) =>
+      btnType === 'More'
+        ? LinkHover
+        : css`
+            cursor: disabled;
+          `}
   }
 `
 

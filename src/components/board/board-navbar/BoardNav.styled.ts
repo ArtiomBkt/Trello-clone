@@ -117,7 +117,7 @@ export const BoardNamePlaceholder = styled.h1`
   font-weight: 700;
   line-height: 32px;
 
-  margin: 0 0 12px;
+  margin: 0;
   padding: 0 12px;
 
   overflow: hidden;

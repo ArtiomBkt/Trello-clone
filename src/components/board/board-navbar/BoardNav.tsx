@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useRef, useState } from 'react'
+import React, { useLayoutEffect, useRef } from 'react'
 import {
   BoardNavContainer,
   BoardNameContainer,
@@ -12,45 +12,51 @@ import {
   BoardSidebarIcon
 } from './BoardNav.styled'
 import { PropTypes } from '../../../types/prop-types'
+import useTitleEditReducer from '../../../reducers/useBoardTitleEditReducer'
 import BoardViews from './BoardViews'
 import BoardOrg from './BoardOrg'
 import BoardMembers from './BoardMembers'
 import BoardControls from './BoardControls'
 
 const BoardNav = ({ board, onBoardUpdate, onSidenavOpen }: PropTypes.BoardNavCmp) => {
-  const [boardTitle, setBoardTitle] = useState(board.title)
-  const [isEditBoardTitle, setIsEditBoardTitle] = useState(false)
-  const [titleContainerWidth, setTitlePlaceholderWidth] = useState('')
+  const [state, dispatch] = useTitleEditReducer({
+    boardTitle: board.title,
+    isEditing: false,
+    titleWidth: 0
+  })
   const inputRef = useRef<HTMLInputElement>(null)
   const titlePlaceholderRef = useRef<HTMLDivElement>(null)
 
   useLayoutEffect(() => {
     if (titlePlaceholderRef.current) {
-      setTitlePlaceholderWidth(window.getComputedStyle(titlePlaceholderRef.current).width)
+      const width = window.getComputedStyle(titlePlaceholderRef.current).width
+      dispatch({ type: 'CALC_WIDTH', payload: width })
     }
-    if (isEditBoardTitle && inputRef.current) {
+    if (state.isEditing && inputRef.current) {
       inputRef.current.focus()
       inputRef.current.select()
     }
-  }, [isEditBoardTitle, inputRef])
+  }, [dispatch, inputRef, state.isEditing])
+
+  useLayoutEffect(() => {
+    if (state.isEditing && titlePlaceholderRef.current) {
+      const { width } = titlePlaceholderRef.current.getBoundingClientRect()
+      dispatch({ type: 'CALC_WIDTH', payload: width })
+    }
+  }, [dispatch, state.isEditing, state.boardTitle])
 
   const handleInputChange = ({ target }: React.ChangeEvent<HTMLInputElement>): void => {
-    if (inputRef.current) {
-      // console.log(target.value.length)
-      // inputRef.current.size = target.value.length
-      // console.log(inputRef.current.size)
-    }
-    setBoardTitle(target.value)
+    dispatch({ type: 'UPDATE_TITLE', payload: target.value })
   }
 
   const handleTitleChange = (ev: React.FocusEvent | React.KeyboardEvent): void => {
     if ((ev as React.KeyboardEvent).key !== 'Enter' && ev.type !== 'blur') return
     ev.preventDefault()
-    setIsEditBoardTitle(false)
+    dispatch({ type: 'TOGGLE_EDITOR' })
 
     const newBoard = {
       ...board,
-      title: boardTitle
+      title: state.boardTitle
     }
     onBoardUpdate(newBoard)
   }
@@ -61,19 +67,18 @@ const BoardNav = ({ board, onBoardUpdate, onSidenavOpen }: PropTypes.BoardNavCmp
         <BoardViews />
       </div>
       <BoardNameContainer>
-        {!isEditBoardTitle ? (
-          <BoardNamePlaceholder ref={titlePlaceholderRef} onClick={() => setIsEditBoardTitle(true)}>
-            {board.title}
-          </BoardNamePlaceholder>
-        ) : (
+        <BoardNamePlaceholder ref={titlePlaceholderRef} onClick={() => dispatch({ type: 'TOGGLE_EDITOR' })}>
+          {state.boardTitle}
+        </BoardNamePlaceholder>
+        {state.isEditing && (
           <BoardNameInput
             ref={inputRef}
             type="text"
             onBlur={handleTitleChange}
             onKeyDown={handleTitleChange}
             onChange={handleInputChange}
-            value={boardTitle}
-            style={{ width: titleContainerWidth }}
+            value={state.boardTitle}
+            style={{ width: state.titleWidth }}
           />
         )}
       </BoardNameContainer>

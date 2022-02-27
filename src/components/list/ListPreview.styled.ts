@@ -57,14 +57,12 @@ export const List = styled.div<PropTypes.DndTypes>`
   border-radius: 3px;
 
   ${({ isDragging }) =>
-    isDragging
-      ? css`
-          transform: rotateY(0) rotate(5deg);
-          transition: transform 0.1s;
-        `
-      : null};
+    isDragging &&
+    css`
+      transform: rotate(3deg);
+      transition: transform 0.05s;
+    `};
 `
-/* background-color: ${({ isDraggingOver }) => isDraggingOver ? '#2c2c2c' : '#ebecf0'}; */
 
 export const ListTasksWrapper = styled.div<PropTypes.DndTypes>`
   flex: 1 1 auto;
@@ -72,7 +70,7 @@ export const ListTasksWrapper = styled.div<PropTypes.DndTypes>`
   overflow-y: auto;
   margin: 0 4px;
   padding: 0 4px;
-  min-height: 0;
+  min-height: 5px;
   z-index: 1;
 
   &::-webkit-scrollbar {

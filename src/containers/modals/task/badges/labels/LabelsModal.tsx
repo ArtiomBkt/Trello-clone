@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import useLabelReducer from '../../../../../hooks/useLabelReducer'
+import useLabelReducer from '../../../../../reducers/useLabelReducer'
 import { PropTypes } from '../../../../../types/prop-types'
 import { LabelsModalsContainer, LabelsList, LabelPreviewContainer, LabelPreviewEditBtn, LabelPreview, LabelSelectedIcon } from './LabelsModal.styled'
 
