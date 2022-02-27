@@ -65,6 +65,8 @@ export const BadgeContainer = styled.div<PropTypes.StyledProps>`
   display: inline-block;
   position: relative;
 
+  cursor: pointer;
+
   padding: 2px;
   margin: 0 4px 4px 0;
   max-width: 100%;

@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useRef } from 'react'
+import React, { useEffect, useLayoutEffect, useRef } from 'react'
 import { createPortal } from 'react-dom'
 import { ReactComponent as CloseIcon } from '../../../assets/images/close.svg'
 import {
@@ -16,6 +16,19 @@ import { PropTypes } from '../../../types/prop-types'
 const HeaderModal = ({ onClose, children, title, modalPos }: PropTypes.HeaderModalProps) => {
   const modalContainerRef = useRef<HTMLDivElement>(null)
   const outsideClick = useOutsideAlerter(modalContainerRef)
+
+  useEffect(() => {
+    const handleResize = () => {
+      const { width, x } = modalContainerRef.current!.getBoundingClientRect()
+      if (window.innerWidth - (width + x) <= 10) {
+        modalContainerRef.current!.style.left = x - 2 + 'px'
+      }
+    }
+
+    window.addEventListener('resize', handleResize)
+
+    return () => window.removeEventListener('resize', handleResize)
+  })
 
   useLayoutEffect(() => {
     if (outsideClick) {

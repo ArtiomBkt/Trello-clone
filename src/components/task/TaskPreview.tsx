@@ -4,6 +4,7 @@ import { PropTypes } from '../../types/prop-types'
 import TaskDetails from '../../containers/task/TaskDetails'
 import { TaskPreviewContainer, TaskCover, TaskEditIcon } from './TaskPreview.styled'
 import TaskQuickEdit from '../../containers/modals/task/QuickEdit'
+import { BoardTypes } from '../../types/board-types'
 
 const TaskPreview = ({ task, index, handleTaskEdit, onLabelsUpdate }: PropTypes.TaskPreviewProps) => {
   const [isQuickEditOpen, setIsQuickEditOpen] = useState(false)
@@ -40,7 +41,21 @@ const TaskPreview = ({ task, index, handleTaskEdit, onLabelsUpdate }: PropTypes.
     handleTaskEdit(newTask)
   }
 
-  const handleTaskDueToggle = (ev: React.MouseEvent) => {
+  const handleTaskMemberToggle = (member: BoardTypes.member): void => {
+    // TODO: get event and prevent default
+    const newTask: PropTypes.task = JSON.parse(JSON.stringify(task))
+    const idx = task.members!.findIndex(taskMember => taskMember.id === member.id)
+
+    if (idx === -1) {
+      newTask.members!.push(member)
+    } else {
+      newTask.members!.splice(idx, 1)
+    }
+
+    handleTaskEdit(newTask)
+  }
+
+  const handleTaskDueToggle = (ev: React.MouseEvent): void => {
     ev.preventDefault()
 
     const newTask: PropTypes.task = JSON.parse(JSON.stringify(task))
@@ -83,6 +98,7 @@ const TaskPreview = ({ task, index, handleTaskEdit, onLabelsUpdate }: PropTypes.
               modalPos={taskEditorPos}
               onLabelsUpdate={onLabelsUpdate}
               handleTaskLabelChange={handleTaskLabelChange}
+              handleTaskMemberToggle={handleTaskMemberToggle}
               onChangeSubmit={handleTaskEditSubmit}
               onClose={handleQuickEditToggle}
             >

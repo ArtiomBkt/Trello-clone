@@ -27,7 +27,6 @@ const Resets = createGlobalStyle`
   }
 
   input:not([type=file]), textarea {
-    background-color: #fafbfc;
     border: none;
     border-radius: 3px;
     line-height: 20px;

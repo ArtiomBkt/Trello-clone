@@ -62,6 +62,7 @@ export const BadgesModalHeaderTitle = styled.span`
 
   overflow: hidden;
   text-overflow: ellipsis;
+  text-transform: capitalize;
   white-space: nowrap;
 
   border-bottom: 1px solid #091e4221;

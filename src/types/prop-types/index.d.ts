@@ -63,6 +63,7 @@ export declare module PropTypes {
 
   type MemberListProps = {
     members: BoardTypes.member[] | undefined
+    member?: BoardTypes.member
   }
 
   interface ContainersProps {
@@ -98,6 +99,7 @@ export declare module PropTypes {
     onChangeSubmit?: (ev: React.MouseEvent) => void
     onClose?: (ev?: React.MouseEvent) => void
     onLabelsUpdate: (labels: PropTypes.label[]) => void
+    handleTaskMemberToggle: (member: BoardTypes.member) => void
   }
 
   type BadgesModalProps = {
@@ -114,6 +116,15 @@ export declare module PropTypes {
     handleTaskLabelChange: (label: PropTypes.label) => void
     onLabelsUpdate?: (labels: PropTypes.label[]) => void
     handleLabelChange?: (label: PropTypes.label) => void
+  }
+
+  type DateProps = {
+    task: PropTypes.task
+  }
+
+  type MemberProps = {
+    task: PropTypes.task
+    handleTaskMemberToggle: (memberId: BoardTypes.member) => void
   }
 
   type HeaderModalProps = {

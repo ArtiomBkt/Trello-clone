@@ -1,13 +1,15 @@
-import React, { useCallback, useLayoutEffect, useRef, useState } from 'react'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { TaskQuickEditorControls, TaskQuickEditorControlBtn, EditorControlBtnIcon, EditorControlText } from './QuickEdit.styled'
 import { PropTypes } from '../../../types/prop-types'
 import useOutsideAlerter from '../../../hooks/useOutsideAlerter'
 import BadgesModal from './badges/BadgesModal'
 import LabelsModal from './badges/labels/LabelsModal'
+import DatesModal from './badges/dates/DatesModal'
+import MemberModal from './badges/members/MemberModal'
 
-const QuickEditControls = ({ handleTaskLabelChange, task, onLabelsUpdate }: PropTypes.QuickEditorProps) => {
+const QuickEditControls = ({ handleTaskLabelChange, handleTaskMemberToggle, task, onLabelsUpdate }: PropTypes.QuickEditorProps) => {
   const [quickControls] = useState([
-    { title: 'Open card', type: 'openCard', icon: `'\\e912'`, href: `/${task.id}` },
+    { title: 'Open card', type: '', icon: `'\\e912'`, href: `/${task.id}` },
     { title: 'Edit labels', type: 'labels', icon: `'\\e93f'` },
     { title: 'Change members', type: 'members', icon: `'\\e946'` },
     { title: 'Edit dates', type: 'dates', icon: `'\\e91b'` }
@@ -19,6 +21,7 @@ const QuickEditControls = ({ handleTaskLabelChange, task, onLabelsUpdate }: Prop
 
   const toggleBadgeModal = useCallback(
     (modalName?: string, ev?: React.MouseEvent) => {
+      ev?.preventDefault()
       if (typeof modalName !== 'string' || modalName === badgeModal) {
         return setBadgeModal(null)
       }
@@ -31,7 +34,24 @@ const QuickEditControls = ({ handleTaskLabelChange, task, onLabelsUpdate }: Prop
     [badgeModal]
   )
 
-  useLayoutEffect(() => {
+  // TODO: there has to be a better solution than this shit
+  // useLayoutEffect(() => {
+  //   if (modalWrapperRef.current) {
+  //     var { width, x } = modalWrapperRef.current.getBoundingClientRect()
+  //   }
+  //   const handleResize = () => {
+  //     if (window.innerWidth - (width + x) < 10) {
+  //       setModalPos({ ...modalPos, left: modalPos.left - 5 })
+  //     }
+  //   }
+  //   handleResize()
+
+  //   window.addEventListener('resize', handleResize)
+
+  //   return () => window.removeEventListener('resize', handleResize)
+  // }, [modalPos, modalWrapperRef])
+
+  useEffect(() => {
     if (outsideAlerter) {
       setBadgeModal(null)
     }
@@ -42,9 +62,9 @@ const QuickEditControls = ({ handleTaskLabelChange, task, onLabelsUpdate }: Prop
       case 'labels':
         return <LabelsModal onLabelsUpdate={onLabelsUpdate} task={task} handleTaskLabelChange={handleTaskLabelChange} />
       case 'members':
-        return <>members</>
+        return <MemberModal handleTaskMemberToggle={handleTaskMemberToggle} task={task} />
       case 'dates':
-        return <>dates</>
+        return <DatesModal task={task} />
       default:
         return
     }
