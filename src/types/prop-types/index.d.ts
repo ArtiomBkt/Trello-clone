@@ -9,6 +9,7 @@ export declare module PropTypes {
     size?: string
     content?: string
     isDone?: boolean
+    dueStatus?: string
     isDateBadge?: boolean
     isFullCover?: boolean
     isListAdd?: boolean
@@ -142,6 +143,7 @@ export declare module PropTypes {
     isQuickEditOpen?: boolean
     taskTitle?: string
     handleTaskTitleChange?: ({ target }: React.ChangeEvent<HTMLTextAreaElement>) => void
+    handleTaskDueToggle?: (ev: React.MouseEvent) => void
   }
 
   interface LabelsInterface {

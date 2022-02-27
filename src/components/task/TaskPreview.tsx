@@ -40,6 +40,19 @@ const TaskPreview = ({ task, index, handleTaskEdit, onLabelsUpdate }: PropTypes.
     handleTaskEdit(newTask)
   }
 
+  const handleTaskDueToggle = (ev: React.MouseEvent) => {
+    ev.preventDefault()
+
+    const newTask: PropTypes.task = JSON.parse(JSON.stringify(task))
+    if (newTask.dueDate?.isDone) {
+      newTask.dueDate!.isDone = false
+    } else {
+      newTask.dueDate!.isDone = true
+    }
+
+    handleTaskEdit(newTask)
+  }
+
   const handleTaskEditSubmit = (ev: React.MouseEvent | React.KeyboardEvent): void => {
     if (((ev as React.KeyboardEvent).key !== 'Enter' && ev.type !== 'click') || !taskTitle) return
     ev.preventDefault()
@@ -73,10 +86,17 @@ const TaskPreview = ({ task, index, handleTaskEdit, onLabelsUpdate }: PropTypes.
               onChangeSubmit={handleTaskEditSubmit}
               onClose={handleQuickEditToggle}
             >
-              <TaskDetails taskTitle={taskTitle} handleTaskTitleChange={handleTaskTitleChange} isQuickEditOpen={isQuickEditOpen} taskRef={taskRef} task={task} />
+              <TaskDetails
+                taskTitle={taskTitle}
+                handleTaskDueToggle={handleTaskDueToggle}
+                handleTaskTitleChange={handleTaskTitleChange}
+                isQuickEditOpen={isQuickEditOpen}
+                taskRef={taskRef}
+                task={task}
+              />
             </TaskQuickEdit>
           )}
-          <TaskDetails taskRef={taskRef} task={task} />
+          <TaskDetails handleTaskDueToggle={handleTaskDueToggle} taskRef={taskRef} task={task} />
         </TaskPreviewContainer>
       )}
     </Draggable>

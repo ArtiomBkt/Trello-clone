@@ -1,10 +1,13 @@
 import React, { useLayoutEffect, useState } from 'react'
-import useLocalStorageState from '../../hooks/useLocalStorageState'
 import { DragDropContext, Droppable, DropResult } from 'react-beautiful-dnd'
-import { BoardTypes } from '../../types/board-types/index'
+
 import { boardService } from '../../services/board.service'
+import useLocalStorageState from '../../hooks/useLocalStorageState'
+import { BoardTypes } from '../../types/board-types/index'
+
 import { BoardContainer, BoardContentWrapper, BoardWrapper, AppWrapper } from './Board.styled'
 import { ListPreviewContainer } from '../../components/list/ListPreview.styled'
+
 import labelsContext from '../../contexts/labelsContext'
 import BoardNav from '../../components/board/board-navbar/BoardNav'
 import BoardSidebar from '../../components/board/board-sidebar/Sidebar'

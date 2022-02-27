@@ -212,8 +212,8 @@ function getDummyBoard(): BoardTypes.board {
               { id: 'l102', title: '', color: 'yellow' },
               { id: 'l107', title: '', color: 'navy' }
             ],
-            startDate: { timestamp: 1242101225068, isDone: false },
-            dueDate: { timestamp: undefined, isDone: false },
+            startDate: { timestamp: undefined, isDone: false },
+            dueDate: { timestamp: 1646087624876, isDone: false },
             comments: [],
             checklists: [],
             isArchived: false
@@ -222,7 +222,7 @@ function getDummyBoard(): BoardTypes.board {
             id: 't101',
             title: 'task two',
             description: 'task two description',
-            style: { background: '#ef7564', fullCover: true },
+            style: { background: '#ef7564', fullCover: false },
             members: [
               {
                 id: 'u100',
@@ -237,8 +237,8 @@ function getDummyBoard(): BoardTypes.board {
               { id: 'l101', title: '', color: 'green' },
               { id: 'l103', title: '', color: 'orange' }
             ],
-            startDate: { timestamp: 1642101255068, isDone: true },
-            dueDate: { timestamp: 1642101255069, isDone: true },
+            startDate: { timestamp: 1545959831361, isDone: false },
+            dueDate: { timestamp: 1545989831361, isDone: false },
             comments: [
               {
                 id: 'c100',
@@ -287,8 +287,8 @@ function getDummyBoard(): BoardTypes.board {
             style: { background: '', fullCover: false },
             members: [],
             labels: [{ id: 'l101', title: 'done', color: 'green' }],
-            startDate: { timestamp: 1242101225068, isDone: false },
-            dueDate: { timestamp: 1242101225068, isDone: false },
+            startDate: { timestamp: undefined, isDone: false },
+            dueDate: { timestamp: 1945959831361, isDone: false },
             comments: [],
             checklists: [],
             isArchived: false

@@ -10,10 +10,12 @@ export const TaskPreviewContainer = styled(Link)<PropTypes.StyledProps>`
           display: flex;
           flex-direction: row;
           min-height: 56px;
+          background-color: ${styling.background};
         `
       : css`
           display: block;
           min-height: 20px;
+          background-color: #fff;
         `};
 
   cursor: pointer;
@@ -23,14 +25,15 @@ export const TaskPreviewContainer = styled(Link)<PropTypes.StyledProps>`
   border-radius: 3px;
   box-shadow: 0 1px 0 #091e4240;
 
-  background-color: ${({ styling }) => styling?.background || '#fff'};
   position: relative;
 
   text-decoration: none;
   z-index: 0;
 
   &:hover {
-    background-color: ${({ styling }) => (styling?.background === '#ef7564' ? '#eb5a46' : '#f4f5f7')};
+    // TODO: on hover, if task background is fullcover, background according to it's color
+
+    background-color: #f4f5f7;
     border-bottom-color: #091e4240;
 
     span {
