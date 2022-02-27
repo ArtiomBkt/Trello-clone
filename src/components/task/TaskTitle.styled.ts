@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { PropTypes } from '../../types/prop-types'
 
 export const TaskTitleContainer = styled.span<PropTypes.StyledProps>`
@@ -11,5 +11,18 @@ export const TaskTitleContainer = styled.span<PropTypes.StyledProps>`
   text-decoration: none;
   color: #172b4d;
 
-  ${({ isFullCover }) => (isFullCover ? 'font-size:16px; font-weight:500; line-height:20px; margin-bottom:0; padding-bottom:8px;' : '')};
+  ${({ styling }) =>
+    styling?.fullCover &&
+    css`
+      font-size: 16px;
+      font-weight: 500;
+      line-height: 20px;
+      margin-bottom: 0;
+      padding-bottom: 8px;
+
+      ${styling?.background === 'navy' &&
+      css`
+        color: #fff;
+      `}
+    `};
 `
