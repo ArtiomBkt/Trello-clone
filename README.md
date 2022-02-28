@@ -27,7 +27,8 @@ This project is under constant progress.
   - [ ] Task inline editing
     - [X] Title.
     - [X] Labels.
-    - [ ] Members.
+    - [X] Members.
+    - [X] Cover.
     - [ ] Dates.
 
 - [ ] Users
