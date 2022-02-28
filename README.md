@@ -2,8 +2,7 @@
 
 This project is under constant progress.
 
-Netlify build
-[![Netlify Status](https://api.netlify.com/api/v1/badges/113e834c-d280-479d-b311-6cf2fa928c3a/deploy-status)](https://app.netlify.com/sites/kanban-trello-clone/deploys)
+[Netlify deploy](https://react-trellop.netlify.app/)
 
 ### Goals for the project (more to be added)
 
