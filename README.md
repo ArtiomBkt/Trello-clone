@@ -1,8 +1,9 @@
 # Trello clone using React, TypeScript, styled components
 
 This project is under constant progress.
-<!-- Feel free to fork and submit a PR. -->
 
+Netlify build
+[![Netlify Status](https://api.netlify.com/api/v1/badges/113e834c-d280-479d-b311-6cf2fa928c3a/deploy-status)](https://app.netlify.com/sites/kanban-trello-clone/deploys)
 
 ### Goals for the project (more to be added)
 
