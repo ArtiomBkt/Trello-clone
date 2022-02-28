@@ -12,6 +12,7 @@ export declare module PropTypes {
     dueStatus?: string
     isDateBadge?: boolean
     isFullCover?: boolean
+    isSelectedColor?: boolean
     isListAdd?: boolean
     isEditBoardTitle?: boolean
     isSidenavOpen?: boolean
@@ -126,6 +127,10 @@ export declare module PropTypes {
     task: PropTypes.task
     members?: MemberListProps['members']
     handleTaskMemberToggle?: (memberId: BoardTypes.member) => void
+  }
+
+  type TaskColorProps = {
+    task: PropTypes.task
   }
 
   type HeaderModalProps = {

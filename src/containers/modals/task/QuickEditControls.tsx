@@ -6,13 +6,16 @@ import BadgesModal from './badges/BadgesModal'
 import LabelsModal from './badges/labels/LabelsModal'
 import DatesModal from './badges/dates/DatesModal'
 import MemberModal from './badges/members/MemberModal'
+import CoverModal from './cover-color/CoverModal'
 
 const QuickEditControls = ({ handleTaskLabelChange, handleTaskMemberToggle, task, onLabelsUpdate }: PropTypes.QuickEditorProps) => {
   const [quickControls] = useState([
     { title: 'Open card', type: '', icon: `'\\e912'`, href: `/${task.id}` },
     { title: 'Edit labels', type: 'labels', icon: `'\\e93f'` },
     { title: 'Change members', type: 'members', icon: `'\\e946'` },
-    { title: 'Edit dates', type: 'dates', icon: `'\\e91b'` }
+    { title: 'Change Cover', type: 'cover', icon: `'\\e914'` },
+    { title: 'Edit dates', type: 'dates', icon: `'\\e91b'` },
+    { title: 'Archive', type: 'archive', icon: `'\\e907'` }
   ])
   const [badgeModal, setBadgeModal] = useState<string | null>(null)
   const [modalPos, setModalPos] = useState({ top: 0, left: 0 })
@@ -63,6 +66,8 @@ const QuickEditControls = ({ handleTaskLabelChange, handleTaskMemberToggle, task
         return <LabelsModal onLabelsUpdate={onLabelsUpdate} task={task} handleTaskLabelChange={handleTaskLabelChange} />
       case 'members':
         return <MemberModal handleTaskMemberToggle={handleTaskMemberToggle} task={task} />
+      case 'cover':
+        return <CoverModal task={task} />
       case 'dates':
         return <DatesModal task={task} />
       default:

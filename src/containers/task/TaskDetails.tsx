@@ -13,17 +13,19 @@ import TaskDescriptionBadge from '../../components/task/task-badges/TaskDescript
 import TaskDates from '../../components/task/task-badges/TaskDateBadge'
 import MemberProfile from '../../components/member/MemberProfile'
 
-const TaskBadges = ({ task, handleTaskDueToggle }: PropTypes.TaskCmps) => {
+const TaskBadges = ({ task, isQuickEditOpen, handleTaskDueToggle }: PropTypes.TaskCmps) => {
   if (!task.checklists && !task.comments && !task.description && !task.startDate) return null
 
-  const props = { id: task?.id, title: task?.title }
+  const props = { id: task.id, title: task.title }
+
+  const isFullCover: boolean = task.style!.fullCover && !isQuickEditOpen
 
   return (
-    <BadgesWrapper isFullCover={task.style?.fullCover}>
+    <BadgesWrapper isFullCover={isFullCover}>
       <TaskDates handleTaskDueToggle={handleTaskDueToggle} task={task} />
-      <TaskDescriptionBadge description={task?.description} {...props} />
-      <TaskCommentBadge comments={task?.comments} {...props} />
-      <TaskChecklistBadge checklists={task?.checklists} {...props} />
+      <TaskDescriptionBadge description={task.description} {...props} />
+      <TaskCommentBadge comments={task.comments} {...props} />
+      <TaskChecklistBadge checklists={task.checklists} {...props} />
     </BadgesWrapper>
   )
 }
@@ -43,9 +45,18 @@ const TaskDetails = ({ taskTitle, taskRef, task, isQuickEditOpen, handleTaskDueT
 
   return (
     <TaskDetailsContainer ref={taskRef} isFullCover={task.style?.fullCover}>
-      {task.labels && !task.style?.fullCover && <LabelsPreview labels={task.labels} />}
-      {!isQuickEditOpen ? <TaskTitle task={task} /> : <EditorTaskTextarea ref={taskTitleRef} onChange={handleTaskTitleChange} value={taskTitle} />}
-      <TaskBadges handleTaskDueToggle={handleTaskDueToggle} task={task} />
+      {!isQuickEditOpen ? (
+        <>
+          {task.labels && !task.style?.fullCover && <LabelsPreview labels={task.labels} />}
+          <TaskTitle task={task} />
+        </>
+      ) : (
+        <>
+          {task.labels && <LabelsPreview labels={task.labels} />}
+          <EditorTaskTextarea ref={taskTitleRef} onChange={handleTaskTitleChange} value={taskTitle} />
+        </>
+      )}
+      <TaskBadges isQuickEditOpen={isQuickEditOpen} handleTaskDueToggle={handleTaskDueToggle} task={task} />
       {task.members!.length > 0 && <TaskMembers task={task} members={task.members} />}
     </TaskDetailsContainer>
   )
