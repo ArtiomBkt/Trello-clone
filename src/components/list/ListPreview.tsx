@@ -9,7 +9,7 @@ import { ListContentPreview, List, ListTasksWrapper } from './ListPreview.styled
 import { TaskComposerWrapper, TaskComposerToggler, TaskComposerIcon } from './task-composer/TaskComposer.styled'
 import { BoardTypes } from '../../types/board-types'
 
-const ListPreview = ({ list, index, onLabelsUpdate, onListUpdate }: PropTypes.ListPreviewProps) => {
+const ListPreview = ({ list, index, onLabelsUpdate, onArchiveItem, onListUpdate }: PropTypes.ListPreviewProps) => {
   const [isComposerOpen, setIsComposerOpen] = useState(false)
 
   const handleComposerToggle = (): void => {
@@ -48,6 +48,31 @@ const ListPreview = ({ list, index, onLabelsUpdate, onListUpdate }: PropTypes.Li
     onListUpdate(newList)
   }
 
+  const handleTaskArchive = (ev: React.MouseEvent, archivedTask: BoardTypes.task): void => {
+    ev.preventDefault()
+
+    const index = list.tasks.findIndex(task => task.id === archivedTask.id)
+    if (index === -1) {
+      throw new Error(`Task ${archivedTask.id} was not found`)
+    }
+
+    const newTasks = [...list.tasks]
+    newTasks.splice(index, 1)
+
+    const newList = {
+      ...list,
+      tasks: newTasks
+    }
+
+    const archivedItem: BoardTypes.archivedItem = {
+      fromList: list.id,
+      item: JSON.parse(JSON.stringify(archivedTask)),
+      index
+    }
+
+    onArchiveItem(archivedItem, newList)
+  }
+
   return (
     <Draggable draggableId={list.id} index={index}>
       {(provided, snapshot) => (
@@ -63,7 +88,8 @@ const ListPreview = ({ list, index, onLabelsUpdate, onListUpdate }: PropTypes.Li
                       task,
                       index,
                       onLabelsUpdate,
-                      handleTaskEdit
+                      handleTaskEdit,
+                      handleTaskArchive
                     }
                     return <TaskPreview {...taskPreviewProps} />
                   })}

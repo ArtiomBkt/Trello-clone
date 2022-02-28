@@ -25,7 +25,7 @@ import CoverModal from './cover-color/CoverModal'
 
 // TODO: figure out hook for modal closing when same button is clicked
 
-const QuickEditControls = ({ handleTaskLabelChange, handleTaskMemberToggle, handleTaskStyleChange, onLabelsUpdate, task }: PropTypes.QuickEditorProps) => {
+const QuickEditControls = ({ handleTaskLabelChange, handleTaskMemberToggle, handleTaskStyleChange, handleTaskArchive, onLabelsUpdate, task }: PropTypes.QuickEditorProps) => {
   const [quickControls] = useState([
     { title: 'Edit labels', type: 'labels', icon: `'\\e93f'` },
     { title: 'Change members', type: 'members', icon: `'\\e946'` },
@@ -102,7 +102,7 @@ const QuickEditControls = ({ handleTaskLabelChange, handleTaskMemberToggle, hand
         </TaskQuickEditorControlBtn>
       ))}
       {/* onclick send task to archive */}
-      <TaskQuickEditorControlBtn>
+      <TaskQuickEditorControlBtn onClick={ev => handleTaskArchive!(ev, task)}>
         <EditorControlBtnIcon content="'\e907'" size="sm" />
         <EditorControlText>Archive</EditorControlText>
       </TaskQuickEditorControlBtn>

@@ -6,7 +6,7 @@ import { TaskPreviewContainer, TaskCover, TaskEditIcon } from './TaskPreview.sty
 import TaskQuickEdit from '../../containers/modals/task/QuickEdit'
 import { BoardTypes } from '../../types/board-types'
 
-const TaskPreview = ({ task, index, handleTaskEdit, onLabelsUpdate }: PropTypes.TaskPreviewProps) => {
+const TaskPreview = ({ task, index, handleTaskEdit, handleTaskArchive, onLabelsUpdate }: PropTypes.TaskPreviewProps) => {
   const [isQuickEditOpen, setIsQuickEditOpen] = useState(false)
   const [taskEditorPos, setTaskEditorPos] = useState({ top: 0, left: 0 })
   const [taskTitle, setTaskTitle] = useState<string>(task.title)
@@ -46,7 +46,7 @@ const TaskPreview = ({ task, index, handleTaskEdit, onLabelsUpdate }: PropTypes.
       newTask.labels!.splice(idx, 1)
     }
 
-    handleTaskEdit(newTask)
+    handleTaskEdit!(newTask)
   }
 
   const handleTaskMemberToggle = (ev: React.MouseEvent, member: BoardTypes.member): void => {
@@ -61,7 +61,7 @@ const TaskPreview = ({ task, index, handleTaskEdit, onLabelsUpdate }: PropTypes.
       newTask.members!.splice(idx, 1)
     }
 
-    handleTaskEdit(newTask)
+    handleTaskEdit!(newTask)
   }
 
   const handleTaskStyleChange = (newStyle: BoardTypes.task['style']): void => {
@@ -71,7 +71,7 @@ const TaskPreview = ({ task, index, handleTaskEdit, onLabelsUpdate }: PropTypes.
       newTask.style = { ...newStyle }
     }
 
-    handleTaskEdit(newTask)
+    handleTaskEdit!(newTask)
   }
 
   const handleTaskDueToggle = (ev: React.MouseEvent): void => {
@@ -84,7 +84,7 @@ const TaskPreview = ({ task, index, handleTaskEdit, onLabelsUpdate }: PropTypes.
       newTask.dueDate!.isDone = true
     }
 
-    handleTaskEdit(newTask)
+    handleTaskEdit!(newTask)
   }
 
   const handleTaskEditSubmit = (ev: React.MouseEvent | React.KeyboardEvent): void => {
@@ -94,7 +94,7 @@ const TaskPreview = ({ task, index, handleTaskEdit, onLabelsUpdate }: PropTypes.
     const newTask: PropTypes.task = JSON.parse(JSON.stringify(task))
     newTask.title = taskTitle
 
-    handleTaskEdit(newTask)
+    handleTaskEdit!(newTask)
     handleQuickEditToggle()
   }
 
@@ -105,6 +105,7 @@ const TaskPreview = ({ task, index, handleTaskEdit, onLabelsUpdate }: PropTypes.
     handleTaskLabelChange,
     handleTaskMemberToggle,
     handleTaskStyleChange,
+    handleTaskArchive,
     onChangeSubmit: handleTaskEditSubmit,
     onClose: handleQuickEditToggle
   }
@@ -120,7 +121,7 @@ const TaskPreview = ({ task, index, handleTaskEdit, onLabelsUpdate }: PropTypes.
 
   // TODO: figure out react router Link cmp - click self/capture
   return (
-    <Draggable draggableId={task.id} index={index}>
+    <Draggable draggableId={task.id} index={index!}>
       {(provided, snapshot) => (
         <TaskPreviewContainer
           ref={provided.innerRef}

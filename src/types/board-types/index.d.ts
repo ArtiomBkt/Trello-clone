@@ -53,6 +53,12 @@ export declare module BoardTypes {
     isArchived?: boolean
   }
 
+  type archivedItem = {
+    fromList?: BoardTypes.list['id']
+    item: BoardTypes.list | BoardTypes.task
+    index: number
+  }
+
   export type board = {
     id: string
     title: string
@@ -61,7 +67,7 @@ export declare module BoardTypes {
     members?: member[]
     labels: label[]
     description?: string
-    archive?: task[]
+    archive: archivedItem[]
     lists?: list[]
   }
 }

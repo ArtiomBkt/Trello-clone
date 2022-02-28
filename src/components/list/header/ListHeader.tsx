@@ -34,6 +34,7 @@ const ListHeader = ({ list, dragHandleProps, onListUpdate }: PropTypes.ListHeade
   }
 
   // TODO: add list options
+  // TODO: handle list archive
 
   return (
     <ListTitle {...dragHandleProps}>

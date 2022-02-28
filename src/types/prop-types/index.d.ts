@@ -41,6 +41,7 @@ export declare module PropTypes {
     index: number
     onListUpdate: (list: BoardTypes.list) => void
     onLabelsUpdate: (labels: BoardTypes.label[]) => void
+    onArchiveItem: (archivedItem: BoardTypes.archivedItem, updatingList: BoardTypes.list) => void
   }
 
   type ListHeaderProps = {
@@ -51,9 +52,10 @@ export declare module PropTypes {
 
   type TaskPreviewProps = {
     task: task
-    index: number
-    handleTaskEdit: (task: BoardTypes.task) => void
-    onLabelsUpdate: (labels: BoardTypes.label[]) => void
+    index?: number
+    handleTaskEdit?: (task: PropTypes.task) => void
+    onLabelsUpdate?: (labels: BoardTypes.label[]) => void
+    handleTaskArchive?: (ev: React.MouseEvent, task: PropTypes.task) => void
   }
 
   type BoardNavCmp = {
@@ -107,9 +109,10 @@ export declare module PropTypes {
     handleTaskLabelChange: (ev: React.MouseEvent, label: PropTypes.label) => void
     onChangeSubmit?: (ev: React.MouseEvent) => void
     onClose?: (ev?: React.MouseEvent) => void
-    onLabelsUpdate: (labels: PropTypes.label[], ev?: React.MouseEvent) => void
+    onLabelsUpdate?: (labels: PropTypes.label[], ev?: React.MouseEvent) => void
     handleTaskMemberToggle: (ev: React.MouseEvent, member: BoardTypes.member) => void
     handleTaskStyleChange: (newStyle: task['style']) => void
+    handleTaskArchive?: (ev: React.MouseEvent, task: PropTypes.task) => void
   }
 
   type BadgesModalProps = {
@@ -165,7 +168,7 @@ export declare module PropTypes {
   }
 
   interface TaskCmps {
-    task: BoardTypes.task
+    task: PropTypes.task
     taskRef?: React.RefObject<HTMLDivElement>
     isQuickEditOpen?: boolean
     taskTitle?: string
@@ -180,8 +183,14 @@ export declare module PropTypes {
   interface TaskColorsInterface extends LabelsInterface {}
 
   type SidenavProps = {
+    board: PropTypes.board
     isSidenavOpen: boolean
     onSidenavClose: () => void
+  }
+
+  type SidebarMenusProps = {
+    children?: React.ReactNode
+    board: PropTypes.board
   }
 
   type LabelsContext = {

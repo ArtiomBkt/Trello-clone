@@ -37,7 +37,22 @@ const Board = () => {
       ...board,
       lists: newLists
     }
+
     onBoardUpdate(newBoard)
+  }
+
+  // TODO: move to utils or somewhere more appropriate =>
+  const getUpdatedLists = (updatingList: BoardTypes.list): BoardTypes.list[] => {
+    const idx = board.lists!.findIndex(list => list.id === updatingList.id)
+    const newLists = [...board.lists!]
+
+    if (idx !== -1) {
+      newLists.splice(idx, 1, updatingList)
+    } else {
+      newLists.push(updatingList)
+    }
+
+    return newLists
   }
 
   const onAddList = (listTitle: string): void => {
@@ -48,20 +63,13 @@ const Board = () => {
   }
 
   const onListUpdate = (newList: BoardTypes.list): void => {
-    const idx = board.lists!.findIndex((list: BoardTypes.list) => list.id === newList.id)
-
-    const newLists = [...board.lists!]
-
-    if (idx !== -1) {
-      newLists.splice(idx, 1, newList)
-    } else {
-      newLists.push(newList)
-    }
+    const newLists = getUpdatedLists(newList)
 
     const newBoard = {
       ...board,
       lists: newLists
     }
+
     onBoardUpdate(newBoard)
   }
 
@@ -69,6 +77,21 @@ const Board = () => {
     const newBoard = {
       ...board,
       labels: newLabels
+    }
+
+    onBoardUpdate(newBoard)
+  }
+
+  const onArchiveItem = (archivedItem: BoardTypes.archivedItem, updatingList?: BoardTypes.list): void => {
+    const newLists = updatingList ? getUpdatedLists(updatingList) : [...board.lists!]
+
+    const archive = [...board.archive]
+    archive.push(archivedItem)
+
+    const newBoard = {
+      ...board,
+      lists: newLists,
+      archive
     }
 
     onBoardUpdate(newBoard)
@@ -102,6 +125,7 @@ const Board = () => {
                               key: list.id,
                               list,
                               index,
+                              onArchiveItem,
                               onLabelsUpdate,
                               onListUpdate
                             }
@@ -116,7 +140,7 @@ const Board = () => {
                 </DragDropContext>
               </div>
             </BoardWrapper>
-            <BoardSidebar isSidenavOpen={isSidenavOpen} onSidenavClose={toggleSidenav} />
+            {isSidenavOpen && <BoardSidebar board={board} isSidenavOpen={isSidenavOpen} onSidenavClose={toggleSidenav} />}
           </div>
         </AppWrapper>
       </BoardContentWrapper>

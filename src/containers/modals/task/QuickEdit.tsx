@@ -11,6 +11,7 @@ const TaskQuickEdit = ({
   handleTaskLabelChange,
   handleTaskMemberToggle,
   handleTaskStyleChange,
+  handleTaskArchive,
   onChangeSubmit,
   onLabelsUpdate,
   onClose
@@ -26,8 +27,9 @@ const TaskQuickEdit = ({
         <QuickEditControls
           handleTaskStyleChange={handleTaskStyleChange}
           handleTaskMemberToggle={handleTaskMemberToggle}
-          onLabelsUpdate={onLabelsUpdate}
           handleTaskLabelChange={handleTaskLabelChange}
+          handleTaskArchive={handleTaskArchive}
+          onLabelsUpdate={onLabelsUpdate}
           task={task}
         />
       </TaskQuickEditorWrapper>
