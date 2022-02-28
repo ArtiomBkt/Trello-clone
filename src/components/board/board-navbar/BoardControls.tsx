@@ -3,6 +3,7 @@ import { BoardWatcherBtn, BoardWatcherIcon, BoardNavDivider } from './BoardNav.s
 import { PropTypes } from '../../../types/prop-types'
 
 const BoardControls = ({ children }: PropTypes.ChildrenProp) => {
+  // TODO: handle board watch/unwatch
   return (
     <div style={{ display: 'inline-flex' }}>
       <BoardWatcherBtn>

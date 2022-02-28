@@ -94,6 +94,8 @@ export const Label = styled.span<PropTypes.StyledProps>`
   color: #fff;
   background-color: ${({ labelColor }) => labelColors[labelColor!].static || '#b3bac5'};
 
+  cursor: pointer;
+
   &:hover {
     background-color: ${({ labelColor }) => labelColors[labelColor!].hover};
   }

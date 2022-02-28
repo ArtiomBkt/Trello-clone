@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components'
-import { Link } from 'react-router-dom'
+// import { Link } from 'react-router-dom'
 import { Icon } from '../../styled/Mixins.styled'
 import { PropTypes } from '../../types/prop-types'
 
@@ -16,7 +16,8 @@ export const taskColors: PropTypes.TaskColorsInterface = {
   navy: { static: '#172b4d', hover: '#091e42' }
 }
 
-export const TaskPreviewContainer = styled(Link)<PropTypes.StyledProps>`
+// export const TaskPreviewContainer = styled(Link)<PropTypes.StyledProps>`
+export const TaskPreviewContainer = styled.div<PropTypes.StyledProps>`
   ${({ styling }) =>
     styling?.fullCover
       ? css`
@@ -66,6 +67,7 @@ export const TaskCover = styled.div<PropTypes.StyledProps>`
 `
 
 export const TaskEditIcon = styled.span<PropTypes.StyledProps>`
+  cursor: pointer;
   box-sizing: content-box;
   position: absolute;
   top: 2px;

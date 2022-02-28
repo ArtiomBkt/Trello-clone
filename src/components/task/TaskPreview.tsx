@@ -24,11 +24,19 @@ const TaskPreview = ({ task, index, handleTaskEdit, onLabelsUpdate }: PropTypes.
     setIsQuickEditOpen(prevState => !prevState)
   }
 
-  const handleTaskTitleChange = ({ target }: React.ChangeEvent<HTMLTextAreaElement>): void => {
-    setTaskTitle(target.value)
+  const handleTaskTitleChange = (ev: React.ChangeEvent<HTMLTextAreaElement> | React.KeyboardEvent): void => {
+    if ((ev as React.KeyboardEvent).key !== 'Enter' && !((ev as React.KeyboardEvent).key === 'Enter' && (ev as React.KeyboardEvent).shiftKey)) {
+      setTaskTitle((ev as React.ChangeEvent<HTMLTextAreaElement>).target.value)
+    }
+    // else {
+    //   ev.preventDefault()
+    //   setTaskTitle(title => title + '\r\n')
+    // }
   }
 
-  const handleTaskLabelChange = (chosenLabel: PropTypes.label): void => {
+  const handleTaskLabelChange = (ev: React.MouseEvent, chosenLabel: PropTypes.label): void => {
+    ev.preventDefault()
+
     const newTask: PropTypes.task = JSON.parse(JSON.stringify(task))
     const idx = task.labels!.findIndex(label => label.id === chosenLabel.id)
 
@@ -41,8 +49,9 @@ const TaskPreview = ({ task, index, handleTaskEdit, onLabelsUpdate }: PropTypes.
     handleTaskEdit(newTask)
   }
 
-  const handleTaskMemberToggle = (member: BoardTypes.member): void => {
-    // TODO: get event and prevent default
+  const handleTaskMemberToggle = (ev: React.MouseEvent, member: BoardTypes.member): void => {
+    ev.preventDefault()
+
     const newTask: PropTypes.task = JSON.parse(JSON.stringify(task))
     const idx = task.members!.findIndex(taskMember => taskMember.id === member.id)
 
@@ -50,6 +59,16 @@ const TaskPreview = ({ task, index, handleTaskEdit, onLabelsUpdate }: PropTypes.
       newTask.members!.push(member)
     } else {
       newTask.members!.splice(idx, 1)
+    }
+
+    handleTaskEdit(newTask)
+  }
+
+  const handleTaskStyleChange = (newStyle: BoardTypes.task['style']): void => {
+    const newTask: PropTypes.task = JSON.parse(JSON.stringify(task))
+
+    if (newStyle) {
+      newTask.style = { ...newStyle }
     }
 
     handleTaskEdit(newTask)
@@ -79,6 +98,27 @@ const TaskPreview = ({ task, index, handleTaskEdit, onLabelsUpdate }: PropTypes.
     handleQuickEditToggle()
   }
 
+  const taskQuickEditProps = {
+    task,
+    modalPos: taskEditorPos,
+    onLabelsUpdate,
+    handleTaskLabelChange,
+    handleTaskMemberToggle,
+    handleTaskStyleChange,
+    onChangeSubmit: handleTaskEditSubmit,
+    onClose: handleQuickEditToggle
+  }
+
+  const quickTaskDetailsProps = {
+    taskTitle,
+    isQuickEditOpen,
+    taskRef,
+    task,
+    handleTaskDueToggle,
+    handleTaskTitleChange
+  }
+
+  // TODO: figure out react router Link cmp - click self/capture
   return (
     <Draggable draggableId={task.id} index={index}>
       {(provided, snapshot) => (
@@ -86,30 +126,15 @@ const TaskPreview = ({ task, index, handleTaskEdit, onLabelsUpdate }: PropTypes.
           ref={provided.innerRef}
           {...provided.draggableProps}
           {...provided.dragHandleProps}
-          to={`/${task.id}`}
+          // to={`/${task.id}`}
           onContextMenuCapture={handleQuickEditToggle}
           styling={task.style}
         >
           {!task.style?.fullCover && task.style?.background && <TaskCover styling={task.style} />}
           <TaskEditIcon onClickCapture={handleQuickEditToggle} content="'\e928'" size="sm" />
           {isQuickEditOpen && (
-            <TaskQuickEdit
-              task={task}
-              modalPos={taskEditorPos}
-              onLabelsUpdate={onLabelsUpdate}
-              handleTaskLabelChange={handleTaskLabelChange}
-              handleTaskMemberToggle={handleTaskMemberToggle}
-              onChangeSubmit={handleTaskEditSubmit}
-              onClose={handleQuickEditToggle}
-            >
-              <TaskDetails
-                taskTitle={taskTitle}
-                handleTaskDueToggle={handleTaskDueToggle}
-                handleTaskTitleChange={handleTaskTitleChange}
-                isQuickEditOpen={isQuickEditOpen}
-                taskRef={taskRef}
-                task={task}
-              />
+            <TaskQuickEdit {...taskQuickEditProps}>
+              <TaskDetails {...quickTaskDetailsProps} />
             </TaskQuickEdit>
           )}
           <TaskDetails handleTaskDueToggle={handleTaskDueToggle} taskRef={taskRef} task={task} />

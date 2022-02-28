@@ -137,7 +137,7 @@ function _makeId(length = 10) {
 function getDummyBoard(): BoardTypes.board {
   return {
     id: 'b100',
-    title: 'board one',
+    title: 'Project tracking',
     createdBy: {
       id: 'u100',
       username: 'ArtiomB',
@@ -146,7 +146,9 @@ function getDummyBoard(): BoardTypes.board {
       starredBoards: [],
       watchList: []
     },
-    style: { background: '#0079bf' },
+    style: {
+      background: '#0079bf'
+    },
     members: [
       {
         id: 'u100',
@@ -165,17 +167,17 @@ function getDummyBoard(): BoardTypes.board {
       },
       {
         id: 'l102',
-        title: '',
+        title: 'attention',
         color: 'yellow'
       },
       {
         id: 'l103',
-        title: 'bug',
+        title: 'urgent',
         color: 'orange'
       },
       {
         id: 'l104',
-        title: '',
+        title: 'bug',
         color: 'red'
       },
       {
@@ -190,7 +192,7 @@ function getDummyBoard(): BoardTypes.board {
       },
       {
         id: 'l107',
-        title: '',
+        title: 'idea',
         color: 'navy'
       }
     ],
@@ -199,46 +201,78 @@ function getDummyBoard(): BoardTypes.board {
     lists: [
       {
         id: 'g100',
-        title: 'group 1',
+        title: 'Backlog',
         tasks: [
           {
             id: 't100',
-            title: 'task one',
+            title: 'Set up external log in options.\nApple Id, google, facebook',
             description: '',
-            style: { background: '', fullCover: false },
+            style: {
+              background: 'blue',
+              fullCover: true
+            },
             members: [],
-            labels: [
-              { id: 'l101', title: 'done', color: 'green' },
-              { id: 'l102', title: '', color: 'yellow' },
-              { id: 'l107', title: '', color: 'navy' }
-            ],
-            startDate: { timestamp: undefined, isDone: false },
-            dueDate: { timestamp: 1646087624876, isDone: false },
+            labels: [],
+            startDate: {
+              isDone: false
+            },
+            dueDate: {
+              timestamp: 1646087624876,
+              isDone: false
+            },
+            comments: [],
+            checklists: [],
+            isArchived: false
+          },
+          {
+            id: 'u2i2R5YfHi',
+            title: "Header links should work when there's user auth",
+            description: '',
+            style: {
+              background: 'blue',
+              fullCover: true
+            },
+            members: [],
+            labels: [],
+            startDate: {
+              isDone: false
+            },
+            dueDate: {
+              isDone: false
+            },
             comments: [],
             checklists: [],
             isArchived: false
           },
           {
             id: 't101',
-            title: 'task two',
+            title: "Some forms don't behave as expected",
             description: 'task two description',
-            style: { background: 'red', fullCover: false },
-            members: [
+            style: {
+              background: 'blue',
+              fullCover: true
+            },
+            members: [],
+            labels: [
               {
-                id: 'u100',
-                username: 'ArtiomB',
-                fullname: 'Artiom bkt',
-                image: '',
-                starredBoards: [],
-                watchList: []
+                id: 'l104',
+                title: 'bug',
+                color: 'red'
+              },
+              {
+                id: 'l103',
+                title: 'urgent',
+                color: 'orange'
               }
             ],
-            labels: [
-              { id: 'l101', title: '', color: 'green' },
-              { id: 'l103', title: '', color: 'orange' }
-            ],
-            startDate: { timestamp: 1545959831361, isDone: false },
-            dueDate: { timestamp: 1545989831361, isDone: false },
+            startDate: {
+              timestamp: 1545959831361,
+              isDone: false
+            },
+            dueDate: {
+              timestamp: 1545989831361,
+              isDone: false
+            },
             comments: [
               {
                 id: 'c100',
@@ -272,32 +306,113 @@ function getDummyBoard(): BoardTypes.board {
                 ]
               }
             ],
+            isArchived: false
+          },
+          {
+            id: '8v4846hxDN',
+            title: 'Users should be able to upload their own images as covers besides Unsplash',
+            description: '',
+            style: {
+              background: '',
+              fullCover: false
+            },
+            members: [],
+            labels: [
+              {
+                id: 'l107',
+                title: 'idea',
+                color: 'navy'
+              },
+              {
+                id: 'l106',
+                title: '',
+                color: 'blue'
+              }
+            ],
+            startDate: {
+              isDone: false
+            },
+            dueDate: {
+              isDone: false
+            },
+            comments: [],
+            checklists: [],
+            isArchived: false
+          },
+          {
+            id: 'WGeTBAh2hg',
+            title: 'Web sockets optimization required',
+            description: '',
+            style: {
+              background: 'red',
+              fullCover: false
+            },
+            members: [
+              {
+                id: 'u100',
+                username: 'ArtiomB',
+                fullname: 'Artiom bkt',
+                image: '',
+                starredBoards: [],
+                watchList: []
+              }
+            ],
+            labels: [
+              {
+                id: 'l102',
+                title: 'attention',
+                color: 'yellow'
+              },
+              {
+                id: 'l103',
+                title: 'urgent',
+                color: 'orange'
+              }
+            ],
+            startDate: {
+              isDone: false
+            },
+            dueDate: {
+              isDone: false
+            },
+            comments: [],
+            checklists: [],
+            isArchived: false
+          },
+          {
+            id: '4UNvzIxfkU',
+            title: 'Sidemenu needs to be worked on',
+            description: '',
+            style: {
+              background: 'navy',
+              fullCover: false
+            },
+            members: [],
+            labels: [],
+            startDate: {
+              isDone: false
+            },
+            dueDate: {
+              isDone: false
+            },
+            comments: [],
+            checklists: [],
             isArchived: false
           }
         ]
       },
       {
         id: 'g102',
-        title: 'group 1',
+        title: 'Current sprint',
         tasks: [
           {
-            id: 't103',
-            title: 'task one',
+            id: 't105',
+            title: 'Task view route',
             description: '',
-            style: { background: '', fullCover: false },
-            members: [],
-            labels: [{ id: 'l101', title: 'done', color: 'green' }],
-            startDate: { timestamp: undefined, isDone: false },
-            dueDate: { timestamp: 1945959831361, isDone: false },
-            comments: [],
-            checklists: [],
-            isArchived: false
-          },
-          {
-            id: 't104',
-            title: 'task two',
-            description: 'task two description',
-            style: { background: 'cyan', fullCover: true },
+            style: {
+              background: 'yellow',
+              fullCover: false
+            },
             members: [
               {
                 id: 'u100',
@@ -308,237 +423,312 @@ function getDummyBoard(): BoardTypes.board {
                 watchList: []
               }
             ],
+            labels: [],
+            startDate: {
+              timestamp: 1242101225068,
+              isDone: false
+            },
+            dueDate: {
+              isDone: false
+            },
+            comments: [],
+            checklists: [],
+            isArchived: false
+          },
+          {
+            id: 'bRlR4CfyPR',
+            title: 'Side menu',
+            description: '',
+            style: {
+              background: 'red',
+              fullCover: true
+            },
+            members: [],
             labels: [
-              { id: 'l101', title: 'done', color: 'green' },
-              { id: 'l105', title: '', color: 'purple' }
-            ],
-            startDate: { timestamp: 1642101255068, isDone: true },
-            dueDate: { timestamp: 1642101255069, isDone: true },
-            comments: [
               {
-                id: 'c100',
-                byMember: {
-                  id: 'u100',
-                  username: 'ArtiomB',
-                  fullname: 'Artiom bkt',
-                  image: '',
-                  starredBoards: [],
-                  watchList: []
-                },
-                content: 'comment test',
-                createdAt: 1642101255068
+                id: 'l102',
+                title: 'attention',
+                color: 'yellow'
+              },
+              {
+                id: 'l103',
+                title: 'urgent',
+                color: 'orange'
               }
             ],
-            checklists: [
+            startDate: {
+              isDone: false
+            },
+            dueDate: {
+              isDone: false
+            },
+            comments: [],
+            checklists: [],
+            isArchived: false
+          },
+          {
+            id: 't103',
+            title: 'Edit dates on tasks',
+            description: '',
+            style: {
+              background: '',
+              fullCover: false
+            },
+            members: [],
+            labels: [
               {
-                id: 'check100',
-                title: 'checklist one',
-                todos: [
-                  {
-                    id: 'todo100',
-                    title: 'todo one',
-                    isDone: false
-                  },
-                  {
-                    id: 'todo101',
-                    title: 'todo two',
-                    isDone: true
-                  }
-                ]
+                id: 'l102',
+                title: 'attention',
+                color: 'yellow'
+              },
+              {
+                id: 'l103',
+                title: 'urgent',
+                color: 'orange'
               }
             ],
+            startDate: {
+              isDone: false
+            },
+            dueDate: {
+              timestamp: 1945959831361,
+              isDone: false
+            },
+            comments: [],
+            checklists: [],
+            isArchived: false
+          },
+          {
+            id: 'cCb6dEat1y',
+            title: 'Task & list archive',
+            description: '',
+            style: {
+              background: '',
+              fullCover: false
+            },
+            members: [],
+            labels: [
+              {
+                id: 'l102',
+                title: 'attention',
+                color: 'yellow'
+              },
+              {
+                id: 'l105',
+                title: '',
+                color: 'purple'
+              }
+            ],
+            startDate: {
+              isDone: false
+            },
+            dueDate: {
+              isDone: false
+            },
+            comments: [],
+            checklists: [],
             isArchived: false
           }
         ]
       },
       {
         id: 'g103',
-        title: 'group 1',
+        title: 'Ideas',
         tasks: [
           {
-            id: 't105',
-            title: 'task one',
+            id: 'FicqlKszNO',
+            title: 'More board view. Board, calendar, dashboard, timeline, map',
             description: '',
-            style: { background: 'navy', fullCover: true },
+            style: {
+              background: 'cyan',
+              fullCover: false
+            },
             members: [],
-            labels: [{ id: 'l101', title: 'done', color: 'green' }],
-            startDate: { timestamp: 1242101225068, isDone: false },
-            dueDate: { timestamp: undefined, isDone: false },
+            labels: [
+              {
+                id: 'l107',
+                title: 'idea',
+                color: 'navy'
+              }
+            ],
+            startDate: {
+              isDone: false
+            },
+            dueDate: {
+              isDone: false
+            },
             comments: [],
             checklists: [],
             isArchived: false
           },
           {
-            id: 't106',
-            title: 'task two',
-            description: 'task two description',
-            style: { background: 'green', fullCover: false },
-            members: [
-              {
-                id: 'u100',
-                username: 'ArtiomB',
-                fullname: 'Artiom bkt',
-                image: '',
-                starredBoards: [],
-                watchList: []
-              }
-            ],
-            labels: [
-              { id: 'l101', title: 'done', color: 'green' },
-              { id: 'l103', title: 'bug', color: 'orange' }
-            ],
-            startDate: { timestamp: 1642101255068, isDone: false },
-            dueDate: { timestamp: 1642101255069, isDone: false },
-            comments: [
-              {
-                id: 'c100',
-                byMember: {
-                  id: 'u100',
-                  username: 'ArtiomB',
-                  fullname: 'Artiom bkt',
-                  image: '',
-                  starredBoards: [],
-                  watchList: []
-                },
-                content: 'comment test',
-                createdAt: 1642101255068
-              }
-            ],
-            checklists: [
-              {
-                id: 'check100',
-                title: 'checklist one',
-                todos: [
-                  {
-                    id: 'todo100',
-                    title: 'todo one',
-                    isDone: false
-                  },
-                  {
-                    id: 'todo101',
-                    title: 'todo two',
-                    isDone: true
-                  }
-                ]
-              }
-            ],
-            isArchived: false
-          }
-        ]
-      },
-      {
-        id: 'g104',
-        title: 'group 1',
-        tasks: [
-          {
-            id: 't107',
-            title: 'task one',
+            id: 'aUFQMw3EJj',
+            title: "User subscription to specific task or whole board's notifications",
             description: '',
-            style: { background: '', fullCover: false },
+            style: {
+              background: 'cyan',
+              fullCover: false
+            },
             members: [],
-            labels: [{ id: 'l101', title: 'done', color: 'green' }],
-            startDate: { timestamp: 1242101225068, isDone: false },
-            dueDate: { timestamp: 1242101225068, isDone: false },
+            labels: [
+              {
+                id: 'l107',
+                title: 'idea',
+                color: 'navy'
+              }
+            ],
+            startDate: {
+              isDone: false
+            },
+            dueDate: {
+              isDone: false
+            },
             comments: [],
             checklists: [],
             isArchived: false
           },
           {
-            id: 't108',
-            title: 'task two',
-            description: 'task two description',
-            style: { background: 'red', fullCover: true },
-            members: [
-              {
-                id: 'u100',
-                username: 'ArtiomB',
-                fullname: 'Artiom bkt',
-                image: '',
-                starredBoards: [],
-                watchList: []
-              }
-            ],
+            id: 'w8H2UbWfSX',
+            title: 'Filter tasks',
+            description: '',
+            style: {
+              background: 'cyan',
+              fullCover: false
+            },
+            members: [],
             labels: [
-              { id: 'l101', title: 'done', color: 'green' },
-              { id: 'l102', title: '', color: 'yellow' }
-            ],
-            startDate: { timestamp: 1642101255068, isDone: false },
-            dueDate: { timestamp: 1642101255069, isDone: false },
-            comments: [
               {
-                id: 'c100',
-                byMember: {
-                  id: 'u100',
-                  username: 'ArtiomB',
-                  fullname: 'Artiom bkt',
-                  image: '',
-                  starredBoards: [],
-                  watchList: []
-                },
-                content: 'comment test',
-                createdAt: 1642101255068
+                id: 'l107',
+                title: 'idea',
+                color: 'navy'
               }
             ],
-            checklists: [
-              {
-                id: 'check100',
-                title: 'checklist one',
-                todos: [
-                  {
-                    id: 'todo100',
-                    title: 'todo one',
-                    isDone: false
-                  },
-                  {
-                    id: 'todo101',
-                    title: 'todo two',
-                    isDone: true
-                  }
-                ]
-              }
-            ],
+            startDate: {
+              isDone: false
+            },
+            dueDate: {
+              isDone: false
+            },
+            comments: [],
+            checklists: [],
             isArchived: false
           }
         ]
       },
       {
         id: 'g101',
-        title: 'group 2',
+        title: 'Done',
         tasks: [
           {
-            id: 't109',
-            title: 'task one group two',
-            description: '',
-            style: { background: '', fullCover: false },
+            id: 't104',
+            title: "Edit task's cover\n",
+            description: 'task two description',
+            style: {
+              background: '',
+              fullCover: false
+            },
             members: [],
-            labels: [{ id: 'l101', title: 'done', color: 'green' }],
-            startDate: { timestamp: Date.now(), isDone: false },
-            dueDate: { timestamp: Date.now(), isDone: false },
+            labels: [
+              {
+                id: 'l101',
+                title: 'done',
+                color: 'green'
+              }
+            ],
+            startDate: {
+              timestamp: 1642101255068,
+              isDone: true
+            },
+            dueDate: {
+              timestamp: 1642101255069,
+              isDone: true
+            },
+            comments: [
+              {
+                id: 'c100',
+                byMember: {
+                  id: 'u100',
+                  username: 'ArtiomB',
+                  fullname: 'Artiom bkt',
+                  image: '',
+                  starredBoards: [],
+                  watchList: []
+                },
+                content: 'comment test',
+                createdAt: 1642101255068
+              }
+            ],
+            checklists: [
+              {
+                id: 'check100',
+                title: 'checklist one',
+                todos: [
+                  {
+                    id: 'todo100',
+                    title: 'todo one',
+                    isDone: false
+                  },
+                  {
+                    id: 'todo101',
+                    title: 'todo two',
+                    isDone: true
+                  }
+                ]
+              }
+            ],
+            isArchived: false
+          },
+          {
+            id: 't109',
+            title: "Edit task's labels",
+            description: '',
+            style: {
+              background: '',
+              fullCover: false
+            },
+            members: [],
+            labels: [
+              {
+                id: 'l101',
+                title: 'done',
+                color: 'green'
+              }
+            ],
+            startDate: {
+              timestamp: 1646061915290,
+              isDone: false
+            },
+            dueDate: {
+              timestamp: 1646061915290,
+              isDone: true
+            },
             comments: [],
             checklists: [],
             isArchived: false
           },
           {
             id: 't110',
-            title: 'task two group two',
+            title: "Edit board's title",
             description: 'task two description',
-            style: { background: 'orange', fullCover: true },
-            members: [
+            style: {
+              background: '',
+              fullCover: false
+            },
+            members: [],
+            labels: [
               {
-                id: 'u100',
-                username: 'ArtiomB',
-                fullname: 'Artiom bkt',
-                image: '',
-                starredBoards: [],
-                watchList: []
+                id: 'l101',
+                title: 'done',
+                color: 'green'
               }
             ],
-            labels: [
-              { id: 'l101', title: 'done', color: 'green' },
-              { id: 'l102', title: '', color: 'yellow' }
-            ],
-            startDate: { timestamp: 1642101255068, isDone: false },
-            dueDate: { timestamp: undefined, isDone: false },
+            startDate: {
+              timestamp: 1642101255068,
+              isDone: false
+            },
+            dueDate: {
+              isDone: true
+            },
             comments: [
               {
                 id: 'c100',

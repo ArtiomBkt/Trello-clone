@@ -92,15 +92,24 @@ export declare module PropTypes {
     onAddList: (listTitle: list['title']) => void
   }
 
+  type ComposerProps = {
+    handleInputChange: ({ target }: React.ChangeEvent<HTMLInputElement>) => void
+    handleListSubmit: (ev: React.MouseEvent | React.KeyboardEvent) => void
+    handleDiscardList: () => void
+    isListAdd: boolean
+    listTitle: string
+  }
+
   type QuickEditorProps = {
     children?: React.ReactNode
     modalPos?: modalPos
     task: PropTypes.task
-    handleTaskLabelChange: (label: PropTypes.label) => void
+    handleTaskLabelChange: (ev: React.MouseEvent, label: PropTypes.label) => void
     onChangeSubmit?: (ev: React.MouseEvent) => void
     onClose?: (ev?: React.MouseEvent) => void
-    onLabelsUpdate: (labels: PropTypes.label[]) => void
-    handleTaskMemberToggle: (member: BoardTypes.member) => void
+    onLabelsUpdate: (labels: PropTypes.label[], ev?: React.MouseEvent) => void
+    handleTaskMemberToggle: (ev: React.MouseEvent, member: BoardTypes.member) => void
+    handleTaskStyleChange: (newStyle: task['style']) => void
   }
 
   type BadgesModalProps = {
@@ -114,8 +123,8 @@ export declare module PropTypes {
   type LabelProps = {
     label?: PropTypes.label
     task: PropTypes.task
-    handleTaskLabelChange: (label: PropTypes.label) => void
-    onLabelsUpdate?: (labels: PropTypes.label[]) => void
+    handleTaskLabelChange: (ev: React.MouseEvent, label: PropTypes.label) => void
+    onLabelsUpdate?: (labels: PropTypes.label[], ev?: React.MouseEvent) => void
     handleLabelChange?: (label: PropTypes.label) => void
   }
 
@@ -126,11 +135,12 @@ export declare module PropTypes {
   type MemberProps = {
     task: PropTypes.task
     members?: MemberListProps['members']
-    handleTaskMemberToggle?: (memberId: BoardTypes.member) => void
+    handleTaskMemberToggle?: (ev: React.MouseEvent, memberId: BoardTypes.member) => void
   }
 
   type TaskColorProps = {
     task: PropTypes.task
+    handleTaskStyleChange: (newStyle: task['style']) => void
   }
 
   type HeaderModalProps = {
@@ -159,7 +169,7 @@ export declare module PropTypes {
     taskRef?: React.RefObject<HTMLDivElement>
     isQuickEditOpen?: boolean
     taskTitle?: string
-    handleTaskTitleChange?: ({ target }: React.ChangeEvent<HTMLTextAreaElement>) => void
+    handleTaskTitleChange?: (ev: React.ChangeEvent<HTMLTextAreaElement> | React.KeyboardEvent) => void
     handleTaskDueToggle?: (ev: React.MouseEvent) => void
   }
 

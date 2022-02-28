@@ -33,6 +33,8 @@ const ListHeader = ({ list, dragHandleProps, onListUpdate }: PropTypes.ListHeade
     setIsOpen(prev => !prev)
   }
 
+  // TODO: add list options
+
   return (
     <ListTitle {...dragHandleProps}>
       {isOpen ? (

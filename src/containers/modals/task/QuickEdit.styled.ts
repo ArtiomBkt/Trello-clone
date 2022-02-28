@@ -99,7 +99,8 @@ export const TaskQuickEditorControls = styled.div<PropTypes.StyledProps>`
     `} */
 `
 
-export const TaskQuickEditorControlBtn = styled.a`
+export const TaskQuickEditorControlBtn = styled.button`
+  cursor: pointer;
   display: block;
 
   margin: 0 0 4px 8px;

@@ -14,12 +14,48 @@ import {
 import { taskColors } from '../../../../components/task/TaskPreview.styled'
 import { PropTypes } from '../../../../types/prop-types'
 
-// I'll need the task here
-// determine if its fully covered
-// color templates accordingly
-// border around chosen color
+const CoverModal = ({ handleTaskStyleChange, task }: PropTypes.TaskColorProps) => {
+  const handleTaskColorChange = (ev: React.MouseEvent, color: string) => {
+    ev.preventDefault()
 
-const CoverModal = ({ task }: PropTypes.TaskColorProps) => {
+    const background = Object.keys(taskColors).find(key => taskColors[key].static === color)
+    if (background) {
+      const newTaskStyle = {
+        ...task.style,
+        background
+      }
+
+      handleTaskStyleChange(newTaskStyle)
+    }
+  }
+
+  const handleTaskCoverStyleChange = (ev: React.MouseEvent, fullCover: boolean) => {
+    ev.preventDefault()
+
+    if (!task.style.background) {
+      return
+    }
+
+    const newTaskStyle = {
+      ...task.style,
+      fullCover
+    }
+
+    handleTaskStyleChange(newTaskStyle)
+  }
+
+  const handleCoverRemove = (ev: React.MouseEvent) => {
+    ev.preventDefault()
+
+    const newTaskStyle = {
+      ...task.style,
+      background: '',
+      fullCover: false
+    }
+
+    handleTaskStyleChange(newTaskStyle)
+  }
+
   const Colors = () => {
     const staticColors: string[] = []
     for (let color in taskColors) {
@@ -29,7 +65,12 @@ const CoverModal = ({ task }: PropTypes.TaskColorProps) => {
     return (
       <>
         {staticColors.map(color => (
-          <CoverColor key={color} isSelectedColor={task.style && taskColors[task.style!.background].static === color} style={{ backgroundColor: color }} />
+          <CoverColor
+            onClick={ev => handleTaskColorChange(ev, color)}
+            key={color}
+            isSelectedColor={task.style?.background ? taskColors[task.style.background].static === color : undefined}
+            style={{ backgroundColor: color }}
+          />
         ))}
       </>
     )
@@ -39,7 +80,7 @@ const CoverModal = ({ task }: PropTypes.TaskColorProps) => {
     <div>
       <CoverModalTitle>Size</CoverModalTitle>
       <CoverOptionsGrid>
-        <TaskCoverTemplate isFullCover={!task.style?.fullCover}>
+        <TaskCoverTemplate onClick={ev => handleTaskCoverStyleChange(ev, false)} isFullCover={!task.style?.fullCover}>
           <HalfCoverStrip styling={task.style} />
           <TaskContentIllustrator>
             {/* Both are divs, first child - longer stripe, second - shorter */}
@@ -53,14 +94,14 @@ const CoverModal = ({ task }: PropTypes.TaskColorProps) => {
             </IllustrationBlobs>
           </TaskContentIllustrator>
         </TaskCoverTemplate>
-        <TaskCoverTemplate styling={task.style} isFullCover={task.style?.fullCover}>
+        <TaskCoverTemplate onClick={ev => handleTaskCoverStyleChange(ev, true)} styling={task.style} isFullCover={task.style?.fullCover}>
           <TaskContentIllustrator style={{ position: 'absolute', bottom: '4px' }}>
             <IllustrationStripes style={{ backgroundColor: '#fff' }} />
             <div style={{ backgroundColor: '#fff' }} />
           </TaskContentIllustrator>
         </TaskCoverTemplate>
       </CoverOptionsGrid>
-      <CoverRemoveBtn>Remove cover</CoverRemoveBtn>
+      <CoverRemoveBtn onClick={handleCoverRemove}>Remove cover</CoverRemoveBtn>
       <CoverModalTitle>Colors</CoverModalTitle>
       <CoverColorsGrid>
         <Colors />

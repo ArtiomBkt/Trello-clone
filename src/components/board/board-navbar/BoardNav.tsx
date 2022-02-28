@@ -61,6 +61,8 @@ const BoardNav = ({ board, onBoardUpdate, onSidenavOpen }: PropTypes.BoardNavCmp
     onBoardUpdate(newBoard)
   }
 
+  // TODO: enable option to star/unstar board
+
   return (
     <BoardNavContainer>
       <div>

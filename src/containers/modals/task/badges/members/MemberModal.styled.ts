@@ -25,6 +25,7 @@ export const MembersModalTitle = styled.h4`
 `
 
 export const MemberWrapper = styled.div`
+  cursor: pointer;
   position: relative;
 
   padding: 4px;

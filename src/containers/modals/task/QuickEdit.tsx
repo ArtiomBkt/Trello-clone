@@ -4,7 +4,17 @@ import { QuickEditContainer, QuickEditCloseBtn, TaskQuickEditorWrapper, TaskQuic
 import { PropTypes } from '../../../types/prop-types'
 import QuickEditControls from './QuickEditControls'
 
-const TaskQuickEdit = ({ children, modalPos, task, handleTaskLabelChange, handleTaskMemberToggle, onChangeSubmit, onLabelsUpdate, onClose }: PropTypes.QuickEditorProps) => {
+const TaskQuickEdit = ({
+  children,
+  modalPos,
+  task,
+  handleTaskLabelChange,
+  handleTaskMemberToggle,
+  handleTaskStyleChange,
+  onChangeSubmit,
+  onLabelsUpdate,
+  onClose
+}: PropTypes.QuickEditorProps) => {
   return createPortal(
     <QuickEditContainer>
       <QuickEditCloseBtn onClick={onClose} content="'\e91c'" size="lg" />
@@ -13,7 +23,13 @@ const TaskQuickEdit = ({ children, modalPos, task, handleTaskLabelChange, handle
           <>{children}</>
         </TaskQuickEditor>
         <TaskQuickEditorSave onClick={onChangeSubmit}>Save</TaskQuickEditorSave>
-        <QuickEditControls handleTaskMemberToggle={handleTaskMemberToggle} onLabelsUpdate={onLabelsUpdate} handleTaskLabelChange={handleTaskLabelChange} task={task} />
+        <QuickEditControls
+          handleTaskStyleChange={handleTaskStyleChange}
+          handleTaskMemberToggle={handleTaskMemberToggle}
+          onLabelsUpdate={onLabelsUpdate}
+          handleTaskLabelChange={handleTaskLabelChange}
+          task={task}
+        />
       </TaskQuickEditorWrapper>
     </QuickEditContainer>,
     document.body

@@ -42,7 +42,7 @@ export declare module BoardTypes {
   export type task = {
     id: string
     title: string
-    style?: { background: string; fullCover: boolean }
+    style: { background: string; fullCover: boolean }
     labels?: label[]
     members?: member[]
     description?: string

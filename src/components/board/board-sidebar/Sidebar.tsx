@@ -17,6 +17,8 @@ import { PropTypes } from '../../../types/prop-types'
 const BoardSidebar = ({ onSidenavClose, isSidenavOpen }: PropTypes.SidenavProps) => {
   // const [currentMenu, setCurrentMenu] = useState('')
 
+  // TODO: board sidebar, main page, more options page, board background page, labels page
+
   return (
     <BoardSidenavWrapper isSidenavOpen={isSidenavOpen}>
       <BoardSidenavContainer>

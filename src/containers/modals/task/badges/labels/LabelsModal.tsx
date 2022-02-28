@@ -25,6 +25,8 @@ const Label = ({ task, handleTaskLabelChange, handleLabelChange, label }: PropTy
   }
 
   if (!label) return null
+  // add ref to label title input, focus when is editing
+  // fix input ui
   return (
     <LabelPreviewContainer>
       <LabelPreviewEditBtn onClick={() => dispatch({ type: 'TOGGLE_EDIT', payload: label.title })} content="'\e928'" size="sm" />
@@ -33,7 +35,7 @@ const Label = ({ task, handleTaskLabelChange, handleLabelChange, label }: PropTy
           <input type="text" value={state.labelTitle} onBlur={handleLabelChangeSubmit} onKeyDown={handleLabelChangeSubmit} onChange={handleLabelTitleChange} />
         </LabelPreview>
       ) : (
-        <LabelPreview onClick={() => handleTaskLabelChange(label)} labelColor={label.color}>
+        <LabelPreview onClick={ev => handleTaskLabelChange(ev, label)} labelColor={label.color}>
           {label.title}
           {task.labels!.find(taskLabel => taskLabel.id === label.id) && <LabelSelectedIcon content="'\e916'" size="sm" />}
         </LabelPreview>

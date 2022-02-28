@@ -16,9 +16,8 @@ import MemberProfile from '../../components/member/MemberProfile'
 const TaskBadges = ({ task, isQuickEditOpen, handleTaskDueToggle }: PropTypes.TaskCmps) => {
   if (!task.checklists && !task.comments && !task.description && !task.startDate) return null
 
-  const props = { id: task.id, title: task.title }
-
-  const isFullCover: boolean = task.style!.fullCover && !isQuickEditOpen
+  const isFullCover: boolean = task.style.fullCover && !isQuickEditOpen
+  const props = { id: task.id, title: task.title, style: task.style }
 
   return (
     <BadgesWrapper isFullCover={isFullCover}>
@@ -53,7 +52,7 @@ const TaskDetails = ({ taskTitle, taskRef, task, isQuickEditOpen, handleTaskDueT
       ) : (
         <>
           {task.labels && <LabelsPreview labels={task.labels} />}
-          <EditorTaskTextarea ref={taskTitleRef} onChange={handleTaskTitleChange} value={taskTitle} />
+          <EditorTaskTextarea ref={taskTitleRef} onKeyUp={handleTaskTitleChange} onChange={handleTaskTitleChange} value={taskTitle} />
         </>
       )}
       <TaskBadges isQuickEditOpen={isQuickEditOpen} handleTaskDueToggle={handleTaskDueToggle} task={task} />
