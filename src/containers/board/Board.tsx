@@ -158,6 +158,7 @@ const Board = () => {
       starredBoardsIds: newStarredBoards
     }
 
+    // TODO: Build user reducer for user associated actions
     console.log(newUser)
   }
 

@@ -34,7 +34,6 @@ const RightChunk = () => {
   }
 
   const getUser = () => {
-    console.log('logged')
     const loggedUser = userService.getUserById(loggedUserId)
     if (!loggedUser) {
       return undefined
