@@ -52,10 +52,10 @@ export declare module PropTypes {
 
   type TaskPreviewProps = {
     task: task
-    index?: number
-    handleTaskEdit?: (task: PropTypes.task) => void
-    onLabelsUpdate?: (labels: BoardTypes.label[]) => void
-    handleTaskArchive?: (ev: React.MouseEvent, task: PropTypes.task) => void
+    index: number
+    handleTaskEdit: (task: PropTypes.task) => void
+    onLabelsUpdate: (labels: BoardTypes.label[]) => void
+    handleTaskArchive: (ev: React.MouseEvent, task: PropTypes.task) => void
   }
 
   type BoardNavCmp = {
@@ -186,11 +186,15 @@ export declare module PropTypes {
     board: PropTypes.board
     isSidenavOpen: boolean
     onSidenavClose: () => void
+    onUnarchiveItem: (archivedItem: BoardTypes.archivedItem) => void
+    onArchiveItemRemove: (archivedItem: BoardTypes.archivedItem) => void
   }
 
   type SidebarMenusProps = {
     children?: React.ReactNode
     board: PropTypes.board
+    onUnarchiveItem?: (archivedItem: BoardTypes.archivedItem) => void
+    onArchiveItemRemove?: (archivedItem: BoardTypes.archivedItem) => void
   }
 
   type LabelsContext = {

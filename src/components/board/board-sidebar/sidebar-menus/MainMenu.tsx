@@ -1,16 +1,19 @@
 import React from 'react'
 import { PropTypes } from '../../../../types/prop-types'
-import { BoardTypes } from '../../../../types/board-types'
-import TaskPreview from '../../../task/TaskPreview'
+import TaskDetails from '../../../../containers/task/TaskDetails'
 
-// TODO: check type of archived item and render accordingly
-
-const MainMenu = ({ board }: PropTypes.SidebarMenusProps) => {
+// Everything here will move to ArchiveMenu component
+// On removal of arcived item, prompt for confirmation
+const MainMenu = ({ board, onArchiveItemRemove, onUnarchiveItem }: PropTypes.SidebarMenusProps) => {
   return (
     <div>
       menu
       {board.archive.map(archiveItem => (
-        <div key={archiveItem.item.id}>s</div>
+        <div key={archiveItem.item.id}>
+          <TaskDetails task={archiveItem.item} />
+          <button onClick={() => onUnarchiveItem!(archiveItem)}>Send to board</button>
+          <button onClick={() => onArchiveItemRemove!(archiveItem)}>Delete</button>
+        </div>
       ))}
     </div>
   )

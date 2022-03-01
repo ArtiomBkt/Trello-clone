@@ -55,7 +55,7 @@ export declare module BoardTypes {
 
   type archivedItem = {
     fromList?: BoardTypes.list['id']
-    item: BoardTypes.list | BoardTypes.task
+    item: BoardTypes.task
     index: number
   }
 

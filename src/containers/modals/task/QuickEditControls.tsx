@@ -86,7 +86,6 @@ const QuickEditControls = ({ handleTaskLabelChange, handleTaskMemberToggle, hand
         return
     }
   }
-  // TODO: add 'open task' and 'archive' options
 
   return (
     <TaskQuickEditorControls>

@@ -24,6 +24,7 @@ const TaskPreview = ({ task, index, handleTaskEdit, handleTaskArchive, onLabelsU
     setIsQuickEditOpen(prevState => !prevState)
   }
 
+  // TODO: add option to enter new line
   const handleTaskTitleChange = (ev: React.ChangeEvent<HTMLTextAreaElement> | React.KeyboardEvent): void => {
     if ((ev as React.KeyboardEvent).key !== 'Enter' && !((ev as React.KeyboardEvent).key === 'Enter' && (ev as React.KeyboardEvent).shiftKey)) {
       setTaskTitle((ev as React.ChangeEvent<HTMLTextAreaElement>).target.value)
@@ -46,7 +47,7 @@ const TaskPreview = ({ task, index, handleTaskEdit, handleTaskArchive, onLabelsU
       newTask.labels!.splice(idx, 1)
     }
 
-    handleTaskEdit!(newTask)
+    handleTaskEdit(newTask)
   }
 
   const handleTaskMemberToggle = (ev: React.MouseEvent, member: BoardTypes.member): void => {
@@ -61,7 +62,7 @@ const TaskPreview = ({ task, index, handleTaskEdit, handleTaskArchive, onLabelsU
       newTask.members!.splice(idx, 1)
     }
 
-    handleTaskEdit!(newTask)
+    handleTaskEdit(newTask)
   }
 
   const handleTaskStyleChange = (newStyle: BoardTypes.task['style']): void => {
@@ -71,7 +72,7 @@ const TaskPreview = ({ task, index, handleTaskEdit, handleTaskArchive, onLabelsU
       newTask.style = { ...newStyle }
     }
 
-    handleTaskEdit!(newTask)
+    handleTaskEdit(newTask)
   }
 
   const handleTaskDueToggle = (ev: React.MouseEvent): void => {
@@ -84,7 +85,7 @@ const TaskPreview = ({ task, index, handleTaskEdit, handleTaskArchive, onLabelsU
       newTask.dueDate!.isDone = true
     }
 
-    handleTaskEdit!(newTask)
+    handleTaskEdit(newTask)
   }
 
   const handleTaskEditSubmit = (ev: React.MouseEvent | React.KeyboardEvent): void => {
@@ -94,7 +95,7 @@ const TaskPreview = ({ task, index, handleTaskEdit, handleTaskArchive, onLabelsU
     const newTask: PropTypes.task = JSON.parse(JSON.stringify(task))
     newTask.title = taskTitle
 
-    handleTaskEdit!(newTask)
+    handleTaskEdit(newTask)
     handleQuickEditToggle()
   }
 
@@ -121,7 +122,7 @@ const TaskPreview = ({ task, index, handleTaskEdit, handleTaskArchive, onLabelsU
 
   // TODO: figure out react router Link cmp - click self/capture
   return (
-    <Draggable draggableId={task.id} index={index!}>
+    <Draggable draggableId={task.id} index={index}>
       {(provided, snapshot) => (
         <TaskPreviewContainer
           ref={provided.innerRef}

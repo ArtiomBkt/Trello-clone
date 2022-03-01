@@ -14,7 +14,7 @@ import {
 import MainMenu from './sidebar-menus/MainMenu'
 import { PropTypes } from '../../../types/prop-types'
 
-const BoardSidebar = ({ board, isSidenavOpen, onSidenavClose }: PropTypes.SidenavProps) => {
+const BoardSidebar = ({ board, isSidenavOpen, onArchiveItemRemove, onUnarchiveItem, onSidenavClose }: PropTypes.SidenavProps) => {
   // const [currentMenu, setCurrentMenu] = useState('')
 
   // TODO: board sidebar, main page, more options page, board background page, labels page
@@ -32,7 +32,7 @@ const BoardSidebar = ({ board, isSidenavOpen, onSidenavClose }: PropTypes.Sidena
             <SidenavDivider />
           </SidenavHeaderContainer>
           <SidenavBodyContainer>
-            <MainMenu board={board} />
+            <MainMenu onArchiveItemRemove={onArchiveItemRemove} onUnarchiveItem={onUnarchiveItem} board={board} />
           </SidenavBodyContainer>
         </SidenavContent>
       </BoardSidenavContainer>

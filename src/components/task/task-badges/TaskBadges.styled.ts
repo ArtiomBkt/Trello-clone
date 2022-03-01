@@ -5,7 +5,6 @@ import { Icon } from '../../../styled/Mixins.styled'
 export const BadgesWrapper = styled.div<PropTypes.StyledProps>`
   ${({ isFullCover }) => isFullCover && 'display: none;'}
 
-  /* float: left; */
   margin-left: -2px;
   max-width: 100%;
 `
@@ -112,11 +111,17 @@ export const BadgeContainer = styled.div<PropTypes.StyledProps>`
           ? css`
               span:nth-child(2) {
                 display: inline-block;
+                &:hover {
+                  color: #fff;
+                }
               }
             `
           : css`
               span:first-child {
                 display: inline-block;
+                &:hover {
+                  color: ${handleDueStatus(dueStatus)?.text};
+                }
               }
             `}
       }

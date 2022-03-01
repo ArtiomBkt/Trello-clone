@@ -97,6 +97,43 @@ const Board = () => {
     onBoardUpdate(newBoard)
   }
 
+  const onUnarchiveItem = ({ fromList, index, item }: BoardTypes.archivedItem): void => {
+    const listToUpdate = JSON.parse(JSON.stringify(board.lists?.find(list => list.id === fromList)))
+    if (listToUpdate) {
+      listToUpdate.tasks.splice(index, 0, item)
+    }
+    const newLists = getUpdatedLists(listToUpdate)
+
+    const newArchive = [...board.archive]
+    const archivedItemIdx = newArchive.findIndex(archiveItem => archiveItem.item.id === item.id)
+    if (archivedItemIdx !== -1) {
+      newArchive.splice(archivedItemIdx, 1)
+    }
+
+    const newBoard = {
+      ...board,
+      lists: newLists,
+      archive: newArchive
+    }
+
+    onBoardUpdate(newBoard)
+  }
+
+  const onArchiveItemRemove = ({ item }: BoardTypes.archivedItem): void => {
+    const newArchive = [...board.archive]
+    const archivedItemIdx = newArchive.findIndex(archiveItem => archiveItem.item.id === item.id)
+    if (archivedItemIdx !== -1) {
+      newArchive.splice(archivedItemIdx, 1)
+    }
+
+    const newBoard = {
+      ...board,
+      archive: newArchive
+    }
+
+    onBoardUpdate(newBoard)
+  }
+
   const onBoardUpdate = (newBoard: BoardTypes.board): void => {
     // dispatch({ type: 'BOARD_UPDATE', payload: newBoard })
     setBoard(newBoard)
@@ -140,7 +177,15 @@ const Board = () => {
                 </DragDropContext>
               </div>
             </BoardWrapper>
-            {isSidenavOpen && <BoardSidebar board={board} isSidenavOpen={isSidenavOpen} onSidenavClose={toggleSidenav} />}
+            {isSidenavOpen && (
+              <BoardSidebar
+                board={board}
+                onArchiveItemRemove={onArchiveItemRemove}
+                onUnarchiveItem={onUnarchiveItem}
+                isSidenavOpen={isSidenavOpen}
+                onSidenavClose={toggleSidenav}
+              />
+            )}
           </div>
         </AppWrapper>
       </BoardContentWrapper>
