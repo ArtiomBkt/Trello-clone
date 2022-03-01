@@ -1,9 +1,9 @@
 import { createContext } from 'react'
 import { PropTypes } from '../types/prop-types'
 
-const labelsContext = createContext<PropTypes.LabelsContext>({
+const LabelsContext = createContext<PropTypes.LabelsContext>({
   isLabelsExpanded: false,
   setIsLabelsExpanded: () => {}
 })
 
-export default labelsContext
+export default LabelsContext

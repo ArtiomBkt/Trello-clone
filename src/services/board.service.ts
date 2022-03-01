@@ -1,4 +1,4 @@
-import { serviceTypes } from '../types/service-types'
+import { ServiceTypes } from '../types/service-types'
 import { BoardTypes } from '../types/board-types'
 
 export const boardService = {
@@ -13,14 +13,14 @@ export const boardService = {
 
 const gBoard: BoardTypes.board = getDummyBoard()
 
-function getBoardById(boardId?: Parameters<serviceTypes.getBoardById>): ReturnType<serviceTypes.getBoardById> {
+function getBoardById(boardId?: Parameters<ServiceTypes.getBoardById>): ReturnType<ServiceTypes.getBoardById> {
   // const board = getDummyBoard()
 
   // return board
   return gBoard
 }
 
-function handleListMove({ board, draggableId, source, destination }: serviceTypes.dragAndDropArgs): BoardTypes.list[] | undefined {
+function handleListMove({ board, draggableId, source, destination }: ServiceTypes.dragAndDropArgs): BoardTypes.list[] | undefined {
   if (!board || !board.lists) return
 
   const draggedList = board.lists.find(list => list.id === draggableId)
@@ -33,7 +33,7 @@ function handleListMove({ board, draggableId, source, destination }: serviceType
   return newLists
 }
 
-function handleTaskMove({ board, draggableId, source, destination }: serviceTypes.dragAndDropArgs): BoardTypes.list[] | undefined {
+function handleTaskMove({ board, draggableId, source, destination }: ServiceTypes.dragAndDropArgs): BoardTypes.list[] | undefined {
   if (!board || !board.lists) return
 
   const startList = board.lists.find(list => list.id === source.droppableId)
@@ -83,7 +83,7 @@ function handleTaskMove({ board, draggableId, source, destination }: serviceType
   }
 }
 
-function getEmptyTask(): ReturnType<serviceTypes.getEmptyTask> {
+function getEmptyTask(): ReturnType<ServiceTypes.getEmptyTask> {
   return {
     id: _makeId(),
     title: '',
@@ -99,7 +99,7 @@ function getEmptyTask(): ReturnType<serviceTypes.getEmptyTask> {
   }
 }
 
-function getEmptyList(): ReturnType<serviceTypes.getEmptyList> {
+function getEmptyList(): ReturnType<ServiceTypes.getEmptyList> {
   return {
     id: _makeId(),
     title: '',
@@ -112,18 +112,18 @@ function getBoardStyle() {
   return board.style.background
 }
 
-function save({ value, type }: serviceTypes.saveArgs) {
+function save({ value, type }: ServiceTypes.saveArgs) {
   return value.id ? _update(value, type) : _add(value, type)
 }
 
-function _add(value: serviceTypes.valueArgs, type: serviceTypes.typeArgs) {
+function _add(value: ServiceTypes.valueArgs, type: ServiceTypes.typeArgs) {
   value.id = _makeId()
   if (type === 'task') return gBoard.lists
   // gBoard.lists?.push(value)
   // return gBoard
 }
 
-function _update(value: serviceTypes.valueArgs, type: serviceTypes.typeArgs) {}
+function _update(value: ServiceTypes.valueArgs, type: ServiceTypes.typeArgs) {}
 
 function _makeId(length = 10) {
   const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
@@ -143,7 +143,7 @@ function getDummyBoard(): BoardTypes.board {
       username: 'ArtiomB',
       fullname: 'Artiom bkt',
       image: '',
-      starredBoards: [],
+      starredBoardsIds: [],
       watchList: []
     },
     style: {
@@ -154,8 +154,8 @@ function getDummyBoard(): BoardTypes.board {
         id: 'u100',
         username: 'ArtiomB',
         fullname: 'Artiom bkt',
-        image: '',
-        starredBoards: [],
+        image: 'https://en.meming.world/images/en/b/b9/Cursed_Cat.jpg',
+        starredBoardsIds: [],
         watchList: []
       }
     ],
@@ -281,7 +281,7 @@ function getDummyBoard(): BoardTypes.board {
                   username: 'ArtiomB',
                   fullname: 'Artiom bkt',
                   image: '',
-                  starredBoards: [],
+                  starredBoardsIds: [],
                   watchList: []
                 },
                 content: 'comment test',
@@ -353,7 +353,7 @@ function getDummyBoard(): BoardTypes.board {
                 username: 'ArtiomB',
                 fullname: 'Artiom bkt',
                 image: '',
-                starredBoards: [],
+                starredBoardsIds: [],
                 watchList: []
               }
             ],
@@ -419,7 +419,7 @@ function getDummyBoard(): BoardTypes.board {
                 username: 'ArtiomB',
                 fullname: 'Artiom bkt',
                 image: '',
-                starredBoards: [],
+                starredBoardsIds: [],
                 watchList: []
               }
             ],
@@ -651,7 +651,7 @@ function getDummyBoard(): BoardTypes.board {
                   username: 'ArtiomB',
                   fullname: 'Artiom bkt',
                   image: '',
-                  starredBoards: [],
+                  starredBoardsIds: [],
                   watchList: []
                 },
                 content: 'comment test',
@@ -737,7 +737,7 @@ function getDummyBoard(): BoardTypes.board {
                   username: 'ArtiomB',
                   fullname: 'Artiom bkt',
                   image: '',
-                  starredBoards: [],
+                  starredBoardsIds: [],
                   watchList: []
                 },
                 content: 'comment test',

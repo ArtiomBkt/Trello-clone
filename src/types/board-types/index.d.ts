@@ -1,45 +1,45 @@
 export declare module BoardTypes {
-  export type label = {
+  type label = {
     id: string
     title?: string
     color: string
   }
 
-  export type todo = {
+  type todo = {
     id: string
     title: string
     isDone: boolean
   }
 
-  export type checklist = {
+  type checklist = {
     id: string
     title: string
     todos?: todo[]
   }
 
-  export type comment = {
+  type comment = {
     id: string
     byMember: member
     content: any
     createdAt: number
   }
 
-  export type member = {
+  interface member {
     id: string
     username: string
     fullname: string
     image?: string
-    starredBoards?: board[]
-    watchList?: board[] | task[]
+    starredBoardsIds: board['id'][]
+    watchList: board['id'][] | task['id'][] | list['id'][]
   }
 
-  export type list = {
+  type list = {
     id: string
     title: string
     tasks: task[]
   }
 
-  export type task = {
+  type task = {
     id: string
     title: string
     style: { background: string; fullCover: boolean }
@@ -59,7 +59,7 @@ export declare module BoardTypes {
     index: number
   }
 
-  export type board = {
+  type board = {
     id: string
     title: string
     createdBy: member

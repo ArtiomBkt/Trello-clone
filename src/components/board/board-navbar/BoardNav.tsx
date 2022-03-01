@@ -18,7 +18,7 @@ import BoardOrg from './BoardOrg'
 import BoardMembers from './BoardMembers'
 import BoardControls from './BoardControls'
 
-const BoardNav = ({ board, onBoardUpdate, onSidenavOpen }: PropTypes.BoardNavCmp) => {
+const BoardNav = ({ board, onBoardUpdate, onSidenavOpen, onUserToggleStar }: PropTypes.BoardNavCmp) => {
   const [state, dispatch] = useTitleEditReducer({
     boardTitle: board.title,
     isEditing: false,
@@ -85,7 +85,7 @@ const BoardNav = ({ board, onBoardUpdate, onSidenavOpen }: PropTypes.BoardNavCmp
         )}
       </BoardNameContainer>
       <BoardStarredContainer>
-        <BoardStarredIcon content="'\e967'" size="sm" />
+        <BoardStarredIcon onClick={onUserToggleStar} content="'\e967'" size="sm" />
       </BoardStarredContainer>
       <BoardOrg />
       <BoardNavDivider />

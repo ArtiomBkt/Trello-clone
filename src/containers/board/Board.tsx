@@ -2,13 +2,14 @@ import React, { useLayoutEffect, useState } from 'react'
 import { DragDropContext, Droppable, DropResult } from 'react-beautiful-dnd'
 
 import { boardService } from '../../services/board.service'
+import { userService } from '../../services/user.service'
 import useLocalStorageState from '../../hooks/useLocalStorageState'
 import { BoardTypes } from '../../types/board-types/index'
 
 import { BoardContainer, BoardContentWrapper, BoardWrapper, AppWrapper } from './Board.styled'
 import { ListPreviewContainer } from '../../components/list/ListPreview.styled'
 
-import labelsContext from '../../contexts/labelsContext'
+import LabelsContext from '../../contexts/labelsToggle'
 import BoardNav from '../../components/board/board-navbar/BoardNav'
 import BoardSidebar from '../../components/board/board-sidebar/Sidebar'
 import ListPreview from '../../components/list/ListPreview'
@@ -134,6 +135,32 @@ const Board = () => {
     onBoardUpdate(newBoard)
   }
 
+  const onUserToggleStar = (ev: React.MouseEvent) => {
+    ev.preventDefault()
+
+    const loggedUserId = JSON.parse(sessionStorage.getItem('loggedUser') || '')?.id
+    const user = userService.getUserById(loggedUserId)
+    if (!user) {
+      throw new Error('User not found')
+    }
+
+    const newStarredBoards = [...user.starredBoardsIds]
+    const boardIdx = newStarredBoards.findIndex(starred => starred === board.id)
+
+    if (boardIdx === -1) {
+      newStarredBoards.push(board.id)
+    } else {
+      newStarredBoards.splice(boardIdx, 1)
+    }
+
+    const newUser = {
+      ...user,
+      starredBoardsIds: newStarredBoards
+    }
+
+    console.log(newUser)
+  }
+
   const onBoardUpdate = (newBoard: BoardTypes.board): void => {
     // dispatch({ type: 'BOARD_UPDATE', payload: newBoard })
     setBoard(newBoard)
@@ -150,13 +177,13 @@ const Board = () => {
         <AppWrapper>
           <div style={{ position: 'absolute', inset: '0' }}>
             <BoardWrapper isSidenavOpen={isSidenavOpen}>
-              <BoardNav onSidenavOpen={toggleSidenav} onBoardUpdate={onBoardUpdate} board={board} />
+              <BoardNav onUserToggleStar={onUserToggleStar} onSidenavOpen={toggleSidenav} onBoardUpdate={onBoardUpdate} board={board} />
               <div style={{ flexGrow: 1, position: 'relative' }}>
                 <DragDropContext onDragEnd={onDragEnd}>
                   <Droppable direction="horizontal" droppableId="board" type="LIST">
                     {provided => (
                       <ListPreviewContainer {...provided.droppableProps} ref={provided.innerRef}>
-                        <labelsContext.Provider value={{ isLabelsExpanded, setIsLabelsExpanded }}>
+                        <LabelsContext.Provider value={{ isLabelsExpanded, setIsLabelsExpanded }}>
                           {board.lists?.map((list, index) => {
                             const listPreviewProps = {
                               key: list.id,
@@ -170,7 +197,7 @@ const Board = () => {
                           })}
                           {provided.placeholder}
                           <ListComposer onAddList={onAddList} />
-                        </labelsContext.Provider>
+                        </LabelsContext.Provider>
                       </ListPreviewContainer>
                     )}
                   </Droppable>

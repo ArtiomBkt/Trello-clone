@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import { PropTypes } from '../../types/prop-types'
-import labelsContext from '../../contexts/labelsContext'
+import labelsContext from '../../contexts/labelsToggle'
 import { LabelsContainer, Label } from './LabelPreview.styled'
 
 const LabelsPreview = ({ labels }: PropTypes.LabelsPreviewProps) => {

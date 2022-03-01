@@ -62,10 +62,11 @@ export declare module PropTypes {
     board: BoardTypes.board
     onBoardUpdate: (board: BoardTypes.board) => void
     onSidenavOpen: () => void
+    onUserToggleStar: (ev: React.MouseEvent) => void
   }
 
   type MemberListProps = {
-    members: BoardTypes.member[] | undefined
+    members?: BoardTypes.member[]
     member?: BoardTypes.member
   }
 

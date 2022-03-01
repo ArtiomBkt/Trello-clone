@@ -4,6 +4,7 @@ import AppLogo from './logo/AppLogo'
 import { ReactComponent as CreateIcon } from '../../assets/images/plus.svg'
 import NavLinks from './links/NavLinks'
 import NavLink from './links/NavLink'
+import RightChunk from './right-chunk/RightChunk'
 
 const AppHeader = () => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth)
@@ -58,7 +59,9 @@ const AppHeader = () => {
             </HeaderLinks>
           </HeaderLinksContainer>
         </HeaderLinksWrapper>
-        <HeaderRightChunk>{/* <RightChunk /> */}</HeaderRightChunk>
+        <HeaderRightChunk>
+          <RightChunk />
+        </HeaderRightChunk>
       </HeaderMainNav>
     </Header>
   )
