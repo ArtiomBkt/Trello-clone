@@ -112,7 +112,7 @@ export const HeaderModalBody = styled.div`
     border-radius: 0;
 
     &:hover {
-      // background colored when active
+      // TODO: Active link = hover state
       background-color: #ebecf0;
       color: #172b4d;
     }

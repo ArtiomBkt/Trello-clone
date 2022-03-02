@@ -147,7 +147,8 @@ export const BoardStarredContainer = styled.a`
 export const BoardStarredIcon = styled.span<PropTypes.StyledProps>`
   ${BoardHeaderIcon}
   ${({ size }) => Icon(size)}
-  color: #f2d600; // change color according to starred/unstarred board
+  // TODO: change color according to starred/unstarred board
+  color: #f2d600;
   box-sizing: content-box;
 
   &:before {
@@ -171,8 +172,7 @@ export const BoardOrgContainer = styled.div`
   display: flex;
   position: relative;
 
-  /** change display when features are ready
-  **/
+  // TODO: change display when features are ready
   display: none;
 `
 
@@ -250,7 +250,8 @@ export const BoardMemberInviteBtn = styled.a`
   border-radius: 3px;
 
   background-color: #fff;
-  color: #000; // colors can change according to background color
+  // TODO: colors can change according to background color
+  color: #000;
 
   span {
     overflow: hidden;

@@ -71,7 +71,7 @@ function handleTaskMove({ board, draggableId, source, destination }: ServiceType
     return newLists
   }
 
-  // Need to test edge cases here to see if returning early is more effective than using 'else'
+  // TODO: Test edge cases here to see if returning early is more effective than using 'else'
 
   const newStartTasks = [...startList!.tasks]
   newStartTasks.splice(source.index, 1)

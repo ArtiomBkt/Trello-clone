@@ -81,7 +81,8 @@ const QuickEditControls = ({ handleTaskLabelChange, handleTaskMemberToggle, hand
       case 'cover':
         return <CoverModal handleTaskStyleChange={handleTaskStyleChange} task={task} />
       case 'dates':
-        return <DatesModal task={task} /> // TODO: add calendar and handle dates
+        // TODO: add calendar and handle dates
+        return <DatesModal task={task} />
       default:
         return
     }

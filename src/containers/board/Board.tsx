@@ -175,6 +175,8 @@ const Board = () => {
     boardDispatch({ type: BoardActionType.BOARD_UPDATE, payload: newBoard })
   }
 
+  // TODO: Add functionality to add/delete board when multiple boards are available
+
   // const onBoardAdd = () => {}
 
   // const onBoardDelete = () => {}

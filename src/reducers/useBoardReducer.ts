@@ -16,7 +16,9 @@ type BoardAction =
   | { type: BoardActionType.BOARD_DELETE }
 
 const useBoardReducer = () => {
-  const initialState = boardService.getBoardById() // Will be an empty board
+  // TODO: When there are multiple boards available, the initial state will be an empty board
+  // Initializer will call the board from the api
+  const initialState = boardService.getBoardById()
 
   const initializer = (initialValue = initialState) => {
     const board = localStorage.getItem('board')

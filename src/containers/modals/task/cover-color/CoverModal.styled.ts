@@ -58,7 +58,9 @@ export const TaskContentIllustrator = styled.div`
   padding: 6px 4px 4px 6px;
 `
 
-// This rule covers both long and shorter strips
+/** 
+  This rule covers both long and shorter strips
+ * */
 export const IllustrationStripes = styled.div<PropTypes.StyledProps>`
   width: 122px;
 

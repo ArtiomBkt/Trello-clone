@@ -2,8 +2,8 @@ import React from 'react'
 import { PropTypes } from '../../../../types/prop-types'
 import TaskDetails from '../../../../containers/task/TaskDetails'
 
-// Everything here will move to ArchiveMenu component
-// On removal of arcived item, prompt for confirmation
+// TODO: Everything here will move to ArchiveMenu component
+// TODO: On removal of arcived item, prompt for confirmation
 const MainMenu = ({ board, onArchiveItemRemove, onUnarchiveItem }: PropTypes.SidebarMenusProps) => {
   return (
     <div>
