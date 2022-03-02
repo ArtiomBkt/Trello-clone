@@ -1,24 +1,32 @@
-import React, { useLayoutEffect, useState } from 'react'
+import React, { useEffect, useLayoutEffect, useState } from 'react'
 import { DragDropContext, Droppable, DropResult } from 'react-beautiful-dnd'
 
 import { boardService } from '../../services/board.service'
 import { userService } from '../../services/user.service'
-import useLocalStorageState from '../../hooks/useLocalStorageState'
+
 import { BoardTypes } from '../../types/board-types/index'
+import useBoardReducer, { BoardActionType } from '../../reducers/useBoardReducer'
+import useLabelReducer from '../../reducers/useLabelReducer'
+import LabelsContext from '../../contexts/labelsToggle'
 
 import { BoardContainer, BoardContentWrapper, BoardWrapper, AppWrapper } from './Board.styled'
 import { ListPreviewContainer } from '../../components/list/ListPreview.styled'
 
-import LabelsContext from '../../contexts/labelsToggle'
 import BoardNav from '../../components/board/board-navbar/BoardNav'
 import BoardSidebar from '../../components/board/board-sidebar/Sidebar'
 import ListPreview from '../../components/list/ListPreview'
 import ListComposer from '../../components/board/list-composer/ListComposer'
 
 const Board = () => {
-  const [board, setBoard] = useLocalStorageState('board', boardService.getBoardById())
+  // const [board, setBoard] = useLocalStorageState('board', boardService.getBoardById())
+  const [board, boardDispatch] = useBoardReducer()
+  const [labelState, labelsDispatch] = useLabelReducer()
   const [isSidenavOpen, setIsSidenavOpen] = useState(false)
-  const [isLabelsExpanded, setIsLabelsExpanded] = useState(false)
+  // const [isLabelsExpanded, setIsLabelsExpanded] = useState(false)
+
+  useEffect(() => {
+    localStorage.setItem('board', JSON.stringify(board))
+  }, [board])
 
   useLayoutEffect(() => {
     const elRoot = document.getElementById('root')
@@ -79,6 +87,7 @@ const Board = () => {
       ...board,
       labels: newLabels
     }
+    // TODO: dispatch for labels update
 
     onBoardUpdate(newBoard)
   }
@@ -163,9 +172,12 @@ const Board = () => {
   }
 
   const onBoardUpdate = (newBoard: BoardTypes.board): void => {
-    // dispatch({ type: 'BOARD_UPDATE', payload: newBoard })
-    setBoard(newBoard)
+    boardDispatch({ type: BoardActionType.BOARD_UPDATE, payload: newBoard })
   }
+
+  // const onBoardAdd = () => {}
+
+  // const onBoardDelete = () => {}
 
   const toggleSidenav = (): void => {
     setIsSidenavOpen(prev => !prev)
@@ -184,7 +196,7 @@ const Board = () => {
                   <Droppable direction="horizontal" droppableId="board" type="LIST">
                     {provided => (
                       <ListPreviewContainer {...provided.droppableProps} ref={provided.innerRef}>
-                        <LabelsContext.Provider value={{ isLabelsExpanded, setIsLabelsExpanded }}>
+                        <LabelsContext.Provider value={{ labelState, labelsDispatch }}>
                           {board.lists?.map((list, index) => {
                             const listPreviewProps = {
                               key: list.id,

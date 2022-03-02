@@ -64,10 +64,10 @@ export declare module BoardTypes {
     title: string
     createdBy: member
     style: { background: string }
-    members?: member[]
+    members: member[]
     labels: label[]
     description?: string
     archive: archivedItem[]
-    lists?: list[]
+    lists: list[]
   }
 }

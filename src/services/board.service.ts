@@ -20,11 +20,17 @@ function getBoardById(boardId?: Parameters<ServiceTypes.getBoardById>): ReturnTy
   return gBoard
 }
 
-function handleListMove({ board, draggableId, source, destination }: ServiceTypes.dragAndDropArgs): BoardTypes.list[] | undefined {
-  if (!board || !board.lists) return
+function handleListMove({ board, draggableId, source, destination }: ServiceTypes.dragAndDropArgs): BoardTypes.list[] {
+  if (!board || !board.lists) {
+    // Should not happen
+    throw new Error('Dragged a list while there are no lists')
+  }
 
   const draggedList = board.lists.find(list => list.id === draggableId)
-  if (!draggedList) return
+  if (!draggedList) {
+    // Should not happen
+    throw new Error('No list was dragged')
+  }
 
   const newLists = [...board.lists]
   newLists.splice(source.index, 1)
@@ -33,23 +39,28 @@ function handleListMove({ board, draggableId, source, destination }: ServiceType
   return newLists
 }
 
-function handleTaskMove({ board, draggableId, source, destination }: ServiceTypes.dragAndDropArgs): BoardTypes.list[] | undefined {
-  if (!board || !board.lists) return
+function handleTaskMove({ board, draggableId, source, destination }: ServiceTypes.dragAndDropArgs): BoardTypes.list[] {
+  if (!board || !board.lists) {
+    // Should not happen
+    throw new Error('Dragged a task while there are no lists')
+  }
 
   const startList = board.lists.find(list => list.id === source.droppableId)
   const endList = board.lists.find(list => list.id === destination.droppableId)
-  if (!startList || !endList) return
 
-  const draggedTask = startList.tasks.find(task => task.id === draggableId)
-  if (!draggedTask) return
+  const draggedTask = startList!.tasks.find(task => task.id === draggableId)
+  if (!draggedTask) {
+    // Should not happen
+    throw new Error('No task was dragged')
+  }
 
-  if (startList.id === endList.id) {
-    const newTasks = [...startList.tasks]
+  if (startList!.id === endList!.id) {
+    const newTasks = [...startList!.tasks]
     newTasks.splice(source.index, 1)
     newTasks.splice(destination.index, 0, draggedTask)
 
     const newList = {
-      ...startList,
+      ...startList!,
       tasks: newTasks
     }
 
@@ -58,29 +69,31 @@ function handleTaskMove({ board, draggableId, source, destination }: ServiceType
     newLists.splice(idx, 1, newList)
 
     return newLists
-  } else {
-    const newStartTasks = [...startList.tasks]
-    newStartTasks.splice(source.index, 1)
-    const newStartList = {
-      ...startList,
-      tasks: newStartTasks
-    }
-
-    const newEndTasks = [...endList.tasks]
-    newEndTasks.splice(destination.index, 0, draggedTask)
-    const newEndList = {
-      ...endList,
-      tasks: newEndTasks
-    }
-
-    const newLists = [...board.lists]
-    const startListIdx = newLists.findIndex(list => list.id === startList.id)
-    newLists.splice(startListIdx, 1, newStartList)
-    const endListIdx = newLists.findIndex(list => list.id === endList.id)
-    newLists.splice(endListIdx, 1, newEndList)
-
-    return newLists
   }
+
+  // Need to test edge cases here to see if returning early is more effective than using 'else'
+
+  const newStartTasks = [...startList!.tasks]
+  newStartTasks.splice(source.index, 1)
+  const newStartList = {
+    ...startList!,
+    tasks: newStartTasks
+  }
+
+  const newEndTasks = [...endList!.tasks]
+  newEndTasks.splice(destination.index, 0, draggedTask)
+  const newEndList = {
+    ...endList!,
+    tasks: newEndTasks
+  }
+
+  const newLists = [...board.lists]
+  const startListIdx = newLists.findIndex(list => list.id === startList!.id)
+  newLists.splice(startListIdx, 1, newStartList)
+  const endListIdx = newLists.findIndex(list => list.id === endList!.id)
+  newLists.splice(endListIdx, 1, newEndList)
+
+  return newLists
 }
 
 function getEmptyTask(): ReturnType<ServiceTypes.getEmptyTask> {

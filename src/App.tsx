@@ -6,17 +6,17 @@ import AppWrapper from './styled/App-wrapper.styled'
 import { UserTypes } from './types/user-types'
 
 const App = () => {
-  // const [loggedUserId, setLoggedUser] = React.useState(() => {
-  //   const user: UserTypes.User['id'] = JSON.parse(sessionStorage.getItem('loggedUser') || '').id
-  //   return user
-  // })
+  const [loggedUserId, setLoggedUser] = React.useState<UserTypes.User['id'] | undefined>(() => {
+    const user = sessionStorage.getItem('loggedUser')
+    return user ? JSON.parse(user).id : undefined
+  })
 
   return (
     <AppWrapper>
-      {/* <LoggedUserContext.Provider value={{ loggedUserId, setLoggedUser }}> */}
-      <AppHeader />
-      <Board />
-      {/* </LoggedUserContext.Provider> */}
+      <LoggedUserContext.Provider value={{ loggedUserId, setLoggedUser }}>
+        <AppHeader />
+        <Board />
+      </LoggedUserContext.Provider>
     </AppWrapper>
   )
 }

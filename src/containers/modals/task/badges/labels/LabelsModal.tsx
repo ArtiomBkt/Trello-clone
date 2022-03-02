@@ -1,13 +1,18 @@
 import React, { useEffect, useState } from 'react'
-import useLabelReducer from '../../../../../reducers/useLabelReducer'
+
+import useLabelReducer, { LabelActionType } from '../../../../../reducers/useLabelReducer'
+
 import { PropTypes } from '../../../../../types/prop-types'
 import { LabelsModalsContainer, LabelsList, LabelPreviewContainer, LabelPreviewEditBtn, LabelPreview, LabelSelectedIcon } from './LabelsModal.styled'
+
+// TODO: consider moving to a separate component
+// TODO: figure out correctly re-rendering
 
 const Label = ({ task, handleTaskLabelChange, handleLabelChange, label }: PropTypes.LabelProps) => {
   const [state, dispatch] = useLabelReducer()
 
   const handleLabelTitleChange = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch({ type: 'CHANGE_TITLE', payload: target.value })
+    dispatch({ type: LabelActionType.CHANGE_TITLE, payload: target.value })
   }
 
   const handleLabelChangeSubmit = (ev: React.FocusEvent | React.KeyboardEvent) => {
@@ -21,15 +26,14 @@ const Label = ({ task, handleTaskLabelChange, handleLabelChange, label }: PropTy
     }
 
     handleLabelChange!(newLabel)
-    dispatch({ type: 'SUBMIT_CHANGE' })
+    dispatch({ type: LabelActionType.SUBMIT_CHANGE })
   }
 
   if (!label) return null
-  // add ref to label title input, focus when is editing
-  // fix input ui
+  // TODO: add ref to label title input, focus when is editing, fix input ui
   return (
     <LabelPreviewContainer>
-      <LabelPreviewEditBtn onClick={() => dispatch({ type: 'TOGGLE_EDIT', payload: label.title })} content="'\e928'" size="sm" />
+      <LabelPreviewEditBtn onClick={() => dispatch({ type: LabelActionType.TOGGLE_EDIT, payload: label.title })} content="'\e928'" size="sm" />
       {state.isEditMode ? (
         <LabelPreview labelColor={label.color}>
           <input type="text" value={state.labelTitle} onBlur={handleLabelChangeSubmit} onKeyDown={handleLabelChangeSubmit} onChange={handleLabelTitleChange} />
@@ -59,6 +63,7 @@ const LabelsModal = ({ task, handleTaskLabelChange, onLabelsUpdate }: PropTypes.
     }
   }
 
+  // TODO: Refactor with reducer
   const handleLabelChange = (updatedLabel: PropTypes.label) => {
     const idx = boardLabels!.findIndex(label => label.id === updatedLabel.id)
     const newLabels = [...boardLabels!]

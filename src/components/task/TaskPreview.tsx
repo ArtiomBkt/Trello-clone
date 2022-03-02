@@ -35,6 +35,7 @@ const TaskPreview = ({ task, index, handleTaskEdit, handleTaskArchive, onLabelsU
     // }
   }
 
+  // TODO: Refactor to use dispatch
   const handleTaskLabelChange = (ev: React.MouseEvent, chosenLabel: PropTypes.label): void => {
     ev.preventDefault()
 

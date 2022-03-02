@@ -1,9 +1,16 @@
 import { createContext } from 'react'
-import { PropTypes } from '../types/prop-types'
+import { LabelState, LabelAction } from '../reducers/useLabelReducer'
 
-const LabelsContext = createContext<PropTypes.LabelsContext>({
-  isLabelsExpanded: false,
-  setIsLabelsExpanded: () => {}
+type ILabelContext = {
+  labelState: LabelState
+  labelsDispatch: React.Dispatch<LabelAction>
+}
+
+const LabelsContext = createContext<ILabelContext>({
+  labelState: { labelTitle: '', isEditMode: false, isLabelsExpanded: false },
+  labelsDispatch: () => {}
 })
+
+LabelsContext.displayName = 'LabelsContext'
 
 export default LabelsContext
