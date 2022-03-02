@@ -59,9 +59,7 @@ const AppHeader = () => {
             </HeaderLinks>
           </HeaderLinksContainer>
         </HeaderLinksWrapper>
-        <HeaderRightChunk>
-          <RightChunk />
-        </HeaderRightChunk>
+        <HeaderRightChunk>{/* <RightChunk /> */}</HeaderRightChunk>
       </HeaderMainNav>
     </Header>
   )
