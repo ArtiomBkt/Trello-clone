@@ -51,7 +51,7 @@ const TaskDetails = ({ taskTitle, taskRef, task, isQuickEditOpen, handleTaskDueT
         </>
       ) : (
         <>
-          {task.labels && <LabelsPreview labels={task.labels} />}
+          {task.labels && <LabelsPreview isQuickEditOpen={isQuickEditOpen} labels={task.labels} />}
           <EditorTaskTextarea ref={taskTitleRef} onKeyUp={handleTaskTitleChange} onChange={handleTaskTitleChange} value={taskTitle} />
         </>
       )}

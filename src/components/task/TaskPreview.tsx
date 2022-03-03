@@ -13,10 +13,8 @@ const TaskPreview = ({ task, index, handleTaskEdit, handleTaskArchive, onLabelsU
   const taskRef = useRef<HTMLDivElement>(null)
 
   const handleQuickEditToggle = (ev?: React.MouseEvent): void => {
-    if (ev) {
-      ev.stopPropagation()
-      ev.preventDefault()
-    }
+    ev?.preventDefault()
+
     if (ev && taskRef.current) {
       const { x, y } = taskRef.current.getBoundingClientRect()
       setTaskEditorPos({ top: y, left: x })
@@ -26,13 +24,11 @@ const TaskPreview = ({ task, index, handleTaskEdit, handleTaskArchive, onLabelsU
 
   // TODO: add option to enter new line
   const handleTaskTitleChange = (ev: React.ChangeEvent<HTMLTextAreaElement> | React.KeyboardEvent): void => {
-    if ((ev as React.KeyboardEvent).key !== 'Enter' && !((ev as React.KeyboardEvent).key === 'Enter' && (ev as React.KeyboardEvent).shiftKey)) {
-      setTaskTitle((ev as React.ChangeEvent<HTMLTextAreaElement>).target.value)
+    if ((ev as React.KeyboardEvent).key === 'Enter' || ((ev as React.KeyboardEvent).key === 'Enter' && (ev as React.KeyboardEvent).shiftKey)) {
+      ev.preventDefault()
+      return handleTaskEditSubmit(ev as React.KeyboardEvent)
     }
-    // else {
-    //   ev.preventDefault()
-    //   setTaskTitle(title => title + '\r\n')
-    // }
+    setTaskTitle((ev as React.ChangeEvent<HTMLTextAreaElement>).target.value)
   }
 
   // TODO: Refactor to use dispatch
@@ -97,7 +93,7 @@ const TaskPreview = ({ task, index, handleTaskEdit, handleTaskArchive, onLabelsU
     newTask.title = taskTitle
 
     handleTaskEdit(newTask)
-    handleQuickEditToggle()
+    handleQuickEditToggle(ev as React.MouseEvent)
   }
 
   const taskQuickEditProps = {
@@ -129,8 +125,9 @@ const TaskPreview = ({ task, index, handleTaskEdit, handleTaskArchive, onLabelsU
           ref={provided.innerRef}
           {...provided.draggableProps}
           {...provided.dragHandleProps}
-          // to={`/${task.id}`}
-          onContextMenuCapture={handleQuickEditToggle}
+          to={`/${task.id}`}
+          onContextMenu={handleQuickEditToggle}
+          isDragging={snapshot.isDragging}
           styling={task.style}
         >
           {!task.style?.fullCover && task.style?.background && <TaskCover styling={task.style} />}

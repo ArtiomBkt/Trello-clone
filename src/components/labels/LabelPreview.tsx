@@ -5,7 +5,7 @@ import { LabelActionType } from '../../reducers/useLabelReducer'
 
 import { LabelsContainer, Label } from './LabelPreview.styled'
 
-const LabelsPreview = ({ labels }: PropTypes.LabelsPreviewProps) => {
+const LabelsPreview = ({ labels, isQuickEditOpen }: PropTypes.LabelsPreviewProps) => {
   const { labelState, labelsDispatch } = useContext(labelsContext)
 
   const toggleLabels = (ev: React.MouseEvent) => {
@@ -15,9 +15,9 @@ const LabelsPreview = ({ labels }: PropTypes.LabelsPreviewProps) => {
   }
 
   return (
-    <LabelsContainer onClick={toggleLabels}>
+    <LabelsContainer onClick={isQuickEditOpen ? undefined : toggleLabels}>
       {labels.map(label => (
-        <Label isLabelExpanded={labelState.isLabelsExpanded} key={label.id} labelColor={label.color}>
+        <Label isLabelExpanded={isQuickEditOpen ? true : labelState.isLabelsExpanded} key={label.id} labelColor={label.color}>
           {label.title}
         </Label>
       ))}

@@ -8,7 +8,7 @@ const BadgesModal = ({ title, children, modalPos, modalWrapperRef, onClose }: Pr
     <BadgesModalContainer title={title} ref={modalWrapperRef} modalPos={modalPos}>
       <BadgesModalHeader>
         <BadgesModalHeaderTitle>{title}</BadgesModalHeaderTitle>
-        <BadgesModalHeaderCloseBtn onClick={onClose} content="'\e91c'" size="sm" />
+        <BadgesModalHeaderCloseBtn title={`Close ${title} modal`} onClick={onClose} content="'\e91c'" size="sm" />
       </BadgesModalHeader>
       <BadgesModalBody>{children}</BadgesModalBody>
     </BadgesModalContainer>,

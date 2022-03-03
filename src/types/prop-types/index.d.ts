@@ -8,6 +8,7 @@ export declare module PropTypes {
     styling?: task['style']
     size?: string
     content?: string
+    title?: string
     isDone?: boolean
     dueStatus?: string
     isDateBadge?: boolean
@@ -20,6 +21,7 @@ export declare module PropTypes {
     isQuickEdit?: boolean
     labelColor?: string
     isLabelExpanded?: boolean
+    isDragging?: boolean
   }
 
   type DndTypes = {
@@ -84,6 +86,7 @@ export declare module PropTypes {
 
   type LabelsPreviewProps = {
     labels: label[]
+    isQuickEditOpen?: boolean
   }
 
   type TaskComposerProps = {
@@ -107,13 +110,14 @@ export declare module PropTypes {
     children?: React.ReactNode
     modalPos?: modalPos
     task: PropTypes.task
+    handleBadgeModalToggle?: (ev: React.MouseEvent) => void
     handleTaskLabelChange: (ev: React.MouseEvent, label: PropTypes.label) => void
-    onChangeSubmit?: (ev: React.MouseEvent) => void
-    onClose?: (ev?: React.MouseEvent) => void
-    onLabelsUpdate?: (labels: PropTypes.label[], ev?: React.MouseEvent) => void
     handleTaskMemberToggle: (ev: React.MouseEvent, member: BoardTypes.member) => void
     handleTaskStyleChange: (newStyle: task['style']) => void
     handleTaskArchive?: (ev: React.MouseEvent, task: PropTypes.task) => void
+    onChangeSubmit?: (ev: React.MouseEvent) => void
+    onClose?: (ev?: React.MouseEvent) => void
+    onLabelsUpdate?: (labels: PropTypes.label[], ev?: React.MouseEvent) => void
   }
 
   type BadgesModalProps = {
@@ -121,7 +125,7 @@ export declare module PropTypes {
     children?: React.ReactNode
     modalPos?: modalPos
     modalWrapperRef?: React.RefObject<HTMLDivElement>
-    onClose?: () => void
+    onClose: (ev: React.MouseEvent) => void
   }
 
   type LabelProps = {

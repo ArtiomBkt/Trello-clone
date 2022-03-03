@@ -1,5 +1,5 @@
 import React, { useEffect, useLayoutEffect, useState } from 'react'
-import { DragDropContext, Droppable, DropResult } from 'react-beautiful-dnd'
+import { DragDropContext, Droppable, DroppableProvided, DropResult } from 'react-beautiful-dnd'
 
 import { boardService } from '../../services/board.service'
 import { userService } from '../../services/user.service'
@@ -196,7 +196,7 @@ const Board = () => {
               <div style={{ flexGrow: 1, position: 'relative' }}>
                 <DragDropContext onDragEnd={onDragEnd}>
                   <Droppable direction="horizontal" droppableId="board" type="LIST">
-                    {provided => (
+                    {(provided: DroppableProvided) => (
                       <ListPreviewContainer {...provided.droppableProps} ref={provided.innerRef}>
                         <LabelsContext.Provider value={{ labelState, labelsDispatch }}>
                           {board.lists?.map((list, index) => {
@@ -219,6 +219,7 @@ const Board = () => {
                 </DragDropContext>
               </div>
             </BoardWrapper>
+            {/* // TODO: Fix animation for sidebar opening */}
             {isSidenavOpen && (
               <BoardSidebar
                 board={board}

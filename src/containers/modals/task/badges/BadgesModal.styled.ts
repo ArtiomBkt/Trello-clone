@@ -4,6 +4,7 @@ import { Icon } from '../../../../styled/Mixins.styled'
 
 export const BadgesModalContainer = styled.div<PropTypes.StyledProps>`
   position: absolute;
+  display: ${({ title }) => (title ? 'block' : 'none')};
 
   ${({ modalPos }) =>
     modalPos &&

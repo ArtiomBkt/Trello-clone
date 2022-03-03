@@ -25,15 +25,24 @@ import CoverModal from './cover-color/CoverModal'
 
 // TODO: figure out hook for modal closing when same button is clicked
 
-const QuickEditControls = ({ handleTaskLabelChange, handleTaskMemberToggle, handleTaskStyleChange, handleTaskArchive, onLabelsUpdate, task }: PropTypes.QuickEditorProps) => {
+const QuickEditControls = ({
+  handleBadgeModalToggle,
+  handleTaskLabelChange,
+  handleTaskMemberToggle,
+  handleTaskStyleChange,
+  handleTaskArchive,
+  onLabelsUpdate,
+  task
+}: PropTypes.QuickEditorProps) => {
   const [quickControls] = useState([
     { title: 'Edit labels', type: 'labels', icon: `'\\e93f'` },
     { title: 'Change members', type: 'members', icon: `'\\e946'` },
     { title: 'Change Cover', type: 'cover', icon: `'\\e914'` },
     { title: 'Edit dates', type: 'dates', icon: `'\\e91b'` }
   ])
-  const [badgeModal, setBadgeModal] = useState<string>('')
+  const [currModal, setCurrModal] = useState<string | undefined>(undefined)
   const [modalPos, setModalPos] = useState({ top: 0, left: 0 })
+  const modalNameRef = useRef<string | undefined>(undefined)
   const modalWrapperRef = useRef<HTMLDivElement>(null)
   const outsideAlerter = useOutsideAlerter(modalWrapperRef)
 
@@ -57,23 +66,32 @@ const QuickEditControls = ({ handleTaskLabelChange, handleTaskMemberToggle, hand
 
   useEffect(() => {
     if (outsideAlerter) {
-      setBadgeModal('')
+      setCurrModal(undefined)
     }
   }, [outsideAlerter])
 
-  const toggleBadgeModal = (ev?: React.MouseEvent, modalName?: string) => {
-    if (!modalName) {
-      setBadgeModal('')
+  const toggleCurrModal = (ev: React.MouseEvent) => {
+    ev.preventDefault()
+    ev.stopPropagation()
+
+    const modalName = ev.currentTarget.getAttribute('data-type')
+
+    if (!modalName || modalName === modalNameRef.current) {
+      modalNameRef.current = undefined
+      setCurrModal(undefined)
+      return handleBadgeModalToggle!(ev)
     }
-    if (ev && modalName) {
-      const { y: top, x: left, height } = ev.currentTarget.getBoundingClientRect()
-      setModalPos({ top: top + height + 5, left })
-      setBadgeModal(modalName)
-    }
+
+    const { y: top, x: left, height } = ev.currentTarget.getBoundingClientRect()
+    setModalPos({ top: top + height + 5, left })
+
+    modalNameRef.current = modalName
+    setCurrModal(modalName!)
+    handleBadgeModalToggle!(ev)
   }
 
   const getModalChild = () => {
-    switch (badgeModal) {
+    switch (currModal) {
       case 'labels':
         return <LabelsModal onLabelsUpdate={onLabelsUpdate} task={task} handleTaskLabelChange={handleTaskLabelChange} />
       case 'members':
@@ -96,23 +114,22 @@ const QuickEditControls = ({ handleTaskLabelChange, handleTaskMemberToggle, hand
         <EditorControlText>Open card</EditorControlText>
       </TaskQuickEditorControlBtn>
       {quickControls.map(control => (
-        <TaskQuickEditorControlBtn onClick={ev => toggleBadgeModal(ev, control.type)} key={control.icon}>
+        <TaskQuickEditorControlBtn data-type={control.type} onClick={toggleCurrModal} key={control.icon}>
           <EditorControlBtnIcon content={control.icon} size="sm" />
           <EditorControlText>{control.title}</EditorControlText>
         </TaskQuickEditorControlBtn>
       ))}
-      {/* onclick send task to archive */}
       <TaskQuickEditorControlBtn onClick={ev => handleTaskArchive!(ev, task)}>
         <EditorControlBtnIcon content="'\e907'" size="sm" />
         <EditorControlText>Archive</EditorControlText>
       </TaskQuickEditorControlBtn>
-      {badgeModal && (
-        <BadgesModal modalWrapperRef={modalWrapperRef} modalPos={modalPos} title={badgeModal} onClose={toggleBadgeModal}>
-          {getModalChild()}
-        </BadgesModal>
-      )}
+      {/* {currModal && ( */}
+      <BadgesModal modalWrapperRef={modalWrapperRef} modalPos={modalPos} title={currModal!} onClose={toggleCurrModal}>
+        {getModalChild()}
+      </BadgesModal>
     </TaskQuickEditorControls>
   )
 }
+// )}
 
 export default QuickEditControls

@@ -4,9 +4,11 @@ const useOutsideAlerter = (ref: RefObject<HTMLDivElement>) => {
   const [outsideClick, setOutsideClick] = useState(false)
 
   useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
+    const handleClickOutside = (ev: MouseEvent) => {
+      ev.stopImmediatePropagation()
+      ev.preventDefault()
       setOutsideClick(false)
-      if (ref.current && !ref.current.contains(event.target as Node)) {
+      if (ref.current && !ref.current.contains(ev.target as Node)) {
         setOutsideClick(true)
       } else {
         setOutsideClick(false)
