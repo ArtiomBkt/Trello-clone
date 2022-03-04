@@ -1,5 +1,5 @@
 import { BoardTypes } from '../board-types'
-import { DraggableProvided } from 'react-beautiful-dnd'
+import { DraggableProvided, DraggableProvidedDraggableProps, DraggableStateSnapshot } from 'react-beautiful-dnd'
 
 export declare module PropTypes {
   type StyledProps = {
@@ -22,7 +22,16 @@ export declare module PropTypes {
     labelColor?: string
     isLabelExpanded?: boolean
     isDragging?: boolean
+    draggingTransform?: string
     placeholderProps?: PlaceholderProps
+  }
+
+  type StyledTaskPreviewProps = {
+    $taskPreviewStyling: {
+      isDragging: DraggableStateSnapshot.isDragging
+      draggingTransform: DraggableProvidedDraggableProps.style.transform
+      cover: task['style']
+    }
   }
 
   type DndTypes = {

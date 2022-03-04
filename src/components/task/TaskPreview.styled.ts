@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components'
-// import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { Icon } from '../../styled/Mixins.styled'
 import { PropTypes } from '../../types/prop-types'
 
@@ -16,15 +16,15 @@ export const taskColors: PropTypes.TaskColorsInterface = {
   navy: { static: '#172b4d', hover: '#091e42' }
 }
 
-// export const TaskPreviewContainer = styled(Link)<PropTypes.StyledProps>`
-export const TaskPreviewContainer = styled.div<PropTypes.StyledProps>`
-  ${({ styling }) =>
-    styling?.fullCover
+/* export const TaskPreviewContainer = styled.div<PropTypes.StyledProps>` */
+export const TaskPreviewContainer = styled(Link)<PropTypes.StyledTaskPreviewProps>`
+  ${({ $taskPreviewStyling }) =>
+    $taskPreviewStyling.cover.fullCover
       ? css`
           display: flex;
           flex-direction: row;
           min-height: 56px;
-          background-color: ${taskColors[styling.background].static};
+          background-color: ${taskColors[$taskPreviewStyling.cover.background].static};
         `
       : css`
           display: block;
@@ -38,15 +38,24 @@ export const TaskPreviewContainer = styled.div<PropTypes.StyledProps>`
 
   border-radius: 3px;
   box-shadow: 0 1px 0 #091e4240;
-  filter: ${({ isDragging }) => isDragging && 'drop-shadow(0 0 .5rem #000)'};
+
+  filter: ${({ $taskPreviewStyling }) => ($taskPreviewStyling.isDragging ? 'drop-shadow(0 0 .5rem #000)' : '')};
+  transform: ${({ $taskPreviewStyling }) =>
+    $taskPreviewStyling.isDragging && $taskPreviewStyling.draggingTransform
+      ? `${$taskPreviewStyling.draggingTransform} rotate(3deg)`
+      : !$taskPreviewStyling.isDragging
+      ? ''
+      : $taskPreviewStyling.draggingTransform} !important;
 
   // TODO: Absolute position on drag might solve overlapping issue - needs calculation like placeholder
-  /* position: ${({ isDragging }) => isDragging && 'absolute'} !important; */
+  // IF absolute positioning is used on this container, additional relatively positioned content's wrapper is a must
+  /* position: ${({ $taskPreviewStyling }) => $taskPreviewStyling.isDragging && 'absolute'} !important; */
 
   text-decoration: none;
+  position: relative;
 
   &:hover {
-    background-color: ${({ styling }) => (styling?.fullCover ? taskColors[styling.background].hover : '#f4f5f7')};
+    background-color: ${({ $taskPreviewStyling }) => ($taskPreviewStyling.cover.fullCover ? taskColors[$taskPreviewStyling.cover.background].hover : '#f4f5f7')};
     border-bottom-color: #091e4240;
 
     span {

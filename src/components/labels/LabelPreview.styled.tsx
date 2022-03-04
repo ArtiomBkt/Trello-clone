@@ -1,3 +1,4 @@
+import React from 'react'
 import styled, { css, keyframes } from 'styled-components'
 import { PropTypes } from '../../types/prop-types'
 
@@ -70,8 +71,9 @@ const labels_shrink = keyframes`
 
   to {
     color: #0000;
+    line-height: 100px;
     padding: 0;
-    width: 40px;
+    max-width: 40px;
   }
 `
 
@@ -108,22 +110,42 @@ export const Label = styled.span<PropTypes.StyledProps>`
 
   margin: 0 4px 4px 0;
 
-  &&& {
-    ${({ isLabelExpanded }) =>
-      isLabelExpanded
-        ? css`
-            animation: ${labels_expand} 0.45s ease-out backwards;
-            height: 16px;
-            line-height: 16px;
-            max-width: 198px;
-            margin: 0 4px 4px 0;
-            padding: 0 8px;
-          `
-        : css`
-            line-height: 100px;
-            animation: ${labels_shrink} 0.45s ease-in backwards;
-            height: 8px;
-            max-width: 40px;
-          `}
+  &&&.label-closed {
+    animation: ${labels_shrink} 0.45s ease-in forwards;
+    height: 8px;
+  }
+
+  &&&.label-open {
+    animation: ${labels_expand} 0.45s ease-out backwards;
+    height: 16px;
+    line-height: 16px;
+    max-width: 198px;
+    margin: 0 4px 4px 0;
+    padding: 0 8px;
   }
 `
+/* &&& {
+    ${({ isLabelExpanded }) => useAnimationTrigger(isLabelExpanded!)}
+  } */
+
+// function useAnimationTrigger(isLabelExpanded: boolean) {
+//   const triggerAnimation = React.useMemo(
+//     () =>
+//       isLabelExpanded
+//         ? css`
+//             animation: ${labels_expand} 0.45s ease-out backwards;
+//             height: 16px;
+//             line-height: 16px;
+//             max-width: 198px;
+//             margin: 0 4px 4px 0;
+//             padding: 0 8px;
+//           `
+//         : css`
+//             animation: ${labels_shrink} 0.45s ease-in forwards;
+//             height: 8px;
+//           `,
+//     [isLabelExpanded]
+//   )
+
+//   return triggerAnimation
+// }

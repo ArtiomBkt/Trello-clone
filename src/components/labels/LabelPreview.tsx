@@ -17,7 +17,7 @@ const LabelsPreview = ({ labels, isQuickEditOpen }: PropTypes.LabelsPreviewProps
   return (
     <LabelsContainer onClick={isQuickEditOpen ? undefined : toggleLabels}>
       {labels.map(label => (
-        <Label isLabelExpanded={isQuickEditOpen ? true : labelState.isLabelsExpanded} key={label.id} labelColor={label.color}>
+        <Label className={isQuickEditOpen || labelState.isLabelsExpanded ? 'label-open' : 'label-closed'} key={label.id} labelColor={label.color}>
           {label.title}
         </Label>
       ))}
@@ -26,3 +26,5 @@ const LabelsPreview = ({ labels, isQuickEditOpen }: PropTypes.LabelsPreviewProps
 }
 
 export default LabelsPreview
+
+// isLabelExpanded={isQuickEditOpen ? true : labelState.isLabelsExpanded}

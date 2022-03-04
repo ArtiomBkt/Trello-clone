@@ -8,6 +8,7 @@ export const TaskComposerWrapper = styled.div`
   height: 38px;
 `
 
+// TODO: Change all anchor tags with children to button elements
 export const TaskComposerToggler = styled.a`
   display: block;
   flex: 1 0 auto;

@@ -125,10 +125,13 @@ const TaskPreview = ({ task, index, handleTaskEdit, handleTaskArchive, onLabelsU
           ref={provided.innerRef}
           {...provided.draggableProps}
           {...provided.dragHandleProps}
-          // to={`/${task.id}`}
+          to={`t/${task.id}`}
           onContextMenu={handleQuickEditToggle}
-          isDragging={snapshot.isDragging}
-          styling={task.style}
+          $taskPreviewStyling={{
+            isDragging: snapshot.isDragging,
+            draggingTransform: provided.draggableProps.style?.transform,
+            cover: task.style
+          }}
         >
           {!task.style?.fullCover && task.style?.background && <TaskCover styling={task.style} />}
           <TaskEditIcon onClickCapture={handleQuickEditToggle} content="'\e928'" size="sm" />
