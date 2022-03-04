@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components'
-import { Link } from 'react-router-dom'
+// import { Link } from 'react-router-dom'
 import { Icon } from '../../styled/Mixins.styled'
 import { PropTypes } from '../../types/prop-types'
 
@@ -16,8 +16,8 @@ export const taskColors: PropTypes.TaskColorsInterface = {
   navy: { static: '#172b4d', hover: '#091e42' }
 }
 
-/* export const TaskPreviewContainer = styled.div<PropTypes.StyledProps>` */
-export const TaskPreviewContainer = styled(Link)<PropTypes.StyledProps>`
+// export const TaskPreviewContainer = styled(Link)<PropTypes.StyledProps>`
+export const TaskPreviewContainer = styled.div<PropTypes.StyledProps>`
   ${({ styling }) =>
     styling?.fullCover
       ? css`
@@ -32,14 +32,16 @@ export const TaskPreviewContainer = styled(Link)<PropTypes.StyledProps>`
           background-color: #fff;
         `};
 
-  cursor: pointer;
   margin-bottom: 8px;
+
   max-width: 300px;
 
   border-radius: 3px;
   box-shadow: 0 1px 0 #091e4240;
+  filter: ${({ isDragging }) => isDragging && 'drop-shadow(0 0 .5rem #000)'};
 
-  position: relative;
+  // TODO: Absolute position on drag might solve overlapping issue - needs calculation like placeholder
+  /* position: ${({ isDragging }) => isDragging && 'absolute'} !important; */
 
   text-decoration: none;
 
@@ -98,4 +100,12 @@ export const TaskEditIcon = styled.span<PropTypes.StyledProps>`
     background-color: #ebecf0;
     opacity: 1;
   }
+`
+
+export const DraggingPlaceholder = styled.div`
+  position: absolute;
+
+  border-radius: 3px;
+
+  background-color: #0000003d;
 `

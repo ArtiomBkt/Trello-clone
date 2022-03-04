@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Draggable, Droppable } from 'react-beautiful-dnd'
+import { Draggable, Droppable, DroppableProvided, DroppableStateSnapshot } from 'react-beautiful-dnd'
 import { PropTypes } from '../../types/prop-types'
 import { boardService } from '../../services/board.service'
 import TaskPreview from '../task/TaskPreview'
@@ -8,8 +8,9 @@ import TaskComposer from './task-composer/TaskComposer'
 import { ListContentPreview, List, ListTasksWrapper } from './ListPreview.styled'
 import { TaskComposerWrapper, TaskComposerToggler, TaskComposerIcon } from './task-composer/TaskComposer.styled'
 import { BoardTypes } from '../../types/board-types'
+import { DraggingPlaceholder } from '../task/TaskPreview.styled'
 
-const ListPreview = ({ list, index, onLabelsUpdate, onArchiveItem, onListUpdate }: PropTypes.ListPreviewProps) => {
+const ListPreview = ({ list, index, placeholderProps, onLabelsUpdate, onArchiveItem, onListUpdate }: PropTypes.ListPreviewProps) => {
   const [isComposerOpen, setIsComposerOpen] = useState(false)
 
   const handleComposerToggle = (): void => {
@@ -80,7 +81,7 @@ const ListPreview = ({ list, index, onLabelsUpdate, onArchiveItem, onListUpdate 
           <List isDragging={snapshot.isDragging}>
             <ListHeader onListUpdate={onListUpdate} dragHandleProps={provided.dragHandleProps} list={list} />
             <Droppable droppableId={list.id} type="TASK">
-              {provided => (
+              {(provided: DroppableProvided, snapshot: DroppableStateSnapshot) => (
                 <ListTasksWrapper {...provided.droppableProps} ref={provided.innerRef}>
                   {list.tasks.map((task, index) => {
                     const taskPreviewProps = {
@@ -94,6 +95,16 @@ const ListPreview = ({ list, index, onLabelsUpdate, onArchiveItem, onListUpdate 
                     return <TaskPreview {...taskPreviewProps} />
                   })}
                   {provided.placeholder}
+                  {placeholderProps && Object.keys(placeholderProps).length > 0 && snapshot.isDraggingOver && (
+                    <DraggingPlaceholder
+                      style={{
+                        top: placeholderProps.clientY,
+                        left: placeholderProps.clientX,
+                        width: placeholderProps.clientWidth,
+                        height: placeholderProps.clientHeight
+                      }}
+                    />
+                  )}
                   {isComposerOpen && <TaskComposer handleTaskAdd={handleTaskAdd} handleComposerToggle={handleComposerToggle} />}
                 </ListTasksWrapper>
               )}

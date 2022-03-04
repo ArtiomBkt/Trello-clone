@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react'
-import { Draggable } from 'react-beautiful-dnd'
+import { Draggable, DraggableProvided, DraggableStateSnapshot } from 'react-beautiful-dnd'
 import { PropTypes } from '../../types/prop-types'
 import TaskDetails from '../../containers/task/TaskDetails'
 import { TaskPreviewContainer, TaskCover, TaskEditIcon } from './TaskPreview.styled'
@@ -120,12 +120,12 @@ const TaskPreview = ({ task, index, handleTaskEdit, handleTaskArchive, onLabelsU
   // TODO: figure out react router Link cmp - click self/capture
   return (
     <Draggable draggableId={task.id} index={index}>
-      {(provided, snapshot) => (
+      {(provided: DraggableProvided, snapshot: DraggableStateSnapshot) => (
         <TaskPreviewContainer
           ref={provided.innerRef}
           {...provided.draggableProps}
           {...provided.dragHandleProps}
-          to={`/${task.id}`}
+          // to={`/${task.id}`}
           onContextMenu={handleQuickEditToggle}
           isDragging={snapshot.isDragging}
           styling={task.style}

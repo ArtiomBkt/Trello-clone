@@ -22,11 +22,19 @@ export declare module PropTypes {
     labelColor?: string
     isLabelExpanded?: boolean
     isDragging?: boolean
+    placeholderProps?: PlaceholderProps
   }
 
   type DndTypes = {
     isDragging?: boolean
     isDraggingOver?: boolean
+  }
+
+  type PlaceholderProps = {
+    clientY: number
+    clientX: number
+    clientHeight: number
+    clientWidth: number
   }
 
   interface modalPos {
@@ -41,6 +49,7 @@ export declare module PropTypes {
   type ListPreviewProps = {
     list: BoardTypes.list
     index: number
+    placeholderProps?: PlaceholderProps
     onListUpdate: (list: BoardTypes.list) => void
     onLabelsUpdate: (labels: BoardTypes.label[]) => void
     onArchiveItem: (archivedItem: BoardTypes.archivedItem, updatingList: BoardTypes.list) => void

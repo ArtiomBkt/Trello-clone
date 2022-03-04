@@ -1,5 +1,5 @@
 import React, { useEffect, useLayoutEffect, useState } from 'react'
-import { DragDropContext, Droppable, DroppableProvided, DropResult } from 'react-beautiful-dnd'
+import { DragDropContext, DragStart, DragUpdate, Droppable, DroppableProvided, DropResult } from 'react-beautiful-dnd'
 
 import { boardService } from '../../services/board.service'
 import { userService } from '../../services/user.service'
@@ -16,12 +16,16 @@ import BoardNav from '../../components/board/board-navbar/BoardNav'
 import BoardSidebar from '../../components/board/board-sidebar/Sidebar'
 import ListPreview from '../../components/list/ListPreview'
 import ListComposer from '../../components/board/list-composer/ListComposer'
+import { PropTypes } from '../../types/prop-types'
 
 const Board = () => {
   // const [board, setBoard] = useLocalStorageState('board', boardService.getBoardById())
   const [board, boardDispatch] = useBoardReducer()
   const [labelState, labelsDispatch] = useLabelReducer()
   const [isSidenavOpen, setIsSidenavOpen] = useState(false)
+  const [placeholderProps, setPlaceholderProps] = useState<PropTypes.PlaceholderProps>()
+  const queryAttr = 'data-rbd-drag-handle-draggable-id'
+  const destinationQueryAttr = 'data-rbd-droppable-id'
   // const [isLabelsExpanded, setIsLabelsExpanded] = useState(false)
 
   useEffect(() => {
@@ -33,7 +37,90 @@ const Board = () => {
     if (elRoot) elRoot.style.background = board.style.background
   }, [board.style.background])
 
+  const getDraggedDom = (draggabledId: string) => {
+    const domQuery = `[${queryAttr}='${draggabledId}']`
+    const draggedDOM = document.querySelector(domQuery)
+
+    return draggedDOM
+  }
+
+  const getDestinationDom = (droppableId: string) => {
+    const domQuery = `[${destinationQueryAttr}='${droppableId}']`
+    const destinationDOM = document.querySelector(domQuery)
+
+    return destinationDOM
+  }
+
+  const handleDragStart = (ev: DragStart) => {
+    const draggedDOM = getDraggedDom(ev.draggableId)
+    if (!draggedDOM) {
+      return
+    }
+
+    const { clientHeight, clientWidth } = draggedDOM
+    const sourceIdx = ev.source.index
+    const clientY =
+      parseFloat(window.getComputedStyle(draggedDOM.parentNode as Element).paddingTop) +
+      [...(draggedDOM.parentNode?.children as any)].slice(0, sourceIdx).reduce((t, c) => {
+        const style = c.currentStyle || window.getComputedStyle(c)
+        const marginBottom = parseFloat(style.marginBottom)
+        return t + c.clientHeight + marginBottom
+      }, 0)
+
+    setPlaceholderProps({
+      clientHeight,
+      clientWidth,
+      clientY,
+      clientX: parseFloat(window.getComputedStyle(draggedDOM.parentNode as Element).paddingLeft)
+    })
+  }
+
+  const handleDragUpdate = (ev: DragUpdate) => {
+    if (!ev.destination) {
+      return
+    }
+
+    const draggedDOM = getDraggedDom(ev.draggableId)
+    if (!draggedDOM) {
+      return
+    }
+
+    const { clientHeight, clientWidth } = draggedDOM
+    const destinationIdx = ev.destination.index
+    const sourceIdx = ev.source.index
+
+    const childrenArray = [...((draggedDOM.parentNode as Element).children as any)]
+    const movedItem = childrenArray[sourceIdx]
+    childrenArray.splice(sourceIdx, 1)
+
+    const droppedDOM = getDestinationDom(ev.destination.droppableId)
+    const destChildrenArray = [...(droppedDOM!.children as any)]
+    let updatedArray
+
+    if (draggedDOM.parentNode === droppedDOM) {
+      updatedArray = [...childrenArray.slice(0, destinationIdx), movedItem, ...childrenArray.slice(destinationIdx + 1)]
+    } else {
+      updatedArray = [...destChildrenArray.slice(0, destinationIdx), movedItem, ...destChildrenArray.slice(destinationIdx + 1)]
+    }
+
+    const clientY =
+      parseFloat(window.getComputedStyle(draggedDOM.parentNode as Element).paddingTop) +
+      updatedArray.slice(0, destinationIdx).reduce((t, c) => {
+        const style = c.currentStyle || window.getComputedStyle(c)
+        const marginBottom = parseFloat(style.marginBottom)
+        return t + c.clientHeight + marginBottom
+      }, 0)
+
+    setPlaceholderProps({
+      clientHeight,
+      clientWidth,
+      clientY,
+      clientX: parseFloat(window.getComputedStyle(draggedDOM.parentNode as Element).paddingLeft)
+    })
+  }
+
   const onDragEnd = (result: DropResult): void => {
+    setPlaceholderProps({ clientHeight: 0, clientWidth: 0, clientY: 0, clientX: 0 })
     const { destination, source, type, draggableId } = result
 
     if (!board || !board.lists || !destination) return
@@ -194,7 +281,7 @@ const Board = () => {
             <BoardWrapper isSidenavOpen={isSidenavOpen}>
               <BoardNav onUserToggleStar={onUserToggleStar} onSidenavOpen={toggleSidenav} onBoardUpdate={onBoardUpdate} board={board} />
               <div style={{ flexGrow: 1, position: 'relative' }}>
-                <DragDropContext onDragEnd={onDragEnd}>
+                <DragDropContext onDragUpdate={handleDragUpdate} onDragStart={handleDragStart} onDragEnd={onDragEnd}>
                   <Droppable direction="horizontal" droppableId="board" type="LIST">
                     {(provided: DroppableProvided) => (
                       <ListPreviewContainer {...provided.droppableProps} ref={provided.innerRef}>
@@ -204,15 +291,16 @@ const Board = () => {
                               key: list.id,
                               list,
                               index,
+                              placeholderProps,
                               onArchiveItem,
                               onLabelsUpdate,
                               onListUpdate
                             }
                             return <ListPreview {...listPreviewProps} />
                           })}
-                          {provided.placeholder}
                           <ListComposer onAddList={onAddList} />
                         </LabelsContext.Provider>
+                        {provided.placeholder}
                       </ListPreviewContainer>
                     )}
                   </Droppable>

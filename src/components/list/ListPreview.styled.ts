@@ -60,11 +60,12 @@ export const List = styled.div<PropTypes.DndTypes>`
     isDragging &&
     css`
       transform: rotate(3deg);
-      transition: transform 0.05s;
+      transition: transform 0.5ms;
     `};
 `
 
-export const ListTasksWrapper = styled.div<PropTypes.DndTypes>`
+export const ListTasksWrapper = styled.div`
+  position: relative;
   flex: 1 1 auto;
   overflow-x: hidden;
   overflow-y: auto;
