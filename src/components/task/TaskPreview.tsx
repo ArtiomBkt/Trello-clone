@@ -22,9 +22,8 @@ const TaskPreview = ({ task, index, handleTaskEdit, handleTaskArchive, onLabelsU
     setIsQuickEditOpen(prevState => !prevState)
   }
 
-  // TODO: add option to enter new line
   const handleTaskTitleChange = (ev: React.ChangeEvent<HTMLTextAreaElement> | React.KeyboardEvent): void => {
-    if ((ev as React.KeyboardEvent).key === 'Enter' || ((ev as React.KeyboardEvent).key === 'Enter' && (ev as React.KeyboardEvent).shiftKey)) {
+    if ((ev as React.KeyboardEvent).key === 'Enter' || (ev as React.KeyboardEvent).key === 'Escape') {
       ev.preventDefault()
       return handleTaskEditSubmit(ev as React.KeyboardEvent)
     }

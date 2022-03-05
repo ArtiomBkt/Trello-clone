@@ -1,63 +1,38 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { Link, useNavigate, useOutletContext, useParams } from 'react-router-dom'
+import { useNavigate, useOutletContext, useParams } from 'react-router-dom'
+
 import { BoardTypes } from 'types/board-types'
 import { BoardAction } from 'reducers/useBoardReducer'
+import useClickOutside from 'hooks/useClickOutside'
+
 import {
   TaskPageWindowOverlay,
   TaskPageContainer,
   TaskPageContentWrapper,
   TaskPageCloseBtn,
   TaskPageContent,
-  CardCoverBox,
-  CardCoverMenu,
-  CardCoverMenuBtn,
-  CardCoverIcon,
-  WindowTaskHeader,
-  WindowTaskHeaderIcon,
-  WindowTaskTitle,
-  WindowTaskListIdentifier,
-  ListIdentifierText,
   WindowTaskMainWrapperGrid,
   MainCol,
-  SideControlsCol
+  SideControlsCol,
+  CardDetailsItem,
+  CardDetailsData
 } from './TaskPage.styled'
 
-const DEFAULT_EVENTS = ['mousedown', 'touchstart']
-
-const useClickOutside = <T extends HTMLElement = any>(handler: () => void, events?: string[] | null, nodes?: HTMLElement[]) => {
-  const ref = useRef<T>()
-
-  useEffect(() => {
-    const listener = (event: any) => {
-      if (Array.isArray(nodes)) {
-        const shouldTrigger = nodes.every(node => !!node && !node.contains(event.target))
-        shouldTrigger && handler()
-      } else if (ref.current && !ref.current.contains(event.target)) {
-        handler()
-      }
-    }
-
-    ;(events || DEFAULT_EVENTS).forEach(fn => document.addEventListener(fn, listener))
-
-    return () => {
-      ;(events || DEFAULT_EVENTS).forEach(fn => document.removeEventListener(fn, listener))
-    }
-  }, [ref, handler, nodes, events])
-
-  return ref
-}
+import TaskPageCover from 'components/task/task-page/TaskPageCover'
+import TaskPageTitle from 'components/task/task-page/TaskPageTitle'
 
 const TaskPage = () => {
   const navigate = useNavigate()
   const { taskId } = useParams()
   const [board] = useOutletContext<[BoardTypes.board, React.Dispatch<BoardAction>]>()
+  const [list, setList] = useState<BoardTypes.list>()
   const [task, setTask] = useState<BoardTypes.task>()
   const taskPageRef = useClickOutside(handleCloseTaskPage)
   const overlayRef = useRef<HTMLDivElement>(null!)
 
   useEffect(() => {
     for (let list of board.lists) {
-      const task = list.tasks.find(task => task.id === taskId)
+      const task = list.tasks.find(task => (task.id === taskId ? (setList(list), task) : false))
       return task && setTask(task)
     }
   }, [board, taskId])
@@ -77,29 +52,30 @@ const TaskPage = () => {
     <TaskPageWindowOverlay ref={overlayRef} tabIndex={0} onClick={handleCloseTaskPage} onKeyUp={handleCloseTaskPage}>
       <TaskPageContainer>
         <TaskPageContentWrapper ref={taskPageRef}>
-          <Link to="/">
-            <TaskPageCloseBtn content="'\e91c'" size="md" />
-          </Link>
+          <TaskPageCloseBtn to="/" content="'\e91c'" size="md" />
           <TaskPageContent>
-            <CardCoverBox>
-              <CardCoverMenu>
-                <CardCoverMenuBtn>
-                  <CardCoverIcon content="'\e914'" size="sm" /> Cover
-                </CardCoverMenuBtn>
-              </CardCoverMenu>
-            </CardCoverBox>
-            <WindowTaskHeader>
-              <WindowTaskHeaderIcon content="'\e912'" size="lg" />
-              <WindowTaskTitle>h2 and textarea</WindowTaskTitle>
-              <WindowTaskListIdentifier>
-                <ListIdentifierText>in list "list name"</ListIdentifierText>
-              </WindowTaskListIdentifier>
-            </WindowTaskHeader>
+            <TaskPageCover />
+            {task && <TaskPageTitle list={list} taskTitle={task.title} />}
             <WindowTaskMainWrapperGrid>
-              <MainCol></MainCol>
+              <MainCol>
+                <CardDetailsData>
+                  <CardDetailsItem>
+                    <h3>Members</h3>
+                  </CardDetailsItem>
+                  <CardDetailsItem>
+                    <h3>Labels</h3>
+                  </CardDetailsItem>
+                  <CardDetailsItem>
+                    <h3>Start date</h3>
+                  </CardDetailsItem>
+                  <CardDetailsItem>
+                    <h3>Due date</h3>
+                  </CardDetailsItem>
+                </CardDetailsData>
+                {/* // TODO: Description and the rest go here */}
+              </MainCol>
               <SideControlsCol></SideControlsCol>
             </WindowTaskMainWrapperGrid>
-            grid
           </TaskPageContent>
         </TaskPageContentWrapper>
       </TaskPageContainer>

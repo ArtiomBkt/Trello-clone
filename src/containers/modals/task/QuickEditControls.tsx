@@ -8,23 +8,6 @@ import DatesModal from './badges/dates/DatesModal'
 import MemberModal from './badges/members/MemberModal'
 import CoverModal from './cover-color/CoverModal'
 
-// const useModalToggler = (elementName: string, cb: () => void) => {
-//   const [isOpen, toggle] = useState(false)
-//   const elementNameRef = useRef(elementName)
-
-//   useEffect(() => {
-//     const prevElem = elementNameRef.current
-//     if (isOpen && prevElem === elementName) {
-//       toggle(false)
-//     }
-//     elementNameRef.current = elementName
-//   }, [cb, elementName, isOpen])
-
-//   return [isOpen, toggle] as const
-// }
-
-// TODO: figure out hook for modal closing when same button is clicked
-
 const QuickEditControls = ({
   handleBadgeModalToggle,
   handleTaskLabelChange,
@@ -45,24 +28,6 @@ const QuickEditControls = ({
   const modalNameRef = useRef<string | undefined>(undefined)
   const modalWrapperRef = useRef<HTMLDivElement>(null)
   const outsideAlerter = useOutsideAlerter(modalWrapperRef)
-
-  // TODO: there has to be a better solution than this shit
-
-  // useLayoutEffect(() => {
-  //   if (modalWrapperRef.current) {
-  //     var { width, x } = modalWrapperRef.current.getBoundingClientRect()
-  //   }
-  //   const handleResize = () => {
-  //     if (window.innerWidth - (width + x) < 10) {
-  //       setModalPos({ ...modalPos, left: modalPos.left - 5 })
-  //     }
-  //   }
-  //   handleResize()
-
-  //   window.addEventListener('resize', handleResize)
-
-  //   return () => window.removeEventListener('resize', handleResize)
-  // }, [modalPos, modalWrapperRef])
 
   useEffect(() => {
     if (outsideAlerter) {
@@ -110,7 +75,6 @@ const QuickEditControls = ({
 
   return (
     <TaskQuickEditorControls>
-      {/* onclick open task details modal */}
       <QuickEditorTaskLink to={`t/${task.id}`}>
         <EditorControlBtnIcon content="'\e912'" size="sm" />
         <EditorControlText>Open card</EditorControlText>
@@ -125,13 +89,11 @@ const QuickEditControls = ({
         <EditorControlBtnIcon content="'\e907'" size="sm" />
         <EditorControlText>Archive</EditorControlText>
       </TaskQuickEditorControlBtn>
-      {/* {currModal && ( */}
       <BadgesModal modalWrapperRef={modalWrapperRef} onWrapperClick={handleOutsideWrapperClick} modalPos={modalPos} title={currModal!} onClose={toggleCurrModal}>
         {getModalChild()}
       </BadgesModal>
     </TaskQuickEditorControls>
   )
 }
-// )}
 
 export default QuickEditControls

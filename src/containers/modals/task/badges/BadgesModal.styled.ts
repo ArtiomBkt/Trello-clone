@@ -8,6 +8,7 @@ export const BadgesModalOverlay = styled.div<PropTypes.StyledProps>`
 
   inset: 0;
 
+  outline: none;
   overflow: hidden;
   z-index: 60;
 `

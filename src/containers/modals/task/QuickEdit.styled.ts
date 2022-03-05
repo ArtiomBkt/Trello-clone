@@ -10,6 +10,7 @@ export const QuickEditContainer = styled.div`
   background: #0009;
   color: #fff;
 
+  outline: none;
   z-index: 10;
 `
 

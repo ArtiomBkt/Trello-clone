@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components'
 import { Icon } from '../../styled/Mixins.styled'
 import { PropTypes } from 'types/prop-types'
+import { Link } from 'react-router-dom'
 
 type cssParams = Parameters<typeof css>
 
@@ -58,7 +59,7 @@ export const TaskPageContentWrapper = styled.div`
 `
 
 // TODO: Change to Link component
-export const TaskPageCloseBtn = styled.span<PropTypes.StyledProps>`
+export const TaskPageCloseBtn = styled(Link)<PropTypes.StyledProps>`
   // TODO: Color should change according to task's cover
   ${({ size }) => Icon(size)}
 
@@ -75,8 +76,11 @@ export const TaskPageCloseBtn = styled.span<PropTypes.StyledProps>`
 
   padding: 4px;
   margin: 4px;
-  height: 32px;
-  width: 32px;
+  &&& {
+    height: 32px;
+    width: 32px;
+    line-height: 32px;
+  }
 
   border-radius: 50%;
 
@@ -178,16 +182,44 @@ export const WindowTaskHeaderIcon = styled.span<PropTypes.StyledProps>`
 `
 
 export const WindowTaskTitle = styled.div`
+  position: relative;
+
   margin: 4px 0 0;
   padding: 8px 0 0;
+
+  & > .task_details-textarea {
+    display: block;
+    resize: none;
+    border: none;
+    outline: none;
+    overflow: hidden;
+    overflow-wrap: break-word;
+
+    border-radius: 3px;
+    min-height: 24px;
+    margin: -4px -8px;
+    padding: 4px 8px;
+    line-height: 24px;
+
+    background: #0000;
+    box-shadow: none;
+
+    font-size: 20px;
+    font-weight: 600;
+
+    transition: background-color, border-color, box-shadow 85ms ease;
+
+    &:focus {
+      background-color: #fff;
+      box-shadow: inset 0 0 0 2px #0079bf;
+    }
+  }
 
   ${mobileMedia({
     margin: 0,
     padding: 0
   })}
 `
-
-// TODO: Add title editing functionality and styles
 
 export const WindowTaskListIdentifier = styled.div`
   display: inline-block;
@@ -210,7 +242,6 @@ export const WindowTaskMainWrapperGrid = styled.div`
 
 export const MainCol = styled.div`
   margin: 0;
-
   padding: 0 8px 8px 16px;
   min-height: 24px;
   width: 552px;
@@ -225,6 +256,37 @@ export const MainCol = styled.div`
     width: 'auto',
     padding: '8px'
   })}
+`
+
+export const CardDetailsData = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+
+  margin-top: 8px;
+  margin-left: 40px;
+
+  ${mobileMedia({
+    margin: '8px'
+  })};
+`
+
+export const CardDetailsItem = styled.div`
+  margin: 0 8px 8px 0;
+  max-width: 100%;
+
+  & > h3 {
+    margin: 0 8px 4px 0;
+    line-height: 20px;
+
+    font-size: 12px;
+    font-weight: 600;
+
+    color: #5e6c84; // TODO: Will change (dark mode)
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
 `
 
 export const SideControlsCol = styled.div`
