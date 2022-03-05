@@ -2,9 +2,18 @@ import styled, { css } from 'styled-components'
 import { PropTypes } from '../../../../types/prop-types'
 import { Icon } from '../../../../styled/Mixins.styled'
 
-export const BadgesModalContainer = styled.div<PropTypes.StyledProps>`
-  position: absolute;
+export const BadgesModalOverlay = styled.div<PropTypes.StyledProps>`
   display: ${({ title }) => (title ? 'block' : 'none')};
+  position: absolute;
+
+  inset: 0;
+
+  overflow: hidden;
+  z-index: 60;
+`
+
+export const BadgesModalContainer = styled.div<PropTypes.StyledProps>`
+  position: fixed; // TODO: Or absolute - needs testing with correct positioning
 
   ${({ modalPos }) =>
     modalPos &&

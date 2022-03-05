@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { TaskQuickEditorControls, TaskQuickEditorControlBtn, EditorControlBtnIcon, EditorControlText } from './QuickEdit.styled'
+import { TaskQuickEditorControls, TaskQuickEditorControlBtn, QuickEditorTaskLink, EditorControlBtnIcon, EditorControlText } from './QuickEdit.styled'
 import { PropTypes } from '../../../types/prop-types'
 import useOutsideAlerter from '../../../hooks/useOutsideAlerter'
 import BadgesModal from './badges/BadgesModal'
@@ -71,9 +71,6 @@ const QuickEditControls = ({
   }, [outsideAlerter])
 
   const toggleCurrModal = (ev: React.MouseEvent) => {
-    ev.preventDefault()
-    ev.stopPropagation()
-
     const modalName = ev.currentTarget.getAttribute('data-type')
 
     if (!modalName || modalName === modalNameRef.current) {
@@ -88,6 +85,11 @@ const QuickEditControls = ({
     modalNameRef.current = modalName
     setCurrModal(modalName!)
     handleBadgeModalToggle!(ev)
+  }
+
+  const handleOutsideWrapperClick = (ev: React.MouseEvent) => {
+    ev.stopPropagation()
+    ev.target === modalWrapperRef.current && toggleCurrModal(ev)
   }
 
   const getModalChild = () => {
@@ -109,10 +111,10 @@ const QuickEditControls = ({
   return (
     <TaskQuickEditorControls>
       {/* onclick open task details modal */}
-      <TaskQuickEditorControlBtn>
+      <QuickEditorTaskLink to={`t/${task.id}`}>
         <EditorControlBtnIcon content="'\e912'" size="sm" />
         <EditorControlText>Open card</EditorControlText>
-      </TaskQuickEditorControlBtn>
+      </QuickEditorTaskLink>
       {quickControls.map(control => (
         <TaskQuickEditorControlBtn data-type={control.type} onClick={toggleCurrModal} key={control.icon}>
           <EditorControlBtnIcon content={control.icon} size="sm" />
@@ -124,7 +126,7 @@ const QuickEditControls = ({
         <EditorControlText>Archive</EditorControlText>
       </TaskQuickEditorControlBtn>
       {/* {currModal && ( */}
-      <BadgesModal modalWrapperRef={modalWrapperRef} modalPos={modalPos} title={currModal!} onClose={toggleCurrModal}>
+      <BadgesModal modalWrapperRef={modalWrapperRef} onWrapperClick={handleOutsideWrapperClick} modalPos={modalPos} title={currModal!} onClose={toggleCurrModal}>
         {getModalChild()}
       </BadgesModal>
     </TaskQuickEditorControls>

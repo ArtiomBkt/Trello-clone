@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import styled, { css } from 'styled-components'
 import { Icon, PrimeBtn } from '../../../styled/Mixins.styled'
 import { PropTypes } from '../../../types/prop-types'
@@ -99,7 +100,7 @@ export const TaskQuickEditorControls = styled.div<PropTypes.StyledProps>`
     `} */
 `
 
-export const TaskQuickEditorControlBtn = styled.button`
+const editorControlBtn = css`
   cursor: pointer;
   display: block;
 
@@ -118,6 +119,14 @@ export const TaskQuickEditorControlBtn = styled.button`
     color: #fff;
     transform: translateX(5px);
   }
+`
+
+export const TaskQuickEditorControlBtn = styled.button`
+  ${editorControlBtn}
+`
+
+export const QuickEditorTaskLink = styled(Link)`
+  ${editorControlBtn}
 `
 
 export const EditorControlBtnIcon = styled.span<PropTypes.StyledProps>`

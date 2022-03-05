@@ -28,6 +28,7 @@ export const TaskPageWindowOverlay = styled.div`
   left: 0;
   top: 0;
   z-index: 20;
+  outline: none;
 
   @media only screen and (min-width: 900px) and (max-width: 1280px), only screen and (min-width: 1281px) {
     overflow-x: hidden;

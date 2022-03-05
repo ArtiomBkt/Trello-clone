@@ -38,9 +38,16 @@ const TaskDetails = ({ taskTitle, taskRef, task, isQuickEditOpen, handleTaskDueT
 
   useLayoutEffect(() => {
     if (taskTitleRef.current && isQuickEditOpen) {
-      taskTitleRef.current.select()
+      return taskTitleRef.current.select()
     }
   }, [isQuickEditOpen])
+
+  const handleTextareaFocus = (ev: React.MouseEvent) => {
+    ev.stopPropagation()
+    ev.target === taskTitleRef.current && taskTitleRef.current.focus()
+  }
+
+  // TODO: Quick edit text area does not respond to click, clicking anywhere outside of it triggers task page
 
   return (
     <TaskDetailsContainer ref={taskRef} isFullCover={task.style?.fullCover}>
@@ -52,7 +59,7 @@ const TaskDetails = ({ taskTitle, taskRef, task, isQuickEditOpen, handleTaskDueT
       ) : (
         <>
           {task.labels && <LabelsPreview isQuickEditOpen={isQuickEditOpen} labels={task.labels} />}
-          <EditorTaskTextarea ref={taskTitleRef} onKeyUp={handleTaskTitleChange} onChange={handleTaskTitleChange} value={taskTitle} />
+          <EditorTaskTextarea ref={taskTitleRef} onClick={handleTextareaFocus} onKeyUp={handleTaskTitleChange} onChange={handleTaskTitleChange} value={taskTitle} />
         </>
       )}
       <TaskBadges isQuickEditOpen={isQuickEditOpen} handleTaskDueToggle={handleTaskDueToggle} task={task} />

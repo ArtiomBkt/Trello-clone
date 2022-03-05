@@ -10,7 +10,7 @@ export enum BoardActionType {
 
 type BoardState = BoardTypes.board
 
-type BoardAction =
+export type BoardAction =
   | { type: BoardActionType.BOARD_ADD; payload: BoardTypes.board }
   | { type: BoardActionType.BOARD_UPDATE; payload: BoardTypes.board }
   | { type: BoardActionType.BOARD_DELETE }

@@ -144,6 +144,7 @@ export declare module PropTypes {
     modalPos?: modalPos
     modalWrapperRef?: React.RefObject<HTMLDivElement>
     onClose: (ev: React.MouseEvent) => void
+    onWrapperClick: (ev: React.MouseEvent) => void
   }
 
   type LabelProps = {

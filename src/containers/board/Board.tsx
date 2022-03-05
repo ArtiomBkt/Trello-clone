@@ -17,6 +17,8 @@ import BoardSidebar from '../../components/board/board-sidebar/Sidebar'
 import ListPreview from '../../components/list/ListPreview'
 import ListComposer from '../../components/board/list-composer/ListComposer'
 import { PropTypes } from '../../types/prop-types'
+import { Outlet } from 'react-router-dom'
+import AppHeader from 'components/app-header/AppHeader'
 
 const Board = () => {
   // const [board, setBoard] = useLocalStorageState('board', boardService.getBoardById())
@@ -274,54 +276,60 @@ const Board = () => {
 
   if (!board) return <div>loading...</div>
   return (
-    <BoardContainer>
-      <BoardContentWrapper>
-        <AppWrapper>
-          <div style={{ position: 'absolute', inset: '0' }}>
-            <BoardWrapper isSidenavOpen={isSidenavOpen}>
-              <BoardNav onUserToggleStar={onUserToggleStar} onSidenavOpen={toggleSidenav} onBoardUpdate={onBoardUpdate} board={board} />
-              <div style={{ flexGrow: 1, position: 'relative' }}>
-                <DragDropContext onDragUpdate={handleDragUpdate} onDragStart={handleDragStart} onDragEnd={onDragEnd}>
-                  <Droppable direction="horizontal" droppableId="board" type="LIST">
-                    {(provided: DroppableProvided) => (
-                      <ListPreviewContainer {...provided.droppableProps} ref={provided.innerRef}>
-                        <LabelsContext.Provider value={{ labelState, labelsDispatch }}>
-                          {board.lists?.map((list, index) => {
-                            const listPreviewProps = {
-                              key: list.id,
-                              list,
-                              index,
-                              placeholderProps,
-                              onArchiveItem,
-                              onLabelsUpdate,
-                              onListUpdate
-                            }
-                            return <ListPreview {...listPreviewProps} />
-                          })}
-                          <ListComposer onAddList={onAddList} />
-                        </LabelsContext.Provider>
-                        {provided.placeholder}
-                      </ListPreviewContainer>
-                    )}
-                  </Droppable>
-                </DragDropContext>
-              </div>
-            </BoardWrapper>
-            {/* // TODO: Fix animation for sidebar opening */}
-            {isSidenavOpen && (
-              <BoardSidebar
-                board={board}
-                onArchiveItemRemove={onArchiveItemRemove}
-                onUnarchiveItem={onUnarchiveItem}
-                isSidenavOpen={isSidenavOpen}
-                onSidenavClose={toggleSidenav}
-              />
-            )}
-          </div>
-        </AppWrapper>
-      </BoardContentWrapper>
-    </BoardContainer>
+    <>
+      <AppHeader />
+      <BoardContainer>
+        <BoardContentWrapper>
+          <AppWrapper>
+            <div style={{ position: 'absolute', inset: '0' }}>
+              <BoardWrapper isSidenavOpen={isSidenavOpen}>
+                <BoardNav onUserToggleStar={onUserToggleStar} onSidenavOpen={toggleSidenav} onBoardUpdate={onBoardUpdate} board={board} />
+                <div style={{ flexGrow: 1, position: 'relative' }}>
+                  <DragDropContext onDragUpdate={handleDragUpdate} onDragStart={handleDragStart} onDragEnd={onDragEnd}>
+                    <Droppable direction="horizontal" droppableId="board" type="LIST">
+                      {(provided: DroppableProvided) => (
+                        <ListPreviewContainer {...provided.droppableProps} ref={provided.innerRef}>
+                          <LabelsContext.Provider value={{ labelState, labelsDispatch }}>
+                            {board.lists?.map((list, index) => {
+                              const listPreviewProps = {
+                                key: list.id,
+                                list,
+                                index,
+                                placeholderProps,
+                                onArchiveItem,
+                                onLabelsUpdate,
+                                onListUpdate
+                              }
+                              return <ListPreview {...listPreviewProps} />
+                            })}
+                            <ListComposer onAddList={onAddList} />
+                          </LabelsContext.Provider>
+                          {provided.placeholder}
+                        </ListPreviewContainer>
+                      )}
+                    </Droppable>
+                  </DragDropContext>
+                </div>
+              </BoardWrapper>
+              {/* // TODO: Fix animation for sidebar opening */}
+              {isSidenavOpen && (
+                <BoardSidebar
+                  board={board}
+                  onArchiveItemRemove={onArchiveItemRemove}
+                  onUnarchiveItem={onUnarchiveItem}
+                  isSidenavOpen={isSidenavOpen}
+                  onSidenavClose={toggleSidenav}
+                />
+              )}
+            </div>
+          </AppWrapper>
+        </BoardContentWrapper>
+      </BoardContainer>
+      <Outlet context={[board, boardDispatch]} />
+    </>
   )
 }
 
 export default Board
+
+// TODO: This component needs splitting asap
