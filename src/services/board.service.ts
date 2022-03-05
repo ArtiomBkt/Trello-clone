@@ -1,5 +1,5 @@
-import { ServiceTypes } from '../types/service-types'
-import { BoardTypes } from '../types/board-types'
+import { ServiceTypes } from 'types/service-types'
+import { BoardTypes } from 'types/board-types'
 
 export const boardService = {
   getBoardById,

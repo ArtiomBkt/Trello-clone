@@ -1,6 +1,6 @@
 import React from 'react'
 import Avatar from 'react-avatar'
-import { PropTypes } from '../../types/prop-types'
+import { PropTypes } from 'types/prop-types'
 
 const MemberProfile = (member: PropTypes.MemberListProps['member'] | any) => {
   if (!member) return <div>loading</div>

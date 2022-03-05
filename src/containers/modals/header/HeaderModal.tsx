@@ -1,6 +1,10 @@
 import React, { useEffect, useLayoutEffect, useRef } from 'react'
 import { createPortal } from 'react-dom'
-import { ReactComponent as CloseIcon } from '../../../assets/images/close.svg'
+
+import useOutsideAlerter from 'hooks/useOutsideAlerter'
+import { PropTypes } from 'types/prop-types'
+
+import { ReactComponent as CloseIcon } from 'assets/images/close.svg'
 import {
   HeaderModalContainer,
   HeaderModalHead,
@@ -10,8 +14,6 @@ import {
   HeaderModalBodyContainer,
   HeaderModalBody
 } from './HeaderModal.styled'
-import useOutsideAlerter from '../../../hooks/useOutsideAlerter'
-import { PropTypes } from '../../../types/prop-types'
 
 const HeaderModal = ({ onClose, children, title, modalPos }: PropTypes.HeaderModalProps) => {
   const modalContainerRef = useRef<HTMLDivElement>(null)

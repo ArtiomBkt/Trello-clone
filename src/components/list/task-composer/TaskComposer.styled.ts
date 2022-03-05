@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components'
-import { PropTypes } from '../../../types/prop-types'
-import { Icon, PrimeBtn } from '../../../styled/Mixins.styled'
+import { PropTypes } from 'types/prop-types'
+import { Icon, PrimeBtn } from 'styled/Mixins.styled'
 
 export const TaskComposerWrapper = styled.div`
   display: flex;
@@ -8,7 +8,6 @@ export const TaskComposerWrapper = styled.div`
   height: 38px;
 `
 
-// TODO: Change all anchor tags with children to button elements
 export const TaskComposerToggler = styled.a`
   display: block;
   flex: 1 0 auto;

@@ -1,5 +1,5 @@
 import { createContext } from 'react'
-import { LabelState, LabelAction } from '../reducers/useLabelReducer'
+import { LabelState, LabelAction } from 'reducers/useLabelReducer'
 
 type ILabelContext = {
   labelState: LabelState

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { PropTypes } from '../../../../../types/prop-types'
-import MemberProfile from '../../../../../components/member/MemberProfile'
+import { PropTypes } from 'types/prop-types'
+import MemberProfile from 'components/member/MemberProfile'
 import { MembersModalContainer, MembersModalTitle, MemberWrapper, MemberImgContainer, MemberNameContainer, SelectedMemberIcon } from './MemberModal.styled'
 
 const MemberModal = ({ task, handleTaskMemberToggle }: PropTypes.MemberProps) => {

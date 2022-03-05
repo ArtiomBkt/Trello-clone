@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components'
-import { Icon, PrimeBtn } from '../../../styled/Mixins.styled'
-import { PropTypes } from '../../../types/prop-types'
+import { Icon, PrimeBtn } from 'styled/Mixins.styled'
+import { PropTypes } from 'types/prop-types'
 
 export const ListComposerContainer = styled.div<PropTypes.StyledProps>`
   display: inline-block;

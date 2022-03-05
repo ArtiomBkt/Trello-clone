@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components'
-import { PropTypes } from '../../../../../types/prop-types'
-import { Icon } from '../../../../../styled/Mixins.styled'
+import { PropTypes } from 'types/prop-types'
+import { Icon } from 'styled/Mixins.styled'
 
 export const MembersModalContainer = styled.div`
   margin-top: 12px;

@@ -1,6 +1,5 @@
-import React from 'react'
-import styled, { css, keyframes } from 'styled-components'
-import { PropTypes } from '../../types/prop-types'
+import styled, { keyframes } from 'styled-components'
+import { PropTypes } from 'types/prop-types'
 
 export const labelColors: PropTypes.LabelsInterface = {
   green: { static: '#61bd4f', hover: '#519839' },

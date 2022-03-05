@@ -1,6 +1,6 @@
 import { useReducer } from 'react'
 import { boardService } from '../services/board.service'
-import { BoardTypes } from '../types/board-types'
+import { BoardTypes } from 'types/board-types'
 
 export enum BoardActionType {
   BOARD_UPDATE = 'BOARD_UPDATE',

@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { Header, HeaderMainNav, HeaderLinksWrapper, HeaderLinksContainer, HeaderLinks, HeaderRightChunk } from './AppHeader.styled'
+import { ReactComponent as CreateIcon } from 'assets/images/plus.svg'
 import AppLogo from './logo/AppLogo'
-import { ReactComponent as CreateIcon } from '../../assets/images/plus.svg'
 import NavLinks from './links/NavLinks'
 import NavLink from './links/NavLink'
-import RightChunk from './right-chunk/RightChunk'
+// import RightChunk from './right-chunk/RightChunk'
 
 const AppHeader = () => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth)

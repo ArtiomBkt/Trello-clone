@@ -1,4 +1,5 @@
 import React from 'react'
+import { PropTypes } from 'types/prop-types'
 import {
   CoverModalTitle,
   CoverOptionsGrid,
@@ -11,8 +12,7 @@ import {
   CoverColorsGrid,
   CoverColor
 } from './CoverModal.styled'
-import { taskColors } from '../../../../components/task/TaskPreview.styled'
-import { PropTypes } from '../../../../types/prop-types'
+import { taskColors } from 'components/task/TaskPreview.styled'
 
 const CoverModal = ({ handleTaskStyleChange, task }: PropTypes.TaskColorProps) => {
   const handleTaskColorChange = (ev: React.MouseEvent, color: string) => {

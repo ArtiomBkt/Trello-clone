@@ -1,6 +1,6 @@
 import styled from 'styled-components'
-import { PropTypes } from '../../../../types/prop-types'
-import { taskColors } from '../../../../components/task/TaskPreview.styled'
+import { PropTypes } from 'types/prop-types'
+import { taskColors } from 'components/task/TaskPreview.styled'
 
 export const CoverModalTitle = styled.h4`
   margin: 0 0 4px 0;

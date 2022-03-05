@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { PropTypes } from '../../types/prop-types'
+import { PropTypes } from 'types/prop-types'
 
 export const TaskDetailsContainer = styled.div<PropTypes.StyledProps>`
   display: flex;

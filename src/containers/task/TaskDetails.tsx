@@ -1,17 +1,17 @@
 import React, { useLayoutEffect, useRef } from 'react'
-import { PropTypes } from '../../types/prop-types'
+import { PropTypes } from 'types/prop-types'
 
 import { TaskDetailsContainer, TaskMembersContainer } from './TaskDetails.styled'
-import { BadgesWrapper } from '../../components/task/task-badges/TaskBadges.styled'
-import { EditorTaskTextarea } from '../modals/task/QuickEdit.styled'
+import { BadgesWrapper } from 'components/task/task-badges/TaskBadges.styled'
+import { EditorTaskTextarea } from 'containers/modals/task/QuickEdit.styled'
 
-import LabelsPreview from '../../components/labels/LabelPreview'
-import TaskChecklistBadge from '../../components/task/task-badges/TaskChecklistBadge'
-import TaskTitle from '../../components/task/TaskTitle'
-import TaskCommentBadge from '../../components/task/task-badges/TaskCommentBadge'
-import TaskDescriptionBadge from '../../components/task/task-badges/TaskDescriptionBadge'
-import TaskDates from '../../components/task/task-badges/TaskDateBadge'
-import MemberProfile from '../../components/member/MemberProfile'
+import LabelsPreview from 'components/labels/LabelPreview'
+import TaskChecklistBadge from 'components/task/task-badges/TaskChecklistBadge'
+import TaskTitle from 'components/task/TaskTitle'
+import TaskCommentBadge from 'components/task/task-badges/TaskCommentBadge'
+import TaskDescriptionBadge from 'components/task/task-badges/TaskDescriptionBadge'
+import TaskDates from 'components/task/task-badges/TaskDateBadge'
+import MemberProfile from 'components/member/MemberProfile'
 
 const TaskBadges = ({ task, isQuickEditOpen, handleTaskDueToggle }: PropTypes.TaskCmps) => {
   if (!task.checklists && !task.comments && !task.description && !task.startDate) return null

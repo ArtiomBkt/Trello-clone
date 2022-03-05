@@ -1,5 +1,5 @@
 import React from 'react'
-import { PropTypes } from '../../../types/prop-types'
+import { PropTypes } from 'types/prop-types'
 import { BadgeContainer, BadgeIcon, BadgeText } from './TaskBadges.styled'
 
 const TaskChecklistBadge = ({ checklists }: PropTypes.task) => {

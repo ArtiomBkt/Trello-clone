@@ -1,4 +1,4 @@
-import { BoardTypes } from '../board-types'
+import { BoardTypes } from 'types/board-types'
 
 export declare module UserTypes {
   interface User extends BoardTypes.member {

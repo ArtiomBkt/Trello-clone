@@ -1,7 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react'
+
+import { PropTypes } from 'types/prop-types'
+import useOutsideAlerter from 'hooks/useOutsideAlerter'
+
 import { TaskQuickEditorControls, TaskQuickEditorControlBtn, QuickEditorTaskLink, EditorControlBtnIcon, EditorControlText } from './QuickEdit.styled'
-import { PropTypes } from '../../../types/prop-types'
-import useOutsideAlerter from '../../../hooks/useOutsideAlerter'
+
 import BadgesModal from './badges/BadgesModal'
 import LabelsModal from './badges/labels/LabelsModal'
 import DatesModal from './badges/dates/DatesModal'

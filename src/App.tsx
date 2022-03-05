@@ -1,11 +1,11 @@
 import React from 'react'
 import { useRoutes } from 'react-router-dom'
 
-import { UserTypes } from './types/user-types'
-import LoggedUserContext from './contexts/userLogin'
-import routes from './routes'
+import { UserTypes } from 'types/user-types'
+import LoggedUserContext from 'contexts/userLogin'
+import routes from 'routes'
 
-import AppWrapper from './styled/App-wrapper.styled'
+import AppWrapper from 'styled/App-wrapper.styled'
 
 const App = () => {
   const [loggedUserId, setLoggedUser] = React.useState<UserTypes.User['id'] | undefined>(() => {

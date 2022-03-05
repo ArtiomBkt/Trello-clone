@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components'
-import { LinkHover } from '../../../styled/Mixins.styled'
-import { PropTypes } from '../../../types/prop-types'
+import { LinkHover } from 'styled/Mixins.styled'
+import { PropTypes } from 'types/prop-types'
 
 export const NavLinkContainer = styled.button<PropTypes.StyledProps>`
   display: inline-flex;

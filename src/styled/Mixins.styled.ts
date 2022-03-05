@@ -1,6 +1,6 @@
 import { css } from 'styled-components'
-import logoStatic from '../assets/images/logo-static.gif'
-import logoHover from '../assets/images/logo-hover.gif'
+import logoStatic from 'assets/images/logo-static.gif'
+import logoHover from 'assets/images/logo-hover.gif'
 
 export const LinkHover = () => css`
   background-color: rgba(255, 255, 255, 0.3);

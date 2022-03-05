@@ -1,6 +1,6 @@
-import useViewSize from 'hooks/useViewSize'
 import React, { useLayoutEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
+import useViewSize from 'hooks/useViewSize'
 import { PropTypes } from 'types/prop-types'
 import { BadgesModalOverlay, BadgesModalContainer, BadgesModalHeader, BadgesModalHeaderCloseBtn, BadgesModalHeaderTitle, BadgesModalBody } from './BadgesModal.styled'
 
@@ -8,10 +8,12 @@ const BadgesModal = ({ title, children, modalPos, modalWrapperRef, onWrapperClic
   const { width: windowWidth, height: windowHeight } = useViewSize()
   const [correctModalPos, setModalPos] = useState<PropTypes.modalPos>()
   const modalBodyRef = useRef<HTMLDivElement>(null!)
+
   // Actual modal width is 304px always, it's set to 320 for some safe space
   const MODAL_WIDTH = 320
   const modalRootId = 'app-wrapper'
 
+  // TODO: Get modal opening state here or use title to determine wether the modal is open or closed 🤦🏼‍♂️
   useLayoutEffect(() => {
     const modalSizes = modalBodyRef.current.getBoundingClientRect()
     console.log(modalSizes)

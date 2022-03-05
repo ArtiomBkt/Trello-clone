@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 
-import useLabelReducer, { LabelActionType } from '../../../../../reducers/useLabelReducer'
+import useLabelReducer, { LabelActionType } from 'reducers/useLabelReducer'
 
-import { PropTypes } from '../../../../../types/prop-types'
+import { PropTypes } from 'types/prop-types'
 import { LabelsModalsContainer, LabelsList, LabelPreviewContainer, LabelPreviewEditBtn, LabelPreview, LabelSelectedIcon } from './LabelsModal.styled'
 
 // TODO: consider moving to a separate component

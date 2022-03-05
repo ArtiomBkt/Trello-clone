@@ -1,8 +1,8 @@
 import React from 'react'
 import type { RouteObject } from 'react-router-dom'
-import App from '../App'
-import Board from '../containers/board/Board'
-import TaskPage from '../containers/task/TaskPage'
+
+import Board from 'containers/board/Board'
+import TaskPage from 'containers/task/TaskPage'
 
 const routes: RouteObject[] = [
   // {

@@ -1,7 +1,7 @@
 import React, { useState, useRef, useLayoutEffect } from 'react'
 import { TaskComposerContainer, ComposingTask, ComposingTaskDetails, ComposingTaskTextarea, AddTaskBtn, DiscardTaskIcon } from './TaskComposer.styled'
-import { PropTypes } from '../../../types/prop-types'
-import useOutsideAlerter from '../../../hooks/useOutsideAlerter'
+import { PropTypes } from 'types/prop-types'
+import useOutsideAlerter from 'hooks/useOutsideAlerter'
 
 const TaskComposer = ({ handleComposerToggle, handleTaskAdd }: PropTypes.TaskComposerProps) => {
   const [taskTitle, setTaskTitle] = useState('')

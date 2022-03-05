@@ -1,4 +1,4 @@
-import { BoardTypes } from '../board-types'
+import { BoardTypes } from 'types/board-types'
 
 export declare module ServiceTypes {
   type valueArgs = BoardTypes.list | BoardTypes.task | BoardTypes.board

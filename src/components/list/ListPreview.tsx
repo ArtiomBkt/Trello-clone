@@ -1,14 +1,17 @@
 import React, { useState } from 'react'
 import { Draggable, Droppable, DroppableProvided, DroppableStateSnapshot } from 'react-beautiful-dnd'
-import { PropTypes } from '../../types/prop-types'
-import { boardService } from '../../services/board.service'
-import TaskPreview from '../task/TaskPreview'
-import ListHeader from './header/ListHeader'
-import TaskComposer from './task-composer/TaskComposer'
+
+import { boardService } from 'services/board.service'
+import { PropTypes } from 'types/prop-types'
+import { BoardTypes } from 'types/board-types'
+
 import { ListContentPreview, List, ListTasksWrapper } from './ListPreview.styled'
 import { TaskComposerWrapper, TaskComposerToggler, TaskComposerIcon } from './task-composer/TaskComposer.styled'
-import { BoardTypes } from '../../types/board-types'
-import { DraggingPlaceholder } from '../task/TaskPreview.styled'
+import { DraggingPlaceholder } from 'components/task/TaskPreview.styled'
+
+import ListHeader from './header/ListHeader'
+import TaskComposer from './task-composer/TaskComposer'
+import TaskPreview from 'components/task/TaskPreview'
 
 const ListPreview = ({ list, index, placeholderProps, onLabelsUpdate, onArchiveItem, onListUpdate }: PropTypes.ListPreviewProps) => {
   const [isComposerOpen, setIsComposerOpen] = useState(false)

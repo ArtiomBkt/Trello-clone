@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components'
-import { PropTypes } from '../../types/prop-types'
+import { PropTypes } from 'types/prop-types'
 
 export const TaskTitleContainer = styled.span<PropTypes.StyledProps>`
   display: block;

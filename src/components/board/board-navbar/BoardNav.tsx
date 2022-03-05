@@ -11,8 +11,8 @@ import {
   BoardSidebarBtn,
   BoardSidebarIcon
 } from './BoardNav.styled'
-import { PropTypes } from '../../../types/prop-types'
-import useTitleEditReducer from '../../../reducers/useBoardTitleEditReducer'
+import { PropTypes } from 'types/prop-types'
+import useTitleEditReducer from 'reducers/useBoardTitleEditReducer'
 import BoardViews from './BoardViews'
 import BoardOrg from './BoardOrg'
 import BoardMembers from './BoardMembers'

@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { ListComposerContainer, ListComposerPlaceholder, AddListIcon, ListComposerAnchor } from './ListComposer.styled'
-import { PropTypes } from '../../../types/prop-types'
+import { PropTypes } from 'types/prop-types'
 import Composer from './Composer'
 
 const ListComposer = ({ onAddList }: PropTypes.ListComposerProps) => {

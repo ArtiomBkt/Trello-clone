@@ -1,5 +1,5 @@
 import React, { useState, useRef, useLayoutEffect } from 'react'
-import { PropTypes } from '../../../types/prop-types'
+import { PropTypes } from 'types/prop-types'
 import { ListTitle, ListHeaderNameAssist, ListHeaderNameInput, ListHeaderOpts, HeaderOptsBtn } from './ListHeader.styled'
 
 const ListHeader = ({ list, dragHandleProps, onListUpdate }: PropTypes.ListHeaderProps) => {

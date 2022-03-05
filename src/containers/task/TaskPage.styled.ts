@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components'
-import { Icon } from '../../styled/Mixins.styled'
+import { Icon } from 'styled/Mixins.styled'
 import { PropTypes } from 'types/prop-types'
 import { Link } from 'react-router-dom'
 

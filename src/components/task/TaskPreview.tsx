@@ -1,10 +1,12 @@
 import React, { useRef, useState } from 'react'
 import { Draggable, DraggableProvided, DraggableStateSnapshot } from 'react-beautiful-dnd'
-import { PropTypes } from '../../types/prop-types'
-import TaskDetails from '../../containers/task/TaskDetails'
+
+import { PropTypes } from 'types/prop-types'
+import { BoardTypes } from 'types/board-types'
 import { TaskPreviewContainer, TaskCover, TaskEditIcon } from './TaskPreview.styled'
-import TaskQuickEdit from '../../containers/modals/task/QuickEdit'
-import { BoardTypes } from '../../types/board-types'
+
+import TaskDetails from 'containers/task/TaskDetails'
+import TaskQuickEdit from 'containers/modals/task/QuickEdit'
 
 const TaskPreview = ({ task, index, handleTaskEdit, handleTaskArchive, onLabelsUpdate }: PropTypes.TaskPreviewProps) => {
   const [isQuickEditOpen, setIsQuickEditOpen] = useState(false)
@@ -116,7 +118,6 @@ const TaskPreview = ({ task, index, handleTaskEdit, handleTaskArchive, onLabelsU
     handleTaskTitleChange
   }
 
-  // TODO: figure out react router Link cmp - click self/capture
   return (
     <Draggable draggableId={task.id} index={index}>
       {(provided: DraggableProvided, snapshot: DraggableStateSnapshot) => (

@@ -1,7 +1,7 @@
 import React, { useLayoutEffect, useRef } from 'react'
-import useOutsideAlerter from '../../../hooks/useOutsideAlerter'
+import useOutsideAlerter from 'hooks/useOutsideAlerter'
 import { AddComposedListBtn, DiscardListBtn, ListComposerControls, ListComposerInput } from './ListComposer.styled'
-import { PropTypes } from '../../../types/prop-types'
+import { PropTypes } from 'types/prop-types'
 
 const Composer = ({ listTitle, isListAdd, handleInputChange, handleListSubmit, handleDiscardList }: PropTypes.ComposerProps) => {
   const inputRef = useRef<HTMLInputElement>(null)

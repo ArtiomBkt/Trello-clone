@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components'
-import { PropTypes } from '../../../types/prop-types'
-import { Icon } from '../../../styled/Mixins.styled'
+import { PropTypes } from 'types/prop-types'
+import { Icon } from 'styled/Mixins.styled'
 
 export const BadgesWrapper = styled.div<PropTypes.StyledProps>`
   ${({ isFullCover }) => isFullCover && 'display: none;'}

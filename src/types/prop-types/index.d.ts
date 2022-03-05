@@ -1,4 +1,4 @@
-import { BoardTypes } from '../board-types'
+import { BoardTypes } from 'types/board-types'
 import { DraggableProvided, DraggableProvidedDraggableProps, DraggableStateSnapshot } from 'react-beautiful-dnd'
 
 export declare module PropTypes {
@@ -181,6 +181,7 @@ export declare module PropTypes {
     children: React.ReactNode
     type: string
     isInModal?: boolean
+    isMenuOpen?: boolean
     handleMenuToggle?: (ev: React.MouseEvent) => void
   }
 

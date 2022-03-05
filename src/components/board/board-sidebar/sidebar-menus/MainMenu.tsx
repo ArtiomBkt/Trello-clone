@@ -1,6 +1,6 @@
 import React from 'react'
-import { PropTypes } from '../../../../types/prop-types'
-import TaskDetails from '../../../../containers/task/TaskDetails'
+import { PropTypes } from 'types/prop-types'
+import TaskDetails from 'containers/task/TaskDetails'
 
 // TODO: Everything here will move to ArchiveMenu component
 // TODO: On removal of arcived item, prompt for confirmation

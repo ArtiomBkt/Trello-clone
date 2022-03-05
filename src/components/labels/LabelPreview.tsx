@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
-import { PropTypes } from '../../types/prop-types'
-import labelsContext from '../../contexts/labelsToggle'
-import { LabelActionType } from '../../reducers/useLabelReducer'
+import { PropTypes } from 'types/prop-types'
+import labelsContext from 'contexts/labelsToggle'
+import { LabelActionType } from 'reducers/useLabelReducer'
 
 import { LabelsContainer, Label } from './LabelPreview.styled'
 

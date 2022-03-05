@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import styled, { css } from 'styled-components'
-import { Icon, PrimeBtn } from '../../../styled/Mixins.styled'
-import { PropTypes } from '../../../types/prop-types'
+import { Icon, PrimeBtn } from 'styled/Mixins.styled'
+import { PropTypes } from 'types/prop-types'
 
 export const QuickEditContainer = styled.div`
   position: fixed;

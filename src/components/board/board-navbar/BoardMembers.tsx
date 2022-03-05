@@ -1,7 +1,7 @@
 import React from 'react'
-import { PropTypes } from '../../../types/prop-types'
+import { PropTypes } from 'types/prop-types'
 import { MemberListContainer, BoardMemberInviteBtn, MemberInviteBtnIcon } from './BoardNav.styled'
-import MemberProfile from '../../member/MemberProfile'
+import MemberProfile from 'components/member/MemberProfile'
 
 const BoardMembers = ({ members }: PropTypes.MemberListProps) => {
   return (

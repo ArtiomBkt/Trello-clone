@@ -1,6 +1,6 @@
 import React from 'react'
 import { BoardWatcherBtn, BoardWatcherIcon, BoardNavDivider } from './BoardNav.styled'
-import { PropTypes } from '../../../types/prop-types'
+import { PropTypes } from 'types/prop-types'
 
 const BoardControls = ({ children }: PropTypes.ChildrenProp) => {
   // TODO: handle board watch/unwatch

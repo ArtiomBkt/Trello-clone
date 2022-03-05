@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components'
-import { Icon } from '../../../styled/Mixins.styled'
-import { PropTypes } from '../../../types/prop-types'
+import { Icon } from 'styled/Mixins.styled'
+import { PropTypes } from 'types/prop-types'
 
 export const ListTitle = styled.div`
   flex: 0 0 auto;

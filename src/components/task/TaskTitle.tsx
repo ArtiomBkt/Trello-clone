@@ -1,5 +1,5 @@
 import React from 'react'
-import { PropTypes } from '../../types/prop-types'
+import { PropTypes } from 'types/prop-types'
 import { TaskTitleContainer } from './TaskTitle.styled'
 
 const TaskTitle = ({ task }: PropTypes.ContainersProps) => {

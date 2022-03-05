@@ -1,8 +1,8 @@
 import React, { useContext } from 'react'
-import LoggedUserContext from '../../../contexts/userLogin'
-import Container from '../../../styled/Container.styled'
-import { userService } from '../../../services/user.service'
-import MemberProfile from '../../member/MemberProfile'
+import LoggedUserContext from 'contexts/userLogin'
+import Container from 'styled/Container.styled'
+import { userService } from 'services/user.service'
+import MemberProfile from 'components/member/MemberProfile'
 
 const RightChunk = () => {
   const [loginInputs, setLoginInputs] = React.useState({

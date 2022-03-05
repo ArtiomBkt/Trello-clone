@@ -1,5 +1,5 @@
 import React from 'react'
-import { PropTypes } from '../../../../../types/prop-types'
+import { PropTypes } from 'types/prop-types'
 
 const DatesModal = ({ task }: PropTypes.DateProps) => {
   const handleDateSubmit = (ev: React.FormEvent) => {

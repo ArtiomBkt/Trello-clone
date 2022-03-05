@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { createPortal } from 'react-dom'
-import { QuickEditContainer, QuickEditCloseBtn, TaskQuickEditorWrapper, TaskQuickEditor, TaskQuickEditorSave } from './QuickEdit.styled'
-import { PropTypes } from '../../../types/prop-types'
-import QuickEditControls from './QuickEditControls'
 import { useParams } from 'react-router-dom'
+import { PropTypes } from 'types/prop-types'
+import { QuickEditContainer, QuickEditCloseBtn, TaskQuickEditorWrapper, TaskQuickEditor, TaskQuickEditorSave } from './QuickEdit.styled'
+import QuickEditControls from './QuickEditControls'
 
 const TaskQuickEdit = ({
   children,

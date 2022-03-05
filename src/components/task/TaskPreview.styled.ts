@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components'
 import { Link } from 'react-router-dom'
-import { Icon } from '../../styled/Mixins.styled'
-import { PropTypes } from '../../types/prop-types'
+import { Icon } from 'styled/Mixins.styled'
+import { PropTypes } from 'types/prop-types'
 
 export const taskColors: PropTypes.TaskColorsInterface = {
   green: { static: '#7bc86c', hover: '#61bd4f' },
@@ -16,7 +16,6 @@ export const taskColors: PropTypes.TaskColorsInterface = {
   navy: { static: '#172b4d', hover: '#091e42' }
 }
 
-/* export const TaskPreviewContainer = styled.div<PropTypes.StyledProps>` */
 export const TaskPreviewContainer = styled(Link)<PropTypes.StyledTaskPreviewProps>`
   ${({ $taskPreviewStyling }) =>
     $taskPreviewStyling.cover.fullCover

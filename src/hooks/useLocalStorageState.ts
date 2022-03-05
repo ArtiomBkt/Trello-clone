@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
-import { BoardTypes } from '../types/board-types/index'
+import { BoardTypes } from 'types/board-types/index'
 
 const useLocalStorageState = (key: string, defaultValue: BoardTypes.board, { serialize = JSON.stringify, deserialize = JSON.parse } = {}) => {
   /**

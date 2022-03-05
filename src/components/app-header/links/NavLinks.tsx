@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import NavLink from './NavLink'
-import HeaderModal from '../../../containers/modals/header/HeaderModal'
-import { PropTypes } from '../../../types/prop-types'
+import HeaderModal from 'containers/modals/header/HeaderModal'
+import { PropTypes } from 'types/prop-types'
 
 const NavLinks = ({ windowWidth, isMenuOpen, modalPos, handleMenuToggle }: PropTypes.NavLinksProps) => {
   const [navLinks] = useState([{ text: 'Workspaces' }, { text: 'Recent' }, { text: 'Starred' }, { text: 'Templates' }])
@@ -17,7 +17,7 @@ const NavLinks = ({ windowWidth, isMenuOpen, modalPos, handleMenuToggle }: PropT
   if (windowWidth <= 660) {
     return (
       <>
-        <NavLink handleMenuToggle={handleMenuToggle} type="More">
+        <NavLink isMenuOpen={isMenuOpen} handleMenuToggle={handleMenuToggle} type="More">
           More
         </NavLink>
         {isMenuOpen && (
@@ -33,7 +33,7 @@ const NavLinks = ({ windowWidth, isMenuOpen, modalPos, handleMenuToggle }: PropT
     return (
       <>
         {navLinks.map((link, idx) => (idx < 2 ? Link(link) : null))}
-        <NavLink handleMenuToggle={handleMenuToggle} type="More">
+        <NavLink isMenuOpen={isMenuOpen} handleMenuToggle={handleMenuToggle} type="More">
           More
         </NavLink>
         {isMenuOpen && (

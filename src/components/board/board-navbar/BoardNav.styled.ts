@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components'
-import { Icon } from '../../../styled/Mixins.styled'
-import { PropTypes } from '../../../types/prop-types'
+import { Icon } from 'styled/Mixins.styled'
+import { PropTypes } from 'types/prop-types'
 
 const HeaderBtn = css`
   position: relative;

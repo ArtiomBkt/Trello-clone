@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
-import { LinkHover, HeaderLogoPseudos } from '../../../styled/Mixins.styled'
+import { LinkHover, HeaderLogoPseudos } from 'styled/Mixins.styled'
 
 export const LogoLink = styled(Link)`
   display: block;

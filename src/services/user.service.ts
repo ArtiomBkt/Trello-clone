@@ -1,6 +1,5 @@
-import { BoardTypes } from '../types/board-types'
-import { ServiceTypes } from '../types/service-types'
-import { UserTypes } from '../types/user-types'
+import { BoardTypes } from 'types/board-types'
+import { UserTypes } from 'types/user-types'
 
 const KEY = 'loggedUser'
 

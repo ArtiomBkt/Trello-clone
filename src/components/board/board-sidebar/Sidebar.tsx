@@ -12,7 +12,7 @@ import {
   SidenavBodyContainer
 } from './Sidebar.styled'
 import MainMenu from './sidebar-menus/MainMenu'
-import { PropTypes } from '../../../types/prop-types'
+import { PropTypes } from 'types/prop-types'
 
 const BoardSidebar = ({ board, isSidenavOpen, onArchiveItemRemove, onUnarchiveItem, onSidenavClose }: PropTypes.SidenavProps) => {
   // TODO: board sidebar, main page, more options page, board background page, labels page

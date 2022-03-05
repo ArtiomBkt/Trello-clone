@@ -1,5 +1,5 @@
 import { useReducer } from 'react'
-import { BoardTypes } from '../types/board-types'
+import { BoardTypes } from 'types/board-types'
 
 export enum LabelActionType {
   TOGGLE_EDIT = 'TOGGLE_EDIT',

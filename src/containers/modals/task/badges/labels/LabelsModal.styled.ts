@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components'
-import { Icon } from '../../../../../styled/Mixins.styled'
-import { PropTypes } from '../../../../../types/prop-types'
-import { labelColors } from '../../../../../components/labels/LabelPreview.styled'
+import { PropTypes } from 'types/prop-types'
+import { Icon } from 'styled/Mixins.styled'
+import { labelColors } from 'components/labels/LabelPreview.styled'
 
 export const LabelsModalsContainer = styled.div`
   margin-top: 12px;

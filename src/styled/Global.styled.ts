@@ -1,6 +1,6 @@
 import { createGlobalStyle } from 'styled-components'
-import icomoon from '../assets/fonts/icomoon.ttf'
-import sourceSans from '../assets/fonts/SourceSansPro-SemiBold.ttf'
+import icomoon from 'assets/fonts/icomoon.ttf'
+import sourceSans from 'assets/fonts/SourceSansPro-SemiBold.ttf'
 
 const Resets = createGlobalStyle`
   *,
