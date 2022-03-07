@@ -1,9 +1,15 @@
 import React from 'react'
+import { BoardTypes } from 'types/board-types'
+
 import { CardCoverBox, CardCoverIcon, CardCoverMenu, CardCoverMenuBtn } from 'containers/task/TaskPage.styled'
 
-const TaskPageCover = () => {
+type TaskPageCoverProps = {
+  task: BoardTypes.task
+}
+
+const TaskPageCover = ({ task }: TaskPageCoverProps) => {
   return (
-    <CardCoverBox>
+    <CardCoverBox styling={task.style}>
       <CardCoverMenu>
         <CardCoverMenuBtn>
           <CardCoverIcon content="'\e914'" size="sm" /> Cover

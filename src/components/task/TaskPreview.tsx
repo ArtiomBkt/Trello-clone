@@ -15,10 +15,6 @@ const TaskPreview = ({ task, index, handleTaskEdit, handleTaskArchive, onLabelsU
   const taskRef = useRef<HTMLDivElement>(null!)
 
   useLayoutEffect(() => {
-    if (taskRef.current) {
-      const { x, y, right, bottom } = taskRef.current.getBoundingClientRect()
-      setTaskEditorPos({ top: y, left: x, bottom, right })
-    }
     if (isQuickEditOpen) {
       if (taskEditorPos.bottom + 350 >= window.innerHeight) {
         setTaskEditorPos(p => ({ ...p, top: 250 }))
@@ -31,6 +27,10 @@ const TaskPreview = ({ task, index, handleTaskEdit, handleTaskArchive, onLabelsU
 
   const handleQuickEditToggle = (ev?: React.MouseEvent): void => {
     ev?.preventDefault()
+    if (ev && ev.currentTarget.parentElement?.hasAttribute('data-rbd-draggable-id')) {
+      const { x, y, right, bottom } = ev.currentTarget.parentElement.getBoundingClientRect()
+      setTaskEditorPos({ top: y, left: x, bottom, right })
+    }
     setIsQuickEditOpen(prevState => !prevState)
   }
 

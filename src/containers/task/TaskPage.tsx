@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
+import ErrorBoundary, { FallbackProps } from 'containers/ErrorBoundary'
 import { useNavigate, useOutletContext, useParams } from 'react-router-dom'
 
 import { BoardTypes } from 'types/board-types'
@@ -20,26 +21,58 @@ import {
 
 import TaskPageCover from 'components/task/task-page/TaskPageCover'
 import TaskPageTitle from 'components/task/task-page/TaskPageTitle'
+import TaskPageDetails from './TaskPageDetails'
+
+type TaskPageState = {
+  status: 'idle' | 'resolved' | 'pending' | 'rejected'
+  task: BoardTypes.task | null
+  error: string | null
+}
 
 const TaskPage = () => {
   const navigate = useNavigate()
   const { taskId } = useParams()
   const [board] = useOutletContext<[BoardTypes.board, React.Dispatch<BoardAction>]>()
   const [list, setList] = useState<BoardTypes.list>()
-  const [task, setTask] = useState<BoardTypes.task>()
+  const [{ status, task, error }, setState] = useState<TaskPageState>({
+    status: taskId ? 'pending' : 'idle',
+    task: null,
+    error: null
+  })
   const taskPageRef = useClickOutside(handleCloseTaskPage)
   const overlayRef = useRef<HTMLDivElement>(null!)
 
-  useEffect(() => {
-    for (let list of board.lists) {
-      const task = list.tasks.find(task => (task.id === taskId ? (setList(list), task) : false))
-      return task && setTask(task)
+  // Dummy fetching for now
+  const fetchTask = React.useCallback(async () => {
+    return new Promise<BoardTypes.task | undefined>((resolve, reject) => {
+      setTimeout(() => {
+        resolve(getTask())
+      }, 300)
+    })
+    function getTask() {
+      for (let list of board.lists) {
+        const task = list.tasks.find(task => (task.id === taskId ? (setList(list), task) : false))
+        if (task) {
+          return task
+        }
+      }
     }
-  }, [board, taskId])
+  }, [board.lists, taskId])
 
   useEffect(() => {
-    overlayRef.current.focus()
-  }, [])
+    setState(state => ({ ...state, status: 'pending' }))
+    fetchTask().then(
+      task => {
+        if (!task) {
+          throw new Error(`Could not fetch task id ${taskId}`)
+        }
+        setState(state => ({ ...state, task, status: 'resolved' }))
+      },
+      error => {
+        setState(state => ({ ...state, status: 'rejected', error }))
+      }
+    )
+  }, [fetchTask, taskId])
 
   function handleCloseTaskPage(ev?: React.MouseEvent | React.KeyboardEvent) {
     if (ev && (ev as React.KeyboardEvent).key === 'Escape') {
@@ -48,38 +81,42 @@ const TaskPage = () => {
     ;(ev?.target === overlayRef.current || !ev) && navigate('/')
   }
 
+  if (status === 'idle') return <div>No task fetching</div>
+  else if (status === 'pending') return <div>loading...</div>
+  else if (status === 'rejected') throw error
+  else if (status === 'resolved' && task)
+    return (
+      <TaskPageWindowOverlay ref={overlayRef} tabIndex={0} onClick={handleCloseTaskPage} onKeyUp={handleCloseTaskPage}>
+        <TaskPageContainer>
+          <TaskPageContentWrapper ref={taskPageRef}>
+            <TaskPageCloseBtn to="/" styling={task.style} content="'\e91c'" size="md" />
+            <TaskPageContent>
+              <ErrorBoundary resetKeys={[taskId]} FallbackComponent={TaskFetchErrorFallback}>
+                <TaskPageCover task={task} />
+                <TaskPageTitle list={list} taskTitle={task.title} />
+                <WindowTaskMainWrapperGrid>
+                  <MainCol>
+                    <TaskPageDetails task={task} />
+                    {/* // TODO: Description and the rest go here */}
+                  </MainCol>
+                  <SideControlsCol></SideControlsCol>
+                </WindowTaskMainWrapperGrid>
+              </ErrorBoundary>
+            </TaskPageContent>
+          </TaskPageContentWrapper>
+        </TaskPageContainer>
+      </TaskPageWindowOverlay>
+    )
+
+  throw new Error('Something went wrong')
+}
+
+function TaskFetchErrorFallback({ error, resetErrorBoundary }: FallbackProps) {
   return (
-    <TaskPageWindowOverlay ref={overlayRef} tabIndex={0} onClick={handleCloseTaskPage} onKeyUp={handleCloseTaskPage}>
-      <TaskPageContainer>
-        <TaskPageContentWrapper ref={taskPageRef}>
-          <TaskPageCloseBtn to="/" content="'\e91c'" size="md" />
-          <TaskPageContent>
-            <TaskPageCover />
-            {task && <TaskPageTitle list={list} taskTitle={task.title} />}
-            <WindowTaskMainWrapperGrid>
-              <MainCol>
-                <CardDetailsData>
-                  <CardDetailsItem>
-                    <h3>Members</h3>
-                  </CardDetailsItem>
-                  <CardDetailsItem>
-                    <h3>Labels</h3>
-                  </CardDetailsItem>
-                  <CardDetailsItem>
-                    <h3>Start date</h3>
-                  </CardDetailsItem>
-                  <CardDetailsItem>
-                    <h3>Due date</h3>
-                  </CardDetailsItem>
-                </CardDetailsData>
-                {/* // TODO: Description and the rest go here */}
-              </MainCol>
-              <SideControlsCol></SideControlsCol>
-            </WindowTaskMainWrapperGrid>
-          </TaskPageContent>
-        </TaskPageContentWrapper>
-      </TaskPageContainer>
-    </TaskPageWindowOverlay>
+    <div>
+      There was an error: <pre>{error.message}</pre>
+      <button onClick={resetErrorBoundary}>Try again</button>
+    </div>
   )
 }
 

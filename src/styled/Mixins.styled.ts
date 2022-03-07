@@ -71,7 +71,7 @@ export const Icon = (size: string | undefined) => css`
   }
 `
 
-export const PrimeBtn = (type: string | undefined) => css`
+export const PrimeBtn = (type?: string | undefined) => css`
   display: inline-flex;
   align-items: center;
   justify-content: center;

@@ -16,9 +16,9 @@ import { ListPreviewContainer } from 'components/list/ListPreview.styled'
 
 import AppHeader from 'components/app-header/AppHeader'
 import BoardNav from 'components/board/board-navbar/BoardNav'
-import BoardSidebar from 'components/board/board-sidebar/Sidebar'
 import ListPreview from 'components/list/ListPreview'
 import ListComposer from 'components/board/list-composer/ListComposer'
+const BoardSidebar = React.lazy(() => import('components/board/board-sidebar/Sidebar'))
 
 const Board = () => {
   const [board, boardDispatch] = useBoardReducer()
@@ -311,15 +311,15 @@ const Board = () => {
                 </div>
               </BoardWrapper>
               {/* // TODO: Fix animation for sidebar opening */}
-              {isSidenavOpen && (
-                <BoardSidebar
-                  board={board}
-                  onArchiveItemRemove={onArchiveItemRemove}
-                  onUnarchiveItem={onUnarchiveItem}
-                  isSidenavOpen={isSidenavOpen}
-                  onSidenavClose={toggleSidenav}
-                />
-              )}
+              {/* {isSidenavOpen && ( */}
+              <BoardSidebar
+                board={board}
+                onArchiveItemRemove={onArchiveItemRemove}
+                onUnarchiveItem={onUnarchiveItem}
+                isSidenavOpen={isSidenavOpen}
+                onSidenavClose={toggleSidenav}
+              />
+              {/* // )} */}
             </div>
           </AppWrapper>
         </BoardContentWrapper>

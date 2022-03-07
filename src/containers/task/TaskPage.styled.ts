@@ -1,7 +1,8 @@
 import styled, { css } from 'styled-components'
-import { Icon } from 'styled/Mixins.styled'
-import { PropTypes } from 'types/prop-types'
 import { Link } from 'react-router-dom'
+import { PropTypes } from 'types/prop-types'
+import { Icon, PrimeBtn } from 'styled/Mixins.styled'
+import { taskColors } from 'components/task/TaskPreview.styled'
 
 type cssParams = Parameters<typeof css>
 
@@ -14,7 +15,7 @@ const mobileMedia = (...args: cssParams) => {
 }
 
 export const TaskPageWindowOverlay = styled.div`
-  display: flex; // TODO: Will be display none if route isn't active
+  display: flex;
 
   align-items: flex-start;
   justify-content: center;
@@ -39,7 +40,7 @@ export const TaskPageWindowOverlay = styled.div`
 `
 
 export const TaskPageContainer = styled.div`
-  display: block; // TODO: Will be display none if route isn't active
+  display: block;
 
   width: 768px;
   margin: 48px 0 80px;
@@ -58,7 +59,6 @@ export const TaskPageContentWrapper = styled.div`
   outline: none;
 `
 
-// TODO: Change to Link component
 export const TaskPageCloseBtn = styled(Link)<PropTypes.StyledProps>`
   // TODO: Color should change according to task's cover
   ${({ size }) => Icon(size)}
@@ -88,9 +88,11 @@ export const TaskPageCloseBtn = styled(Link)<PropTypes.StyledProps>`
   z-index: 2;
   transition: background-color 85ms, color 85ms;
 
+  background-color: ${({ styling }) => styling?.background && '#00000014'};
+
   &:hover {
     cursor: pointer;
-    background-color: #091e4214; // TODO: With task cover color hover state is always on
+    background-color: ${({ styling }) => (styling?.background ? '#00000029' : '#091e4214')};
   }
 `
 
@@ -98,13 +100,21 @@ export const TaskPageContent = styled.div`
   min-height: 600px;
 `
 
-export const CardCoverBox = styled.div`
-  // TODO: If there's no cover color - element is hidden and background color is according to cover's
-  /* display: none; */
-  background-color: #091e4214;
+export const CardCoverBox = styled.div<PropTypes.StyledProps>`
+  ${({ styling }) =>
+    styling?.background
+      ? css`
+          display: block;
+          background-color: ${taskColors[styling.background].static};
+          height: 116px;
+        `
+      : css`
+          display: none;
+          background-color: #091e4214;
+          height: 160px;
+        `}
 
   width: 100%;
-  height: 160px;
 
   position: relative;
   background-repeat: no-repeat;
@@ -227,8 +237,9 @@ export const WindowTaskListIdentifier = styled.div`
 `
 
 export const ListIdentifierText = styled.p`
-  margin-bottom: 0;
+  margin: 0;
   padding-bottom: 0;
+  color: #5e6c84;
 `
 
 export const WindowTaskMainWrapperGrid = styled.div`
@@ -299,4 +310,30 @@ export const SideControlsCol = styled.div`
     padding: 0,
     width: 'auto'
   })}
+`
+
+export const AddTaskMembersBtn = styled.div<PropTypes.StyledProps>`
+  ${PrimeBtn()};
+
+  &&& {
+    border-radius: 100%;
+  }
+
+  span {
+    ${({ size }) => Icon(size)};
+
+    &:before {
+      ${({ content }) => css`
+        content: ${content};
+      `}
+    }
+
+    &&& {
+      font-size: 16px;
+      height: 16px;
+      width: 16px;
+      padding: 8px;
+      line-height: 16px;
+    }
+  }
 `

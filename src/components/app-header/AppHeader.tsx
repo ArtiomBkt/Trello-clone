@@ -38,11 +38,14 @@ const AppHeader = () => {
   )
 
   const handleMenuToggle = (ev?: React.MouseEvent) => {
-    if (ev) {
-      ev.stopPropagation()
-      positionCalc(ev)
+    // TODO: useEffect here might help with toggling correctly
+    ev?.stopPropagation()
+    if (isMenuOpen) {
+      setIsMenuOpen(false)
+    } else {
+      positionCalc(ev!)
+      setIsMenuOpen(true)
     }
-    setIsMenuOpen(prevIsMenuOpen => !prevIsMenuOpen)
   }
 
   return (

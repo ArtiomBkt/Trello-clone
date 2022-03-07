@@ -4,6 +4,7 @@ import TaskDetails from 'containers/task/TaskDetails'
 
 // TODO: Everything here will move to ArchiveMenu component
 // TODO: On removal of arcived item, prompt for confirmation
+// TODO: Create a skelton for the tasks
 const MainMenu = ({ board, onArchiveItemRemove, onUnarchiveItem }: PropTypes.SidebarMenusProps) => {
   return (
     <div>

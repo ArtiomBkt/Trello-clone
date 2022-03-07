@@ -41,6 +41,8 @@ const RightChunk = () => {
     return loggedUser
   }
 
+  const loggedMember = getUser()
+
   return (
     <>
       <Container style={{ display: 'flex' }}>
@@ -53,7 +55,7 @@ const RightChunk = () => {
             </button>
           </>
         ) : (
-          <MemberProfile member={getUser()} />
+          loggedMember && MemberProfile(loggedMember)
         )}
       </Container>
     </>
