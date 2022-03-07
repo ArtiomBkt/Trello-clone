@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useLayoutEffect, useRef, useState } from 'react'
 import { Draggable, DraggableProvided, DraggableStateSnapshot } from 'react-beautiful-dnd'
 
 import { PropTypes } from 'types/prop-types'
@@ -10,17 +10,27 @@ import TaskQuickEdit from 'containers/modals/task/QuickEdit'
 
 const TaskPreview = ({ task, index, handleTaskEdit, handleTaskArchive, onLabelsUpdate }: PropTypes.TaskPreviewProps) => {
   const [isQuickEditOpen, setIsQuickEditOpen] = useState(false)
-  const [taskEditorPos, setTaskEditorPos] = useState({ top: 0, left: 0 })
+  const [taskEditorPos, setTaskEditorPos] = useState<{ top: number; left: number; bottom: number; right: number }>({ top: 0, left: 0, bottom: 0, right: 0 })
   const [taskTitle, setTaskTitle] = useState<string>(task.title)
-  const taskRef = useRef<HTMLDivElement>(null)
+  const taskRef = useRef<HTMLDivElement>(null!)
+
+  useLayoutEffect(() => {
+    if (taskRef.current) {
+      const { x, y, right, bottom } = taskRef.current.getBoundingClientRect()
+      setTaskEditorPos({ top: y, left: x, bottom, right })
+    }
+    if (isQuickEditOpen) {
+      if (taskEditorPos.bottom + 350 >= window.innerHeight) {
+        setTaskEditorPos(p => ({ ...p, top: 250 }))
+      }
+      if (taskEditorPos.right + 230 >= window.innerWidth) {
+        setTaskEditorPos(p => ({ ...p, left: 260 }))
+      }
+    }
+  }, [isQuickEditOpen, taskEditorPos.bottom, taskEditorPos.right])
 
   const handleQuickEditToggle = (ev?: React.MouseEvent): void => {
     ev?.preventDefault()
-
-    if (ev && taskRef.current) {
-      const { x, y } = taskRef.current.getBoundingClientRect()
-      setTaskEditorPos({ top: y, left: x })
-    }
     setIsQuickEditOpen(prevState => !prevState)
   }
 

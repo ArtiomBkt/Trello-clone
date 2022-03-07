@@ -82,23 +82,28 @@ export const TaskQuickEditorControls = styled.div<PropTypes.StyledProps>`
   align-items: flex-start;
 
   position: absolute;
-  left: 100%;
+  right: -200px;
   top: 0;
+  width: 200px;
 
-  /* transform: translateX(-20px); */
-  /* opacity: 0; */
-  transition: opacity, transform 0.85s ease-in;
+  z-index: 30;
 
-  width: 240px;
+  @media only screen and (max-width: 467px) {
+    flex-direction: row;
+    flex-wrap: wrap;
 
-  z-index: 0;
+    width: 250px;
 
-  /* ${({ isQuickEdit }) =>
+    top: 110%;
+    left: -8px;
+  }
+
+  ${({ isQuickEdit }) =>
     isQuickEdit &&
     css`
       opacity: 1;
       transform: translateX(0);
-    `} */
+    `}
 `
 
 const editorControlBtn = css`

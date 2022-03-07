@@ -3,18 +3,21 @@ import { PropTypes } from 'types/prop-types'
 import { Icon } from 'styled/Mixins.styled'
 
 export const BadgesModalOverlay = styled.div<PropTypes.StyledProps>`
-  display: ${({ title }) => (title ? 'block' : 'none')};
-  position: absolute;
+  position: fixed;
 
   inset: 0;
 
   outline: none;
   overflow: hidden;
   z-index: 60;
+
+  @media only screen and (max-width: 460px) {
+    background: #0009;
+  }
 `
 
 export const BadgesModalContainer = styled.div<PropTypes.StyledProps>`
-  position: fixed; // TODO: Or absolute - needs testing with correct positioning
+  position: fixed;
 
   ${({ modalPos }) =>
     modalPos &&
@@ -31,6 +34,14 @@ export const BadgesModalContainer = styled.div<PropTypes.StyledProps>`
 
   overflow: hidden;
   z-index: 70;
+
+  @media only screen and (max-width: 460px) {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    width: 90%;
+  }
 `
 
 export const BadgesModalHeader = styled.div`
