@@ -1,8 +1,9 @@
 import styled, { css } from 'styled-components'
 import { Link } from 'react-router-dom'
 import { PropTypes } from 'types/prop-types'
-import { Icon, PrimeBtn } from 'styled/Mixins.styled'
+import { Icon } from 'styled/Mixins.styled'
 import { taskColors } from 'components/task/TaskPreview.styled'
+import { Label } from 'components/labels/LabelPreview.styled'
 
 type cssParams = Parameters<typeof css>
 
@@ -312,28 +313,49 @@ export const SideControlsCol = styled.div`
   })}
 `
 
-export const AddTaskMembersBtn = styled.div<PropTypes.StyledProps>`
-  ${PrimeBtn()};
+export const CardDetailsAddItem = styled.button`
+  cursor: pointer;
+  display: block;
+
+  background-color: #091e420a;
+
+  padding: 0;
+  margin: 0 8px 8px 0;
+
+  border-radius: 3px;
+
+  &:hover {
+    background-color: #091e4214;
+  }
+`
+
+export const CardDetailsAddItemIcon = styled.span<PropTypes.StyledProps>`
+  ${({ size }) => Icon(size)};
+
+  &:before {
+    ${({ content }) => css`
+      content: ${content};
+    `}
+  }
 
   &&& {
-    border-radius: 100%;
+    box-sizing: content-box;
+    font-size: 16px;
+    line-height: 16px;
+
+    height: 16px;
+    width: 16px;
+    padding: 8px;
   }
+`
 
-  span {
-    ${({ size }) => Icon(size)};
+export const TaskDetailsLabel = styled(Label)<PropTypes.StyledProps>`
+  box-sizing: border-box;
 
-    &:before {
-      ${({ content }) => css`
-        content: ${content};
-      `}
-    }
+  height: 32px;
+  padding: 0 12px;
+  width: auto;
 
-    &&& {
-      font-size: 16px;
-      height: 16px;
-      width: 16px;
-      padding: 8px;
-      line-height: 16px;
-    }
-  }
+  line-height: 32px;
+  font-weight: 600;
 `

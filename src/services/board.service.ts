@@ -156,7 +156,7 @@ function getDummyBoard(): BoardTypes.board {
       id: 'u100',
       username: 'ArtiomB',
       fullname: 'Artiom bkt',
-      image: '',
+      image: 'https://en.meming.world/images/en/b/b9/Cursed_Cat.jpg',
       starredBoardsIds: [],
       watchList: []
     },
@@ -294,7 +294,7 @@ function getDummyBoard(): BoardTypes.board {
                   id: 'u100',
                   username: 'ArtiomB',
                   fullname: 'Artiom bkt',
-                  image: '',
+                  image: 'https://en.meming.world/images/en/b/b9/Cursed_Cat.jpg',
                   starredBoardsIds: [],
                   watchList: []
                 },
@@ -366,7 +366,7 @@ function getDummyBoard(): BoardTypes.board {
                 id: 'u100',
                 username: 'ArtiomB',
                 fullname: 'Artiom bkt',
-                image: '',
+                image: 'https://en.meming.world/images/en/b/b9/Cursed_Cat.jpg',
                 starredBoardsIds: [],
                 watchList: []
               }
@@ -432,7 +432,7 @@ function getDummyBoard(): BoardTypes.board {
                 id: 'u100',
                 username: 'ArtiomB',
                 fullname: 'Artiom bkt',
-                image: '',
+                image: 'https://en.meming.world/images/en/b/b9/Cursed_Cat.jpg',
                 starredBoardsIds: [],
                 watchList: []
               }
@@ -664,7 +664,7 @@ function getDummyBoard(): BoardTypes.board {
                   id: 'u100',
                   username: 'ArtiomB',
                   fullname: 'Artiom bkt',
-                  image: '',
+                  image: 'https://en.meming.world/images/en/b/b9/Cursed_Cat.jpg',
                   starredBoardsIds: [],
                   watchList: []
                 },
@@ -750,7 +750,7 @@ function getDummyBoard(): BoardTypes.board {
                   id: 'u100',
                   username: 'ArtiomB',
                   fullname: 'Artiom bkt',
-                  image: '',
+                  image: 'https://en.meming.world/images/en/b/b9/Cursed_Cat.jpg',
                   starredBoardsIds: [],
                   watchList: []
                 },

@@ -59,6 +59,18 @@ const Resets = createGlobalStyle`
 
     text-decoration: none;
   }
+
+  .sb-avatar {
+    cursor: pointer;
+
+    &:hover {
+      background-color: #c1c7d0;
+    }
+
+    img {
+      opacity: .8;
+    }
+  }
 `
 
 const FontStyles = createGlobalStyle`

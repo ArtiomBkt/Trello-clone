@@ -1,3 +1,4 @@
+import TaskPageLabels from 'components/task/task-page/TaskPageLabels'
 import TaskPageMembers from 'components/task/task-page/TaskPageMembers'
 import React from 'react'
 import { BoardTypes } from 'types/board-types'
@@ -16,7 +17,9 @@ const TaskPageDetails = ({ task }: Props) => {
         </TaskPageMembers>
       </CardDetailsItem>
       <CardDetailsItem>
-        <h3>Labels</h3>
+        <TaskPageLabels labels={task.labels}>
+          <h3>Labels</h3>
+        </TaskPageLabels>
       </CardDetailsItem>
       <CardDetailsItem>
         <h3>Start date</h3>

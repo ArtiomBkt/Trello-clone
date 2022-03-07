@@ -26,5 +26,3 @@ const LabelsPreview = ({ labels, isQuickEditOpen }: PropTypes.LabelsPreviewProps
 }
 
 export default LabelsPreview
-
-// isLabelExpanded={isQuickEditOpen ? true : labelState.isLabelsExpanded}
