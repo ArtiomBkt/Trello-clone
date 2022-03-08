@@ -16,6 +16,10 @@ This project is under constant progress.
   - [X] Change board's title.
   - [ ] Change board's background.
   - [ ] Create new boards.
+  - [ ] Sidemenu
+    - [X] Archive.
+    - [ ] Board background.
+    - [ ] Activity.
 
 - [X] Lists
   - [X] New list composing.
