@@ -20,6 +20,7 @@ import {
 import TaskPageCover from 'components/task/task-page/TaskPageCover'
 import TaskPageTitle from 'components/task/task-page/TaskPageTitle'
 import TaskPageDetails from './TaskPageDetails'
+import TaskPageControls from './TaskPageControls'
 
 type TaskPageState = {
   status: 'idle' | 'resolved' | 'pending' | 'rejected'
@@ -95,9 +96,10 @@ const TaskPage = () => {
                 <WindowTaskMainWrapperGrid>
                   <MainCol>
                     <TaskPageDetails task={task} />
-                    {/* // TODO: Description and the rest go here */}
                   </MainCol>
-                  <SideControlsCol></SideControlsCol>
+                  <SideControlsCol>
+                    <TaskPageControls />
+                  </SideControlsCol>
                 </WindowTaskMainWrapperGrid>
               </ErrorBoundary>
             </TaskPageContent>

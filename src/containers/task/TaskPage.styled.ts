@@ -41,8 +41,6 @@ export const TaskPageWindowOverlay = styled.div`
 `
 
 export const TaskPageContainer = styled.div`
-  display: block;
-
   width: 768px;
   margin: 48px 0 80px;
 
@@ -53,7 +51,7 @@ export const TaskPageContainer = styled.div`
   overflow: hidden;
   z-index: 25;
 
-  ${mobileMedia({ margin: '36px 8px', width: 'auto' })};
+  ${mobileMedia({ margin: '36px 8px', width: '100%' })}; // maybe width auto?
 `
 
 export const TaskPageContentWrapper = styled.div`
@@ -170,7 +168,7 @@ export const WindowTaskHeader = styled.div`
 
   z-index: 1;
 
-  ${mobileMedia({ margin: '8px 16px 8px 12px', padding: '8px 0 0 8px' })};
+  ${mobileMedia({ margin: '8px 16px 8px 32px', padding: '8px 0 0 8px' })};
 `
 
 export const WindowTaskHeaderIcon = styled.span<PropTypes.StyledProps>`

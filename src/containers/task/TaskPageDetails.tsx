@@ -185,6 +185,8 @@ const TaskPageDetails = ({ task }: Props) => {
             </TaskDetailsDates>
           </CardDetailsItem>
         )}
+        {/* // TODO: Description, Checklists, Activity, Comments go here */}
+        {/* // TODO: Rewrite the logic and break down this component */}
       </CardDetailsData>
       {isEdit && (
         <BadgesModal
