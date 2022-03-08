@@ -12,7 +12,12 @@ const TaskPageLabels = ({ labels, children }: Props) => {
     <>
       {children}
       <div style={{ display: 'flex' }}>
-        {labels && labels.map(label => <TaskDetailsLabel labelColor={label.color}>{label.title}</TaskDetailsLabel>)}
+        {labels &&
+          labels.map(label => (
+            <TaskDetailsLabel key={label.id} labelColor={label.color}>
+              {label.title}
+            </TaskDetailsLabel>
+          ))}
         <CardDetailsAddItem>
           <CardDetailsAddItemIcon content="'\e901'" size="sm" />
         </CardDetailsAddItem>

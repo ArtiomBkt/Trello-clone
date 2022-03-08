@@ -1,15 +1,26 @@
-import React, { useRef } from 'react'
+import React from 'react'
 import { createPortal } from 'react-dom'
+import { CSSProperties } from 'styled-components'
 import { PropTypes } from 'types/prop-types'
 import { BadgesModalOverlay, BadgesModalContainer, BadgesModalHeader, BadgesModalHeaderCloseBtn, BadgesModalHeaderTitle, BadgesModalBody } from './BadgesModal.styled'
 
-const BadgesModal = ({ title, children, modalPos, modalWrapperRef, onWrapperClick, onClose }: PropTypes.BadgesModalProps) => {
-  const modalBodyRef = useRef<HTMLDivElement>(null!)
-  const modalRootId = 'app-wrapper'
+const BadgesModal = ({ rootEl = 'app-wrapper', title, children, modalPos, modalWrapperRef, onWrapperClick, onClose }: PropTypes.BadgesModalProps) => {
+  // const modalBodyRef = useRef<HTMLDivElement>(null!)
 
+  const getStyles = (): CSSProperties => {
+    return rootEl !== 'task-details-root'
+      ? {
+          position: 'absolute',
+          inset: 'initial',
+          top: modalPos?.top,
+          left: modalPos?.left
+        }
+      : {}
+  }
+  // ref={modalBodyRef}
   return createPortal(
-    <BadgesModalOverlay title={title} onClick={onWrapperClick} ref={modalWrapperRef}>
-      <BadgesModalContainer ref={modalBodyRef} modalPos={modalPos}>
+    <BadgesModalOverlay style={getStyles()} title={title} onClick={onWrapperClick} ref={modalWrapperRef}>
+      <BadgesModalContainer modalPos={modalPos}>
         <BadgesModalHeader>
           <BadgesModalHeaderTitle>{title}</BadgesModalHeaderTitle>
           <BadgesModalHeaderCloseBtn title={`Close ${title} modal`} onClick={onClose} content="'\e91c'" size="sm" />
@@ -17,7 +28,7 @@ const BadgesModal = ({ title, children, modalPos, modalWrapperRef, onWrapperClic
         <BadgesModalBody>{children}</BadgesModalBody>
       </BadgesModalContainer>
     </BadgesModalOverlay>,
-    document.getElementById(modalRootId) || document.body
+    document.getElementById(rootEl) || document.body
   )
 }
 

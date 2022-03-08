@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components'
 import { PropTypes } from 'types/prop-types'
 import { Icon } from 'styled/Mixins.styled'
 
-export const BadgesModalOverlay = styled.div<PropTypes.StyledProps>`
+export const BadgesModalOverlay = styled.div`
   position: fixed;
 
   inset: 0;

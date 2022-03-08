@@ -143,6 +143,7 @@ export declare module PropTypes {
     children?: React.ReactNode
     modalPos?: modalPos
     modalWrapperRef?: React.RefObject<HTMLDivElement>
+    rootEl?: string
     onClose: (ev: React.MouseEvent) => void
     onWrapperClick: (ev: React.MouseEvent) => void
   }
@@ -150,7 +151,7 @@ export declare module PropTypes {
   type LabelProps = {
     label?: PropTypes.label
     task: PropTypes.task
-    handleTaskLabelChange: (ev: React.MouseEvent, label: PropTypes.label) => void
+    handleTaskLabelChange?: (ev: React.MouseEvent, label: PropTypes.label) => void
     onLabelsUpdate?: (labels: PropTypes.label[], ev?: React.MouseEvent) => void
     handleLabelChange?: (label: PropTypes.label) => void
   }
@@ -167,7 +168,7 @@ export declare module PropTypes {
 
   type TaskColorProps = {
     task: PropTypes.task
-    handleTaskStyleChange: (newStyle: task['style']) => void
+    handleTaskStyleChange?: (newStyle: task['style']) => void
   }
 
   type HeaderModalProps = {

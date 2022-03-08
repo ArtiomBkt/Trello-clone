@@ -39,7 +39,7 @@ const Label = ({ task, handleTaskLabelChange, handleLabelChange, label }: PropTy
           <input type="text" value={state.labelTitle} onBlur={handleLabelChangeSubmit} onKeyDown={handleLabelChangeSubmit} onChange={handleLabelTitleChange} />
         </LabelPreview>
       ) : (
-        <LabelPreview onClick={ev => handleTaskLabelChange(ev, label)} labelColor={label.color}>
+        <LabelPreview onClick={ev => handleTaskLabelChange!(ev, label)} labelColor={label.color}>
           {label.title}
           {task.labels!.find(taskLabel => taskLabel.id === label.id) && <LabelSelectedIcon content="'\e916'" size="sm" />}
         </LabelPreview>

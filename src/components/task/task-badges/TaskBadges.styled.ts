@@ -49,7 +49,7 @@ export const BadgeIcon = styled.span<PropTypes.StyledProps>`
   }
 `
 
-const handleDueStatus = (dueStatus: PropTypes.StyledProps['dueStatus']) => {
+export const handleDueStatus = (dueStatus: PropTypes.StyledProps['dueStatus']) => {
   switch (dueStatus) {
     case 'overdue':
       return { static: '#ec9488', hover: '#eb5a46', text: '#fff' }

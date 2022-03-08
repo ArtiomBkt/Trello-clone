@@ -2,8 +2,8 @@ import React from 'react'
 import { PropTypes } from 'types/prop-types'
 import { BadgeContainer, BadgeIcon, BadgeText, BadgeDueUnchecked, BadgeDueChecked } from './TaskBadges.styled'
 
-const formatDate = (timestamp: number): string => {
-  let formattedDate = new Date(timestamp).toDateString().slice(4, 10)
+export const formatDate = (timestamp: number): string => {
+  const formattedDate = new Date(timestamp).toDateString().slice(4, 10)
   if (formattedDate[4] === '0') {
     return formattedDate.replace('0', '')
   }

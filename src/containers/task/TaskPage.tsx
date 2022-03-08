@@ -14,9 +14,7 @@ import {
   TaskPageContent,
   WindowTaskMainWrapperGrid,
   MainCol,
-  SideControlsCol,
-  CardDetailsItem,
-  CardDetailsData
+  SideControlsCol
 } from './TaskPage.styled'
 
 import TaskPageCover from 'components/task/task-page/TaskPageCover'
@@ -86,7 +84,7 @@ const TaskPage = () => {
   else if (status === 'rejected') throw error
   else if (status === 'resolved' && task)
     return (
-      <TaskPageWindowOverlay ref={overlayRef} tabIndex={0} onClick={handleCloseTaskPage} onKeyUp={handleCloseTaskPage}>
+      <TaskPageWindowOverlay ref={overlayRef} id="task-details-root" tabIndex={0} onClick={handleCloseTaskPage} onKeyUp={handleCloseTaskPage}>
         <TaskPageContainer>
           <TaskPageContentWrapper ref={taskPageRef}>
             <TaskPageCloseBtn to="/" styling={task.style} content="'\e91c'" size="md" />

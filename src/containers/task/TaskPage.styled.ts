@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components'
 import { Link } from 'react-router-dom'
 import { PropTypes } from 'types/prop-types'
-import { Icon } from 'styled/Mixins.styled'
+import { Icon, PrimeBtn } from 'styled/Mixins.styled'
 import { taskColors } from 'components/task/TaskPreview.styled'
 import { Label } from 'components/labels/LabelPreview.styled'
 
@@ -175,13 +175,10 @@ export const WindowTaskHeader = styled.div`
 
 export const WindowTaskHeaderIcon = styled.span<PropTypes.StyledProps>`
   position: absolute;
-  left: 40px;
-  top: 4px;
+  left: 15px;
+  top: 20px;
 
-  ${mobileMedia({
-    left: '-28px',
-    top: '4px'
-  })};
+  ${mobileMedia({ left: '-28px', top: '4px' })}
 
   ${({ size }) => Icon(size)};
 
@@ -358,4 +355,76 @@ export const TaskDetailsLabel = styled(Label)<PropTypes.StyledProps>`
 
   line-height: 32px;
   font-weight: 600;
+`
+
+export const TaskDetailsDates = styled.div`
+  display: flex;
+  align-items: center;
+  margin: 0 8px 8px 0;
+`
+
+export const TaskDatesBox = styled.div<PropTypes.StyledProps>`
+  position: relative;
+  flex-shrink: 0;
+
+  border-radius: 2px;
+  height: 16px;
+  width: 16px;
+  margin: auto 4px auto 0;
+
+  color: #172b4d;
+  white-space: nowrap;
+  transition: all 0.2 ease-in-out;
+  overflow: hidden;
+  cursor: pointer;
+
+  ${({ isDone }) =>
+    isDone
+      ? css`
+          background-color: #0079bf;
+          box-shadow: inset 0 0 0 2px #0079bf;
+        `
+      : css`
+          background-color: #fafbfc;
+          box-shadow: inset 0 0 0 2px #dfe1e6;
+        `}
+
+  &:hover {
+    ${({ isDone }) =>
+      isDone
+        ? css`
+            background-color: #5ba4cf;
+            box-shadow: inset 0 0 0 2px #5ba4cf;
+          `
+        : css`
+            background-color: #ebecf0;
+            box-shadow: inset 0 0 0 2px #dfe1e6;
+          `}
+  }
+
+  span {
+    ${({ isDone }) =>
+      isDone
+        ? css`
+            content: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%23fff' viewBox='-3 -4 16 16'%3E%3Cpath d='M1.49 3.215a.667.667 0 0 0-.98.903l2.408 2.613c.358.351.892.351 1.223.02l.243-.239a1689.645 1689.645 0 0 0 2.625-2.589l.027-.026a328.23 328.23 0 0 0 2.439-2.429.667.667 0 1 0-.95-.936c-.469.476-1.314 1.316-2.426 2.417l-.027.026a1368.126 1368.126 0 0 1-2.517 2.482L1.49 3.215z'/%3E%3C/svg%3E");
+            opacity: 1;
+          `
+        : css`
+          content: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="transparent" viewBox="-3 -4 16 16"><path d="M1.49 3.215a.667.667 0 0 0-.98.903l2.408 2.613c.358.351.892.351 1.223.02l.243-.239a1689.645 1689.645 0 0 0 2.625-2.589l.027-.026a328.23 328.23 0 0 0 2.439-2.429.667.667 0 1 0-.95-.936c-.469.476-1.314 1.316-2.426 2.417l-.027.026a1368.126 1368.126 0 0 1-2.517 2.482L1.49 3.215z"/></svg>')
+          opacity: 0;
+        `};
+    height: 16px;
+    width: 16px;
+  }
+`
+
+export const TaskDatePickerBtn = styled.button`
+  ${PrimeBtn(undefined)}
+  margin-bottom: 0;
+
+  &:hover {
+    background-color: rgba(9, 30, 66, 0.08);
+    box-shadow: none;
+    border: none;
+  }
 `

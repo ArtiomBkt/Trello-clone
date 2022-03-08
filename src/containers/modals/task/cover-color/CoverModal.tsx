@@ -25,7 +25,7 @@ const CoverModal = ({ handleTaskStyleChange, task }: PropTypes.TaskColorProps) =
         background
       }
 
-      handleTaskStyleChange(newTaskStyle)
+      handleTaskStyleChange!(newTaskStyle)
     }
   }
 
@@ -41,7 +41,7 @@ const CoverModal = ({ handleTaskStyleChange, task }: PropTypes.TaskColorProps) =
       fullCover
     }
 
-    handleTaskStyleChange(newTaskStyle)
+    handleTaskStyleChange!(newTaskStyle)
   }
 
   const handleCoverRemove = (ev: React.MouseEvent) => {
@@ -53,7 +53,7 @@ const CoverModal = ({ handleTaskStyleChange, task }: PropTypes.TaskColorProps) =
       fullCover: false
     }
 
-    handleTaskStyleChange(newTaskStyle)
+    handleTaskStyleChange!(newTaskStyle)
   }
 
   const Colors = () => {
