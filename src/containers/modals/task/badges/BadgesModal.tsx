@@ -8,7 +8,7 @@ const BadgesModal = ({ rootEl = 'app-wrapper', title, children, modalPos, modalW
   // const modalBodyRef = useRef<HTMLDivElement>(null!)
 
   const getStyles = (): CSSProperties => {
-    return rootEl !== 'task-details-root'
+    return rootEl === 'task-details-root'
       ? {
           position: 'absolute',
           inset: 'initial',
