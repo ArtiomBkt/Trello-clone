@@ -23,6 +23,14 @@ import DatesModal from 'containers/modals/task/badges/dates/DatesModal'
 import LabelsModal from 'containers/modals/task/badges/labels/LabelsModal'
 import MemberModal from 'containers/modals/task/badges/members/MemberModal'
 import CoverModal from 'containers/modals/task/cover-color/CoverModal'
+import {
+  BadgesModalBody,
+  BadgesModalContainer,
+  BadgesModalHeader,
+  BadgesModalHeaderCloseBtn,
+  BadgesModalHeaderTitle,
+  BadgesModalOverlay
+} from 'containers/modals/task/badges/BadgesModal.styled'
 
 type Props = {
   task: BoardTypes.task
@@ -38,29 +46,6 @@ const initialState: ModalState = {
   isEdit: false,
   modal: null,
   position: { top: 0, left: 0 }
-}
-
-type ModalProps = Props & {
-  modal: ModalState['modal']
-}
-
-const ModalChild = ({ modal, task }: ModalProps) => {
-  switch (modal) {
-    case 'labels':
-      //  onLabelsUpdate={onLabelsUpdate} handleTaskLabelChange={handleTaskLabelChange}
-      return <LabelsModal task={task} />
-    case 'members':
-      // handleTaskMemberToggle={handleTaskMemberToggle}
-      return <MemberModal task={task} />
-    case 'cover':
-      // handleTaskStyleChange={handleTaskStyleChange}
-      return <CoverModal task={task} />
-    case 'dates':
-      // TODO: add calendar and handle dates
-      return <DatesModal task={task} />
-    default:
-      return <div>fail</div>
-  }
 }
 
 const formatTime = (timestamp: number) => {
@@ -93,12 +78,33 @@ const TaskPageDetails = ({ task }: Props) => {
   }
 
   const closeModal = (ev: React.MouseEvent) => {
+    ev.stopPropagation()
+    ev.preventDefault()
     console.log(ev)
-    // setEditMode(initialState)
+    setEditMode(initialState)
   }
 
   const handleOutsideWrapperClick = (ev: React.MouseEvent) => {
     console.log(ev)
+  }
+
+  const getModal = () => {
+    switch (modal) {
+      case 'labels':
+        //  onLabelsUpdate={onLabelsUpdate} handleTaskLabelChange={handleTaskLabelChange}
+        return <LabelsModal task={task} />
+      case 'members':
+        // handleTaskMemberToggle={handleTaskMemberToggle}
+        return <MemberModal task={task} />
+      case 'cover':
+        // handleTaskStyleChange={handleTaskStyleChange}
+        return <CoverModal task={task} />
+      case 'dates':
+        // TODO: add calendar and handle dates
+        return <DatesModal task={task} />
+      default:
+        return <div>fail</div>
+    }
   }
 
   // TODO: Shrink this cmp down and reuse
@@ -189,6 +195,16 @@ const TaskPageDetails = ({ task }: Props) => {
         {/* // TODO: Rewrite the logic and break down this component */}
       </CardDetailsData>
       {isEdit && (
+        // <BadgesModalOverlay style={{ position: 'fixed', zIndex: 80 }} title={modal!} onClick={handleOutsideWrapperClick} ref={modalWrapperRef}>
+        //   <BadgesModalContainer modalPos={position}>
+        //     <BadgesModalHeader>
+        //       <BadgesModalHeaderTitle>{modal}</BadgesModalHeaderTitle>
+        //       <BadgesModalHeaderCloseBtn title={`Close ${modal} modal`} onClick={closeModal} content="'\e91c'" size="sm" />
+        //     </BadgesModalHeader>
+        //     <BadgesModalBody>{getModal()}</BadgesModalBody>
+        //   </BadgesModalContainer>
+        // </BadgesModalOverlay>
+
         <BadgesModal
           modalPos={position}
           modalWrapperRef={modalWrapperRef}
@@ -197,7 +213,7 @@ const TaskPageDetails = ({ task }: Props) => {
           rootEl={'task-details-root'}
           title={modal!}
         >
-          <ModalChild modal={modal!} task={task} />
+          {getModal()}
         </BadgesModal>
       )}
     </>

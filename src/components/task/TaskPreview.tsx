@@ -20,7 +20,7 @@ const TaskPreview = ({ task, index, handleTaskEdit, handleTaskArchive, onLabelsU
         setTaskEditorPos(p => ({ ...p, top: 250 }))
       }
       if (taskEditorPos.right + 230 >= window.innerWidth) {
-        setTaskEditorPos(p => ({ ...p, left: 260 }))
+        setTaskEditorPos(p => ({ ...p, left: p.right - 450 }))
       }
     }
   }, [isQuickEditOpen, taskEditorPos.bottom, taskEditorPos.right])

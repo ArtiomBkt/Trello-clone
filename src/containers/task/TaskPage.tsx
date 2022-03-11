@@ -85,9 +85,9 @@ const TaskPage = () => {
   else if (status === 'rejected') throw error
   else if (status === 'resolved' && task)
     return (
-      <TaskPageWindowOverlay ref={overlayRef} id="task-details-root" tabIndex={0} onClick={handleCloseTaskPage} onKeyUp={handleCloseTaskPage}>
+      <TaskPageWindowOverlay ref={overlayRef} tabIndex={0} onClick={handleCloseTaskPage} onKeyUp={handleCloseTaskPage}>
         <TaskPageContainer>
-          <TaskPageContentWrapper ref={taskPageRef}>
+          <TaskPageContentWrapper id="task-details-root" ref={taskPageRef}>
             <TaskPageCloseBtn to="/" styling={task.style} content="'\e91c'" size="md" />
             <TaskPageContent>
               <ErrorBoundary resetKeys={[taskId]} FallbackComponent={TaskFetchErrorFallback}>

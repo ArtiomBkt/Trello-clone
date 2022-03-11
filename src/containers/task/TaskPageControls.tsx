@@ -1,5 +1,5 @@
 import React from 'react'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { ReactComponent as DateIcon } from 'assets/images/watch.svg'
 import { Icon } from 'styled/Mixins.styled'
 import { PropTypes } from 'types/prop-types'
@@ -24,15 +24,21 @@ export const ControlsPanelWrapper = styled.div`
 
 export const ControlBtnsContainer = styled.div`
   display: flex;
+  flex-direction: column;
   flex-wrap: wrap;
 
   @media only screen and (max-width: 750px) {
-    padding: 0 8px;
+    flex-direction: row;
     justify-content: space-between;
+    padding: 0 8px;
   }
 `
 
-export const ControlBtn = styled.button`
+type ControlBtnProps = {
+  deleteBtn?: boolean
+}
+
+export const ControlBtn = styled.button<ControlBtnProps>`
   display: block;
   cursor: pointer;
   box-sizing: border-box;
@@ -42,8 +48,25 @@ export const ControlBtn = styled.button`
   max-width: 300px;
   overflow: hidden;
 
-  color: #172b4d;
-  background-color: #091e4214;
+  ${({ deleteBtn }) =>
+    deleteBtn
+      ? css`
+          color: #fff;
+          background-color: #b04632;
+
+          &:hover {
+            background-color: #933b27;
+          }
+        `
+      : css`
+          color: #172b4d;
+          background-color: rgba(9, 30, 66, 0.04);
+
+          &:hover {
+            background-color: rgba(9, 30, 66, 0.08);
+          }
+        `}
+
   transition: backgorund-color, border-color, box-shadow 85ms ease;
 
   @media only screen and (max-width: 750px) {
@@ -109,6 +132,20 @@ const TaskPageControls = () => {
       </ControlsPanelWrapper>
       <ControlsPanelWrapper>
         <h3>Actions</h3>
+        <ControlBtnsContainer>
+          <ControlBtn>
+            <ControlBtnIcon content="'\e907'" size="sm" />
+            <span>Archive</span>
+          </ControlBtn>
+          <ControlBtn>
+            <ControlBtnIcon content="'\e963'" size="sm" />
+            <span>Share</span>
+          </ControlBtn>
+          <ControlBtn deleteBtn>
+            <ControlBtnIcon style={{ color: '#fff' }} content="'\e95c'" size="sm" />
+            <span>Delete</span>
+          </ControlBtn>
+        </ControlBtnsContainer>
       </ControlsPanelWrapper>
     </>
   )

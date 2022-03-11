@@ -17,7 +17,9 @@ const BadgesModal = ({ rootEl = 'app-wrapper', title, children, modalPos, modalW
         }
       : {}
   }
+
   // ref={modalBodyRef}
+  // TODO: Fix onwrapperclick
   return createPortal(
     <BadgesModalOverlay style={getStyles()} title={title} onClick={onWrapperClick} ref={modalWrapperRef}>
       <BadgesModalContainer modalPos={modalPos}>

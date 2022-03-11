@@ -65,6 +65,7 @@ export const Icon = (size: string | undefined) => css`
   text-decoration: none;
   vertical-align: bottom;
   color: #42526e;
+  -webkit-font-smoothing: antialiased;
 
   &:hover {
     color: #172b4d;
