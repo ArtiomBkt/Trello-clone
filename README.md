@@ -1,43 +1,64 @@
-# Trello clone using React, TypeScript, styled components
+# Trello clone
 
-This project is under constant progress.
+~~This project is under constant progress.~~
+The workload on the client side of this project has been reduced in favor of building a solid [server](https://github.com/abukati/Trellop-server).
 
-[Netlify deploy](https://react-trellop.netlify.app/)
+## What has been done so far
 
-### Goals for the project (more to be added)
+- UI is complete in most of the visible areas.
+- Lists and tasks (known artifacts are [listed here](#known-artifacts)) are drag and droppable.
+- Board's and lists' titles are editable.
+- Ability to create new tasks and lists.
+- Task badges (labels, members, cover color & style) are editable.
+- Tasks are archivable and archived tasks can be either sent back to it's original position on the board or completely removed.
+- Task's routable details page is almost done UI wise, functionality is delayed to be integrated with the [server](https://github.com/abukati/Trellop-server).
 
-#### Functionalities
+### Feel like running this project on your machine?
 
-- [X] Drag and drop
-  - [X] Lists drag and drop.
-  - [X] Tasks drag and drop - inside the same list and between lists.
+Fork it, clone it, cook it up using `npm install` and serve with `npm start`.
 
-- [ ] Boards
-  - [X] Change board's title.
-  - [ ] Change board's background.
-  - [ ] Create new boards.
-  - [ ] Sidemenu
-    - [X] Archive.
-    - [ ] Board background.
-    - [ ] Activity.
+## Some of the many things that are left to do
 
-- [X] Lists
-  - [X] New list composing.
-  - [X] List title editing.
+- Tests, tests and tests.
+- Ability to create new boards, from scratch or using a template.
+- Editable board appearance and view mode (calendar and dashboard for now).
+- Board's sidemenu with tabs for archive, background, labels, description and activity.
+- Editable dates on tasks.
+- User actions (star/unstar board, watch/unwatch, comment, authorization).
 
-- [ ] Tasks
-  - [X] New task composing.
-  - [ ] Task's details modal.
-  - [ ] Task inline editing
-    - [X] Title.
-    - [X] Labels.
-    - [X] Members.
-    - [X] Cover.
-    - [ ] Dates.
+### Some of the things I want to do
 
-- [ ] Users
-  - [ ] Multiple users support.
-  - [ ] Star, watch board.
-  - [ ] Notifications.
-  - [ ] Board admin and permissions.
+- Eject the pre-configured webpack provided by CRA and config one myself.
+- Toggler for dimming/brightening, like dark/light mode but not quite the same.
+- Rendering "skeltons" for board's page while data is fetched, also server side rendering some static pages.
 
+## Known artifacts
+
+- Task's styling messes up when it's dragged to another list (happens only if dragged to the right 🤔)
+- On task's details page clicking outside any badge modal, yet inside the boundaries of page itself, the modal should close.
+- Watch, star, member invites, board views mode, and header links do nothing for now.
+- Labels' animations are being reset on some renders causing this weird bounce.
+- Sidemenu is currently displaying only archived tasks (if present) in a very non-stylish manner.
+- Responsivness of modals needs a little tweaking as it's completely off in some cases.
+
+## Testing
+
+There are no tests written yet (🤡). They will be written using Jest.
+
+### Typing
+
+TypeScript, TypeScript and TypeScript.
+
+### Linting
+
+ESlint
+
+### Formatting
+
+Prettier, [root config file](./.prettierrc) for this project.
+
+### UI libraries
+
+- React.
+- Styled components (🫶🏻)
+- React-beautiful-dnd.
