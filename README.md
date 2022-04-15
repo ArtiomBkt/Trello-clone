@@ -1,7 +1,8 @@
 # Trello clone
 
 ~~This project is under constant progress.~~
-The workload on the client side of this project has been reduced in favor of building a solid [server](https://github.com/abukati/Trellop-server).
+~~The workload on the client side of this project has been reduced in favor of building a solid [server](https://github.com/abukati/Trellop-server).~~
+Project development is on halt for now.
 
 ## What has been done so far
 
